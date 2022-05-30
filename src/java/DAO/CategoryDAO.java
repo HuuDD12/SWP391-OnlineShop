@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author Admin
  */
-public class CategoryDAO extends DBContext.DBContext{
+public class CategoryDAO extends DBcontext.DBContext{
     public List<Category> getAllCategory() {
         String sql = "SELECT * from Category";
         List<Category> list = new ArrayList<>();

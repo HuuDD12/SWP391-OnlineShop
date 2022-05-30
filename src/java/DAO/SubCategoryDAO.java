@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author Admin
  */
-public class SubCategoryDAO extends DBContext.DBContext{
+public class SubCategoryDAO extends DBcontext.DBContext{
     public List<Subcategory> getAllSubCategory() {
         String sql = "SELECT * FROM dbo.SubCategory";
         List<Subcategory> list = new ArrayList<>();

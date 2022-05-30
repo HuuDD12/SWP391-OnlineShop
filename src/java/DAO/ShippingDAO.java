@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  *
  * @author Admin
  */
-public class ShippingDAO extends DBContext.DBContext {
+public class ShippingDAO extends DBcontext.DBContext {
 
     public int createReturnId(Shipping shipping) {
         String sql = "INSERT INTO [dbo].[ShipInfo]\n"

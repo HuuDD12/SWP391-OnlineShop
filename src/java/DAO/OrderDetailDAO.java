@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  *
  * @author Admin
  */
-public class OrderDetailDAO extends DBContext.DBContext {
+public class OrderDetailDAO extends DBcontext.DBContext {
 
     public void saveCart(int orderId, Map<Integer, Cart> carts) {
 

@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author Admin
  */
-public class ProductDAO extends DBContext.DBContext {
+public class ProductDAO extends DBcontext.DBContext {
 
     public List<Product> getAll() {
         String sql = "select Product.*,ProductImgURL from product inner join ProductImg on product.ProductID = ProductImg.ProductID";

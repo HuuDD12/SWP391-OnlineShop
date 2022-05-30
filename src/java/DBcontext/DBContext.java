@@ -1,37 +1,25 @@
-
 package DBcontext;
-
-
 import java.sql.Connection;
 import java.sql.DriverManager;
-
+import java.sql.SQLException;
 
 public class DBContext {
-    
-    /*USE BELOW METHOD FOR YOUR DATABASE CONNECTION FOR BOTH SINGLE AND MULTILPE SQL SERVER INSTANCE(s)*/
-    /*DO NOT EDIT THE BELOW METHOD, YOU MUST USE ONLY THIS ONE FOR YOUR DATABASE CONNECTION*/
-     public Connection getConnection()throws Exception {
-        String url = "jdbc:sqlserver://"+serverName+":"+portNumber + "\\" + instance +";databaseName="+dbName;
-        if(instance == null || instance.trim().isEmpty())
-            url = "jdbc:sqlserver://"+serverName+":"+portNumber +";databaseName="+dbName;
-        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        return DriverManager.getConnection(url, userID, password);
-    }   
-    /*Insert your other code right after this comment*/
-    /*Change/update information of your database connection, DO NOT change name of instance variables in this class*/
-    private final String serverName = "localhost";
-    private final String dbName = "SWP391_OnlineShop";
-    private final String portNumber = "1433";
-    private final String instance="";//LEAVE THIS ONE EMPTY IF YOUR SQL IS A SINGLE INSTANCE
-    private final String userID = "sa";
-    private final String password = "122001";
-    public static void main(String[] args) {
+    protected Connection connection;
+    public DBContext()
+    {
         try {
-            System.out.println(new DBContext().getConnection());
-            System.out.println("hi");
-        } catch (Exception e) {
-            System.out.println("ho");
+            // Edit URL , username, password to authenticate with your MS SQL Server
+            String url = "jdbc:sqlserver://localhost:1433;databaseName= Online_Shop";
+            String username = "sa";
+            String password = "sa";
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            connection = DriverManager.getConnection(url, username, password);
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println(ex);
         }
     }
+    public static void main(String[] args) {
+        System.out.println(new DBContext().connection);
+    }
+    
 }
- 
