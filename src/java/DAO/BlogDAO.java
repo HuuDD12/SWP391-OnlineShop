@@ -5,7 +5,6 @@
  */
 package dao;
 
-import context.DBcontext;
 import model.Blog;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,22 +17,19 @@ import java.util.List;
  *
  * @author Ottelia
  */
-public class BlogDAO {
-
-    private Connection conn;
-    private PreparedStatement ps;
-    private ResultSet rs;
-    private String query;
+public class BlogDAO extends DBcontext.DBContext{
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+    String query = "";
 
     public ArrayList<Blog> getHotBlogs() {
         //Product with most amount
         ArrayList<Blog> hotBlogList = new ArrayList<>();
-        query = "select top 3 * from Blog\n"
+         query = "select top 3 * from Blog\n"
                 + "order by id desc";
         try {
-             conn = new DBcontext().open();
-            ps = conn.prepareStatement(query);
-            rs = ps.executeQuery();
+            ps = connection.prepareStatement(query);
+             rs = ps.executeQuery();
             while (rs.next()) {
                 hotBlogList.add(new Blog(rs.getInt("ID"), rs.getString("Author"), rs.getString("Title"), rs.getString("Content"), rs.getString("imageLink")));
             }
@@ -47,23 +43,21 @@ public class BlogDAO {
         try {
 
             query = "select * from Blogs";
-            conn = new DBcontext().open();
-            ps = conn.prepareStatement(query);
+            ps = connection.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()) {
                 blogList.add(new Blog(rs.getInt("ID"), rs.getString("Author"), rs.getString("Title"), rs.getString("Content"), rs.getString("imageLink")));
             }
         } catch (SQLException e) {
         }
-        DBcontext.close(conn, ps, rs);
         return blogList;
     }
 
     public Blog getBlogByID(int id) {
         query = "SELECT * FROM Blogs WHERE ID = ?";
         try {
-            conn = new DBcontext().open();
-            ps = conn.prepareStatement(query);
+ 
+            ps = connection.prepareStatement(query);
             ps.setInt(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -71,14 +65,14 @@ public class BlogDAO {
             }
         } catch (SQLException e) {
         }
-        DBcontext.close(conn, ps, rs);
+
         return null;
     }
 
     public void add(String author, String title, String content, String imageLink) {
         query = "INSERT INTO Blogs VALUES (?,?,?,?)";
-        try { conn = new DBcontext().open();
-            ps = conn.prepareStatement(query);
+        try { 
+            ps = connection.prepareStatement(query);
             ps.setString(1, author);
             ps.setString(2, title);
             ps.setString(3, content);
@@ -86,13 +80,13 @@ public class BlogDAO {
             ps.executeUpdate();
         } catch (SQLException e) {
         }
-        DBcontext.close(conn, ps, rs);
+
     }
 
     public void update(String author, String title, String content, String imageLink, int id) {
           query = "update Blogs set Author= ? , Title =?, Content= ?, imageLink= ?  where ID =?";
-        try { conn = new DBcontext().open();
-            ps = conn.prepareStatement(query);
+        try { 
+            ps = connection.prepareStatement(query);
             ps.setString(1, author);
             ps.setString(2, title);
             ps.setString(3, content);
@@ -106,13 +100,13 @@ public class BlogDAO {
     public void delete(int id) {
         query = "Delete FROM Blog WHERE ID = ?";
 
-        try { conn = new DBcontext().open();
-            ps = conn.prepareStatement(query);
+        try { 
+            ps = connection.prepareStatement(query);
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {
         }
-        DBcontext.close(conn, ps, rs);
+   
     }
     public static void main(String[] args) {
         BlogDAO dao = new BlogDAO();
