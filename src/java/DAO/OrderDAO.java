@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  *
  * @author Admin
  */
-public class OrderDAO extends DBContext.DBContext {
+public class OrderDAO extends DBcontext.DBContext{
 
     public int createReturnId(Order order) {
         String sql = "INSERT INTO [dbo].[Orders]\n"
