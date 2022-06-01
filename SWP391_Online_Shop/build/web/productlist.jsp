@@ -106,7 +106,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                         <!-- BEGIN SIDEBAR -->
                         <div class="sidebar col-md-3 col-sm-5">
                             <ul class="list-group margin-bottom-25 sidebar-menu">
-                            <c:forEach items="${listC}" var="c">
+                            <c:forEach items="${sessionScope.listC}" var="c">
                                 <li class="list-group-item clearfix dropdown active">
                                     <a href="javascript:void(0);" class="collapsed">
                                         <i class="fa fa-angle-right"></i>
@@ -114,10 +114,10 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 
                                     </a>
                                     <ul class="dropdown-menu" style="display:block;">
-                                        <c:forEach items="${listS}" var="s">
+                                        <c:forEach items="${sessionScope.listS}" var="s">
                                             <c:if test="${c.cate_id == s.cate_id}">
                                                 <li class="list-group-item dropdown clearfix active">
-                                                    <a href="productlist" style="color: #000" class="collapsed">${s.subcate_name} </a>                                
+                                                    <a href="subcategory?sid=${s.subcate_id}" style="color: #000" class="collapsed">${s.subcate_name} </a>                                
                                                 </li>
                                             </c:if>
                                         </c:forEach>
@@ -147,7 +147,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 
                         <div class="sidebar-products clearfix">
                             <h2>Bestsellers</h2>
-                            <c:forEach items="${listTop3}" var="listTop3">
+                        <c:forEach items="${sessionScope.listTop3}" var="listTop3">
                                 <div class="item">
                                     <a href="shop-item.html"><img src="${listTop3.url}" alt="Some Shoes in Animal with Cut Out"></a>
                                     <h3><a href="shop-item.html">${listTop3.productName}</a></h3>
@@ -166,16 +166,6 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                 <a href="javascript:;"><i class="fa fa-th-list"></i></a>
                             </div>
                             <div class="col-md-10 col-sm-10">
-                                <div class="pull-right">
-                                    <label class="control-label">Show:</label>
-                                    <select class="form-control input-sm">
-                                        <option value="#?limit=24" selected="selected">24</option>
-                                        <option value="#?limit=25">25</option>
-                                        <option value="#?limit=50">50</option>
-                                        <option value="#?limit=75">75</option>
-                                        <option value="#?limit=100">100</option>
-                                    </select>
-                                </div>
                                 <div class="pull-right">
 
                                     <label class="control-label">Sort&nbsp;By:</label>
@@ -220,12 +210,12 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                             <div class="col-md-4 col-sm-4 items-info">Items 1 to 9 of 10 total</div>
                             <div class="col-md-8 col-sm-8">
                                 <ul class="pagination pull-right">                               
-                                        <li class="page-item"><a class="page-link" href="productlist?page=1">&laquo;</a></li>
+                                    <li class="page-item"><a class="page-link" href="productlist?page=1">&laquo;</a></li>
 
                                     <c:forEach begin="1" end="${endPage}" var="i">
                                         <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${i}">${i}</a></li>
                                         </c:forEach>                
-                                        <li class="page-item"><a class="page-link" href="productlist?page=${endPage}">&raquo;</a></li>
+                                    <li class="page-item"><a class="page-link" href="productlist?page=${endPage}">&raquo;</a></li>
                                 </ul>
                             </div>
                         </div>

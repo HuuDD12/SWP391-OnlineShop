@@ -20,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-@WebServlet(name = "SortController", urlPatterns = {"/sort"})
-public class SortControl extends HttpServlet {
+@WebServlet(name = "SubCategoryDAO", urlPatterns = {"/subcategory"})
+public class SubCategoryControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,38 +36,11 @@ public class SortControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String type = request.getParameter("type");
-            if(type.equals("1")){
-                ProductDAO pdao = new ProductDAO();
-                List<Product> listP = pdao.sortProductByNameAsc();
-                request.setAttribute("listP", listP);
-                request.setAttribute("type", type);
-                request.getRequestDispatcher("productlist.jsp").forward(request, response);
-            }else if(type.equals("2")){
-                ProductDAO pdao = new ProductDAO();
-                List<Product> listP = pdao.sortProductByNameDesc();
-                request.setAttribute("listP", listP);
-                request.setAttribute("type", type);
-                request.getRequestDispatcher("productlist.jsp").forward(request, response);
-            }else if(type.equals("3")){
-                ProductDAO pdao = new ProductDAO();
-                List<Product> listP = pdao.sortProductByPriceAsc();
-                request.setAttribute("listP", listP);
-                request.setAttribute("type", type);
-                request.getRequestDispatcher("productlist.jsp").forward(request, response);
-            }else if(type.equals("4")){
-                ProductDAO pdao = new ProductDAO();
-                List<Product> listP = pdao.sortProductByPriceDesc();
-                request.setAttribute("listP", listP);
-                request.setAttribute("type", type);
-                request.getRequestDispatcher("productlist.jsp").forward(request, response);
-            }else{
-                ProductDAO pdao = new ProductDAO();
-                List<Product> listP = pdao.getAll();
-                request.setAttribute("listP", listP);
-                request.setAttribute("type", type);
-                request.getRequestDispatcher("productlist.jsp").forward(request, response);
-            }
+            int subcate = Integer.parseInt(request.getParameter("sid"));
+            ProductDAO pdao = new ProductDAO();
+            List<Product> listP = pdao.searchProductBySubCate(subcate);
+            request.setAttribute("listP",listP);
+            request.getRequestDispatcher("productlist.jsp").forward(request, response);
         }
     }
 

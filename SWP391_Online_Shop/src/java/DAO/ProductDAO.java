@@ -98,7 +98,35 @@ public class ProductDAO extends DBcontext.DBContext {
         }
         return null;
     }
+    
+    public List<Product> searchProductBySubCate(int subcate) {
+        String sql = "select Product.*,ProductImgURL from product inner join ProductImg on product.ProductID = ProductImg.ProductID where Product.SubCategoryID = ?";
+        List<Product> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, subcate);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("productID"),
+                        rs.getString("ProductName"),
+                        rs.getString("Description"),
+                        rs.getDouble("OriginalPrice"),
+                        rs.getDouble("SalePrice"),
+                        rs.getInt("SubCategoryID"),
+                        rs.getInt("Amount"),
+                        rs.getInt("BrandID"),
+                        rs.getInt("sell_id"),
+                        rs.getString("ProductImgURL")
+                );
+                list.add(p);
+            }
 
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    
     public List<Product> sortProductByNameAsc() {
         String sql = "select Product.*,ProductImgURL from product inner join ProductImg on product.ProductID = ProductImg.ProductID order by Product.ProductName";
         List<Product> list = new ArrayList<>();
@@ -214,6 +242,7 @@ public class ProductDAO extends DBcontext.DBContext {
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, (index - 1) * 3);
+            //ps.setInt(2, entry);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                Product p = new Product(rs.getInt("productID"),
@@ -252,9 +281,9 @@ public class ProductDAO extends DBcontext.DBContext {
 
     public static void main(String[] args) {
         ProductDAO pdao = new ProductDAO();
-        List<Product> list = pdao.pagingProduct(2);
-        for (Product o : list) {
-            System.out.println(o);
+        List<Product> list = pdao.searchProductBySubCate(2);
+        for (Product product : list) {
+            System.out.println(product);
         }
     }
 

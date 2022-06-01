@@ -34,4 +34,6 @@ public class SubCategoryDAO extends DBcontext.DBContext{
         }
         return list;
     }
+    
+    
 }

@@ -19,13 +19,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "ShopControl", urlPatterns = {"/productlist"})
-public class ProductListControl extends HttpServlet {
+@WebServlet(name = "ProductListController", urlPatterns = {"/productlist"})
+public class ProductListController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,8 +40,8 @@ public class ProductListControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
         final int size = 3;
-        int Esize = 0;
         ProductDAO pdao = new ProductDAO();
         CategoryDAO cdao = new CategoryDAO();
         List<Category> listC = cdao.getAllCategory();
@@ -62,9 +63,9 @@ public class ProductListControl extends HttpServlet {
         request.setAttribute("listP", list);
         request.setAttribute("endPage", endPage);
         request.setAttribute("page", page);
-        request.setAttribute("listTop3", listTop3);
-        request.setAttribute("listC", listC);
-        request.setAttribute("listS", listS);
+        session.setAttribute("listTop3", listTop3);
+        session.setAttribute("listC", listC);
+        session.setAttribute("listS", listS);
         request.getRequestDispatcher("productlist.jsp").forward(request, response);
     }
 
@@ -106,5 +107,5 @@ public class ProductListControl extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
+
 }
