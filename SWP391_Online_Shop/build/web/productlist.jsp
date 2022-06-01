@@ -97,7 +97,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
             <div class="main">
                 <div class="container">
                     <ul class="breadcrumb">
-                        <li><a href="#">Home</a></li>
+                        <li><a href="index.html">Home</a></li>
                         <li><a href="">Store</a></li>
                         <li class="active">Men category</li>
                     </ul>
@@ -147,21 +147,14 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 
                         <div class="sidebar-products clearfix">
                             <h2>Bestsellers</h2>
-                            <div class="item">
-                                <a href="shop-item.html"><img src="assets/pages/img/products/k1.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                                <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                                <div class="price">$31.00</div>
-                            </div>
-                            <div class="item">
-                                <a href="shop-item.html"><img src="assets/pages/img/products/k4.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                                <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                                <div class="price">$23.00</div>
-                            </div>
-                            <div class="item">
-                                <a href="shop-item.html"><img src="assets/pages/img/products/k3.jpg" alt="Some Shoes in Animal with Cut Out"></a>
-                                <h3><a href="shop-item.html">Some Shoes in Animal with Cut Out</a></h3>
-                                <div class="price">$86.00</div>
-                            </div>
+                            <c:forEach items="${listTop3}" var="listTop3">
+                                <div class="item">
+                                    <a href="shop-item.html"><img src="${listTop3.url}" alt="Some Shoes in Animal with Cut Out"></a>
+                                    <h3><a href="shop-item.html">${listTop3.productName}</a></h3>
+                                    <div class="price">${listTop3.originalPrice}</div>
+                                </div>
+                            </c:forEach>
+
                         </div>
                     </div>
                     <!-- END SIDEBAR -->
@@ -208,7 +201,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                         <div class="pi-img-wrapper">
                                             <img src="${p.url}" class="img-responsive" alt="Berry Lace Dress">
                                             <div>
-                                            
+
                                                 <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
                                             </div>
                                         </div>
@@ -226,14 +219,13 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                         <div class="row">
                             <div class="col-md-4 col-sm-4 items-info">Items 1 to 9 of 10 total</div>
                             <div class="col-md-8 col-sm-8">
-                                <ul class="pagination pull-right">
-                                    <li><a href="javascript:;">&laquo;</a></li>
-                                    <li><a href="javascript:;">1</a></li>
-                                    <li><span>2</span></li>
-                                    <li><a href="javascript:;">3</a></li>
-                                    <li><a href="javascript:;">4</a></li>
-                                    <li><a href="javascript:;">5</a></li>
-                                    <li><a href="javascript:;">&raquo;</a></li>
+                                <ul class="pagination pull-right">                               
+                                        <li class="page-item"><a class="page-link" href="productlist?page=1">&laquo;</a></li>
+
+                                    <c:forEach begin="1" end="${endPage}" var="i">
+                                        <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${i}">${i}</a></li>
+                                        </c:forEach>                
+                                        <li class="page-item"><a class="page-link" href="productlist?page=${endPage}">&raquo;</a></li>
                                 </ul>
                             </div>
                         </div>

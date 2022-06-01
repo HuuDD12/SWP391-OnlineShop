@@ -39,13 +39,30 @@ public class ProductListControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        final int size = 3;
+        int Esize = 0;
         ProductDAO pdao = new ProductDAO();
-        List<Product> list = pdao.getAll();
         CategoryDAO cdao = new CategoryDAO();
         List<Category> listC = cdao.getAllCategory();
         SubCategoryDAO sdao = new SubCategoryDAO();
         List<Subcategory> listS = sdao.getAllSubCategory();
+        List<Product> listTop3 = pdao.getTop3Product();
+        String page = request.getParameter("page");
+        
+        int count = pdao.count();
+        int endPage = count / size;
+        if (count % size != 0) {
+            endPage++;
+        }
+        if (page == null) {
+            page = "1";
+        }
+        int pTid = Integer.parseInt(page);
+        List<Product> list = pdao.pagingProduct(pTid);
         request.setAttribute("listP", list);
+        request.setAttribute("endPage", endPage);
+        request.setAttribute("page", page);
+        request.setAttribute("listTop3", listTop3);
         request.setAttribute("listC", listC);
         request.setAttribute("listS", listS);
         request.getRequestDispatcher("productlist.jsp").forward(request, response);
