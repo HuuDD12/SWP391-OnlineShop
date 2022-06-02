@@ -181,23 +181,24 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                     <div class="col-md-9 col-sm-7">
                         
                             <h1>Register</h1>
-                            <form>
+                            <form action="register" method="post">
+                                <h3 class="text-danger">${message}</h3>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Your Name</label>
-                                    <input type="name" class="form-control" id="exampleInputPassword1" placeholder="Your Name">
+                                    <input name="username" type="name" class="form-control" id="exampleInputPassword1" placeholder="Your Name">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                    <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
                                     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                    <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Repeat your Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Repeat your Password">
+                                    <input name="repass" type="password" class="form-control" id="exampleInputPassword1" placeholder="Repeat your Password">
                                 </div>
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input" id="exampleCheck1">

@@ -16,7 +16,7 @@ public class Account {
     private String email;
     private int RoleId;
     private int block;
-
+    private int code;
     public Account() {
     }
 
@@ -28,6 +28,34 @@ public class Account {
         this.RoleId = RoleId;
         this.block = block;
     }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public Account(String username, String password, String email, int RoleId, int block, int code) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.RoleId = RoleId;
+        this.block = block;
+        this.code = code;
+    }
+
+    
+    public Account(String username, String password, String email, int RoleId, int block) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.RoleId = RoleId;
+        this.block = block;
+    }
+    
+    
 
     public String getUserId() {
         return userId;
