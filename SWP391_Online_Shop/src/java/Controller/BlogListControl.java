@@ -3,23 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package Controller;
 
+import DAO.BlogDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Blog;
-import dao.BlogDAO;
+import Model.Blog;
 
 /**
  *
  * @author zanvi
  */
-public class BlogList extends HttpServlet {
+@WebServlet(name = "BlogListControl", urlPatterns = {"/bloglist"})
+public class BlogListControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,7 +36,7 @@ public class BlogList extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            BlogDAO BlogDAO = new BlogDAO();
+             BlogDAO BlogDAO = new BlogDAO();
             // get List of Blog from database
             ArrayList<Blog> blogList = BlogDAO.getAllBlogs();
             request.setAttribute("blogList", blogList);

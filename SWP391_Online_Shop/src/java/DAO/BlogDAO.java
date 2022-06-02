@@ -3,10 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
-
-import model.Blog;
-import java.sql.Connection;
+package DAO;
+import Model.Blog;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,7 +31,7 @@ public class BlogDAO extends DBcontext.DBContext{
             while (rs.next()) {
                 hotBlogList.add(new Blog(rs.getInt("ID"), rs.getString("Author"), rs.getString("Title"), rs.getString("Content"), rs.getString("imageLink")));
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
         return hotBlogList;
     }
@@ -116,3 +114,4 @@ public class BlogDAO extends DBcontext.DBContext{
         }
     }
 }
+
