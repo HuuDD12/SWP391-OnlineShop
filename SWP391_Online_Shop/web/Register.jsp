@@ -205,6 +205,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                     <label class="form-check-label" for="exampleCheck1">I agree all statements in Terms of service</label>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
+                                <h3 class="text-danger">${success}</h3>
                             </form>
                         
                         <!-- END CONTENT -->

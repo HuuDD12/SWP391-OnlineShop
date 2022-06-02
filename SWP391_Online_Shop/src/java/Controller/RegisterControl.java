@@ -51,7 +51,7 @@ public class RegisterControl extends HttpServlet {
                 } else {
                     SendEmail sm = new SendEmail();
                     String code = sm.getRandom();
-                    acc = new Account(user, pass, email,code, 3, 0);
+                    acc = new Account(user, pass, email, 3, 0, code);
                     //call the send email method
                     boolean test = sm.sendEmail(acc);
 
