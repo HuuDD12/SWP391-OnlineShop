@@ -131,23 +131,20 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 
                         <div class="sidebar-filter margin-bottom-25">
                             <h2>Filter</h2>
-                            <h3>Availability</h3>
-                            <div class="checkbox-list">
-                                <label><input type="checkbox"> Not Available (3)</label>
-                                <label><input type="checkbox"> In Stock (26)</label>
-                            </div>
+                            <form action="searchbyprice">
+                                <h3>Price</h3>
+                                <div id="slider-range" class="price-filter-range" name="rangeInput"></div></br>
+                                <label for="amount">Range:</label><br>
+                                <input name="min" type="number" min=0 max="299999" oninput="validity.valid||(value='0');" id="min_price" class="price-range-field" />                         
+                                <input name="max" type="number" min=1 max="300000" oninput="validity.valid||(value='300000');" id="max_price" class="price-range-field" /></br></br>
+                                <button class="price-range-search" id="price-range-submit">Search</button></br>
+                            </form>
 
-                            <h3>Price</h3>
-                            <p>
-                                <label for="amount">Range:</label>
-                                <input type="text" id="amount" style="border:0; color:#f6931f; font-weight:bold;">
-                            </p>
-                            <div id="slider-range"> </div>
                         </div>
 
                         <div class="sidebar-products clearfix">
                             <h2>Bestsellers</h2>
-                        <c:forEach items="${sessionScope.listTop3}" var="listTop3">
+                            <c:forEach items="${sessionScope.listTop3}" var="listTop3">
                                 <div class="item">
                                     <a href="shop-item.html"><img src="${listTop3.url}" alt="Some Shoes in Animal with Cut Out"></a>
                                     <h3><a href="shop-item.html">${listTop3.productName}</a></h3>
