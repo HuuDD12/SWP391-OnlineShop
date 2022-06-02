@@ -9,9 +9,9 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- icon -->
         <link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon">
         <!-- link Fonts -->
@@ -39,8 +39,30 @@
             referrerpolicy="no-referrer"
             />
         <!-- CSS -->
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css" />
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/queries.css" />
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css"><!--- fonts for slider on the index page -->  
+        <!-- Fonts END -->
+
+        <!-- Global styles START -->          
+        <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Global styles END --> 
+
+        <!-- Page level plugin styles START -->
+        <link href="assets/pages/css/animate.css" rel="stylesheet">
+        <link href="assets/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet">
+        <link href="assets/plugins/owl.carousel/assets/owl.carousel.css" rel="stylesheet">
+        <!-- Page level plugin styles END -->
+
+        <!-- Theme styles START -->
+        <link href="assets/pages/css/components.css" rel="stylesheet">
+        <link href="assets/pages/css/slider.css" rel="stylesheet">
+        <link href="assets/pages/css/style-shop.css" rel="stylesheet" type="text/css">
+        <link href="assets/corporate/css/style.css" rel="stylesheet">
+        <link href="assets/corporate/css/style-responsive.css" rel="stylesheet">
+        <link href="assets/corporate/css/themes/red.css" rel="stylesheet" id="style-color">
+        <link href="assets/corporate/css/custom.css" rel="stylesheet">
+        <!-- Theme styles END -->
         <title>${blog.title}</title>
         <style>
             .gallery-wrap .img-big-wrap img {
@@ -114,7 +136,7 @@
     </head>
 
     <body>
-        <a href="shop-index.html"><button style="background-color: greenyellow; border: 1px solid; float: left; ">Return Home</button></a>
+        <jsp:include page="header.jsp"></jsp:include>
 
         <%-- Content here--%>
     <center>
@@ -142,19 +164,19 @@
                             </article>
                         </div>
                     </div>
-                            <p style="font-family: 'Noto Serif Display', serif; ">Nếu bạn muốn đóng góp bài viết cho chúng tôi, vui lòng gửi qua hòm thư: shope@gmail.com</p>
+                    <p style="font-family: 'Noto Serif Display', serif; ">Nếu bạn muốn đóng góp bài viết cho chúng tôi, vui lòng gửi qua hòm thư: shope@gmail.com</p>
                 </div>
             </div>
         </div>
     </center>
     <jsp:include page="footer.jsp"></jsp:include>
-    <!-- BOOTSTRAP5-->
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"
-    ></script>
-    <!-- SCRIPT -->
-    <script src="${pageContext.request.contextPath}/js/script.js"></script>
+        <!-- BOOTSTRAP5-->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"
+        ></script>
+        <!-- SCRIPT -->
+        <script src="${pageContext.request.contextPath}/js/script.js"></script>
 </body>
 </html>

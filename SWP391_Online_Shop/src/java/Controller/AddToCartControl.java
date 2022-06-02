@@ -3,11 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controller;
 
 import DAO.ProductDAO;
@@ -44,7 +39,7 @@ public class AddToCartControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            int productId = Integer.parseInt(request.getParameter("pid"));
+              int productId = Integer.parseInt(request.getParameter("pid"));
             ProductDAO pdao = new ProductDAO();
             HttpSession session = request.getSession();
              Map<Integer,Cart> carts = (Map<Integer,Cart>) session.getAttribute("carts");

@@ -19,7 +19,12 @@ import java.util.List;
 public class ProductDAO extends DBcontext.DBContext {
 
     public List<Product> getAll() {
-        String sql = "select Product.*,ProductImgURL from product inner join ProductImg on product.ProductID = ProductImg.ProductID";
+        String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
+                + "MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
+                + "MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n"
+                + "MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n"
+                + "MIN(ProI.ProductImgURL) AS ProductImgURL FROM \n"
+                + "dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t ";
         List<Product> list = new ArrayList<>();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -46,7 +51,12 @@ public class ProductDAO extends DBcontext.DBContext {
     }
 
     public List<Product> getTop3Product() {
-        String sql = "select top 3 Product.*,ProductImgURL from product inner join ProductImg on product.ProductID = ProductImg.ProductID";
+        String sql = "SELECT top 3 * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
+                + "MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
+                + "MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n"
+                + "MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n"
+                + "MIN(ProI.ProductImgURL) AS ProductImgURL FROM \n"
+                + "dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t ";
         List<Product> list = new ArrayList<>();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -73,7 +83,12 @@ public class ProductDAO extends DBcontext.DBContext {
     }
 
     public Product getProductById(int productId) {
-        String sql = "select Product.*,ProductImgURL from product inner join ProductImg on product.ProductID = ProductImg.ProductID where Product.ProductID = ?";
+        String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
+                + "MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
+                + "MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n"
+                + "MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n"
+                + "MIN(ProI.ProductImgURL) AS ProductImgURL FROM \n"
+                + "dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t  where t.ProductID = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, productId);
@@ -98,9 +113,14 @@ public class ProductDAO extends DBcontext.DBContext {
         }
         return null;
     }
-    
+
     public List<Product> searchProductBySubCate(int subcate) {
-        String sql = "select Product.*,ProductImgURL from product inner join ProductImg on product.ProductID = ProductImg.ProductID where Product.SubCategoryID = ?";
+        String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
+                + "MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
+                + "MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n"
+                + "MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n"
+                + "MIN(ProI.ProductImgURL) AS ProductImgURL FROM \n"
+                + "dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t  where t.SubCategoryID = ?";
         List<Product> list = new ArrayList<>();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -126,9 +146,14 @@ public class ProductDAO extends DBcontext.DBContext {
         }
         return list;
     }
-    
+
     public List<Product> sortProductByNameAsc() {
-        String sql = "select Product.*,ProductImgURL from product inner join ProductImg on product.ProductID = ProductImg.ProductID order by Product.ProductName";
+        String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
+                + "MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
+                + "MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n"
+                + "MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n"
+                + "MIN(ProI.ProductImgURL) AS ProductImgURL FROM \n"
+                + "dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t  order by t.ProductName";
         List<Product> list = new ArrayList<>();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -155,7 +180,12 @@ public class ProductDAO extends DBcontext.DBContext {
     }
 
     public List<Product> sortProductByNameDesc() {
-        String sql = "select Product.*,ProductImgURL from product inner join ProductImg on product.ProductID = ProductImg.ProductID order by Product.ProductName desc";
+        String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
+                + "MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
+                + "MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n"
+                + "MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n"
+                + "MIN(ProI.ProductImgURL) AS ProductImgURL FROM \n"
+                + "dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t  order by t.ProductName desc";
         List<Product> list = new ArrayList<>();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -182,7 +212,12 @@ public class ProductDAO extends DBcontext.DBContext {
     }
 
     public List<Product> sortProductByPriceAsc() {
-        String sql = "select Product.*,ProductImgURL from product inner join ProductImg on product.ProductID = ProductImg.ProductID order by Product.OriginalPrice";
+        String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
+                + "MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
+                + "MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n"
+                + "MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n"
+                + "MIN(ProI.ProductImgURL) AS ProductImgURL FROM \n"
+                + "dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t order by t.OriginalPrice";
         List<Product> list = new ArrayList<>();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -209,7 +244,12 @@ public class ProductDAO extends DBcontext.DBContext {
     }
 
     public List<Product> sortProductByPriceDesc() {
-        String sql = "select Product.*,ProductImgURL from product inner join ProductImg on product.ProductID = ProductImg.ProductID order by Product.OriginalPrice desc";
+        String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
+                + "MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
+                + "MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n"
+                + "MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n"
+                + "MIN(ProI.ProductImgURL) AS ProductImgURL FROM \n"
+                + "dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t order by t.OriginalPrice desc";
         List<Product> list = new ArrayList<>();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -236,8 +276,13 @@ public class ProductDAO extends DBcontext.DBContext {
     }
 
     public List<Product> pagingProduct(int index) {
-        String sql = "select Product.*,ProductImgURL from product inner join ProductImg on product.ProductID = ProductImg.ProductID "
-                + "order by productID OFFSET ? ROWS FETCH NEXT 3 ROWS ONLY";
+        String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
+                + "MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
+                + "MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n"
+                + "MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n"
+                + "MIN(ProI.ProductImgURL) AS ProductImgURL FROM \n"
+                + "dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t  "
+                + "order by t.productID OFFSET ? ROWS FETCH NEXT 3 ROWS ONLY";
         List<Product> list = new ArrayList<>();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -245,7 +290,7 @@ public class ProductDAO extends DBcontext.DBContext {
             //ps.setInt(2, entry);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-               Product p = new Product(rs.getInt("productID"),
+                Product p = new Product(rs.getInt("productID"),
                         rs.getString("ProductName"),
                         rs.getString("Description"),
                         rs.getDouble("OriginalPrice"),
@@ -264,8 +309,14 @@ public class ProductDAO extends DBcontext.DBContext {
         return list;
 
     }
-      public int count() {
-        String query = "select COUNT (*) from product inner join ProductImg on product.ProductID = ProductImg.ProductID";
+
+    public int count() {
+        String query = "SELECT count(*) FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
+                + "MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
+                + "MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n"
+                + "MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n"
+                + "MIN(ProI.ProductImgURL) AS ProductImgURL FROM \n"
+                + "dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t ";
         try {
 
             PreparedStatement ps = connection.prepareStatement(query);
@@ -281,7 +332,7 @@ public class ProductDAO extends DBcontext.DBContext {
 
     public static void main(String[] args) {
         ProductDAO pdao = new ProductDAO();
-        List<Product> list = pdao.searchProductBySubCate(2);
+        List<Product> list = pdao.pagingProduct(1);
         for (Product product : list) {
             System.out.println(product);
         }
