@@ -57,7 +57,7 @@
                                 <a href="javascript:void(0);" class="top-cart-info-count">0 items</a>
                             </c:when>
                                 <c:otherwise>
-                                <a href="javascript:void(0);" class="top-cart-info-count">${sessionScope.carts.size()} items</a>
+                                    <a id="cart_number" href="javascript:void(0);" class="top-cart-info-count">${sessionScope.carts.size()} items</a>
                             </c:otherwise> 
 
                         </c:choose>

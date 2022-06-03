@@ -194,7 +194,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                         </div>
                                         <h3><a href="shop-item.html">${p.productName}</a></h3>
                                         <div class="pi-price">${p.originalPrice}</div>
-                                        <a href="add-to-cart?pid=${p.productID}" class="btn btn-default add2cart">Add to cart</a>
+                                        <a onclick="addTocartAsync(${p.productID})" class="btn btn-default add2cart">Add to cart</a>
                                     </div>
                                 </div>
                             </c:forEach>
@@ -210,7 +210,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 
                                     <c:forEach begin="1" end="${endPage}" var="i">
                                         <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${i}">${i}</a></li>
-                                    </c:forEach>                
+                                        </c:forEach>                
                                     <li class="page-item"><a class="page-link" href="productlist?page=${endPage}">&raquo;</a></li>
                                 </ul>
                             </div>
@@ -341,25 +341,39 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                                 Layout.initSliderRange();
                                             });
         </script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!--        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
         <script>
-            function searchByName(param){
-                            var txtSearch = param.value;
-                            $.ajax({
-                                url: "/SWP391_Online_Shop/searchAjax",
-                                type: "get", //send it through get method
-                                data: {
-                                    txt: txtSearch
-                                },
-                                success: function (data) {
-                                    var row = document.getElementById("content");
-                                    row.innerHTML = data;
-                                },
-                                error: function (xhr) {
-                                    //Do Something to handle error
-                                }
-                            });
-                        }
+            function searchByName(param) {
+                var txtSearch = param.value;
+                $.ajax({
+                    url: "/SWP391_Online_Shop/searchAjax",
+                    type: "get", //send it through get method
+                    data: {
+                        txt: txtSearch
+                    },
+                    success: function (data) {
+                        var row = document.getElementById("content");
+                        row.innerHTML = data;
+                    },
+                    error: function (xhr) {
+                        //Do Something to handle error
+                    }
+                });
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script>
+            function addTocartAsync(productId) {
+                axios.get('add-to-cart-async', {
+                    params: {
+                        productId: productId
+                    }
+                }).then((response) => {
+                    //lay data thanh cong
+                    document.getElementById("cart_number").innerHTML = response.data + " items";
+                    //cap nhat view
+                })
+            }
         </script>
         <!-- END PAGE LEVEL JAVASCRIPTS -->
     </body>
