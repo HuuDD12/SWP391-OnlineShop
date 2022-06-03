@@ -180,10 +180,10 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                             </div>
                         </div>
                         <!-- BEGIN PRODUCT LIST -->
-                        <div class="row product-list">
+                        <div id="content" class="row product-list">
                             <!-- PRODUCT ITEM START -->
                             <c:forEach items="${listP}" var="p">
-                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="product col-md-4 col-sm-6 col-xs-12">
                                     <div class="product-item">
                                         <div class="pi-img-wrapper">
                                             <img src="${p.url}" class="img-responsive" alt="Berry Lace Dress">
@@ -203,15 +203,14 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                         </div>
                         <!-- END PRODUCT LIST -->
                         <!-- BEGIN PAGINATOR -->
-                        <div class="row">
-                            <div class="col-md-4 col-sm-4 items-info">Items 1 to 9 of 10 total</div>
+                        <div class="row">                           
                             <div class="col-md-8 col-sm-8">
                                 <ul class="pagination pull-right">                               
                                     <li class="page-item"><a class="page-link" href="productlist?page=1">&laquo;</a></li>
 
                                     <c:forEach begin="1" end="${endPage}" var="i">
                                         <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${i}">${i}</a></li>
-                                        </c:forEach>                
+                                    </c:forEach>                
                                     <li class="page-item"><a class="page-link" href="productlist?page=${endPage}">&raquo;</a></li>
                                 </ul>
                             </div>
@@ -341,6 +340,26 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                                 Layout.initUniform();
                                                 Layout.initSliderRange();
                                             });
+        </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            function searchByName(param){
+                            var txtSearch = param.value;
+                            $.ajax({
+                                url: "/SWP391_Online_Shop/searchAjax",
+                                type: "get", //send it through get method
+                                data: {
+                                    txt: txtSearch
+                                },
+                                success: function (data) {
+                                    var row = document.getElementById("content");
+                                    row.innerHTML = data;
+                                },
+                                error: function (xhr) {
+                                    //Do Something to handle error
+                                }
+                            });
+                        }
         </script>
         <!-- END PAGE LEVEL JAVASCRIPTS -->
     </body>

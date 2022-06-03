@@ -267,9 +267,9 @@
                             <span class="sep"></span>
                             <i class="fa fa-search search-btn"></i>
                             <div class="search-box">
-                                <form action="#">
+                                <form action="searchbyname" method="post">
                                     <div class="input-group">
-                                        <input type="text" placeholder="Search" class="form-control">
+                                        <input oninput="searchByName(this)" name="txt" value="${txtSearch}" type="text" placeholder="Search" class="form-control">
                                         <span class="input-group-btn">
                                             <button class="btn btn-primary" type="submit">Search</button>
                                         </span>

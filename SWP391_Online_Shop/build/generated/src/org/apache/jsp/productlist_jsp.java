@@ -177,18 +177,15 @@ public final class productlist_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("                        <div class=\"sidebar-filter margin-bottom-25\">\r\n");
       out.write("                            <h2>Filter</h2>\r\n");
-      out.write("                            <h3>Availability</h3>\r\n");
-      out.write("                            <div class=\"checkbox-list\">\r\n");
-      out.write("                                <label><input type=\"checkbox\"> Not Available (3)</label>\r\n");
-      out.write("                                <label><input type=\"checkbox\"> In Stock (26)</label>\r\n");
-      out.write("                            </div>\r\n");
+      out.write("                            <form action=\"searchbyprice\">\r\n");
+      out.write("                                <h3>Price</h3>\r\n");
+      out.write("                                <div id=\"slider-range\" class=\"price-filter-range\" name=\"rangeInput\"></div></br>\r\n");
+      out.write("                                <label for=\"amount\">Range:</label><br>\r\n");
+      out.write("                                <input name=\"min\" type=\"number\" min=0 max=\"299999\" oninput=\"validity.valid||(value='0');\" id=\"min_price\" class=\"price-range-field\" />                         \r\n");
+      out.write("                                <input name=\"max\" type=\"number\" min=1 max=\"300000\" oninput=\"validity.valid||(value='300000');\" id=\"max_price\" class=\"price-range-field\" /></br></br>\r\n");
+      out.write("                                <button class=\"price-range-search\" id=\"price-range-submit\">Search</button></br>\r\n");
+      out.write("                            </form>\r\n");
       out.write("\r\n");
-      out.write("                            <h3>Price</h3>\r\n");
-      out.write("                            <p>\r\n");
-      out.write("                                <label for=\"amount\">Range:</label>\r\n");
-      out.write("                                <input type=\"text\" id=\"amount\" style=\"border:0; color:#f6931f; font-weight:bold;\">\r\n");
-      out.write("                            </p>\r\n");
-      out.write("                            <div id=\"slider-range\"> </div>\r\n");
       out.write("                        </div>\r\n");
       out.write("\r\n");
       out.write("                        <div class=\"sidebar-products clearfix\">\r\n");
@@ -209,16 +206,6 @@ public final class productlist_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                <a href=\"javascript:;\"><i class=\"fa fa-th-list\"></i></a>\r\n");
       out.write("                            </div>\r\n");
       out.write("                            <div class=\"col-md-10 col-sm-10\">\r\n");
-      out.write("                                <div class=\"pull-right\">\r\n");
-      out.write("                                    <label class=\"control-label\">Show:</label>\r\n");
-      out.write("                                    <select class=\"form-control input-sm\">\r\n");
-      out.write("                                        <option value=\"#?limit=24\" selected=\"selected\">24</option>\r\n");
-      out.write("                                        <option value=\"#?limit=25\">25</option>\r\n");
-      out.write("                                        <option value=\"#?limit=50\">50</option>\r\n");
-      out.write("                                        <option value=\"#?limit=75\">75</option>\r\n");
-      out.write("                                        <option value=\"#?limit=100\">100</option>\r\n");
-      out.write("                                    </select>\r\n");
-      out.write("                                </div>\r\n");
       out.write("                                <div class=\"pull-right\">\r\n");
       out.write("\r\n");
       out.write("                                    <label class=\"control-label\">Sort&nbsp;By:</label>\r\n");
@@ -246,7 +233,7 @@ public final class productlist_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            </div>\r\n");
       out.write("                        </div>\r\n");
       out.write("                        <!-- BEGIN PRODUCT LIST -->\r\n");
-      out.write("                        <div class=\"row product-list\">\r\n");
+      out.write("                        <div id=\"content\" class=\"row product-list\">\r\n");
       out.write("                            <!-- PRODUCT ITEM START -->\r\n");
       out.write("                            ");
       if (_jspx_meth_c_forEach_3(_jspx_page_context))
@@ -261,13 +248,13 @@ public final class productlist_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            <div class=\"col-md-4 col-sm-4 items-info\">Items 1 to 9 of 10 total</div>\r\n");
       out.write("                            <div class=\"col-md-8 col-sm-8\">\r\n");
       out.write("                                <ul class=\"pagination pull-right\">                               \r\n");
-      out.write("                                        <li class=\"page-item\"><a class=\"page-link\" href=\"productlist?page=1\">&laquo;</a></li>\r\n");
+      out.write("                                    <li class=\"page-item\"><a class=\"page-link\" href=\"productlist?page=1\">&laquo;</a></li>\r\n");
       out.write("\r\n");
       out.write("                                    ");
       if (_jspx_meth_c_forEach_4(_jspx_page_context))
         return;
       out.write("                \r\n");
-      out.write("                                        <li class=\"page-item\"><a class=\"page-link\" href=\"productlist?page=");
+      out.write("                                    <li class=\"page-item\"><a class=\"page-link\" href=\"productlist?page=");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${endPage}", java.lang.String.class, (PageContext)_jspx_page_context, null));
       out.write("\">&raquo;</a></li>\r\n");
       out.write("                                </ul>\r\n");
@@ -401,6 +388,26 @@ public final class productlist_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                                Layout.initSliderRange();\r\n");
       out.write("                                            });\r\n");
       out.write("        </script>\r\n");
+      out.write("        <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>\r\n");
+      out.write("        <script>\r\n");
+      out.write("            function searchByName(param){\r\n");
+      out.write("                            var txtSearch = param.value;\r\n");
+      out.write("                            $.ajax({\r\n");
+      out.write("                                url: \"/SWP391_Online_Shop/searchAjax\",\r\n");
+      out.write("                                type: \"get\", //send it through get method\r\n");
+      out.write("                                data: {\r\n");
+      out.write("                                    txt: txtSearch\r\n");
+      out.write("                                },\r\n");
+      out.write("                                success: function (data) {\r\n");
+      out.write("                                    var row = document.getElementById(\"content\");\r\n");
+      out.write("                                    row.innerHTML = data;\r\n");
+      out.write("                                },\r\n");
+      out.write("                                error: function (xhr) {\r\n");
+      out.write("                                    //Do Something to handle error\r\n");
+      out.write("                                }\r\n");
+      out.write("                            });\r\n");
+      out.write("                        }\r\n");
+      out.write("        </script>\r\n");
       out.write("        <!-- END PAGE LEVEL JAVASCRIPTS -->\r\n");
       out.write("    </body>\r\n");
       out.write("    <!-- END BODY -->\r\n");
@@ -426,7 +433,7 @@ public final class productlist_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_forEach_0 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _jspx_tagPool_c_forEach_var_items.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
     _jspx_th_c_forEach_0.setPageContext(_jspx_page_context);
     _jspx_th_c_forEach_0.setParent(null);
-    _jspx_th_c_forEach_0.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${listC}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    _jspx_th_c_forEach_0.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${sessionScope.listC}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
     _jspx_th_c_forEach_0.setVar("c");
     int[] _jspx_push_body_count_c_forEach_0 = new int[] { 0 };
     try {
@@ -478,7 +485,7 @@ public final class productlist_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_forEach_1 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _jspx_tagPool_c_forEach_var_items.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
     _jspx_th_c_forEach_1.setPageContext(_jspx_page_context);
     _jspx_th_c_forEach_1.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_forEach_0);
-    _jspx_th_c_forEach_1.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${listS}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    _jspx_th_c_forEach_1.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${sessionScope.listS}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
     _jspx_th_c_forEach_1.setVar("s");
     int[] _jspx_push_body_count_c_forEach_1 = new int[] { 0 };
     try {
@@ -524,7 +531,9 @@ public final class productlist_jsp extends org.apache.jasper.runtime.HttpJspBase
       do {
         out.write("\r\n");
         out.write("                                                <li class=\"list-group-item dropdown clearfix active\">\r\n");
-        out.write("                                                    <a href=\"productlist\" style=\"color: #000\" class=\"collapsed\">");
+        out.write("                                                    <a href=\"subcategory?sid=");
+        out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${s.subcate_id}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+        out.write("\" style=\"color: #000\" class=\"collapsed\">");
         out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${s.subcate_name}", java.lang.String.class, (PageContext)_jspx_page_context, null));
         out.write(" </a>                                \r\n");
         out.write("                                                </li>\r\n");
@@ -550,7 +559,7 @@ public final class productlist_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_forEach_2 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _jspx_tagPool_c_forEach_var_items.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
     _jspx_th_c_forEach_2.setPageContext(_jspx_page_context);
     _jspx_th_c_forEach_2.setParent(null);
-    _jspx_th_c_forEach_2.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${listTop3}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    _jspx_th_c_forEach_2.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${sessionScope.listTop3}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
     _jspx_th_c_forEach_2.setVar("listTop3");
     int[] _jspx_push_body_count_c_forEach_2 = new int[] { 0 };
     try {
@@ -605,7 +614,7 @@ public final class productlist_jsp extends org.apache.jasper.runtime.HttpJspBase
       if (_jspx_eval_c_forEach_3 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
         do {
           out.write("\r\n");
-          out.write("                                <div class=\"col-md-4 col-sm-6 col-xs-12\">\r\n");
+          out.write("                                <div class=\"product col-md-4 col-sm-6 col-xs-12\">\r\n");
           out.write("                                    <div class=\"product-item\">\r\n");
           out.write("                                        <div class=\"pi-img-wrapper\">\r\n");
           out.write("                                            <img src=\"");
