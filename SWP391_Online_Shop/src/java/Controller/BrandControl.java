@@ -5,14 +5,8 @@
  */
 package Controller;
 
-import DAO.BrandDAO;
-import DAO.CategoryDAO;
 import DAO.ProductDAO;
-import DAO.SubCategoryDAO;
-import Model.Brand;
-import Model.Category;
 import Model.Product;
-import Model.Subcategory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -21,14 +15,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "ProductListController", urlPatterns = {"/productlist"})
-public class ProductListController extends HttpServlet {
+@WebServlet(name = "BrandControl", urlPatterns = {"/brand"})
+public class BrandControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,35 +35,14 @@ public class ProductListController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-        final int size = 6;
-        ProductDAO pdao = new ProductDAO();
-        CategoryDAO cdao = new CategoryDAO();
-        List<Category> listC = cdao.getAllCategory();
-        SubCategoryDAO sdao = new SubCategoryDAO();
-        List<Subcategory> listS = sdao.getAllSubCategory();
-        List<Product> listTop3 = pdao.getTop3Product();
-        String page = request.getParameter("page");
-        BrandDAO bdao = new BrandDAO();
-        List<Brand> listB = bdao.getAllBrand();
-        int count = pdao.count();
-        int endPage = count / size;
-        if (count % size != 0) {
-            endPage++;
+        try (PrintWriter out = response.getWriter()) {
+            String bid = request.getParameter("bid");
+            ProductDAO pdao = new ProductDAO();
+            List<Product> list = pdao.getProductByBrand(bid);
+            request.setAttribute("listP", list);
+            request.getRequestDispatcher("productlist.jsp").forward(request, response);
+            
         }
-        if (page == null) {
-            page = "1";
-        }
-        int pTid = Integer.parseInt(page);
-        List<Product> list = pdao.pagingProduct(pTid);
-        request.setAttribute("listP", list);
-        request.setAttribute("listB", listB);
-        request.setAttribute("endPage", endPage);
-        request.setAttribute("page", page);
-        session.setAttribute("listTop3", listTop3);
-        session.setAttribute("listC", listC);
-        session.setAttribute("listS", listS);
-        request.getRequestDispatcher("productlist.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

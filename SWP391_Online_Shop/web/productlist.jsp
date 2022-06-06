@@ -183,8 +183,8 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                         <div id="content" class="row product-list">
                             <!-- PRODUCT ITEM START -->
                             <c:forEach items="${listP}" var="p">
-                                <div class="product col-md-4 col-sm-6 col-xs-12">
-                                    <div class="product-item">
+                                <div class="product col-md-4">
+                                    <div st class="product-item">
                                         <div class="pi-img-wrapper">
                                             <img src="${p.url}" class="img-responsive" alt="Berry Lace Dress">
                                             <div>
