@@ -104,6 +104,11 @@ public class Account {
     public void setBlock(int block) {
         this.block = block;
     }
+
+    @Override
+    public String toString() {
+        return "Account{" + "userId=" + userId + ", username=" + username + ", password=" + password + ", email=" + email + ", RoleId=" + RoleId + ", block=" + block + ", code=" + code + '}';
+    }
     
     
     
