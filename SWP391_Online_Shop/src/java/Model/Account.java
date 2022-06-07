@@ -28,7 +28,7 @@ public class Account {
         this.RoleId = RoleId;
         this.block = block;
     }
-
+    
     public String getCode() {
         return code;
     }

@@ -3,23 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package Controller;
 
-import dao.DAO;
+import DAO.UserDAO;
+import Model.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.ProductImg;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author dell
+ * @author Admin
  */
-public class SearchControl extends HttpServlet {
+@WebServlet(name = "LoginControl", urlPatterns = {"/login"})
+public class LoginControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,15 +36,44 @@ public class SearchControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        	response.setCharacterEncoding("UTF-8");
-            String txtSearch = request.getParameter("txt");
-            ProductDAO pr = new ProductDAO();
-            
-            List<Product> listP = pr.searchByName(txtSearch);
-            request.setAttribute("txtS", txtSearch);
-            request.setAttribute("listP", listP);
-            request.getRequestDispatcher("SearchProduct.jsp").forward(request, response);
+        String user = request.getParameter("user");
+        String pass = request.getParameter("pass");
+        String rem = request.getParameter("rem");
+        UserDAO u = new UserDAO();
+        Account acc = u.login(user, pass);
+        Account block = u.getAccBlock(user);
+        if (block == null) {
+            if (acc == null) {
+                request.setAttribute("mess", "WRONG USERNAME OR PASSWORD");
+                request.getRequestDispatcher("LoginHere.jsp").forward(request, response);
+            } else {
+                HttpSession session = request.getSession();
+                session.setAttribute("acc", acc);
+                Cookie cuser = new Cookie("user", user);
+                Cookie cpass = new Cookie("pass", pass);
+                Cookie cremember = new Cookie("rem", rem);
+                if (rem != null) {
+                    //user click remember me-->set time cookies
+                    //co nho , 1 ngay
+                    cuser.setMaxAge(60 * 60 * 24);
+                    cpass.setMaxAge(60 * 60 * 24);
+                    cremember.setMaxAge(60 * 60 * 24);
+                } else {
+                    //khong nho , nen xoa no di
+                    cuser.setMaxAge(0);
+                    cpass.setMaxAge(0);
+                    cremember.setMaxAge(0);
+
+                }
+                response.addCookie(cuser);
+                response.addCookie(cpass);
+                response.addCookie(cremember);
+                response.sendRedirect("productlist");
+            }
+        } else {
+            request.setAttribute("mess", "YOUR ACCOUNT BLOCKED");
+            request.getRequestDispatcher("LoginHere.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

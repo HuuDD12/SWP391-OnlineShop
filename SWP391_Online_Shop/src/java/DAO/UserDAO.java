@@ -18,7 +18,54 @@ import java.util.List;
  * @author Pham Anh Duc
  */
 public class UserDAO extends DBcontext.DBContext{
+    
+    public Account login(String username, String password) {
+        String sql = "select * from [users] where username=? and password=? ";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
 
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return new Account(rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getInt(6));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+
+    }
+    
+     public Account getAccBlock(String user) {
+        String query = "select * \n"
+                + "from [users]\n"
+                + "where [username] = ? and block = 1";
+        try {
+           
+             PreparedStatement ps = connection.prepareStatement(query);
+             ps.setString(1, user);
+             ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+               return new Account(rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getInt(6)); 
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+    
     public void signup(Account acc) {
         String sql = "INSERT INTO [dbo].[Users]\n"
                 + "           ([Username]\n"
@@ -89,9 +136,7 @@ public class UserDAO extends DBcontext.DBContext{
     
     public static void main(String[] args) {
         UserDAO u = new UserDAO();
-        List<Role> list = u.getAllUser();
-        for (Role o : list) {
-            System.out.println(o);
-        }
+        Account acc = u.login("admin", "123");
+        System.out.println(acc);
     }
 }

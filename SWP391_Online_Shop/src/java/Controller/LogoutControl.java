@@ -3,20 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import Model.Account;
 
 /**
  *
- * @author dell
+ * @author Admin
  */
+@WebServlet(name = "LogoutControl", urlPatterns = {"/logout"})
 public class LogoutControl extends HttpServlet {
 
     /**
@@ -33,8 +36,8 @@ public class LogoutControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         session.removeAttribute("acc");
-        response.sendRedirect("home");
-                
+        session.removeAttribute("carts");
+        response.sendRedirect("productlist");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

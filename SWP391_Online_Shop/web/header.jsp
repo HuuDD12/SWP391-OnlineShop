@@ -30,10 +30,9 @@
             <!-- BEGIN TOP BAR MENU -->
             <div class="col-md-6 col-sm-6 additional-nav">
                 <ul class="list-unstyled list-inline pull-right">
-                    <li><a href="MyAccountPage.jsp">My Account</a></li>
-                    <li><a href="shop-wishlist.html">My Wishlist</a></li>
-                    <li><a href="shop-checkout.html">Checkout</a></li>
-                    <li><a href="Homepage.jsp">Log OUT</a></li>
+                    <c:if test="${sessionScope.acc == null}">
+                        <li><a href="LoginHere.jsp"><i class="fa fa-lock"></i>Login</a></li>
+                    </c:if>
                 </ul>
             </div>
             <!-- END TOP BAR MENU -->
@@ -45,7 +44,7 @@
 <!-- BEGIN HEADER -->
 <div class="header">
     <div class="container">
-        <a class="site-logo" href="shop-index.html"><img src="assets/corporate/img/logos/logo-shop-red.png" alt="Metronic Shop UI"></a>
+        <a class="site-logo" href="productlist"><img src="assets/corporate/img/logos/logo-shop-red.png" alt="Metronic Shop UI"></a>
 
         <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 
@@ -91,7 +90,7 @@
                     <ul class="dropdown-menu">
                         <c:forEach items="${listB}" var="b">
                             <li><a href="brand?bid=${b.brandId}">${b.brandName}</a></li>
-                        </c:forEach>
+                            </c:forEach>
                     </ul>
                     <!-- END DROPDOWN MENU -->
                 </li>
@@ -214,35 +213,41 @@
                     </ul>
                 </li>
                 <li class="dropdown active">
+                      <c:if test ="${sessionScope.acc !=  null}">
                     <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                        Pages 
+                        Hello ${sessionScope.acc.getUsername()}
 
                     </a>
 
                     <ul class="dropdown-menu">
-                        <li><a href="shop-index.html">Home Default</a></li>
-                        <li><a href="shop-index-header-fix.html">Home Header Fixed</a></li>
-                        <li><a href="shop-index-light-footer.html">Home Light Footer</a></li>
-                        <li class="active"><a href="shop-product-list.html">Product List</a></li>
-                        <li><a href="shop-search-result.html">Search Result</a></li>
-                        <li><a href="shop-item.html">Product Page</a></li>
-                        <li><a href="shop-shopping-cart-null.html">Shopping Cart (Null Cart)</a></li>
-                        <li><a href="shop-shopping-cart.html">Shopping Cart</a></li>
-                        <li><a href="shop-checkout.html">Checkout</a></li>
-                        <li><a href="shop-about.html">About</a></li>
-                        <li><a href="shop-contacts.html">Contacts</a></li>
-                        <li><a href="shop-account.html">My account</a></li>
-                        <li><a href="shop-wishlist.html">My Wish List</a></li>
-                        <li><a href="shop-goods-compare.html">Product Comparison</a></li>
-                        <li><a href="shop-standart-forms.html">Standart Forms</a></li>
-                        <li><a href="shop-faq.html">FAQ</a></li>
-                        <li><a href="shop-privacy-policy.html">Privacy Policy</a></li>
-                        <li><a href="shop-terms-conditions-page.html">Terms &amp; Conditions</a></li>
+                     
+                            <!-- Default -->
+                     
+                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ProfileControl">View profile</a></li>  
+                            <!-- Admin -->
+                            <c:if test="${sessionScope.acc.getRoleId() ==  1}">
+                                <li><a  href="${pageContext.request.contextPath}/AccountManagerControl">Manage Users</a></li>
+                                </c:if>
+                            <!-- Seller -->
+                            <c:if test="${sessionScope.acc.getRoleId() ==  2}">
+                                <li><a  href="${pageContext.request.contextPath}/Dashboard">DashBoard</a></li>
+                                </c:if>
+                            <!-- Marketing -->
+                            <c:if test="${sessionScope.acc.getRoleId() ==  4}">
+                                <li><a  href="${pageContext.request.contextPath}/mkt/dashboard">Dashboard</a></li>
+                                </c:if>
+                                <c:if test="${sessionScope.acc.getRoleId() ==  5}">
+                                <li><a  href="${pageContext.request.contextPath}/DeliveryDashboard">Delivery Dashboard</a></li>
+                                </c:if>
+                            <!-- Default Logout -->
+                            
+                            <li><a  href="${pageContext.request.contextPath}/logout">Logout</a></li>
+                            
+                        <!-- Neu khong co user -->
                     </ul>
+                            </c:if>
                 </li>
 
-
-                <li><a href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes&amp;utm_source=download&amp;utm_medium=banner&amp;utm_campaign=metronic_frontend_freebie" target="_blank">Admin theme</a></li>
 
                 <!-- BEGIN TOP SEARCH -->
                 <li class="menu-search">
