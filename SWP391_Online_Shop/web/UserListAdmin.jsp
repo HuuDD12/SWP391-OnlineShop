@@ -131,13 +131,12 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                       <tbody>
                       <c:forEach items="${List}" var="x">
                           <tr>                                          
-                              <td>${x.Account.userId}</td>
-                              <td>${x.Account.username}</td>
-                              <td>${x.Account.email}</td>
+                              <td>${x.account.userId}</td>
+                              <td>${x.account.username}</td>
+                              <td>${x.account.email}</td>
                               <td>${x.roleName}</td>
-                              <td>
-                                  
-                                  <a href="#?sid=${x.Account.userId}">Ban</a>
+                              <td>                                  
+                                  <a href="#?sid=${x.account.userId}">Ban</a>
                               </td>
                           </tr>
                       </c:forEach>

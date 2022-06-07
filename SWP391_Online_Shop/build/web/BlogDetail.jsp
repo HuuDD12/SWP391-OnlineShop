@@ -147,7 +147,7 @@
                         <div class="col-md-4 ">
                             <article class="gallery-wrap"> 
                                 <div class="img-big-wrap">
-                                    <div> <a href="#"><img src="./resources/img/Blog/${blog.imageLink}"></a></div>
+                                    <div> <a href="#"><img src="${blog.imageLink}"></a></div>
                                 </div>                            
                             </article> 
                         </div>
