@@ -130,7 +130,7 @@
                             <div class="col-md-5 border-right">
                                 <article class="gallery-wrap"> 
                                     <div class="img-big-wrap">
-                                        <div> <a href="blogdetail?ID=${o.id}"><img src="./resources/img/Blog/${o.imageLink}"></a></div>
+                                        <div> <a href="blogdetail?ID=${o.id}"><img src="${o.imageLink}"></a></div>
                                     </div> <!-- slider-product.// -->
 
                                 </article> <!-- gallery-wrap .end// -->
@@ -152,7 +152,7 @@
                             <div class="col-md-5 border-right">
                                 <article class="gallery-wrap"> 
                                     <div class="img-big-wrap">
-                                        <div> <a href="blogdetail?ID=${o.id}"><img src="./resources/img/Blog/${o.imageLink}"></a></div>
+                                        <div> <a href="blogdetail?ID=${o.id}"><img src="${o.imageLink}"></a></div>
                                     </div> <!-- slider-product.// -->
 
                                 </article> <!-- gallery-wrap .end// -->
