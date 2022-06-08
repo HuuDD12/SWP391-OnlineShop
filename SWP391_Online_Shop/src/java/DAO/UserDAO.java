@@ -6,9 +6,12 @@
 package DAO;
 
 import Model.Account;
+import Model.Role;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -59,10 +62,36 @@ public class UserDAO extends DBcontext.DBContext{
         }
         return null;
     }
+    public List<Role> getAllUser() {
+        List<Role> list = new ArrayList<>();
+        String sql = "select u.*,r.RoleName from Users u inner join role r on u.RoleID = r.RoleID ";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {  
+                Account acc = new  Account( 
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4), 
+                        rs.getInt(5), 
+                        rs.getInt(6));   
+                Role r = new Role(acc, rs.getString(7));
+                list.add(r);
+            }
+
+        } catch (Exception e) {
+        }
+        return list;
+    }
+    
+    
     
     public static void main(String[] args) {
         UserDAO u = new UserDAO();
-        Account acc = u.checkAccExist("admin");
-        System.out.println(acc);
+        List<Role> list = u.getAllUser();
+        for (Role o : list) {
+            System.out.println(o);
+        }
     }
 }
