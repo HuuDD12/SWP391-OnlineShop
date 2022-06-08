@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package Controller;
 
-import dao.DAO;
+import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author dell
  */
-public class SaveInfo extends HttpServlet {
+@WebServlet(name = "deleteProduct", urlPatterns = {"/deleteProduct"})
+public class deleteProduct extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,19 +33,13 @@ public class SaveInfo extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            request.setCharacterEncoding("UTF-8");
-            String id = request.getParameter("id");
-            String firstName = request.getParameter("firstName");
-            String secondName = request.getParameter("secondName");
-            String phoneNumber = request.getParameter("phoneNumber");
-            String address = request.getParameter("address");
-            
-            DAO dao = new DAO();
-            dao.UpdateInfor(firstName, secondName, phoneNumber, address, id);
-            response.sendRedirect("MyAccountPage.jsp");
-        
+            String cid = request.getParameter("pid");
+            ProductDAO p = new ProductDAO();
+            p.deleteProduct(cid);
+            response.sendRedirect("ManagerProduct");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

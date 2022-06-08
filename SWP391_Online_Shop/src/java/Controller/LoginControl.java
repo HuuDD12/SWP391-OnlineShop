@@ -3,11 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package Controller;
 
+import DAO.UserDAO;
+import Model.Account;
+import Model.Users;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +21,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author dell
  */
-public class LogoutControl extends HttpServlet {
+@WebServlet(name = "LoginControl", urlPatterns = {"/LoginControl"})
+public class LoginControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,10 +36,21 @@ public class LogoutControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-        session.removeAttribute("acc");
-        response.sendRedirect("home");
-                
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        
+        UserDAO U = new UserDAO();
+        Account a = U.login(username, password);
+        
+        if(a==null){
+            request.setAttribute("mess", "Wrong user or pass");
+            request.getRequestDispatcher("LoginHere.jsp").forward(request, response);
+        }
+        else{
+            HttpSession session = request.getSession();
+            session.setAttribute("acc", a);
+            response.sendRedirect("HomeControl");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
