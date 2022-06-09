@@ -7,11 +7,16 @@ package Controller;
 
 import DAO.UserDAO;
 import Model.Account;
-import Model.Users;
+
+import Model.Account;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+
+import javax.servlet.http.Cookie;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,9 +24,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author dell
+ * @author Admin
  */
-@WebServlet(name = "LoginControl", urlPatterns = {"/LoginControl"})
+@WebServlet(name = "LoginControl", urlPatterns = {"/login"})
 public class LoginControl extends HttpServlet {
 
     /**
@@ -36,60 +41,97 @@ public class LoginControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        
-        UserDAO U = new UserDAO();
-        Account a = U.login(username, password);
-        
-        if(a==null){
-            request.setAttribute("mess", "Wrong user or pass");
+        String user = request.getParameter("user");
+        String pass = request.getParameter("pass");
+        String rem = request.getParameter("rem");
+        UserDAO u = new UserDAO();
+        Account acc = u.login(user, pass);
+        Account block = u.getAccBlock(user);
+        if (block == null) {
+            if (acc == null) {
+                request.setAttribute("mess", "WRONG USERNAME OR PASSWORD");
+                request.getRequestDispatcher("LoginHere.jsp").forward(request, response);
+            } else {
+                HttpSession session = request.getSession();
+                session.setAttribute("acc", acc);
+                Cookie cuser = new Cookie("user", user);
+                Cookie cpass = new Cookie("pass", pass);
+                Cookie cremember = new Cookie("rem", rem);
+                if (rem != null) {
+                    //user click remember me-->set time cookies
+                    //co nho , 1 ngay
+                    cuser.setMaxAge(60 * 60 * 24);
+                    cpass.setMaxAge(60 * 60 * 24);
+                    cremember.setMaxAge(60 * 60 * 24);
+                } else {
+                    //khong nho , nen xoa no di
+                    cuser.setMaxAge(0);
+                    cpass.setMaxAge(0);
+                    cremember.setMaxAge(0);
+
+                }
+                response.addCookie(cuser);
+                response.addCookie(cpass);
+                response.addCookie(cremember);
+                response.sendRedirect("productlist");
+            }
+        } else {
+            request.setAttribute("mess", "YOUR ACCOUNT BLOCKED");
             request.getRequestDispatcher("LoginHere.jsp").forward(request, response);
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+
+            UserDAO U = new UserDAO();
+            Account a = U.login(username, password);
+
+            if (a == null) {
+                request.setAttribute("mess", "Wrong user or pass");
+                request.getRequestDispatcher("LoginHere.jsp").forward(request, response);
+            } else {
+                HttpSession session = request.getSession();
+                session.setAttribute("acc", a);
+                response.sendRedirect("HomeControl");
+            }
         }
-        else{
-            HttpSession session = request.getSession();
-            session.setAttribute("acc", a);
-            response.sendRedirect("HomeControl");
+    }
+        // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+        /**
+         * Handles the HTTP <code>GET</code> method.
+         *
+         * @param request servlet request
+         * @param response servlet response
+         * @throws ServletException if a servlet-specific error occurs
+         * @throws IOException if an I/O error occurs
+         */
+        @Override
+        protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+            processRequest(request, response);
         }
-    }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+        /**
+         * Handles the HTTP <code>POST</code> method.
+         *
+         * @param request servlet request
+         * @param response servlet response
+         * @throws ServletException if a servlet-specific error occurs
+         * @throws IOException if an I/O error occurs
+         */
+        @Override
+        protected void doPost
+        (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+            processRequest(request, response);
+        }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
+        /**
+         * Returns a short description of the servlet.
+         *
+         * @return a String containing servlet description
+         */
+        @Override
+        public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+        }// </editor-fold>
 
 }

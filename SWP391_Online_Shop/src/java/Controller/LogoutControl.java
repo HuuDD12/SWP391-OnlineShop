@@ -13,13 +13,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import Model.Account;
 
 /**
  *
- * @author dell
+ * @author Admin
  */
-@WebServlet(name = "logout", urlPatterns = {"/logout"})
-public class logout extends HttpServlet {
+
+@WebServlet(name = "LogoutControl", urlPatterns = {"/logout"})
+public class LogoutControl extends HttpServlet {
+
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,12 +36,10 @@ public class logout extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            HttpSession session = request.getSession();
-            session.removeAttribute("acc");
-            response.sendRedirect("HomeControl");
-        }
+        HttpSession session = request.getSession();
+        session.removeAttribute("acc");
+        session.removeAttribute("carts");
+   
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

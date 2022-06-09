@@ -1,8 +1,78 @@
-
+    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- BEGIN TOP BAR -->
+<div class="pre-header">
+    <div class="container">
+        <div class="row">
+            <!-- BEGIN TOP BAR LEFT PART -->
+            <div class="col-md-6 col-sm-6 additional-shop-info">
+                <ul class="list-unstyled list-inline">
+                    <li><i class="fa fa-phone"></i><span>+1 456 6717</span></li>
+                    <!-- BEGIN CURRENCIES -->
+                    <li class="shop-currencies">
+                        <a href="javascript:void(0);">?</a>
+                        <a href="javascript:void(0);">£</a>
+                        <a href="javascript:void(0);" class="current">$</a>
+                    </li>
+                    <!-- END CURRENCIES -->
+                    <!-- BEGIN LANGS -->
+                    <li class="langs-block">
+                        <a href="javascript:void(0);" class="current">English </a>
+                        <div class="langs-block-others-wrapper"><div class="langs-block-others">
+                                <a href="javascript:void(0);">Vietnamese</a>
+                            </div></div>
+                    </li>
+                    <!-- END LANGS -->
+                </ul>
+            </div>
+            <!-- END TOP BAR LEFT PART -->
+            <!-- BEGIN TOP BAR MENU -->
+            <div class="col-md-6 col-sm-6 additional-nav">
+                <ul class="list-unstyled list-inline pull-right">
+                    <c:if test="${sessionScope.acc == null}">
+                        <li><a href="LoginHere.jsp"><i class="fa fa-lock"></i>Login</a></li>
+                    </c:if>
+                </ul>
+            </div>
+            <!-- END TOP BAR MENU -->
+        </div>
+    </div>        
+</div>
+<!-- END TOP BAR -->
+
+<!-- BEGIN HEADER -->
+<div class="header">
+    <div class="container">
+        <a class="site-logo" href="productlist"><img src="assets/corporate/img/logos/logo-shop-red.png" alt="Metronic Shop UI"></a>
+
+        <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+
+        <!-- BEGIN CART -->
+        <div class="top-cart-block">
+            <div class="top-cart-info">
+                <c:choose>
+                    <c:when test="${sessionScope.carts.size() == null}">
+                        <a href="javascript:void(0);" class="top-cart-info-count">0 items</a>
+                    </c:when>
+                    <c:otherwise>
+                        <a id="cart_number" href="javascript:void(0);" class="top-cart-info-count">${sessionScope.carts.size()} items</a>
+                    </c:otherwise> 
+
+                </c:choose>
+
+
+
+
+            </div>
+            <i class="fa fa-shopping-cart"></i>
+
+            <div class="top-cart-content-wrapper">
+                <div class="top-cart-content">
+                    <div class="text-center">
+                        <a href="carts" class="btn btn-default">View Cart</a>
+                        <a href="checkout" class="btn btn-primary">Checkout</a>
         <div class="pre-header">
             <div class="container">
                 <div class="row">
@@ -55,6 +125,17 @@
             <div class="container">
                 <a class="site-logo" href="shop-index.html"><img src="assets/corporate/img/logos/logo-shop-red.png" alt="Metronic Shop UI"></a>
 
+                    <!-- BEGIN DROPDOWN MENU -->
+                    <ul class="dropdown-menu">
+                        <c:forEach items="${listB}" var="b">
+                            <li><a href="brand?bid=${b.brandId}">${b.brandName}</a></li>
+                            </c:forEach>
+                    </ul>
+                    <!-- END DROPDOWN MENU -->
+                </li>
+                <li class="dropdown dropdown-megamenu">
+                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
+                        Man
                 <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 
                 <!-- BEGIN CART -->
@@ -287,6 +368,61 @@
                         </li>
                         <!-- END TOP SEARCH -->
                     </ul>
+                </li>
+                <li class="dropdown active">
+                      <c:if test ="${sessionScope.acc !=  null}">
+                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
+                        Hello ${sessionScope.acc.getUsername()}
+
+                    </a>
+
+                    <ul class="dropdown-menu">
+                     
+                            <!-- Default -->
+                     
+                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ProfileControl">View profile</a></li>  
+                            <!-- Admin -->
+                            <c:if test="${sessionScope.acc.getRoleId() ==  1}">
+                                <li><a  href="${pageContext.request.contextPath}/AccountManagerControl">Manage Users</a></li>
+                                </c:if>
+                            <!-- Seller -->
+                            <c:if test="${sessionScope.acc.getRoleId() ==  2}">
+                                <li><a  href="${pageContext.request.contextPath}/Dashboard">DashBoard</a></li>
+                                </c:if>
+                            <!-- Marketing -->
+                            <c:if test="${sessionScope.acc.getRoleId() ==  4}">
+                                <li><a  href="${pageContext.request.contextPath}/mkt/dashboard">Dashboard</a></li>
+                                </c:if>
+                                <c:if test="${sessionScope.acc.getRoleId() ==  5}">
+                                <li><a  href="${pageContext.request.contextPath}/DeliveryDashboard">Delivery Dashboard</a></li>
+                                </c:if>
+                            <!-- Default Logout -->
+                            
+                            <li><a  href="${pageContext.request.contextPath}/logout">Logout</a></li>
+                            
+                        <!-- Neu khong co user -->
+                    </ul>
+                            </c:if>
+                </li>
+
+
+                <!-- BEGIN TOP SEARCH -->
+                <li class="menu-search">
+                    <span class="sep"></span>
+                    <i class="fa fa-search search-btn"></i>
+                    <div class="search-box">
+                        <form action="searchbyname" method="post">
+                            <div class="input-group">
+                                <input oninput="searchByName(this)" name="txt" value="${txtSearch}" type="text" placeholder="Search" class="form-control">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="submit">Search</button>
+                                </span>
+                            </div>
+                        </form>
+                    </div> 
+                </li>
+                <!-- END TOP SEARCH -->
+</ul>
                 </div>
                 <!-- END NAVIGATION -->
             </div>

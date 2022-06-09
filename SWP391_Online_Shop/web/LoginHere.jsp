@@ -139,7 +139,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                     <!-- BEGIN TOP BAR MENU -->
                     <div class="col-md-6 col-sm-6 additional-nav">
                         <ul class="list-unstyled list-inline pull-right">
-                            <li><a href="Register.jsp">Register</a></li>
+                            <li><a href="register">Register</a></li>
                              <li><a href="LoginHere.jsp">Log In</a></li>
                         </ul>
                     </div>
@@ -152,7 +152,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
         <!-- BEGIN HEADER -->
         <div class="header">
             <div class="container">
-                <a class="site-logo" href="Homepage.jsp"><img src="assets/corporate/img/logos/logo-shop-red.png" alt="Metronic Shop UI"></a>
+                <a class="site-logo" href="productlist"><img src="assets/corporate/img/logos/logo-shop-red.png" alt="Metronic Shop UI"></a>
 
                 <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 
@@ -176,6 +176,15 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                     <div class="col-md-9 col-sm-7">
                         <div class="register-page">
                             <h1>Login</h1>
+                            <form action="login" method="post">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Username</label>
+                                    <input name="user" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Your Username">
+                                    
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Password</label>
+                                    <input name="pass" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                             <form action="LoginControl" method="post">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Email address</label>
@@ -185,10 +194,11 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Password</label>
                                     <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+>>>>
                                 </div>
                                 <div class="flex-sb-m w-full p-t-3 p-b-32">
                             <div class="contact100-form-checkbox">
-                                <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                                <input class="input-checkbox100" id="ckb1" type="checkbox" name="rem">
                                 <label class="label-checkbox100" for="ckb1">
                                     Remember me
                                 </label>
