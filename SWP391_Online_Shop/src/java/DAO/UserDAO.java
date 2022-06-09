@@ -18,54 +18,7 @@ import java.util.List;
  * @author Pham Anh Duc
  */
 public class UserDAO extends DBcontext.DBContext{
-    
-    public Account login(String username, String password) {
-        String sql = "select * from [users] where username=? and password=? ";
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
 
-            ps.setString(1, username);
-            ps.setString(2, password);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                return new Account(rs.getString(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getInt(5),
-                        rs.getInt(6));
-            }
-
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return null;
-
-    }
-    
-     public Account getAccBlock(String user) {
-        String query = "select * \n"
-                + "from [users]\n"
-                + "where [username] = ? and block = 1";
-        try {
-           
-             PreparedStatement ps = connection.prepareStatement(query);
-             ps.setString(1, user);
-             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-               return new Account(rs.getString(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getInt(5),
-                        rs.getInt(6)); 
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return null;
-    }
-    
     public void signup(Account acc) {
         String sql = "INSERT INTO [dbo].[Users]\n"
                 + "           ([Username]\n"
@@ -109,11 +62,13 @@ public class UserDAO extends DBcontext.DBContext{
         }
         return null;
     }
-    public List<Role> getAllUser() {
+    public List<Role> getAllUser(int index) {
         List<Role> list = new ArrayList<>();
-        String sql = "select u.*,r.RoleName from Users u inner join role r on u.RoleID = r.RoleID ";
+        String sql = "select u.*,r.RoleName from Users u inner join role r on u.RoleID = r.RoleID where u.UserID between ? and ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, (index-1)*5+1);
+            ps.setInt(2, index*5);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {  
                 Account acc = new  Account( 
@@ -131,12 +86,37 @@ public class UserDAO extends DBcontext.DBContext{
         }
         return list;
     }
-    
-    
-    
+
+    public void UpdateBanUser(String UserID, int  block) {
+        String query = "Update [Users]\n"
+                + "  set isBlock = ? \n"
+                + "  where UserID = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, block);
+            ps.setString(2, UserID);         
+            ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
+
+    public int getCountUser() {
+        String query = "select count(*) from Users";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {                
+                return rs.getInt(1);
+            }                  
+        } catch (Exception e) {
+        }
+        return 0;
+    }
     public static void main(String[] args) {
         UserDAO u = new UserDAO();
-        Account acc = u.login("admin", "123");
-        System.out.println(acc);
+        List<Role> list = u.getAllUser(1);
+        for (Role o : list) {
+            System.out.println(o);
+        }
     }
 }

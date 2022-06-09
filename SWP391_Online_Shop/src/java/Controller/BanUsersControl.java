@@ -5,12 +5,9 @@
  */
 package Controller;
 
-import DAO.RoleDAO;
 import DAO.UserDAO;
-import Model.Role;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,10 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Admin
+ * @author ADM
  */
-@WebServlet(name = "UserListControl", urlPatterns = {"/userlist"})
-public class UserListControl extends HttpServlet {
+@WebServlet(name = "BanUsersControl", urlPatterns = {"/BanUsersControl"})
+public class BanUsersControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,25 +33,18 @@ public class UserListControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        UserDAO udao = new UserDAO();
-        RoleDAO dao = new RoleDAO();
-        String indexpage = request.getParameter("index");
-        if(indexpage == null){
-            indexpage= "1";
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet BanUsersControl</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet BanUsersControl at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-        int index = Integer.parseInt(indexpage);
-        int count = udao.getCountUser();
-        int endpage = count /5;
-        if(count % 5 != 0){
-            endpage++;
-        }
-        List<Role> list = udao.getAllUser(index);
-        List<Role> listR = dao.getAllRole();
-        request.setAttribute("endPage", endpage);      
-        request.setAttribute("tag", index);
-        request.setAttribute("List", list);
-        request.setAttribute("ListR", listR);
-        request.getRequestDispatcher("UserListAdmin.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -69,7 +59,15 @@ public class UserListControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String User = request.getParameter("sid");
+        String block = request.getParameter("sid1");
+        int isblock = Integer.parseInt(block);
+        if (isblock == 0){
+            isblock = 1;
+        }else{isblock = 0;}
+        UserDAO dao = new UserDAO();
+        dao.UpdateBanUser(User, isblock);
+        response.sendRedirect("userlist");
     }
 
     /**
