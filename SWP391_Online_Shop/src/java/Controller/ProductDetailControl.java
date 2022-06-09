@@ -5,7 +5,9 @@
  */
 package Controller;
 
+import DAO.CommentDAO;
 import DAO.ProductDAO;
+import Model.Comment;
 import Model.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,14 +38,16 @@ public class ProductDetailControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-           int pid = Integer.parseInt(request.getParameter("pid"));
-           String sid = request.getParameter("sid");
-           ProductDAO pdao = new ProductDAO();
-           List<Product> list = pdao.getTop3ListProByCat(sid, pid);
-           Product p = pdao.getProductById(pid);
-           request.setAttribute("product", p);
-           request.setAttribute("list", list);
-           request.getRequestDispatcher("ProductDetail.jsp").forward(request, response);
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ProductDetailControl</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ProductDetailControl at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
@@ -59,7 +63,17 @@ public class ProductDetailControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+           int pid = Integer.parseInt(request.getParameter("pid"));
+           String sid = request.getParameter("sid");
+           ProductDAO pdao = new ProductDAO();
+           CommentDAO cdao = new CommentDAO();
+           List<Product> list = pdao.getTop3ListProByCat(sid, pid);
+           Product p = pdao.getProductById(pid);
+           List<Comment> listC = cdao.getComment(pid);
+           request.setAttribute("product", p);
+           request.setAttribute("list", list);
+           request.setAttribute("listC", listC);
+           request.getRequestDispatcher("ProductDetail.jsp").forward(request, response);
     }
 
     /**
@@ -73,7 +87,15 @@ public class ProductDetailControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String feedback = request.getParameter("review");
+        //int id = Integer.valueOf(request.getParameter("id"));
+        int ProID = Integer.parseInt(request.getParameter("pid"));
+        String sid = request.getParameter("sid");
+        CommentDAO cdao = new CommentDAO();
+        cdao.insert(name, email, feedback, ProID);
+        response.sendRedirect("productdetail?pid="+ProID+"&sid="+sid);
     }
 
     /**
