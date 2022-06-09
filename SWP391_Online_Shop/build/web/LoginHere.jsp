@@ -166,7 +166,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
         <div class="main">
             <div class="container">
                 <ul class="breadcrumb">
-                    <li><a href="HomeControl">Home</a></li>                 
+                    <li><a href="productlist">Home</a></li>                 
                 </ul>
                 <!-- BEGIN SIDEBAR & CONTENT -->
 
@@ -179,13 +179,12 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                         <form action="login" method="post">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Username</label>
-                                <input name="user" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Your Username">
+                                <input value="${cookie.user.value}" name="user" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Your Username">
 
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Password</label>
-                                <input name="pass" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-
+                                <input value="${cookie.pass.value}" name="pass" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"></br>
                                 <input class="input-checkbox100" id="ckb1" type="checkbox" name="rem">
                                 <label class="label-checkbox100" for="ckb1">
                                     Remember me
