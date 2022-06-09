@@ -48,4 +48,106 @@ public class OrderDAO extends DBcontext.DBContext{
         }
         return 0;
     }
+ public List<Order> viewOrderWait(String id) {
+        String sql = "select o.* from Orders o join Order_Status s\n"
+                + "on o.Status = s.ID \n"
+                + "where o.UserID = ?\n"
+                + "and o.ShippingID = 1";
+        List<Order> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Order p = new Order(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getInt(7));
+                list.add(p);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Order> viewOrderPack(String id) {
+        String sql = "select o.* from Orders o join Order_Status s\n"
+                + "on o.Status = s.ID \n"
+                + "where o.UserID = ?\n"
+                + "and o.ShippingID = 2";
+        List<Order> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Order p = new Order(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getInt(7));
+                list.add(p);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Order> viewOrderDelivery(String id) {
+        String sql = "select o.* from Orders o join Order_Status s\n"
+                + "on o.Status = s.ID \n"
+                + "where o.UserID = ?\n"
+                + "and o.ShippingID = 3";
+        List<Order> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Order p = new Order(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getInt(7));
+                list.add(p);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    public List<Order> viewOrderCancel(String id) {
+        String sql = "select o.* from Orders o join Order_Status s\n"
+                + "on o.Status = s.ID \n"
+                + "where o.UserID = ?\n"
+                + "and o.ShippingID = 4";
+        List<Order> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Order p = new Order(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getInt(7));
+                list.add(p);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    public List<Order> viewOrderComplete(String id) {
+        String sql = "select o.* from Orders o join Order_Status s\n"
+                + "on o.Status = s.ID \n"
+                + "where o.UserID = ?\n"
+                + "and o.ShippingID = 5";
+        List<Order> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Order p = new Order(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getInt(7));
+                list.add(p);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
 }

@@ -4,6 +4,7 @@
     Author     : VAN ANH
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--
@@ -119,10 +120,11 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                 <!-- BEGIN TOP BAR MENU -->
                 <div class="col-md-6 col-sm-6 additional-nav">
                     <ul class="list-unstyled list-inline pull-right">
-                        <li><a href="MyAccountPage.jsp">My Account</a></li>
+                        
                         <li><a href="shop-wishlist.html">My Wishlist</a></li>
                         <li><a href="shop-checkout.html">Checkout</a></li>
                         <li><a href="page-login.html">Log In</a></li>
+                        
                     </ul>
                 </div>
                 <!-- END TOP BAR MENU -->
@@ -448,16 +450,17 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
             <div class="content-page">
               <h3>My Account</h3>
               <ul>
-                <li><a href="EditAccountInfor.jsp">Edit your account information</a></li>
+                <li><a href="ManagerAccountInfo?cid=${acc.id}">Edit your account information</a></li>
                 <li><a href="ChangePassword.jsp">Change your password</a></li>
                 <li><a href="MyAddress.jsp">Modify your address book entries</a></li>
                 <li><a href="javascript:;">Modify your wish list</a></li>
+                <li><a href="ManagerProduct">Manager Product</a></li>
               </ul>
               <hr>
 
               <h3>My Orders</h3>
               <ul>
-                <li><a href="javascript:;">View your order history</a></li>
+                <li><a href="ViewHistoryOrder?cid=${acc.id}">View your order history</a></li>
                 <li><a href="javascript:;">Downloads</a></li>
                 <li><a href="javascript:;">Your Reward Points</a></li>
                 <li><a href="javascript:;">View your return requests</a></li>

@@ -1,15 +1,9 @@
 <%-- 
     Document   : MyInformation
-    Created on : Jun 1, 2022, 12:40:41 AM
+    Created on : Jun 2, 2022, 3:42:45 PM
     Author     : dell
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%-- 
-    Document   : EditAccountInfor
-    Created on : May 29, 2022, 10:29:24 AM
-    Author     : dell
---%>
 <!DOCTYPE html>
 <!--
 Template: Metronic Frontend Freebie - Responsive HTML Template Based On Twitter Bootstrap 3.3.4
@@ -680,4 +674,5 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
     </body>
     <!-- END BODY -->
 </html>
+
 

@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import DAO.RoleDAO;
 import DAO.UserDAO;
 import Model.Role;
 import java.io.IOException;
@@ -36,8 +37,23 @@ public class UserListControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         UserDAO udao = new UserDAO();
-        List<Role> list = udao.getAllUser();
+        RoleDAO dao = new RoleDAO();
+        String indexpage = request.getParameter("index");
+        if(indexpage == null){
+            indexpage= "1";
+        }
+        int index = Integer.parseInt(indexpage);
+        int count = udao.getCountUser();
+        int endpage = count /5;
+        if(count % 5 != 0){
+            endpage++;
+        }
+        List<Role> list = udao.getAllUser(index);
+        List<Role> listR = dao.getAllRole();
+        request.setAttribute("endPage", endpage);      
+        request.setAttribute("tag", index);
         request.setAttribute("List", list);
+        request.setAttribute("ListR", listR);
         request.getRequestDispatcher("UserListAdmin.jsp").forward(request, response);
     }
 
