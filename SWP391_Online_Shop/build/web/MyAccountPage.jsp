@@ -460,7 +460,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 
               <h3>My Orders</h3>
               <ul>
-                <li><a href="javascript:;">View your order history</a></li>
+                <li><a href="ViewHistoryOrder?cid=${acc.id}">View your order history</a></li>
                 <li><a href="javascript:;">Downloads</a></li>
                 <li><a href="javascript:;">Your Reward Points</a></li>
                 <li><a href="javascript:;">View your return requests</a></li>

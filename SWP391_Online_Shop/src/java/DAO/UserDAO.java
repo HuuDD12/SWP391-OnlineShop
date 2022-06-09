@@ -119,4 +119,55 @@ public class UserDAO extends DBcontext.DBContext{
             System.out.println(o);
         }
     }
+
+    public Account login(String username, String password) {
+         String sql = "select*from [users] where username=? and password=? ";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return new Account(rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4), 
+                        rs.getInt(5), 
+                        rs.getInt(6));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+
+    }
+
+    public Account getAccBlock(String user) {
+        String sql = "select * \n"
+                + "from [users]\n"
+                + "where [username] = ? and block = 1";
+            
+       try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            
+            ps.setString(1, user);
+           
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                 return new Account(rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4), 
+                        rs.getInt(5), 
+                        rs.getInt(6));
+               
+            }
+        
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
 }
