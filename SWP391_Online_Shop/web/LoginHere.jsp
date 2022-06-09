@@ -166,7 +166,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
         <div class="main">
             <div class="container">
                 <ul class="breadcrumb">
-                    <li><a href="Homepage.jsp">Home</a></li>                 
+                    <li><a href="HomeControl">Home</a></li>                 
                 </ul>
                 <!-- BEGIN SIDEBAR & CONTENT -->
                
@@ -185,6 +185,16 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Password</label>
                                     <input name="pass" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                            <form action="LoginControl" method="post">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Email address</label>
+                                    <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Password</label>
+                                    <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+>>>>
                                 </div>
                                 <div class="flex-sb-m w-full p-t-3 p-b-32">
                             <div class="contact100-form-checkbox">
@@ -193,7 +203,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                     Remember me
                                 </label>
                             </div>
-
+                                    <p>${mess}</p>        
                             <div>
                                 <a href="#" class="txt1">
                                     Forgot Password?

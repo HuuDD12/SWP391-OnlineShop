@@ -19,8 +19,10 @@ import Model.Account;
  *
  * @author Admin
  */
+
 @WebServlet(name = "LogoutControl", urlPatterns = {"/logout"})
 public class LogoutControl extends HttpServlet {
+
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,7 +39,7 @@ public class LogoutControl extends HttpServlet {
         HttpSession session = request.getSession();
         session.removeAttribute("acc");
         session.removeAttribute("carts");
-        response.sendRedirect("productlist");
+   
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
