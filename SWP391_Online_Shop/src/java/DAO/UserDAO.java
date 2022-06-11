@@ -121,10 +121,8 @@ public class UserDAO extends DBcontext.DBContext {
 
     public static void main(String[] args) {
         UserDAO u = new UserDAO();
-        List<Role> list = u.getAllUser(1);
-        for (Role o : list) {
-            System.out.println(o);
-        }
+        int count = u.countUser();
+        System.out.println(count);
     }
 
     public Account login(String username, String password) {
@@ -175,5 +173,20 @@ public class UserDAO extends DBcontext.DBContext {
             System.out.println(e);
         }
         return null;
+    }
+    
+       public int countUser() {
+        String query = "select COUNT (*) from [users] ";
+        try {
+           
+           PreparedStatement ps = connection.prepareStatement(query);
+              ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+
+        }
+        return 0;
     }
 }

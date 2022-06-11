@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import Model.Account;
 import Model.Order;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -152,5 +153,45 @@ public class OrderDAO extends DBcontext.DBContext{
             System.out.println(e);
         }
         return list;
+    }
+    
+       public int countOrder() {
+        String query = "select COUNT (*) from [orders] ";
+        try {
+           
+           PreparedStatement ps = connection.prepareStatement(query);
+              ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+
+        }
+        return 0;
+    }
+       
+       
+        public List<Order> getBillByDay(){
+        List<Order> list = new ArrayList<>();
+        String sql = "SELECT * from Orders inner join Users on Orders.UserID = Users.UserID where [Date] = cast(getdate() as Date)";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+              ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Account u = new Account(rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getInt(12),rs.getInt(13));              
+                list.add(new Order(rs.getInt(1), rs.getInt(2),rs.getDouble(3),rs.getString(4),rs.getInt(5),
+                        rs.getString(6),rs.getInt(7),u));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+        
+    public static void main(String[] args) {
+        OrderDAO o = new OrderDAO();
+        List<Order> list = o.getBillByDay();
+        for (Order order : list) {
+            System.out.println(order);
+        }
     }
 }

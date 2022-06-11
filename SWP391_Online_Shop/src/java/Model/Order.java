@@ -17,7 +17,7 @@ public class Order {
     private String note;
     private String createdDate;
     private int shippingId;
-
+    private Account acc;
     public Order() {
     }
 
@@ -31,6 +31,25 @@ public class Order {
         this.shippingId = shippingId;
     }
 
+    public Order(int id, int accountId, double totalPrice, String note, int status, String createdDate, int shippingId, Account acc) {
+        this.id = id;
+        this.accountId = accountId;
+        this.totalPrice = totalPrice;
+        this.status = status;
+        this.note = note;
+        this.createdDate = createdDate;
+        this.shippingId = shippingId;
+        this.acc = acc;
+    }
+
+    public Account getAcc() {
+        return acc;
+    }
+
+    public void setAcc(Account acc) {
+        this.acc = acc;
+    }
+    
     public Order(int accountId, double totalPrice, int status, String note, int shippingId) {
         this.accountId = accountId;
         this.totalPrice = totalPrice;

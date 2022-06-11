@@ -36,6 +36,10 @@ public class Product {
         this.url = url;
     }
 
+    public Product(String productName) {
+        this.productName = productName;
+    }
+
    
     
 

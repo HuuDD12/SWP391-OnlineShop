@@ -464,5 +464,21 @@ public class ProductDAO extends DBcontext.DBContext {
         }
         return list;
     }
-
+    
+        public int CountProductLow() {
+        int count = 0;
+        String sql = "SELECT COUNT(*) as 'count'\n"
+                + "  FROM product where amount < 90 ";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return count;
+    }
+        
+    
 }

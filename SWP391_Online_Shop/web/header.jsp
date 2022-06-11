@@ -285,6 +285,7 @@
                             <!-- Admin -->
                             <c:if test="${sessionScope.acc.getRoleId() ==  1}">
                                 <li><a  href="${pageContext.request.contextPath}/AccountManagerControl">Manage Users</a></li>
+                                <li><a href="dashboard">DashBoard</a></li>
                                 </c:if>
                             <!-- Seller -->
                             <c:if test="${sessionScope.acc.getRoleId() ==  2}">
