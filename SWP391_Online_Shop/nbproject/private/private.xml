@@ -3,14 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/src/java/Utils/AddToCartAsync.java</file>
+            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/src/java/DAO/UserDAO.java</file>
             <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/web/ProductDetail.jsp</file>
-            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/src/java/DAO/ProductDAO.java</file>
+            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/src/java/Controller/RegisterControl.java</file>
+            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/src/java/Controller/SearchByNameAjax.java</file>
+            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/src/java/Controller/Detail.java</file>
             <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/src/java/Controller/ProductListController.java</file>
-            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/web/productlist.jsp</file>
-            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/web/Left.jsp</file>
-            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/web/header.jsp</file>
-            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/src/java/Model/Product.java</file>
+            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/src/java/Controller/BanUsersControl.java</file>
+            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/src/java/DAO/OrderDAO.java</file>
+            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/web/Detail.jsp</file>
         </group>
     </open-files>
 </project-private>

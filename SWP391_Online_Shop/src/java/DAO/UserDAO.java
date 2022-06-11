@@ -10,6 +10,7 @@ import Model.Role;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ import java.util.List;
  */
 public class UserDAO extends DBcontext.DBContext {
 
-    public void signup(Account acc) {
+    public int createReturnId(Account acc) {
         String sql = "INSERT INTO [dbo].[Users]\n"
                 + "           ([Username]\n"
                 + "           ,[Password]\n"
@@ -29,17 +30,21 @@ public class UserDAO extends DBcontext.DBContext {
                 + "     VALUES\n"
                 + "           (?,?,?,?,?)";
         try {
-            PreparedStatement ps = connection.prepareStatement(sql);
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, acc.getUsername());
             ps.setString(2, acc.getPassword());
             ps.setString(3, acc.getEmail());
             ps.setInt(4, acc.getRoleId());
             ps.setInt(5, acc.getBlock());
             ps.executeUpdate();
-
+            ResultSet rs = ps.getGeneratedKeys(); 
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
         } catch (SQLException e) {
             System.out.println(e);
         }
+        return 0;
     }
 
     public Account checkAccExist(String username) {

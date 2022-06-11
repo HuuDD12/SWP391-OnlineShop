@@ -43,7 +43,7 @@ public class VerifyCodeControl extends HttpServlet {
             String code = request.getParameter("authcode");
             
             if(code.equals(user.getCode())){
-                u.signup(user);
+               // u.signup(user);
                 request.setAttribute("success", "Register Successfully!!!!");
                 request.getRequestDispatcher("Register.jsp").forward(request, response);
             }else{

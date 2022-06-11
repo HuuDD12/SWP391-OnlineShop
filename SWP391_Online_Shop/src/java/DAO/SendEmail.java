@@ -41,7 +41,6 @@ public class SendEmail {
             pr.setProperty("mail.smtp.host", "smtp.gmail.com");
             pr.setProperty("mail.smtp.port", "587");
             pr.setProperty("mail.smtp.auth", "true");
-            pr.setProperty("mail.smtp.starttls.enable", "true");
             pr.put("mail.smtp.socketFactory.port", "587");
             pr.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
