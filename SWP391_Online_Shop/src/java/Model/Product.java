@@ -127,6 +127,12 @@ public class Product {
     public String toString() {
         return "Product{" + "productID=" + productID + ", productName=" + productName + ", description=" + description + ", originalPrice=" + originalPrice + ", salePrice=" + salePrice + ", subID=" + subID + ", amount=" + amount + ", brandID=" + brandID + ", sell_id=" + sell_id + ", url=" + url + '}';
     }
+
+    public Product(String productName, String url) {
+        this.productName = productName;
+        this.url = url;
+    }
+    
     
     
     

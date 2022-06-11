@@ -143,7 +143,8 @@
                                             <th>ID đơn hàng</th>
                                             <th>Khách hàng</th>
                                             <th>Ngày mua</th>
-                                            <th>Tổng tiền</th>  
+                                            <th>Tổng tiền</th>
+                                            <th><a>View</a></th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -151,7 +152,8 @@
                                             <th>ID đơn hàng</th>
                                             <th>Khách hàng</th>
                                             <th>Ngày mua</th>
-                                            <th>Tổng tiền</th>                                              
+                                            <th>Tổng tiền</th>  
+                                            
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -160,7 +162,8 @@
                                                 <td>${b.id}</td>
                                                 <td>${b.acc.username}</td>
                                                 <td>${b.createdDate}</td>
-                                                <td>${b.totalPrice}</td>                                                                                  
+                                                <td>${b.totalPrice}</td> 
+                                                <th><a href="orderdetail?oid=${b.id}">View</a></th>
                                             </tr>
                                         </c:forEach>
 

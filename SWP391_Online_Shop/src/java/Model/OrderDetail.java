@@ -33,6 +33,13 @@ public class OrderDetail {
         this.p = p;
     }
 
+    public OrderDetail(int orderId, double productPrice, int quantity, Product p) {
+        this.orderId = orderId;
+        this.productPrice = productPrice;
+        this.quantity = quantity;
+        this.p = p;
+    }
+
     
 
     public int getId() {

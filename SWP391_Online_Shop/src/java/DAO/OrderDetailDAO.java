@@ -67,4 +67,28 @@ public class OrderDetailDAO extends DBcontext.DBContext {
         }
         return null;
     }
+
+    public OrderDetail OrderDetailProduct(int pid) {
+        String query = "SELECT od.OrderID,p.ProductName,od.ProductPrice,od.Quantity,proi.ProductImgURL from  Order_Detail od\n"
+                + "inner join Product p on od.ProductID = p.ProductID\n"
+                + "inner join ProductImg proi on proi.ProductID = p.ProductID where od.OrderID = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, pid);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getString(2),rs.getString(5));
+                return new OrderDetail(rs.getInt(1),rs.getDouble(3),rs.getInt(4), p);
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+    public static void main(String[] args) {
+        OrderDetailDAO o = new OrderDetailDAO();
+        OrderDetail od = o.OrderDetailProduct(11);
+        System.out.println(od);
+    }
 }

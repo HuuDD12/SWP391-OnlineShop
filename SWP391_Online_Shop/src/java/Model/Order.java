@@ -10,6 +10,7 @@ package Model;
  * @author Admin
  */
 public class Order {
+
     private int id;
     private int accountId;
     private double totalPrice;
@@ -18,6 +19,9 @@ public class Order {
     private String createdDate;
     private int shippingId;
     private Account acc;
+    private Shipping s;
+    private OrderStatus os;
+
     public Order() {
     }
 
@@ -29,6 +33,47 @@ public class Order {
         this.note = note;
         this.createdDate = createdDate;
         this.shippingId = shippingId;
+    }
+
+    public Order(int id, int accountId, double totalPrice, int status, String note, String createdDate, int shippingId, Account acc, Shipping s) {
+        this.id = id;
+        this.accountId = accountId;
+        this.totalPrice = totalPrice;
+        this.status = status;
+        this.note = note;
+        this.createdDate = createdDate;
+        this.shippingId = shippingId;
+        this.acc = acc;
+        this.s = s;
+    }
+
+    public Order(int id, int accountId, double totalPrice, int status, String note, String createdDate, int shippingId, Account acc, Shipping s, OrderStatus os) {
+        this.id = id;
+        this.accountId = accountId;
+        this.totalPrice = totalPrice;
+        this.status = status;
+        this.note = note;
+        this.createdDate = createdDate;
+        this.shippingId = shippingId;
+        this.acc = acc;
+        this.s = s;
+        this.os = os;
+    }
+
+    public OrderStatus getOs() {
+        return os;
+    }
+
+    public void setOs(OrderStatus os) {
+        this.os = os;
+    }
+
+    public Shipping getS() {
+        return s;
+    }
+
+    public void setS(Shipping s) {
+        this.s = s;
     }
 
     public Order(int id, int accountId, double totalPrice, String note, int status, String createdDate, int shippingId, Account acc) {
@@ -49,7 +94,7 @@ public class Order {
     public void setAcc(Account acc) {
         this.acc = acc;
     }
-    
+
     public Order(int accountId, double totalPrice, int status, String note, int shippingId) {
         this.accountId = accountId;
         this.totalPrice = totalPrice;
@@ -57,10 +102,6 @@ public class Order {
         this.note = note;
         this.shippingId = shippingId;
     }
-
-    
-    
-    
 
     public int getId() {
         return id;
@@ -117,6 +158,5 @@ public class Order {
     public void setStatus(int status) {
         this.status = status;
     }
-    
-    
+
 }
