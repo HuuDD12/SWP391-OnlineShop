@@ -131,8 +131,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                         <th>User ID</th>
                                         <th>User Name</th>
                                         <th>Email</th>
-                                        <th>Role</th>
-                                        <th colspan="1">Action</th>
+                                        <th>Role Name</th>
                                         <th colspan="2">Action</th>
                                     </tr>
                                 </thead>
@@ -142,14 +141,22 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                             <td>${x.account.userId}</td>
                                             <td>${x.account.username}</td>
                                             <td>${x.account.email}</td>
-                                            <td>${x.roleName}</td>
-                                            <td>   
-                                                <c:if test="${x.roleName !='Admin'}">
-                                                    <a href="#?sid=${x.account.userId}&&sid1=${x.account.roleId}">Change Role</a>
-                                                </c:if>                                 
-                                                <c:if test="${x.roleName == 'Admin'}">
-                                                    <a href="#?sid=${x.account.userId}&&sid1=${x.account.roleId}"></a>
-                                                </c:if>  
+                                            <td class="row align-items-center"> 
+                                                <form action="ChangeRoleOfUser" method="get">
+                                                <div class="col-auto">
+                                                <select name="RoleName" ${x.account.roleId == 1?"disabled":""} >                                                   
+                                                    <option value="1" ${x.account.roleId == 1?"selected":""} >Admin</option>                                              
+                                                    <option value="2" ${x.account.roleId == 2?"selected":""} >Seller</option>                                              
+                                                    <option value="3" ${x.account.roleId == 3?"selected":""} >Customer</option>                                              
+                                                    <option value="4" ${x.account.roleId == 4?"selected":""} >Marketing</option>                                              
+                                                    <option value="5" ${x.account.roleId == 5?"selected":""} >Shipper</option>                                            
+                                                </select>
+                                                <input name="sid" value="${x.account.userId}" class="hidden">
+                                                <input name="index" value="${tag}" class="hidden">
+                                                <input name="Search" value="<%=request.getParameter("Search") != null ? request.getParameter("Search") : ""%>" class="hidden">
+                                                    <button type="submit" class="btn btn-primary" >Save</button> 
+                                                </div>
+                                                </form>
                                             </td>
                                             <td>
                                                 <c:if test="${x.account.block == '0'}">

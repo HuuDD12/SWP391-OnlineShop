@@ -6,6 +6,7 @@
 package Controller;
 
 import DAO.UserDAO;
+import DAO.RoleDAO;
 import Model.Role;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -50,7 +51,7 @@ public class UserListControl extends HttpServlet {
         if(count % 5 != 0){
             endpage++;
         }
-        List<Role> list = udao.SearchUserByName(Search,index);     
+        List<Role> list = udao.SearchUserByName(Search,index);         
         request.setAttribute("Total", count);      
         request.setAttribute("endPage", endpage);      
         request.setAttribute("tag", index);

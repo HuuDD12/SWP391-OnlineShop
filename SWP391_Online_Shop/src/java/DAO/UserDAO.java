@@ -137,6 +137,18 @@ public class UserDAO extends DBcontext.DBContext {
         } catch (SQLException e) {
         }
     }
+    public void UpdateRoleUser(String UserID, int role) {
+        String query = "update [Users]\n" +
+"set [RoleID] = ?\n" +
+"where [UserID] = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, role);
+            ps.setString(2, UserID);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
 
     public int getCountUser() {
         String query = "select count(*) from Users";

@@ -5,8 +5,11 @@
  */
 package Controller;
 
+import DAO.UserDAO;
+import Model.Role;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,18 +35,7 @@ public class ChangeRoleOfUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ChangeRoleOfUser</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ChangeRoleOfUser at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -58,7 +50,35 @@ public class ChangeRoleOfUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String User = request.getParameter("sid");
+        String role = request.getParameter("RoleName");
+        String indexpage = request.getParameter("index");
+        String Search = request.getParameter("Search");
+        if(role == null){
+            role = "3";
+        }
+        int Role = Integer.parseInt(role);
+        
+        UserDAO dao = new UserDAO();
+        dao.UpdateRoleUser(User, Role);
+        if (Search == null){
+            Search = "";
+        }
+        if(indexpage == null){
+            indexpage= "1";
+        }
+        int index = Integer.parseInt(indexpage);
+        int count = dao.getCountUserSearch(Search);
+        int endpage = count /5;
+        if(count % 5 != 0){
+            endpage++;
+        }
+        List<Role> list = dao.SearchUserByName(Search,index);     
+        request.setAttribute("Total", count);      
+        request.setAttribute("endPage", endpage);      
+        request.setAttribute("tag", index);
+        request.setAttribute("List", list);
+        request.getRequestDispatcher("UserListAdmin.jsp").forward(request, response);
     }
 
     /**
