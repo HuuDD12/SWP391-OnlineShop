@@ -14,8 +14,8 @@ public class Order {
     private int id;
     private int accountId;
     private double totalPrice;
-    private int status;
     private String note;
+    private int status;
     private String createdDate;
     private int shippingId;
     private Account acc;
@@ -47,7 +47,29 @@ public class Order {
         this.s = s;
     }
 
-    public Order(int id, int accountId, double totalPrice, int status, String note, String createdDate, int shippingId, Account acc, Shipping s, OrderStatus os) {
+    public Order(int id, int accountId, double totalPrice, String note, int status, String createdDate, int shippingId, Account acc, OrderStatus os) {
+        this.id = id;
+        this.accountId = accountId;
+        this.totalPrice = totalPrice;
+        this.note = note;
+        this.status = status;
+        this.createdDate = createdDate;
+        this.shippingId = shippingId;
+        this.acc = acc;
+        this.os = os;
+    }
+
+
+
+    public OrderStatus getOs() {
+        return os;
+    }
+
+    public void setOs(OrderStatus os) {
+        this.os = os;
+    }
+
+    public Order(int id, int accountId, double totalPrice, int status, String note, String createdDate, int shippingId, Account acc, OrderStatus os) {
         this.id = id;
         this.accountId = accountId;
         this.totalPrice = totalPrice;
@@ -56,15 +78,6 @@ public class Order {
         this.createdDate = createdDate;
         this.shippingId = shippingId;
         this.acc = acc;
-        this.s = s;
-        this.os = os;
-    }
-
-    public OrderStatus getOs() {
-        return os;
-    }
-
-    public void setOs(OrderStatus os) {
         this.os = os;
     }
 

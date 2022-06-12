@@ -64,7 +64,6 @@
                 </li>
                 <li><a class="app-menu__item" href="ordermanager"><i class='app-menu__icon bx bx-task'></i><span
                             class="app-menu__label">Quản lý đơn hàng</span></a></li>
-
             </ul>
         </aside>
         <main class="app-content">
@@ -152,8 +151,7 @@
                                             <th>ID đơn hàng</th>
                                             <th>Khách hàng</th>
                                             <th>Ngày mua</th>
-                                            <th>Tổng tiền</th>  
-                                            
+                                            <th>Tổng tiền</th>                                              
                                         </tr>
                                     </tfoot>
                                     <tbody>

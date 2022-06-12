@@ -53,7 +53,13 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
         <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"><!-- for slider-range -->
         <link href="assets/plugins/rateit/src/rateit.css" rel="stylesheet" type="text/css">
         <!-- Page level plugin styles END -->
-
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+            integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+            />
         <!-- Theme styles START -->
         <link href="assets/pages/css/components.css" rel="stylesheet">
         <link href="assets/corporate/css/style.css" rel="stylesheet">
@@ -61,6 +67,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
         <link href="assets/corporate/css/style-responsive.css" rel="stylesheet">
         <link href="assets/corporate/css/themes/red.css" rel="stylesheet" id="style-color">
         <link href="assets/corporate/css/custom.css" rel="stylesheet">
+        <link href="css/style_1.css" rel="stylesheet">
         <!-- Theme styles END -->
     </head>
     <!-- Head END -->
@@ -105,21 +112,21 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                     <div class="row margin-bottom-40">
                         <!-- BEGIN SIDEBAR -->
                     <jsp:include page="Left.jsp"></jsp:include>
-                    <!-- END SIDEBAR -->
-                    <!-- BEGIN CONTENT -->
-                    <div class="col-md-9 col-sm-7">
-                        <div class="row list-view-sorting clearfix">
-                            <div class="col-md-2 col-sm-2 list-view">
-                                <a href="javascript:;"><i class="fa fa-th-large"></i></a>
-                                <a href="javascript:;"><i class="fa fa-th-list"></i></a>
-                            </div>
-                            <div class="col-md-10 col-sm-10">
-                                <div class="pull-right">
+                        <!-- END SIDEBAR -->
+                        <!-- BEGIN CONTENT -->
+                        <div class="col-md-9 col-sm-7">
+                            <div class="row list-view-sorting clearfix">
+                                <div class="col-md-2 col-sm-2 list-view">
+                                    <a href="javascript:;"><i class="fa fa-th-large"></i></a>
+                                    <a href="javascript:;"><i class="fa fa-th-list"></i></a>
+                                </div>
+                                <div class="col-md-10 col-sm-10">
+                                    <div class="pull-right">
 
-                                    <label class="control-label">Sort&nbsp;By:</label>
-                                    <form action="sort">
-                                        <select name="type" onchange="this.form.submit()" class="form-control input-sm">
-                                            <option ${type==0?"selected":""} value="0" selected="selected">Default</option>
+                                        <label class="control-label">Sort&nbsp;By:</label>
+                                        <form action="sort">
+                                            <select name="type" onchange="this.form.submit()" class="form-control input-sm">
+                                                <option ${type==0?"selected":""} value="0" selected="selected">Default</option>
                                             <option ${type==1?"selected":""} value="1">Name (A - Z)</option>
                                             <option ${type==2?"selected":""} value="2">Name (Z - A)</option>
                                             <option ${type==3?"selected":""} value="3">Price (Low &gt; High)</option>
@@ -197,91 +204,91 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 
         <jsp:include page="footer.jsp"></jsp:include>
 
-        <!-- BEGIN fast view of a product -->
-        <div id="product-pop-up" style="display: none; width: 700px;">
-            <div class="product-page product-pop-up">
-                <div class="row">
-                    <div class="col-md-6 col-sm-6 col-xs-3">
-                        <div class="product-main-image">
-                            <img src="assets/pages/img/products/model7.jpg" alt="Cool green dress with red bell" class="img-responsive">
-                        </div>
-                        <div class="product-other-images">
-                            <a href="javascript:;" class="active"><img alt="Berry Lace Dress" src="assets/pages/img/products/model3.jpg"></a>
-                            <a href="javascript:;"><img alt="Berry Lace Dress" src="assets/pages/img/products/model4.jpg"></a>
-                            <a href="javascript:;"><img alt="Berry Lace Dress" src="assets/pages/img/products/model5.jpg"></a>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-9">
-                        <h1>Cool green dress with red bell</h1>
-                        <div class="price-availability-block clearfix">
-                            <div class="price">
-                                <strong><span>$</span>47.00</strong>
-                                <em>$<span>62.00</span></em>
+            <!-- BEGIN fast view of a product -->
+            <div id="product-pop-up" style="display: none; width: 700px;">
+                <div class="product-page product-pop-up">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-3">
+                            <div class="product-main-image">
+                                <img src="assets/pages/img/products/model7.jpg" alt="Cool green dress with red bell" class="img-responsive">
                             </div>
-                            <div class="availability">
-                                Availability: <strong>In Stock</strong>
+                            <div class="product-other-images">
+                                <a href="javascript:;" class="active"><img alt="Berry Lace Dress" src="assets/pages/img/products/model3.jpg"></a>
+                                <a href="javascript:;"><img alt="Berry Lace Dress" src="assets/pages/img/products/model4.jpg"></a>
+                                <a href="javascript:;"><img alt="Berry Lace Dress" src="assets/pages/img/products/model5.jpg"></a>
                             </div>
                         </div>
-                        <div class="description">
-                            <p>Lorem ipsum dolor ut sit ame dolore  adipiscing elit, sed nonumy nibh sed euismod laoreet dolore magna aliquarm erat volutpat 
-                                Nostrud duis molestie at dolore.</p>
-                        </div>
-                        <div class="product-page-options">
-                            <div class="pull-left">
-                                <label class="control-label">Size:</label>
-                                <select class="form-control input-sm">
-                                    <option>L</option>
-                                    <option>M</option>
-                                    <option>XL</option>
-                                </select>
+                        <div class="col-md-6 col-sm-6 col-xs-9">
+                            <h1>Cool green dress with red bell</h1>
+                            <div class="price-availability-block clearfix">
+                                <div class="price">
+                                    <strong><span>$</span>47.00</strong>
+                                    <em>$<span>62.00</span></em>
+                                </div>
+                                <div class="availability">
+                                    Availability: <strong>In Stock</strong>
+                                </div>
                             </div>
-                            <div class="pull-left">
-                                <label class="control-label">Color:</label>
-                                <select class="form-control input-sm">
-                                    <option>Red</option>
-                                    <option>Blue</option>
-                                    <option>Black</option>
-                                </select>
+                            <div class="description">
+                                <p>Lorem ipsum dolor ut sit ame dolore  adipiscing elit, sed nonumy nibh sed euismod laoreet dolore magna aliquarm erat volutpat 
+                                    Nostrud duis molestie at dolore.</p>
+                            </div>
+                            <div class="product-page-options">
+                                <div class="pull-left">
+                                    <label class="control-label">Size:</label>
+                                    <select class="form-control input-sm">
+                                        <option>L</option>
+                                        <option>M</option>
+                                        <option>XL</option>
+                                    </select>
+                                </div>
+                                <div class="pull-left">
+                                    <label class="control-label">Color:</label>
+                                    <select class="form-control input-sm">
+                                        <option>Red</option>
+                                        <option>Blue</option>
+                                        <option>Black</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="product-page-cart">
+                                <div class="product-quantity">
+                                    <input id="product-quantity" type="text" value="1" readonly name="product-quantity" class="form-control input-sm">
+                                </div>
+                                <button class="btn btn-primary" type="submit">Add to cart</button>
+                                <a href="shop-item.html" class="btn btn-default">More details</a>
                             </div>
                         </div>
-                        <div class="product-page-cart">
-                            <div class="product-quantity">
-                                <input id="product-quantity" type="text" value="1" readonly name="product-quantity" class="form-control input-sm">
-                            </div>
-                            <button class="btn btn-primary" type="submit">Add to cart</button>
-                            <a href="shop-item.html" class="btn btn-default">More details</a>
-                        </div>
-                    </div>
 
-                    <div class="sticker sticker-sale"></div>
+                        <div class="sticker sticker-sale"></div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- END fast view of a product -->
+            <!-- END fast view of a product -->
 
-        <!-- Load javascripts at bottom, this will reduce page load time -->
-        <!-- BEGIN CORE PLUGINS(REQUIRED FOR ALL PAGES) -->
-        <!--[if lt IE 9]>
-        <script src="assets/plugins/respond.min.js"></script>  
-        <![endif]-->  
-        <script src="assets/plugins/jquery.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>      
-        <script src="assets/corporate/scripts/back-to-top.js" type="text/javascript"></script>
-        <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-        <!-- END CORE PLUGINS -->
+            <!-- Load javascripts at bottom, this will reduce page load time -->
+            <!-- BEGIN CORE PLUGINS(REQUIRED FOR ALL PAGES) -->
+            <!--[if lt IE 9]>
+            <script src="assets/plugins/respond.min.js"></script>  
+            <![endif]-->  
+            <script src="assets/plugins/jquery.min.js" type="text/javascript"></script>
+            <script src="assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+            <script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>      
+            <script src="assets/corporate/scripts/back-to-top.js" type="text/javascript"></script>
+            <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+            <!-- END CORE PLUGINS -->
 
-        <!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
-        <script src="assets/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
-        <script src="assets/plugins/owl.carousel/owl.carousel.min.js" type="text/javascript"></script><!-- slider for products -->
-        <script src='assets/plugins/zoom/jquery.zoom.min.js' type="text/javascript"></script><!-- product zoom -->
-        <script src="assets/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script><!-- Quantity -->
-        <script src="assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/rateit/src/jquery.rateit.js" type="text/javascript"></script>
-        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js" type="text/javascript"></script><!-- for slider-range -->
+            <!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
+            <script src="assets/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
+            <script src="assets/plugins/owl.carousel/owl.carousel.min.js" type="text/javascript"></script><!-- slider for products -->
+            <script src='assets/plugins/zoom/jquery.zoom.min.js' type="text/javascript"></script><!-- product zoom -->
+            <script src="assets/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script><!-- Quantity -->
+            <script src="assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+            <script src="assets/plugins/rateit/src/jquery.rateit.js" type="text/javascript"></script>
+            <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js" type="text/javascript"></script><!-- for slider-range -->
 
-        <script src="assets/corporate/scripts/layout.js" type="text/javascript"></script>
-        <script type="text/javascript">
+            <script src="assets/corporate/scripts/layout.js" type="text/javascript"></script>
+            <script type="text/javascript">
                                             jQuery(document).ready(function () {
                                                 Layout.init();
                                                 Layout.initOWL();
@@ -291,41 +298,42 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                                 Layout.initUniform();
                                                 Layout.initSliderRange();
                                             });
-        </script>
-        <!--        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
-        <script>
-            function searchByName(param) {
-                var txtSearch = param.value;
-                $.ajax({
-                    url: "/SWP391_Online_Shop/searchAjax",
-                    type: "get", //send it through get method
-                    data: {
-                        txt: txtSearch
-                    },
-                    success: function (data) {
-                        var row = document.getElementById("content");
-                        row.innerHTML = data;
-                    },
-                    error: function (xhr) {
-                        //Do Something to handle error
-                    }
-                });
-            }
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script>
-            function addTocartAsync(productId) {
-                axios.get('add-to-cart-async', {
-                    params: {
-                        productId: productId
-                    }
-                }).then((response) => {
-                    //lay data thanh cong
-                    document.getElementById("cart_number").innerHTML = response.data + " items";
-                    //cap nhat view
-                })
-            }
-        </script>
+            </script>
+            <!--        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+            <script>
+                function searchByName(param) {
+                    var txtSearch = param.value;
+                    $.ajax({
+                        url: "/SWP391_Online_Shop/searchAjax",
+                        type: "get", //send it through get method
+                        data: {
+                            txt: txtSearch
+                        },
+                        success: function (data) {
+                            var row = document.getElementById("content");
+                            row.innerHTML = data;
+                        },
+                        error: function (xhr) {
+                            //Do Something to handle error
+                        }
+                    });
+                }
+            </script>
+            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+            <script>
+                function addTocartAsync(productId) {
+                    axios.get('add-to-cart-async', {
+                        params: {
+                            productId: productId
+                        }
+                    }).then((response) => {
+                        //lay data thanh cong
+                        document.getElementById("cart_number").innerHTML = response.data + " items";
+                        //cap nhat view
+                    })
+                }
+            </script>
+
         <!-- END PAGE LEVEL JAVASCRIPTS -->
     </body>
     <!-- END BODY -->

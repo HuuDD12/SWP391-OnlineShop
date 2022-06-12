@@ -43,7 +43,7 @@ public class RegisterControl extends HttpServlet {
             String pass = request.getParameter("password");
             String email = request.getParameter("email");
             String repass = request.getParameter("repass");
-            UserInfoDAO uidao= new UserInfoDAO();
+            
             UserDAO u = new UserDAO();
             Account acc = u.checkAccExist(user);
             if (acc == null) {
@@ -55,20 +55,16 @@ public class RegisterControl extends HttpServlet {
                     String code = sm.getRandom();
                     acc = new Account(user, pass, email, 3, 0, code);
                     //call the send email method
-                    //boolean test = sm.sendEmail(acc);
+                    boolean test = sm.sendEmail(acc);
 
                     //check if the email send successfully
-//                    if (test) {
-//                        HttpSession session = request.getSession();
-//                        session.setAttribute("authcode", acc);
-//                        response.sendRedirect("verify.jsp");
-//                    } else {
-//                        out.println("Failed to send verification email");
-//                    }
-                    int uid = new UserDAO().createReturnId(acc);
-                    UserInfo info = new UserInfo(uid, "", "", "", "");
-                    uidao.saveUserInfo(info);
-                    response.sendRedirect("productlist");
+                    if (test) {
+                        HttpSession session = request.getSession();
+                        session.setAttribute("authcode", acc);
+                        response.sendRedirect("verify.jsp");
+                    } else {
+                        out.println("Failed to send verification email");
+                    }
                 }
             } else {
                 request.setAttribute("message", "Username is existed");

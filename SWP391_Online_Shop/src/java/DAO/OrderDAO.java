@@ -7,6 +7,7 @@ package DAO;
 
 import Model.Account;
 import Model.Order;
+import Model.OrderStatus;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,7 +22,7 @@ import java.util.logging.Logger;
  *
  * @author Admin
  */
-public class OrderDAO extends DBcontext.DBContext{
+public class OrderDAO extends DBcontext.DBContext {
 
     public int createReturnId(Order order) {
         String sql = "INSERT INTO [dbo].[Orders]\n"
@@ -52,7 +53,8 @@ public class OrderDAO extends DBcontext.DBContext{
         }
         return 0;
     }
- public List<Order> viewOrderWait(String id) {
+
+    public List<Order> viewOrderWait(String id) {
         String sql = "select o.* from Orders o join Order_Status s\n"
                 + "on o.Status = s.ID \n"
                 + "where o.UserID = ?\n"
@@ -114,6 +116,7 @@ public class OrderDAO extends DBcontext.DBContext{
         }
         return list;
     }
+
     public List<Order> viewOrderCancel(String id) {
         String sql = "select o.* from Orders o join Order_Status s\n"
                 + "on o.Status = s.ID \n"
@@ -134,6 +137,7 @@ public class OrderDAO extends DBcontext.DBContext{
         }
         return list;
     }
+
     public List<Order> viewOrderComplete(String id) {
         String sql = "select o.* from Orders o join Order_Status s\n"
                 + "on o.Status = s.ID \n"
@@ -154,13 +158,13 @@ public class OrderDAO extends DBcontext.DBContext{
         }
         return list;
     }
-    
-       public int countOrder() {
+
+    public int countOrder() {
         String query = "select COUNT (*) from [orders] ";
         try {
-           
-           PreparedStatement ps = connection.prepareStatement(query);
-              ResultSet rs = ps.executeQuery();
+
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 return rs.getInt(1);
             }
@@ -169,27 +173,44 @@ public class OrderDAO extends DBcontext.DBContext{
         }
         return 0;
     }
-       
-       
-        public List<Order> getBillByDay(){
+
+    public List<Order> getBillByDay() {
         List<Order> list = new ArrayList<>();
         String sql = "SELECT * from Orders inner join Users on Orders.UserID = Users.UserID where [Date] = cast(getdate() as Date)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-              ResultSet rs = ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Account u = new Account(rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getInt(12),rs.getInt(13));              
-                list.add(new Order(rs.getInt(1), rs.getInt(2),rs.getDouble(3),rs.getString(4),rs.getInt(5),
-                        rs.getString(6),rs.getInt(7),u));
+                Account u = new Account(rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getInt(12), rs.getInt(13));
+                list.add(new Order(rs.getInt(1), rs.getInt(2), rs.getDouble(3), rs.getString(4), rs.getInt(5),
+                        rs.getString(6), rs.getInt(7), u));
             }
         } catch (Exception e) {
         }
         return list;
     }
-        
+
+    public List<Order> getAllBill() {
+        List<Order> list = new ArrayList<>();
+        String sql = "SELECT * from Orders inner join Users on Orders.UserID = Users.UserID \n"
+                + "inner join Order_Status os on Orders.Status = os.ID";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Account u = new Account(rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getInt(12), rs.getInt(13));
+                OrderStatus os = new OrderStatus(rs.getInt(14), rs.getString(15));
+                list.add(new Order(rs.getInt(1), rs.getInt(2), rs.getDouble(3), rs.getString(4), rs.getInt(5),
+                        rs.getString(6), rs.getInt(7), u, os));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
         OrderDAO o = new OrderDAO();
-        List<Order> list = o.getBillByDay();
+        List<Order> list = o.getAllBill();
         for (Order order : list) {
             System.out.println(order);
         }

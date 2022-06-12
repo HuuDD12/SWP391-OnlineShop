@@ -5,10 +5,9 @@
  */
 package Controller;
 
+import DAO.GmailAPI;
 import DAO.UserDAO;
-import DAO.UserInfoDAO;
 import Model.Account;
-import Model.UserInfo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -16,14 +15,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "VerifyCodeControl", urlPatterns = {"/VerifyCode"})
-public class VerifyCodeControl extends HttpServlet {
+@WebServlet(name = "ResetPasswordControl", urlPatterns = {"/resetpassword"})
+public class ResetPasswordControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,21 +36,16 @@ public class VerifyCodeControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-
-            HttpSession session = request.getSession();
-            Account user = (Account) session.getAttribute("authcode");
-            UserDAO u = new UserDAO();
-            String code = request.getParameter("authcode");
-            UserInfoDAO uidao= new UserInfoDAO();
-            if (code.equals(user.getCode())) {
-                int uid = new UserDAO().createReturnId(user);
-                UserInfo info = new UserInfo(uid, "", "", "", "");
-                uidao.saveUserInfo(info);
-                request.setAttribute("success", "Register Successfully!!!!");
-                request.getRequestDispatcher("Register.jsp").forward(request, response);
-            } else {
-                out.println("Incorrect verification code");
-            }
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ResetPasswordControl</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ResetPasswordControl at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
@@ -68,7 +61,7 @@ public class VerifyCodeControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("ResetPassword.jsp").forward(request, response);
     }
 
     /**
@@ -82,7 +75,38 @@ public class VerifyCodeControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        UserDAO dao = new UserDAO();
+        GmailAPI gmail = new GmailAPI();
+
+        try {
+            String mailTo = request.getParameter("mail");
+            Account u = dao.getUsersByEmail(mailTo);
+            if (u == null) {
+                request.setAttribute("warn", "The email did not exist, please try again!");
+                request.getRequestDispatcher("ResetPassword.jsp").forward(request, response);
+            } else {
+                //FIX DEFAULT LENGTH OF PASSWORD 8 CHARACTORS
+                int charactor = 8;
+                String gmailFrom = "duongbato14@gmail.com";
+                String password = "oholtguoeigmiidp";
+                String subject = "Reset Password";
+                String newPassword = dao.RandomPassword(charactor);
+                // TO UPDATE PASSWORD
+                dao.updatePassword(u.getUserId(), newPassword);
+
+                String message = ("This is your new password: " + newPassword);
+                //SEND NEW PASSWORD
+              
+                //send mail 
+                gmail.send(mailTo, subject, message, gmailFrom, password);
+                
+                response.sendRedirect("LoginHere.jsp");
+
+            }
+        } catch (Exception ex) {
+            request.setAttribute("warn", "The email did not exist, please try again!");
+            request.getRequestDispatcher("ResetPassword.jsp").forward(request, response);
+        }
     }
 
     /**
