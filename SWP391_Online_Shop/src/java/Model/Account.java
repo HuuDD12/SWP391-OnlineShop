@@ -14,18 +14,18 @@ public class Account {
     private String username;
     private String password;
     private String email;
-    private int RoleId;
+    private int roleId;
     private int block;
     private String code;
     public Account() {
     }
 
-    public Account(String userId, String username, String password, String email, int RoleId, int block) {
+    public Account(String userId, String username, String password, String email, int roleId, int block) {
         this.userId = userId;
         this.username = username;
         this.password = password;
         this.email = email;
-        this.RoleId = RoleId;
+        this.roleId = roleId;
         this.block = block;
     }
     
@@ -37,11 +37,11 @@ public class Account {
         this.code = code;
     }
 
-    public Account(String username, String password, String email, int RoleId, int block, String code) {
+    public Account(String username, String password, String email, int roleId, int block, String code) {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.RoleId = RoleId;
+        this.roleId = roleId;
         this.block = block;
         this.code = code;
     }
@@ -51,7 +51,7 @@ public class Account {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.RoleId = RoleId;
+        this.roleId = RoleId;
         this.block = block;
     }
     
@@ -90,11 +90,11 @@ public class Account {
     }
 
     public int getRoleId() {
-        return RoleId;
+        return roleId;
     }
 
     public void setRoleId(int RoleId) {
-        this.RoleId = RoleId;
+        this.roleId = roleId;
     }
 
     public int getBlock() {
@@ -107,7 +107,7 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account{" + "userId=" + userId + ", username=" + username + ", password=" + password + ", email=" + email + ", RoleId=" + RoleId + ", block=" + block + ", code=" + code + '}';
+        return "Account{" + "userId=" + userId + ", username=" + username + ", password=" + password + ", email=" + email + ", RoleId=" + roleId + ", block=" + block + ", code=" + code + '}';
     }
     
     

@@ -116,19 +116,27 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                         <!-- END SIDEBAR -->
 
                         <!-- BEGIN CONTENT -->
-                        <div class="col-md-9 col-sm-7">          
+                        <div class="col-md-9 col-sm-7">                 
                             <div class="col-md-12" style="padding: 0;">
-                                <table class="border table table-striped table-hover table-bordered text-center" style="margin-top: 10px; font-size: 13px;">
-                                    <thead class="bg-info" style="position: -webkit-sticky; position: sticky; top: 0;">                         
-                                        <tr>
-                                            <th>User ID</th>
-                                            <th>User Name</th>
-                                            <th>Email</th>
-                                            <th>Role</th>
-                                            <th colspan="2">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                                <form action="userlist" method="get"class="row align-items-center">
+                                    <div class="col-auto">
+                                        <input type="text" name="Search" value="<%=request.getParameter("Search") != null ? request.getParameter("Search") : ""%>" placeholder="Enter Keyword">                              
+                                    <button type="submit" class="btn btn-primary" >Search</button>                  
+                                </div>                             
+                            </form>
+                            <p>Total record : ${Total} </p>
+                            <table class="border table table-striped table-hover table-bordered text-center" style="margin-top: 10px; font-size: 13px;">
+                                <thead class="bg-info" style="position: -webkit-sticky; position: sticky; top: 0;">                         
+                                    <tr>
+                                        <th>User ID</th>
+                                        <th>User Name</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
+                                        <th colspan="1">Action</th>
+                                        <th colspan="2">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                     <c:forEach items="${List}" var="x">
                                         <tr>                                          
                                             <td>${x.account.userId}</td>
@@ -136,21 +144,44 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                             <td>${x.account.email}</td>
                                             <td>${x.roleName}</td>
                                             <td>   
+                                                <c:if test="${x.roleName !='Admin'}">
+                                                    <a href="#?sid=${x.account.userId}&&sid1=${x.account.roleId}">Change Role</a>
+                                                </c:if>                                 
+                                                <c:if test="${x.roleName == 'Admin'}">
+                                                    <a href="#?sid=${x.account.userId}&&sid1=${x.account.roleId}"></a>
+                                                </c:if>  
+                                            </td>
+                                            <td>
                                                 <c:if test="${x.account.block == '0'}">
-                                                    <a href="BanUsersControl?sid=${x.account.userId}&&sid1=${x.account.block}">Block</a>
+                                                    <a href="BanUsersControl?sid=${x.account.userId}&sid1=${x.account.block}&index=${tag}&Search=<%=request.getParameter("Search") != null ? request.getParameter("Search") : ""%>">Block</a>
                                                 </c:if>                                 
                                                 <c:if test="${x.account.block == '1'}">
-                                                    <a href="BanUsersControl?sid=${x.account.userId}&&sid1=${x.account.block}">Un Block</a>
+                                                    <a href="BanUsersControl?sid=${x.account.userId}&sid1=${x.account.block}&index=${tag}&Search=<%=request.getParameter("Search") != null ? request.getParameter("Search") : ""%>">Un Block</a>
                                                 </c:if>                                 
                                             </td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>
                             </table>
-                            <c:forEach begin="1" end="${endPage}" var="i">
-                                <a class="${tag == i?"active":""}" href="userlist?index=${i}">${i}</a>
-                            </c:forEach>
+                            <nav aria-label="...">
+                                <ul class="pagination">
+                                    <c:if test="${tag!= 1}">
+                                    <li class="page-item ">
+                                        <a class="page-link" href="userlist?index=${tag-1}&Search=<%=request.getParameter("Search") != null ? request.getParameter("Search") : ""%>" >Previous</a>
+                                    </li>
+                                    </c:if>
+                                    <c:forEach begin="1" end="${endPage}" var="i">
+                                        <li class="page-item ${tag == i?"active":""}"><a class="page-link" href="userlist?index=${i}&Search=<%=request.getParameter("Search") != null ? request.getParameter("Search") : ""%>">${i}</a></li>
+                                    </c:forEach>
+                                    <c:if test="${tag<endPage}">
+                                    <li class="page-item">
+                                        <a class="page-link" href="userlist?index=${tag+1}&Search=<%=request.getParameter("Search") != null ? request.getParameter("Search") : ""%>">Next</a>
+                                    </li>
+                                    </c:if>
+                                </ul>
+                            </nav>                           
                         </div>
+
                     </div>
                     <!-- END CONTENT -->
                 </div>
