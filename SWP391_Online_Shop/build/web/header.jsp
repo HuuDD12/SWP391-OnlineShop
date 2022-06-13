@@ -337,43 +337,5 @@
         <!-- END NAVIGATION -->
     </div>
 </div>
-                                <div class="offcanvas offcanvas-end sticky-notification" data-bs-scroll="true" tabindex="-1" id="notification" aria-labelledby="notification">
-    <div class="offcanvas-header">
-        <h5 id="notificationLabel">Notification</h5><a href="${pageContext.request.contextPath}/user/readall" class="btn btn-info text-white <c:if test="${user==null}">disabled</c:if>">Read All</a>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body overflow-hidden">
-        <%-- BODY --%>
-        <c:if test="${user!=null}">
-            <c:forEach items="${notifications}" var="notification">
-                <div class="card text-dark border-info shadow mb-3" style="max-width: 540px;font-size: 12px">
-                    <div class="card-body">
-                        <h6 class="card-title"><i class="far fa-envelope me-1"></i>Shope</h6>
-                        <p class="card-text">${notification.getContent()}</p>  
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted"><c:out value="${notification.getTime()}" /><c:if test="${notification.getStatus()==0}"> / <a href="${pageContext.request.contextPath}/user/markasread?notiID=${notification.getId()}">Mark as read</a></c:if></small> 
-                        </div>
-                    <c:if test="${notification.getStatus()==0}">
-                        <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
-                            <span class="visually-hidden">New alerts</span>
-                        </span>
-                    </c:if>
-                </div>
-            </c:forEach>
-        </c:if>
-        <c:if test="${user==null}">
-            <div class="card text-dark bg-info shadow mb-3" style="max-width: 540px;font-size: 12px">
-                <div class="card-body">
-                    <h6 class="card-title"><i class="fas fa-shopping-bag me-1"></i>Welcome to Shope</h6>
-                    <p class="card-text">Join us to start receiving notification about your order, comment, promos, and more</p>  
-                </div>
-                <div class="card-footer">
-                    <a class="text-decoration-none" href="${pageContext.request.contextPath}/login"><small class="text-white">Login/Register</small></a>
-                </div>
-            </div>
-        </c:if>
-        <%-- BODY --%>
-    </div>
-</div>
+                            
 <!-- Header END -->

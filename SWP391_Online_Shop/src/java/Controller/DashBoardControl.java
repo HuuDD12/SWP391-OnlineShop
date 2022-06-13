@@ -50,7 +50,7 @@ public class DashBoardControl extends HttpServlet {
                 UserDAO udao = new UserDAO();
                 OrderDetailDAO oddao = new OrderDetailDAO();
                 int count = dao.count();
-                int countuser = udao.countUser();
+                int countuser = udao.getCountUser();
                 int countorder = odao.countOrder();
                 int countproductlow = dao.CountProductLow();
                 List<Order> billbyday = odao.getBillByDay();

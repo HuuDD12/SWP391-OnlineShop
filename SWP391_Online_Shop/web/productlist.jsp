@@ -67,7 +67,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
         <link href="assets/corporate/css/style-responsive.css" rel="stylesheet">
         <link href="assets/corporate/css/themes/red.css" rel="stylesheet" id="style-color">
         <link href="assets/corporate/css/custom.css" rel="stylesheet">
-        <link href="css/style_1.css" rel="stylesheet">
+        
         <!-- Theme styles END -->
     </head>
     <!-- Head END -->
@@ -141,7 +141,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                         <div id="content" class="row product-list">
                             <!-- PRODUCT ITEM START -->
                             <c:forEach items="${listP}" var="p">
-                                <div class="product col-md-4">
+                                <div style="padding: 5px" class="product col-md-4">
                                     <div st class="product-item">
                                         <div class="pi-img-wrapper">
                                             <img src="${p.url}" class="img-responsive" alt="Berry Lace Dress">

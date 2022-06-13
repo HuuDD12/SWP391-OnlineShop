@@ -1,173 +1,81 @@
-/*---------------------- GOOGLE FONTS ----------------------*/
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
-/*---------------------- VARIABLES CSS ----------------------*/
-:root {
-    /*  --header-height: 120px ;*/
-
-    /*-------------------- Colors --------------------*/
-    /*
-      --first-color: ;
-      --first-color-second: ;
-      --first-color-alt: ;
-      --first-color-lighter: ;
-      --title-color: ;
-      --text-color: ;
-      --text-color-light: ;
-      --input-color: ;
-      --body-color: ;
-      --container-color: ;*/
-
-    /*-------------------- Font and typography --------------------*/
-    --body-font: font-family: 'Poppins', sans-serif; ;
-
-    /*   font size  
-      --big-font-size: ;
-      --h1-font-size: ;
-      --h2-font-size: ;
-      --h3-font-size: ;
-      --normal-font-size: ;
-      --small-font-size: ;
-      --smaller-font-size: ;*/
-
-    /*-------------------- Font weight --------------------*/
-    --font-medium: ;
-    --font-semi-bold: ;
-
-
-
-    /*-------------------- z index --------------------*/
-    --z-tooltip: 1 ;
-    --z-fixed: 2;
-    --z-modal: 99 ;
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap);body {
+  font-family: "Roboto", sans-serif;
+  background: #EFF1F3;
+  min-height: 100vh;
+  position: relative;
 }
 
-/*Font size for large devices*/ 
-@media screen and (min-width: 968px) {
-    :root {
-        /*    --big-font-size: ;
-            --h1-font-size: ;
-            --h2-font-size: ;
-            --h3-font-size: ;
-            --normal-font-size: ;
-            --small-font-size: ;
-            --smaller-font-size: ;*/
-    }
+.section-50 {
+  padding: 50px 0;
 }
 
-
-/*-------------------- BASE --------------------*/
-*{
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+.m-b-50 {
+  margin-bottom: 50px;
 }
 
-html{
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    box-sizing: border-box;
-    overflow-x: hidden;
+.dark-link {
+  color: #333;
 }
 
-body{
-    margin: 0;
-    width: 100%;
-    z-index: 0;
-    padding-top: 80px;
-    font-family: 'Poppins',sans-serif;
-    overflow-x: hidden;
+.heading-line {
+  position: relative;
+  padding-bottom: 5px;
 }
 
-.title {
-    padding-top: 80px;
-    padding-bottom: 80px;
-}
-canvas{
-    max-width: 100%;
-    overflow: hidden;
-}
-
-.title h4 {
-    color: #000;
-    font-size: 30px;
-    font-weight: 600;
-    text-transform: uppercase;
-    display: inline-block;
-    position: relative;
+.heading-line:after {
+  content: "";
+  height: 4px;
+  width: 75px;
+  background-color: #29B6F6;
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 
-.title h4:after {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 3px;
-    width: 100%;
-    background-color: #ff7200;
-    content: '';
-}
-/*-------------------- REUSEABLE------------------*/
-.sticky {
-    position: fixed !important;
-    top: 0 !important;
-    width: 100% !important;
-    z-index: 2000;
-}
-.sticky-notification {
-    position: fixed !important;
-    top: 0 !important;
-    z-index: 2001;
-}
-/*-------------------- NAVBAR --------------------*/
-.nav-item
-{
-    margin-left: 10px;
-}
-.logo img
-{
-    height: 75px;
-}
-.navbar
-{
-    font-size: 20px;
-}
-.navbar .fas
-{
-    font-size: 130%;
-}
-.searchbar
-{
-    margin-top: 10px;
-    width: 100%;
-}
-#navbar1{
-    height: 90px;
-}
-#navbar2{
-    height: 55px;
-}
-/*-------------------- TOP BTN --------------------*/
-#myTBTN {
-  width:57px;
-  display: none; /* Hidden by default */
-  position: fixed; /* Fixed/sticky position */
-  bottom: 20px; /* Place the button at the bottom of the page */
-  right: 30px; /* Place the button 30px from the right */
-  z-index: 99; /* Make sure it does not overlap */
-  border: none; /* Remove borders */
-  outline: none; /* Remove outline */
-  background-color: #eb3b5a; /* Set a background color */
-  color: white; /* Text color */
-  cursor: pointer; /* Add a mouse pointer on hover */
-  padding: 15px; /* Some padding */
-  border-radius: 10px; /* Rounded corners */
-  font-size: 18px; /* Increase font size */
+.notification-ui_dd-content {
+  margin-bottom: 30px;
 }
 
-#myTBTN:hover {
-  background-color: #a5b1c2; /* Add a dark-grey background on hover */
+.notification-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 20px;
+  margin-bottom: 7px;
+  background: #fff;
+  -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+}
+
+.notification-list--unread {
+  border-left: 2px solid #29B6F6;
+}
+
+.notification-list .notification-list_content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.notification-list .notification-list_content .notification-list_img img {
+  height: 48px;
+  width: 48px;
+  border-radius: 50px;
+  margin-right: 20px;
+}
+
+.notification-list .notification-list_content .notification-list_detail p {
+  margin-bottom: 5px;
+  line-height: 1.2;
+}
+
+.notification-list .notification-list_feature-img img {
+  height: 48px;
+  width: 48px;
+  border-radius: 5px;
+  margin-left: 20px;
 }
 

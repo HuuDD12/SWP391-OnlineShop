@@ -5,10 +5,13 @@
  */
 package Controller;
 
+import DAO.NotificationDAO;
 import DAO.OrderDAO;
 import DAO.OrderDetailDAO;
 import DAO.ShippingDAO;
+import Model.Account;
 import Model.Cart;
+import Model.Notification;
 import Model.Order;
 import Model.Shipping;
 import java.io.IOException;
@@ -92,6 +95,7 @@ public class CheckoutControl extends HttpServlet {
         String note = request.getParameter("note");
         HttpSession session = request.getSession();
         Map<Integer, Cart> carts = (Map<Integer, Cart>) session.getAttribute("carts");
+        Account acc = (Account) session.getAttribute("acc");
         if (carts == null) {
             carts = new LinkedHashMap<>();
         }
@@ -114,6 +118,10 @@ public class CheckoutControl extends HttpServlet {
 
         //lưu OrderDetail
         new OrderDetailDAO().saveCart(orderId, carts);
+        
+        //Gửi thông báo
+        Notification notification= new Notification(acc.getUserId(), orderId, "Order #"+Integer.toString(orderId)+" has been placed!");
+        new NotificationDAO().addNotification(notification);
         session.removeAttribute("carts");
         response.sendRedirect("Finish.jsp");
     }

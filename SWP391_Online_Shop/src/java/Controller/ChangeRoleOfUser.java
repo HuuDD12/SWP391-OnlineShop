@@ -5,8 +5,11 @@
  */
 package Controller;
 
+import DAO.UserDAO;
+import Model.Role;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -58,7 +61,35 @@ public class ChangeRoleOfUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+         String User = request.getParameter("sid");
+        String role = request.getParameter("RoleName");
+        String indexpage = request.getParameter("index");
+        String Search = request.getParameter("Search");
+        if(role == null){
+            role = "3";
+        }
+        int Role = Integer.parseInt(role);
+        
+        UserDAO dao = new UserDAO();
+        dao.UpdateRoleUser(User, Role);
+        if (Search == null){
+            Search = "";
+        }
+        if(indexpage == null){
+            indexpage= "1";
+        }
+        int index = Integer.parseInt(indexpage);
+        int count = dao.getCountUserSearch(Search);
+        int endpage = count /5;
+        if(count % 5 != 0){
+            endpage++;
+        }
+        List<Role> list = dao.SearchUserByName(Search,index);     
+        request.setAttribute("Total", count);      
+        request.setAttribute("endPage", endpage);      
+        request.setAttribute("tag", index);
+        request.setAttribute("List", list);
+        request.getRequestDispatcher("UserListAdmin.jsp").forward(request, response);
     }
 
     /**
