@@ -65,7 +65,7 @@ public class ProductListController extends HttpServlet {
         int pTid = Integer.parseInt(page);
         List<Product> list = pdao.pagingProduct(pTid);
         request.setAttribute("listP", list);
-        request.setAttribute("listB", listB);
+        session.setAttribute("listB", listB);
         request.setAttribute("endPage", endPage);
         request.setAttribute("page", page);
         session.setAttribute("listTop3", listTop3);
