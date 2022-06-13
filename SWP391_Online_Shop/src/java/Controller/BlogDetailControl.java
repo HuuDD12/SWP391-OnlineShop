@@ -6,7 +6,7 @@
 package Controller;
 
 import DAO.BlogDAO;
-import model.Blog;
+import Model.Blog;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;

@@ -1,5 +1,5 @@
 
-package model;
+package Model;
 
 import java.util.Objects;
 
