@@ -207,7 +207,29 @@ public class OrderDAO extends DBcontext.DBContext {
         }
         return list;
     }
+    
+    public void OrderAction(int orderID, String action) {
+        String query = "";
+        switch (action) {
+            case "accept":
+                query = "update Orders set Status = 2 \n"
+                        + "where ID = ? ";
+                break;
+            case "reject":
+                query = "update Orders set Status = 4 \n"
+                        + "where ID =  ? ";
+                break;
+        }
 
+        try {
+      
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, orderID);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+    
     public static void main(String[] args) {
         OrderDAO o = new OrderDAO();
         List<Order> list = o.getAllBill();

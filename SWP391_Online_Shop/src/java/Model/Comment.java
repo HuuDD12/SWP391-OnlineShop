@@ -17,11 +17,28 @@ public class Comment {
     private String feedback;
     private Date date;
     private int id;
-
+    private double star;
 
     public Comment() {
     }
 
+    public Comment(String name, String email, String feedback, Date date, int id, double star) {
+        this.name = name;
+        this.email = email;
+        this.feedback = feedback;
+        this.date = date;
+        this.id = id;
+        this.star = star;
+    }
+
+    public double getStar() {
+        return star;
+    }
+
+    public void setStar(double star) {
+        this.star = star;
+    }
+    
     public Comment(String name, String email, String feedback, Date date, int id) {
         this.name = name;
         this.email = email;

@@ -36,7 +36,6 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
         <meta property="og:url" content="-CUSTOMER VALUE-">
 
         <link rel="shortcut icon" href="favicon.ico">
-
         <!-- Fonts START -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css"> 
         <!-- Fonts END -->
@@ -44,6 +43,8 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
         <!-- Global styles START -->          
         <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="fonts/material-icon/css/material-design-iconic-font.css" rel="stylesheet">
+        <link href="fonts/material-icon/css/material-design-iconic-font.min.css" rel="stylesheet">
         <!-- Global styles END --> 
 
         <!-- Page level plugin styles START -->
@@ -87,18 +88,18 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 
         <!-- BEGIN TOP BAR -->
         <jsp:include page="header.jsp"></jsp:include>
-        <!-- Header END -->
+            <!-- Header END -->
 
-        <div class="main">
-            <div class="container">
-                <ul class="breadcrumb">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="">Store</a></li>
-                    <li class="active">Cool green dress with red bell</li>
-                </ul>
-                <!-- BEGIN SIDEBAR & CONTENT -->
-                <div class="row margin-bottom-40">
-                    <!-- BEGIN SIDEBAR -->
+            <div class="main">
+                <div class="container">
+                    <ul class="breadcrumb">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="">Store</a></li>
+                        <li class="active">Cool green dress with red bell</li>
+                    </ul>
+                    <!-- BEGIN SIDEBAR & CONTENT -->
+                    <div class="row margin-bottom-40">
+                        <!-- BEGIN SIDEBAR -->
                     <jsp:include page="Left.jsp"></jsp:include>
                         <!-- END SIDEBAR -->
 
@@ -158,7 +159,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                                     <div class="review-item-submitted">
                                                         <strong>${c.name}</strong>
                                                         <em>${c.date}</em>
-                                                        
+                                                        <div class="rateit" data-rateit-value="${c.star}" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
                                                     </div>                                              
                                                     <div class="review-item-content">
                                                         <p>${c.feedback}</p>
@@ -183,10 +184,16 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                                     <label for="review">Review <span class="require">*</span></label>
                                                     <textarea name="review" class="form-control" rows="8" id="review"></textarea>
                                                 </div>
-                                   
+                                                <div class="form-group">
+                                                    <label for="email">Rating</label>
+                                                    <input name="star" type="number" value="4" step="0.25" id="backing5">
+                                                    <div class="rateit" data-rateit-backingfld="#backing5" data-rateit-resetable="false"  data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
+                                                    </div>
+                                                </div>
                                                 <div class="padding-top-20">                  
                                                     <button type="submit" class="btn btn-primary">Send</button>
                                                 </div>
+
                                             </form>
                                             <!-- END FORM--> 
                                         </div>

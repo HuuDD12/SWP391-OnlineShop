@@ -73,42 +73,66 @@
                 <div id="clock"></div>
             </div>
             <div class="row">
-                 <div class="col-md-12">
-                            <div class="card-header">
-                                <i class="fas fa-table me-1"></i>
-                                Tất cả đơn hàng
-                            </div>
-                            <div class="card-body">
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <th>ID đơn hàng</th>
-                                            <th>Khách hàng</th>
-                                            <th>Ngày mua</th>
-                                            <th>Tổng tiền</th>
-                                            <th>Trạng thái</th>
-                                            <th>Ghi chú</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach items="${list}" var="b">
-                                            <tr>
-                                                <td>${b.id}</td>
-                                                <td>${b.acc.username}</td>
-                                                <td>${b.createdDate}</td>
-                                                <td>${b.totalPrice}</td> 
-                                                <td>${b.os.name}</td> 
-                                                <td>${b.note}</td> 
-                                                <th><a href="orderdetail?oid=${b.id}">View</a></th>
-                                            </tr>
-                                        </c:forEach>
+                <div class="col-md-12">
+                    <div class="card-header">
+                        <i class="fas fa-table me-1"></i>
+                        Tất cả đơn hàng
+                    </div>
+                    <div class="card-body">
+                        <table  id="datatablesSimple">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center">ID đơn hàng</th>
+                                    <th style="text-align: center">Khách hàng</th>
+                                    <th style="text-align: center">Ngày mua</th>
+                                    <th style="text-align: center">Tổng tiền</th>
+                                    <th style="text-align: center">Trạng thái</th>
+                                    <th style="text-align: center">Ghi chú</th>
+                                    <th style="text-align: center">View</th>
+                                    <th style="text-align: center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${list}" var="b">
+                                    <tr>
+                                        <td style="text-align: center">${b.id}</td>
+                                        <td style="text-align: center">${b.acc.username}</td>
+                                        <td style="text-align: center">${b.createdDate}</td>
+                                        <td style="text-align: center">${b.totalPrice}</td> 
+                                        <c:if test="${b.status == 1}">
+                                            <td style="text-align: center"><span class="badge rounded-pill bg-secondary">Waiting for Confirmation</span></td>
+                                        </c:if>
+                                        <c:if test="${b.status == 2}">
+                                            <td style="text-align: center"><span class="badge rounded-pill bg-warning text-dark">Packing</span></td>
+                                        </c:if>
+                                        <c:if test="${b.status == 3}">
+                                            <td style="text-align: center"><span class="badge rounded-pill bg-primary">Delivering</span></td>
+                                        </c:if>
+                                        <c:if test="${b.status == 4}">
+                                            <td style="text-align: center"><span class="badge bg-danger">Canceled</span></td>
+                                        </c:if>
+                                        <c:if test="${b.status == 5}">
+                                            <td style="text-align: center"><span class="badge bg-success">completed</span></td>
+                                        </c:if> 
+                                        <td style="text-align: center">${b.note}</td> 
+                                        <td style="text-align: center"><a class="btn btn-sm btn-primary" href="orderdetail?oid=${b.id}">View</a></td>
+                                        <c:if test="${b.status == 1}">
+                                            <td style="text-align: center"><a href="confirmorder?action=accept&oid=${b.id}"><span class="btn btn-sm btn-success rounded-pill">Accept</span></a>
+                                                <a href="confirmorder?action=reject&oid=${b.id}"><span class="btn btn-sm btn-danger rounded-pill">Reject</span></a> 
+                                            </td>
+                                        </c:if>
+                                        <c:if test="${b.status != 1}">
+                                            <td>
+                                            </td>
+                                        </c:if>
+                                    </tr>
+                                </c:forEach>
 
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+            </div>
         </main>
         <!-- Essential javascripts for application to work-->
         <script src="admin/js/jquery-3.2.1.min.js"></script>
@@ -176,7 +200,7 @@
                 }
             }
         </script>
-         <script src="js/datatables-simple-demo.js"></script>
+        <script src="js/datatables-simple-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
     </body>
 
