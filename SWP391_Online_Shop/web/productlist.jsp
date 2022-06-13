@@ -53,13 +53,6 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
         <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"><!-- for slider-range -->
         <link href="assets/plugins/rateit/src/rateit.css" rel="stylesheet" type="text/css">
         <!-- Page level plugin styles END -->
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-            integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-            />
         <!-- Theme styles START -->
         <link href="assets/pages/css/components.css" rel="stylesheet">
         <link href="assets/corporate/css/style.css" rel="stylesheet">

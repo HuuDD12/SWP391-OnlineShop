@@ -1,4 +1,23 @@
+<%@page import="Model.Notification"%>
+<%@page import="java.util.List"%>
+<%@page import="DAO.NotificationDAO"%>
+<%@page import="Model.Account"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    Account user = (Account) session.getAttribute("acc");
+    if (user != null) {
+        NotificationDAO ndao = new NotificationDAO();
+        int unreadnoti = 0;
+        List<Notification> notifications = ndao.getAllNotification(Integer.parseInt(user.getUserId()));
+        for (Notification notification : notifications) {
+            if (notification.getStatus() == 0) {
+                unreadnoti++;
+            }
+        }
+        pageContext.setAttribute("notifications", notifications);
+        pageContext.setAttribute("unreadnoti", unreadnoti);
+    }
+%>
 <!-- BEGIN TOP BAR -->
 <div class="pre-header">
     <div class="container">
@@ -32,17 +51,16 @@
                 <ul class="list-unstyled list-inline pull-right">
                     <c:if test="${sessionScope.acc == null}">
                         <li><a href="LoginHere.jsp"><i class="fa fa-lock"></i>Login</a></li>
-                        </c:if>
+                    </c:if>
+                    <c:if test="${sessionScope.acc != null}">
                     <li class="nav-item d-block d-lg-none">
-                        <a class="nav-link d-inline-block" role="button" data-bs-toggle="offcanvas" data-bs-target="#notification" aria-controls="offcanvasRight"><i class="fas fa-bell"></i>
-                            <c:if test="${sessionScope.user !=null}">
-                                <span class="position-relative translate-middle badge rounded-pill bg-danger">
-                                    ${unreadnoti}
-                                    <span class="visually-hidden">unread notifications</span>
-                                </span>
-                            </c:if>
+                        <a class="nav-link d-inline-block" role="button" data-bs-toggle="offcanvas" href="notification?nid=${sessionScope.acc.userId}" data-bs-target="#notification" aria-controls="offcanvasRight"><i class="fa fa-bell"></i>
+                            <span class="position-relative translate-middle badge rounded-pill bg-danger">
+                                (${unreadnoti})                              
+                            </span>
                         </a>
                     </li>
+                    </c:if>
                 </ul>
             </div>
             <!-- END TOP BAR MENU -->

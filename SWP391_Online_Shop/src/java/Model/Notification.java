@@ -90,5 +90,10 @@ public class Notification {
         this.time = time;
     }
 
+    @Override
+    public String toString() {
+        return "Notification{" + "id=" + id + ", UserID=" + UserID + ", OrderID=" + OrderID + ", content=" + content + ", status=" + status + ", time=" + time + '}';
+    }
+
     
 }

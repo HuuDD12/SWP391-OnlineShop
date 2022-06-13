@@ -30,7 +30,7 @@ public class SendEmail {
 
         String toEmail = user.getEmail();
         String fromEmail = "duongbato14@gmail.com";
-        String password = "oholtguoeigmiidp";
+        String password = "jhwrgqxnanbfjjeh";
 
         try {
 

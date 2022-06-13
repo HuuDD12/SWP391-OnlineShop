@@ -5,9 +5,7 @@
  */
 package Controller;
 
-import DAO.GmailAPI;
-import DAO.UserDAO;
-import Model.Account;
+import DAO.NotificationDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -20,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-@WebServlet(name = "ResetPasswordControl", urlPatterns = {"/resetpassword"})
-public class ResetPasswordControl extends HttpServlet {
+@WebServlet(name = "MarkAsReadControl", urlPatterns = {"/markasread"})
+public class MarkAsReadControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,16 +34,11 @@ public class ResetPasswordControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ResetPasswordControl</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ResetPasswordControl at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            int nid = Integer.parseInt(request.getParameter("nid"));
+            int uid = Integer.parseInt(request.getParameter("uid"));
+            NotificationDAO ndao = new NotificationDAO();
+            ndao.markAsRead(uid, nid);
+            response.sendRedirect("notification?nid="+uid);
         }
     }
 
@@ -61,7 +54,7 @@ public class ResetPasswordControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("ResetPassword.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -75,38 +68,7 @@ public class ResetPasswordControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserDAO dao = new UserDAO();
-        GmailAPI gmail = new GmailAPI();
-
-        try {
-            String mailTo = request.getParameter("mail");
-            Account u = dao.getUsersByEmail(mailTo);
-            if (u == null) {
-                request.setAttribute("warn", "The email did not exist, please try again!");
-                request.getRequestDispatcher("ResetPassword.jsp").forward(request, response);
-            } else {
-                //FIX DEFAULT LENGTH OF PASSWORD 8 CHARACTORS
-                int charactor = 8;
-                String gmailFrom = "duongbato14@gmail.com";
-                String password = "jhwrgqxnanbfjjeh";
-                String subject = "Reset Password";
-                String newPassword = dao.RandomPassword(charactor);
-                // TO UPDATE PASSWORD
-                dao.updatePassword(u.getUserId(), newPassword);
-
-                String message = ("This is your new password: " + newPassword);
-                //SEND NEW PASSWORD
-              
-                //send mail 
-                gmail.send(mailTo, subject, message, gmailFrom, password);
-                
-                response.sendRedirect("LoginHere.jsp");
-
-            }
-        } catch (Exception ex) {
-            request.setAttribute("warn", "Can't connect to gmail!");
-            request.getRequestDispatcher("ResetPassword.jsp").forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**

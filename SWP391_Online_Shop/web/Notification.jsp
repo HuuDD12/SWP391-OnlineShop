@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -7,7 +8,7 @@
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="css/style_1.css">
-             <link rel="shortcut icon" href="favicon.ico">
+        <link rel="shortcut icon" href="favicon.ico">
 
         <!-- Fonts START -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css"> 
@@ -43,121 +44,36 @@
     <body>
         <jsp:include page="header.jsp"></jsp:include>
 
-        <section class="section-50">
-            <div class="container">
-                <h3 class="m-b-50 heading-line">Notifications <i class="fa fa-bell text-muted"></i></h3>
+            <section class="section-50">
+                <div class="container">
+                    <h3 class="m-b-50 heading-line">Notifications <i class="fa fa-bell text-muted"></i></h3>
+                <c:if test="${list.size() > 0}">
+                    <div class="notification-ui_dd-content">
+                        <c:forEach items="${list}" var="o">
+                            <div class="notification-list notification-list--unread">
+                                <div class="notification-list_content">
+                                    <div class="notification-list_img">
+                                        <img src="images/users/user1.jpg" alt="user">
+                                    </div>
+                                    <div class="notification-list_detail">
+                                        <p><b>System</b> sent a message to you</p><br>
+                                        <p class="text-muted">${o.content}</p>
+                                        <p class="text-muted"><small>${o.time}</small></p>
+                                        <p><a href="markasread?nid=${o.id}&uid=${sessionScope.acc.userId}">Mark As Read</a></p>
+                                    </div>
+                                        
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
 
-                <div class="notification-ui_dd-content">
-                    <div class="notification-list notification-list--unread">
-                        <div class="notification-list_content">
-                            <div class="notification-list_img">
-                                <img src="images/users/user1.jpg" alt="user">
-                            </div>
-                            <div class="notification-list_detail">
-                                <p><b>John Doe</b> reacted to your post</p>
-                                <p class="text-muted">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde, dolorem.</p>
-                                <p class="text-muted"><small>10 mins ago</small></p>
-                            </div>
-                        </div>
-                        <div class="notification-list_feature-img">
-                            <img src="images/features/random1.jpg" alt="Feature image">
-                        </div>
+                    <div class="text-center">
+                        <a href="#!" class="dark-link">Load more activity</a>
                     </div>
-                    <div class="notification-list notification-list--unread">
-                        <div class="notification-list_content">
-                            <div class="notification-list_img">
-                                <img src="images/users/user2.jpg" alt="user">
-                            </div>
-                            <div class="notification-list_detail">
-                                <p><b>Richard Miles</b> liked your post</p>
-                                <p class="text-muted">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde, dolorem.</p>
-                                <p class="text-muted"><small>10 mins ago</small></p>
-                            </div>
-                        </div>
-                        <div class="notification-list_feature-img">
-                            <img src="images/features/random2.jpg" alt="Feature image">
-                        </div>
-                    </div>
-                    <div class="notification-list">
-                        <div class="notification-list_content">
-                            <div class="notification-list_img">
-                                <img src="images/users/user3.jpg" alt="user">
-                            </div>
-                            <div class="notification-list_detail">
-                                <p><b>Brian Cumin</b> reacted to your post</p>
-                                <p class="text-muted">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde, dolorem.</p>
-                                <p class="text-muted"><small>10 mins ago</small></p>
-                            </div>
-                        </div>
-                        <div class="notification-list_feature-img">
-                            <img src="images/features/random3.jpg" alt="Feature image">
-                        </div>
-                    </div>
-                    <div class="notification-list">
-                        <div class="notification-list_content">
-                            <div class="notification-list_img">
-                                <img src="images/users/user4.jpg" alt="user">
-                            </div>
-                            <div class="notification-list_detail">
-                                <p><b>Lance Bogrol</b> reacted to your post</p>
-                                <p class="text-muted">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde, dolorem.</p>
-                                <p class="text-muted"><small>10 mins ago</small></p>
-                            </div>
-                        </div>
-                        <div class="notification-list_feature-img">
-                            <img src="images/features/random4.jpg" alt="Feature image">
-                        </div>
-                    </div>
-                    <div class="notification-list">
-                        <div class="notification-list_content">
-                            <div class="notification-list_img">
-                                <img src="images/users/user1.jpg" alt="user">
-                            </div>
-                            <div class="notification-list_detail">
-                                <p><b>Parsley Montana</b> reacted to your post</p>
-                                <p class="text-muted">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde, dolorem.</p>
-                                <p class="text-muted"><small>10 mins ago</small></p>
-                            </div>
-                        </div>
-                        <div class="notification-list_feature-img">
-                            <img src="images/features/random1.jpg" alt="Feature image">
-                        </div>
-                    </div>
-                    <div class="notification-list">
-                        <div class="notification-list_content">
-                            <div class="notification-list_img">
-                                <img src="images/users/user3.jpg" alt="user">
-                            </div>
-                            <div class="notification-list_detail">
-                                <p><b>Brian Cumin</b> reacted to your post</p>
-                                <p class="text-muted">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde, dolorem.</p>
-                                <p class="text-muted"><small>10 mins ago</small></p>
-                            </div>
-                        </div>
-                        <div class="notification-list_feature-img">
-                            <img src="images/features/random3.jpg" alt="Feature image">
-                        </div>
-                    </div>
-                    <div class="notification-list">
-                        <div class="notification-list_content">
-                            <div class="notification-list_img">
-                                <img src="images/users/user2.jpg" alt="user">
-                            </div>
-                            <div class="notification-list_detail">
-                                <p><b>Lance Bogrol</b> reacted to your post</p>
-                                <p class="text-muted">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde, dolorem.</p>
-                                <p class="text-muted"><small>10 mins ago</small></p>
-                            </div>
-                        </div>
-                        <div class="notification-list_feature-img">
-                            <img src="images/features/random2.jpg" alt="Feature image">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="text-center">
-                    <a href="#!" class="dark-link">Load more activity</a>
-                </div>
+                </c:if>
+                <c:if test="${list.size() == 0}">
+                    <h3 class="text-center">No Message Found</h3>
+                </c:if>    
 
             </div>
         </section>
