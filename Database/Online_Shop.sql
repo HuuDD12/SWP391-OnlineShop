@@ -328,6 +328,30 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+/****** Object:  Table [dbo].[Comment]    Script Date: 06/13/2022 13:11:28 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Comment](
+	[Id] [INT] IDENTITY(1,1) NOT NULL,
+	[Name] [NVARCHAR](200) NULL,
+	[Email] [NVARCHAR](500) NULL,
+	[CommentDate] [DATE] NULL,
+	[CommentDetail] [NVARCHAR](2000) NULL,
+	[ProductId] [INT] NULL
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[Comment]  WITH CHECK ADD FOREIGN KEY([ProductId])
+REFERENCES [dbo].[Product] ([ProductID])
+GO
+
+
+
 ALTER TABLE [dbo].[Delivery]  WITH CHECK ADD FOREIGN KEY([ShipInfoID])
 REFERENCES [dbo].[ShipInfo] ([ID])
 GO
