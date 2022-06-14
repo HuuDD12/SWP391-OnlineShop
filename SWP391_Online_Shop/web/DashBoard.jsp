@@ -38,7 +38,7 @@
 
 
                 <!-- User Menu-->
-                <li><a class="app-nav__item" href="home"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+                <li><a class="app-nav__item" href="productlist"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
                 </li>
             </ul>
@@ -57,7 +57,7 @@
             <ul class="app-menu">
                 <li><a class="app-menu__item" href="dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
                             class="app-menu__label">Bảng điều khiển</span></a></li>
-                <li><a class="app-menu__item" href="admin"><i class='app-menu__icon bx bxs-user-account'></i><span
+                <li><a class="app-menu__item" href="userlist"><i class='app-menu__icon bx bxs-user-account'></i><span
                             class="app-menu__label">Quản lí khách hàng</span></a></li>
                 <li><a class="app-menu__item" href="manager-product"><i
                             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
