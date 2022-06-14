@@ -63,7 +63,7 @@
         <link href="assets/corporate/css/style-responsive.css" rel="stylesheet">
         <link href="assets/corporate/css/themes/red.css" rel="stylesheet" id="style-color">
         <link href="assets/corporate/css/custom.css" rel="stylesheet">
-        <!-- Theme styles END -->F
+        <!-- Theme styles END -->
         <title>Manage Blog</title>
         <style>
             .container{
@@ -181,6 +181,6 @@
             crossorigin="anonymous"
         ></script>
         <!-- SCRIPT -->
-        <script src="${pageContext.request.contextPath}/js/script.js"></script>
+        <script src="js/script.js"></script>
     </body>
 </html>
