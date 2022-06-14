@@ -113,11 +113,10 @@
             <div class="container">
                 <div class="col-md-12">
 
-
-
                     <img style="width: 100%; margin: 45px;" src="./resources/img/Blog/5233122.jpg" >
                     <div class="spotlight">
-                        <h2 class="card-title show_txt">Những item bạn nhất định không nên bỏ lỡ</h2>
+                        <h2 class="card-title show_txt">Những item bạn nhất định không nên bỏ lỡ</h2> 
+                        <button class="btn btn-success"><a href="addblog">Add Blogs</a></button>
                         <p>Với sự thay đổi liên tục, xu hướng thời trang luôn được cập nhật mới mẻ hơn, độc đáo, hiện đại và thu hút hơn. Những phong cách mới, xu thế thời trang hot luôn được mọi người quan tâm, đặc biệt là giới trẻ. Không thể phủ nhận ngành công nghiệp thời trang đang phát triển rất mạnh mẽ. Không chỉ đơn giản là cách ăn mặc, cách mix&match đồ hay diện đồ theo phong cách yêu thích, thời trang còn là sự đổi mới, phá cách và tràn đầy sức sáng tạo ấn tượng. Vậy bạn đã có ý tưởng gì cho mình chưa? Cùng Shope khám phá ngay nhé.</p>
                     </div>
                 </div>
@@ -137,7 +136,10 @@
                             </div>
                             <div class="col-md-7">
                                 <article class="card-body p-5">
+                                    <button class="btn btn-warning"><a href="#">Update Blogs</a></button>
+                                    <button class="btn btn-danger"><a href="#">Delete Blogs</a></button>
                                     <h3 class="card-title show_txt"><a href="blogdetail?ID=${o.id}" title="View Blog">${o.title}</a></h3>  
+                                    
                                     <p class="content">${o.content}</p>
                             </div>
                         </div>  
@@ -146,8 +148,11 @@
                         <div class="row">
                             <div class="col-md-7">
                                 <article class="card-body p-5">
+                                    <button class="btn btn-warning"><a href="#">Update Blogs</a></button>
+                                    <button class="btn btn-danger"><a href="#">Delete Blogs</a></button>
                                     <h3 class="card-title show_txt"><a href="blogdetail?ID=${o.id}" title="View Blog">${o.title}</a></h3>  
                                     <p class="content">${o.content}</p>
+                                    
                             </div>
                             <div class="col-md-5 border-right">
                                 <article class="gallery-wrap"> 
