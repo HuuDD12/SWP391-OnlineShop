@@ -3,7 +3,7 @@
 <%@page import="DAO.NotificationDAO"%>
 <%@page import="Model.Account"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
+-<%
     Account user = (Account) session.getAttribute("acc");
     if (user != null) {
         NotificationDAO ndao = new NotificationDAO();
@@ -51,16 +51,17 @@
                 <ul class="list-unstyled list-inline pull-right">
                     <c:if test="${sessionScope.acc == null}">
                         <li><a href="LoginHere.jsp"><i class="fa fa-lock"></i>Login</a></li>
-                    </c:if>
-                    <c:if test="${sessionScope.acc != null}">
-                    <li class="nav-item d-block d-lg-none">
-                        <a class="nav-link d-inline-block" role="button" data-bs-toggle="offcanvas" href="notification?nid=${sessionScope.acc.userId}" data-bs-target="#notification" aria-controls="offcanvasRight"><i class="fa fa-bell"></i>
-                            <span class="position-relative translate-middle badge rounded-pill bg-danger">
-                                (${unreadnoti})                              
-                            </span>
-                        </a>
+                        </c:if>
+                        <c:if test="${sessionScope.acc != null}">
+                        <li class="nav-item d-block d-lg-none">
+                            <a class="nav-link d-inline-block" href="notification?nid=${sessionScope.acc.userId}" role="button" data-bs-toggle="offcanvas" data-bs-target="#notification" aria-controls="offcanvasRight"><i class="fa fa-bell"></i>
+
+                                <span class="position-relative translate-middle badge rounded-pill bg-danger">
+                                    ${unreadnoti}
+                                </span> 
+                            </a>                           
                     </li>
-                    </c:if>
+                        </c:if>
                 </ul>
             </div>
             <!-- END TOP BAR MENU -->
@@ -244,7 +245,60 @@
                     </ul>
                 </li>
                 <li><a href="shop-item.html">Kids</a></li>
-                <li><a href="bloglist">Blog</a></li>
+                <li class="dropdown dropdown100 nav-catalogue">
+                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
+                        New
+
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <div class="header-navigation-content">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-4 col-xs-6">
+                                        <div class="product-item">
+                                            <div class="pi-img-wrapper">
+                                                <a href="shop-item.html"><img src="assets/pages/img/products/model4.jpg" class="img-responsive" alt="Berry Lace Dress"></a>
+                                            </div>
+                                            <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
+                                            <div class="pi-price">$29.00</div>
+                                            <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-4 col-xs-6">
+                                        <div class="product-item">
+                                            <div class="pi-img-wrapper">
+                                                <a href="shop-item.html"><img src="assets/pages/img/products/model3.jpg" class="img-responsive" alt="Berry Lace Dress"></a>
+                                            </div>
+                                            <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
+                                            <div class="pi-price">$29.00</div>
+                                            <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-4 col-xs-6">
+                                        <div class="product-item">
+                                            <div class="pi-img-wrapper">
+                                                <a href="shop-item.html"><img src="assets/pages/img/products/model7.jpg" class="img-responsive" alt="Berry Lace Dress"></a>
+                                            </div>
+                                            <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
+                                            <div class="pi-price">$29.00</div>
+                                            <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-4 col-xs-6">
+                                        <div class="product-item">
+                                            <div class="pi-img-wrapper">
+                                                <a href="shop-item.html"><img src="assets/pages/img/products/model4.jpg" class="img-responsive" alt="Berry Lace Dress"></a>
+                                            </div>
+                                            <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
+                                            <div class="pi-price">$29.00</div>
+                                            <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
                 <li class="dropdown active">
                     <c:if test ="${sessionScope.acc !=  null}">
                         <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
@@ -259,16 +313,16 @@
                             <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ProfileControl">View profile</a></li>  
                             <!-- Admin -->
                             <c:if test="${sessionScope.acc.getRoleId() ==  1}">
-                                <li><a  href="${pageContext.request.contextPath}/AccountManagerControl">Manage Users</a></li>
+                                <li><a  href="${pageContext.request.contextPath}/userlist">Manage Users</a></li>
                                 <li><a href="dashboard">DashBoard</a></li>
                                 </c:if>
                             <!-- Seller -->
                             <c:if test="${sessionScope.acc.getRoleId() ==  2}">
                                 <li><a  href="${pageContext.request.contextPath}/Dashboard">DashBoard</a></li>
                                 </c:if>
-                            <c:if test="${sessionScope.acc.getRoleId() ==  3}">
+                                <c:if test="${sessionScope.acc.getRoleId() ==  3}">
                                 <li><a href="${pageContext.request.contextPath}/sendfeedback">FeedBack</a></li>
-                            </c:if>
+                                </c:if>
                             <!-- Marketing -->
                             <c:if test="${sessionScope.acc.getRoleId() ==  4}">
                                 <li><a  href="${pageContext.request.contextPath}/mkt/dashboard">Dashboard</a></li>
@@ -278,6 +332,7 @@
                                 </c:if>
                             <!-- Default Logout -->
 
+                            <li><a  href="${pageContext.request.contextPath}/ChangePasswordControl?sid=${sessionScope.acc.getUsername()}">Change PassWord</a></li>
                             <li><a  href="${pageContext.request.contextPath}/logout">Logout</a></li>
 
                             <!-- Neu khong co user -->
@@ -305,5 +360,5 @@
         <!-- END NAVIGATION -->
     </div>
 </div>
-                            
+
 <!-- Header END -->

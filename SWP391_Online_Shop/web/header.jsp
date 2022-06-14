@@ -1,4 +1,23 @@
+<%@page import="Model.Notification"%>
+<%@page import="java.util.List"%>
+<%@page import="DAO.NotificationDAO"%>
+<%@page import="Model.Account"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+-<%
+    Account user = (Account) session.getAttribute("acc");
+    if (user != null) {
+        NotificationDAO ndao = new NotificationDAO();
+        int unreadnoti = 0;
+        List<Notification> notifications = ndao.getAllNotification(Integer.parseInt(user.getUserId()));
+        for (Notification notification : notifications) {
+            if (notification.getStatus() == 0) {
+                unreadnoti++;
+            }
+        }
+        pageContext.setAttribute("notifications", notifications);
+        pageContext.setAttribute("unreadnoti", unreadnoti);
+    }
+%>
 <!-- BEGIN TOP BAR -->
 <div class="pre-header">
     <div class="container">
@@ -33,16 +52,16 @@
                     <c:if test="${sessionScope.acc == null}">
                         <li><a href="LoginHere.jsp"><i class="fa fa-lock"></i>Login</a></li>
                         </c:if>
-                    <li class="nav-item d-block d-lg-none">
-                        <a class="nav-link d-inline-block" role="button" data-bs-toggle="offcanvas" data-bs-target="#notification" aria-controls="offcanvasRight"><i class="fas fa-bell"></i>
-                            <c:if test="${sessionScope.user !=null}">
+                        <c:if test="${sessionScope.acc != null}">
+                        <li class="nav-item d-block d-lg-none">
+                            <a class="nav-link d-inline-block" href="notification?nid=${sessionScope.acc.userId}" role="button" data-bs-toggle="offcanvas" data-bs-target="#notification" aria-controls="offcanvasRight"><i class="fa fa-bell"></i>
+
                                 <span class="position-relative translate-middle badge rounded-pill bg-danger">
                                     ${unreadnoti}
-                                    <span class="visually-hidden">unread notifications</span>
-                                </span>
-                            </c:if>
-                        </a>
+                                </span> 
+                            </a>                           
                     </li>
+                        </c:if>
                 </ul>
             </div>
             <!-- END TOP BAR MENU -->
@@ -54,7 +73,7 @@
 <!-- BEGIN HEADER -->
 <div class="header">
     <div class="container">
-        <a class="site-logo" href="shop-index.html"><img src="assets/corporate/img/logos/logo-shop-red.png" alt="Metronic Shop UI"></a>
+        <a class="site-logo" href="productlist"><img src="assets/corporate/img/logos/logo-shop-red.png" alt="Metronic Shop UI"></a>
 
         <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 
@@ -155,7 +174,7 @@
 
 
                     <ul class="dropdown-menu" role="menu">
-                        <<c:forEach items="${listB}" var="b">
+                        <<c:forEach items="${sessionScope.listB}" var="b">
                             <li><a href="brand?bid=${b.brandId}">${b.brandName}</a></li>
                             </c:forEach>
                     </ul>
@@ -301,9 +320,9 @@
                             <c:if test="${sessionScope.acc.getRoleId() ==  2}">
                                 <li><a  href="${pageContext.request.contextPath}/Dashboard">DashBoard</a></li>
                                 </c:if>
-                            <c:if test="${sessionScope.acc.getRoleId() ==  3}">
+                                <c:if test="${sessionScope.acc.getRoleId() ==  3}">
                                 <li><a href="${pageContext.request.contextPath}/sendfeedback">FeedBack</a></li>
-                            </c:if>
+                                </c:if>
                             <!-- Marketing -->
                             <c:if test="${sessionScope.acc.getRoleId() ==  4}">
                                 <li><a  href="${pageContext.request.contextPath}/mkt/dashboard">Dashboard</a></li>
@@ -341,43 +360,5 @@
         <!-- END NAVIGATION -->
     </div>
 </div>
-                                <div class="offcanvas offcanvas-end sticky-notification" data-bs-scroll="true" tabindex="-1" id="notification" aria-labelledby="notification">
-    <div class="offcanvas-header">
-        <h5 id="notificationLabel">Notification</h5><a href="${pageContext.request.contextPath}/user/readall" class="btn btn-info text-white <c:if test="${user==null}">disabled</c:if>">Read All</a>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body overflow-hidden">
-        <%-- BODY --%>
-        <c:if test="${user!=null}">
-            <c:forEach items="${notifications}" var="notification">
-                <div class="card text-dark border-info shadow mb-3" style="max-width: 540px;font-size: 12px">
-                    <div class="card-body">
-                        <h6 class="card-title"><i class="far fa-envelope me-1"></i>Shope</h6>
-                        <p class="card-text">${notification.getContent()}</p>  
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted"><c:out value="${notification.getTime()}" /><c:if test="${notification.getStatus()==0}"> / <a href="${pageContext.request.contextPath}/user/markasread?notiID=${notification.getId()}">Mark as read</a></c:if></small> 
-                        </div>
-                    <c:if test="${notification.getStatus()==0}">
-                        <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
-                            <span class="visually-hidden">New alerts</span>
-                        </span>
-                    </c:if>
-                </div>
-            </c:forEach>
-        </c:if>
-        <c:if test="${user==null}">
-            <div class="card text-dark bg-info shadow mb-3" style="max-width: 540px;font-size: 12px">
-                <div class="card-body">
-                    <h6 class="card-title"><i class="fas fa-shopping-bag me-1"></i>Welcome to Shope</h6>
-                    <p class="card-text">Join us to start receiving notification about your order, comment, promos, and more</p>  
-                </div>
-                <div class="card-footer">
-                    <a class="text-decoration-none" href="${pageContext.request.contextPath}/login"><small class="text-white">Login/Register</small></a>
-                </div>
-            </div>
-        </c:if>
-        <%-- BODY --%>
-    </div>
-</div>
+
 <!-- Header END -->
