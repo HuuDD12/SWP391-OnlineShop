@@ -192,7 +192,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                             </div>
                             <p>${mess}</p>        
                             <div>
-                                <a href="#" class="txt1">
+                                <a href="ResetPassword.jsp" class="txt1">
                                     Forgot Password?
                                 </a>
                             </div>

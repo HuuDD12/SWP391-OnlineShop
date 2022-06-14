@@ -42,7 +42,7 @@ public class ProductDetailControl extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ProductDetailControl</title>");            
+            out.println("<title>Servlet ProductDetailControl</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ProductDetailControl at " + request.getContextPath() + "</h1>");
@@ -63,17 +63,17 @@ public class ProductDetailControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-           int pid = Integer.parseInt(request.getParameter("pid"));
-           String sid = request.getParameter("sid");
-           ProductDAO pdao = new ProductDAO();
-           CommentDAO cdao = new CommentDAO();
-           List<Product> list = pdao.getTop3ListProByCat(sid, pid);
-           Product p = pdao.getProductById(pid);
-           List<Comment> listC = cdao.getComment(pid);
-           request.setAttribute("product", p);
-           request.setAttribute("list", list);
-           request.setAttribute("listC", listC);
-           request.getRequestDispatcher("ProductDetail.jsp").forward(request, response);
+        int pid = Integer.parseInt(request.getParameter("pid"));
+        String sid = request.getParameter("sid");
+        ProductDAO pdao = new ProductDAO();
+        CommentDAO cdao = new CommentDAO();
+        List<Product> list = pdao.getTop3ListProByCat(sid, pid);
+        Product p = pdao.getProductById(pid);
+        List<Comment> listC = cdao.getComment(pid);
+        request.setAttribute("product", p);
+        request.setAttribute("list", list);
+        request.setAttribute("listC", listC);
+        request.getRequestDispatcher("ProductDetail.jsp").forward(request, response);
     }
 
     /**
@@ -92,10 +92,11 @@ public class ProductDetailControl extends HttpServlet {
         String feedback = request.getParameter("review");
         //int id = Integer.valueOf(request.getParameter("id"));
         int ProID = Integer.parseInt(request.getParameter("pid"));
+        double star = Double.parseDouble(request.getParameter("star"));
         String sid = request.getParameter("sid");
         CommentDAO cdao = new CommentDAO();
-        cdao.insert(name, email, feedback, ProID);
-        response.sendRedirect("productdetail?pid="+ProID+"&sid="+sid);
+        cdao.insert(name, email, feedback, ProID, star);
+        response.sendRedirect("productdetail?pid=" + ProID + "&sid=" + sid);
     }
 
     /**

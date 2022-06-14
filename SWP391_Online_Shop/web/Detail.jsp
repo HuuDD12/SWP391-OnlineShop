@@ -209,7 +209,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                         </div>
                         <div class="form-group">
                           <label for="email">Rating</label>
-                          <input type="range" value="4" step="0.25" id="backing5">
+                          <input name="star" type="range" value="4" step="0.25" id="backing5">
                           <div class="rateit" data-rateit-backingfld="#backing5" data-rateit-resetable="false"  data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
                           </div>
                         </div>

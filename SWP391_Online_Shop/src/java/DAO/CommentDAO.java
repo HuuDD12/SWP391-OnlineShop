@@ -20,21 +20,23 @@ import java.util.logging.Logger;
  */
 public class CommentDAO extends DBcontext.DBContext {
 
-    public void insert(String name, String email, String feedback, int id) {
+    public void insert(String name, String email, String feedback, int id,double star) {
         try {
             String sql = "INSERT INTO [dbo].[Comment]\n"
                     + "           ([Name]\n"
                     + "           ,[Email]\n"
                     + "           ,[CommentDate]\n"
                     + "           ,[CommentDetail]\n"
-                    + "           ,[ProductId])\n"
+                    + "           ,[ProductId]\n"
+                    + "           ,[Star])\n"
                     + "     VALUES\n"
-                    + "           (?,?,GETDATE(),?,?)";
+                    + "           (?,?,GETDATE(),?,?,?)";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, name);
             stm.setString(2, email);;
             stm.setString(3, feedback);
             stm.setInt(4, id);
+            stm.setDouble(5, star);
 
             stm.executeUpdate();
         } catch (SQLException ex) {
@@ -50,16 +52,16 @@ public class CommentDAO extends DBcontext.DBContext {
             stm.setInt(1, ProID);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                Comment f = new Comment(rs.getString(2), rs.getString(3), rs.getString(5), rs.getDate(4), rs.getInt(6));
+                Comment f = new Comment(rs.getString(2), rs.getString(3), rs.getString(5), rs.getDate(4), rs.getInt(6), rs.getDouble(7));
                 list.add(f);
             }
 
         } catch (SQLException ex) {
-            
+
         }
         return list;
     }
-    
+
     public static void main(String[] args) {
         CommentDAO dao = new CommentDAO();
         List<Comment> list = dao.getComment(2);
