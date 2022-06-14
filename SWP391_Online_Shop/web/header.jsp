@@ -1,23 +1,4 @@
-<%@page import="Model.Notification"%>
-<%@page import="java.util.List"%>
-<%@page import="DAO.NotificationDAO"%>
-<%@page import="Model.Account"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-    Account user = (Account) session.getAttribute("acc");
-    if (user != null) {
-        NotificationDAO ndao = new NotificationDAO();
-        int unreadnoti = 0;
-        List<Notification> notifications = ndao.getAllNotification(Integer.parseInt(user.getUserId()));
-        for (Notification notification : notifications) {
-            if (notification.getStatus() == 0) {
-                unreadnoti++;
-            }
-        }
-        pageContext.setAttribute("notifications", notifications);
-        pageContext.setAttribute("unreadnoti", unreadnoti);
-    }
-%>
 <!-- BEGIN TOP BAR -->
 <div class="pre-header">
     <div class="container">
@@ -51,16 +32,17 @@
                 <ul class="list-unstyled list-inline pull-right">
                     <c:if test="${sessionScope.acc == null}">
                         <li><a href="LoginHere.jsp"><i class="fa fa-lock"></i>Login</a></li>
-                    </c:if>
-                    <c:if test="${sessionScope.acc != null}">
+                        </c:if>
                     <li class="nav-item d-block d-lg-none">
-                        <a class="nav-link d-inline-block" role="button" data-bs-toggle="offcanvas" href="notification?nid=${sessionScope.acc.userId}" data-bs-target="#notification" aria-controls="offcanvasRight"><i class="fa fa-bell"></i>
-                            <span class="position-relative translate-middle badge rounded-pill bg-danger">
-                                (${unreadnoti})                              
-                            </span>
+                        <a class="nav-link d-inline-block" role="button" data-bs-toggle="offcanvas" data-bs-target="#notification" aria-controls="offcanvasRight"><i class="fas fa-bell"></i>
+                            <c:if test="${sessionScope.user !=null}">
+                                <span class="position-relative translate-middle badge rounded-pill bg-danger">
+                                    ${unreadnoti}
+                                    <span class="visually-hidden">unread notifications</span>
+                                </span>
+                            </c:if>
                         </a>
                     </li>
-                    </c:if>
                 </ul>
             </div>
             <!-- END TOP BAR MENU -->
@@ -72,7 +54,7 @@
 <!-- BEGIN HEADER -->
 <div class="header">
     <div class="container">
-        <a class="site-logo" href="productlist"><img src="assets/corporate/img/logos/logo-shop-red.png" alt="Metronic Shop UI"></a>
+        <a class="site-logo" href="shop-index.html"><img src="assets/corporate/img/logos/logo-shop-red.png" alt="Metronic Shop UI"></a>
 
         <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 
@@ -173,7 +155,7 @@
 
 
                     <ul class="dropdown-menu" role="menu">
-                        <<c:forEach items="${sessionScope.listB}" var="b">
+                        <<c:forEach items="${listB}" var="b">
                             <li><a href="brand?bid=${b.brandId}">${b.brandName}</a></li>
                             </c:forEach>
                     </ul>
@@ -244,7 +226,60 @@
                     </ul>
                 </li>
                 <li><a href="shop-item.html">Kids</a></li>
-                <li><a href="bloglist">Blog</a></li>
+                <li class="dropdown dropdown100 nav-catalogue">
+                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
+                        New
+
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <div class="header-navigation-content">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-4 col-xs-6">
+                                        <div class="product-item">
+                                            <div class="pi-img-wrapper">
+                                                <a href="shop-item.html"><img src="assets/pages/img/products/model4.jpg" class="img-responsive" alt="Berry Lace Dress"></a>
+                                            </div>
+                                            <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
+                                            <div class="pi-price">$29.00</div>
+                                            <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-4 col-xs-6">
+                                        <div class="product-item">
+                                            <div class="pi-img-wrapper">
+                                                <a href="shop-item.html"><img src="assets/pages/img/products/model3.jpg" class="img-responsive" alt="Berry Lace Dress"></a>
+                                            </div>
+                                            <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
+                                            <div class="pi-price">$29.00</div>
+                                            <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-4 col-xs-6">
+                                        <div class="product-item">
+                                            <div class="pi-img-wrapper">
+                                                <a href="shop-item.html"><img src="assets/pages/img/products/model7.jpg" class="img-responsive" alt="Berry Lace Dress"></a>
+                                            </div>
+                                            <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
+                                            <div class="pi-price">$29.00</div>
+                                            <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-4 col-xs-6">
+                                        <div class="product-item">
+                                            <div class="pi-img-wrapper">
+                                                <a href="shop-item.html"><img src="assets/pages/img/products/model4.jpg" class="img-responsive" alt="Berry Lace Dress"></a>
+                                            </div>
+                                            <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
+                                            <div class="pi-price">$29.00</div>
+                                            <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
                 <li class="dropdown active">
                     <c:if test ="${sessionScope.acc !=  null}">
                         <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
@@ -259,7 +294,7 @@
                             <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ProfileControl">View profile</a></li>  
                             <!-- Admin -->
                             <c:if test="${sessionScope.acc.getRoleId() ==  1}">
-                                <li><a  href="${pageContext.request.contextPath}/AccountManagerControl">Manage Users</a></li>
+                                <li><a  href="${pageContext.request.contextPath}/userlist">Manage Users</a></li>
                                 <li><a href="dashboard">DashBoard</a></li>
                                 </c:if>
                             <!-- Seller -->
@@ -275,6 +310,7 @@
                                 </c:if>
                             <!-- Default Logout -->
 
+                            <li><a  href="${pageContext.request.contextPath}/ChangePasswordControl?sid=${sessionScope.acc.getUsername()}">Change PassWord</a></li>
                             <li><a  href="${pageContext.request.contextPath}/logout">Logout</a></li>
 
                             <!-- Neu khong co user -->
@@ -302,5 +338,43 @@
         <!-- END NAVIGATION -->
     </div>
 </div>
-                            
+                                <div class="offcanvas offcanvas-end sticky-notification" data-bs-scroll="true" tabindex="-1" id="notification" aria-labelledby="notification">
+    <div class="offcanvas-header">
+        <h5 id="notificationLabel">Notification</h5><a href="${pageContext.request.contextPath}/user/readall" class="btn btn-info text-white <c:if test="${user==null}">disabled</c:if>">Read All</a>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body overflow-hidden">
+        <%-- BODY --%>
+        <c:if test="${user!=null}">
+            <c:forEach items="${notifications}" var="notification">
+                <div class="card text-dark border-info shadow mb-3" style="max-width: 540px;font-size: 12px">
+                    <div class="card-body">
+                        <h6 class="card-title"><i class="far fa-envelope me-1"></i>Shope</h6>
+                        <p class="card-text">${notification.getContent()}</p>  
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted"><c:out value="${notification.getTime()}" /><c:if test="${notification.getStatus()==0}"> / <a href="${pageContext.request.contextPath}/user/markasread?notiID=${notification.getId()}">Mark as read</a></c:if></small> 
+                        </div>
+                    <c:if test="${notification.getStatus()==0}">
+                        <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                            <span class="visually-hidden">New alerts</span>
+                        </span>
+                    </c:if>
+                </div>
+            </c:forEach>
+        </c:if>
+        <c:if test="${user==null}">
+            <div class="card text-dark bg-info shadow mb-3" style="max-width: 540px;font-size: 12px">
+                <div class="card-body">
+                    <h6 class="card-title"><i class="fas fa-shopping-bag me-1"></i>Welcome to Shope</h6>
+                    <p class="card-text">Join us to start receiving notification about your order, comment, promos, and more</p>  
+                </div>
+                <div class="card-footer">
+                    <a class="text-decoration-none" href="${pageContext.request.contextPath}/login"><small class="text-white">Login/Register</small></a>
+                </div>
+            </div>
+        </c:if>
+        <%-- BODY --%>
+    </div>
+</div>
 <!-- Header END -->
