@@ -96,7 +96,7 @@ public class BlogDAO extends DBcontext.DBContext{
     }
 
     public void delete(int id) {
-        query = "Delete FROM Blog WHERE ID = ?";
+        query = "Delete FROM Blogs WHERE ID = ?";
 
         try { 
             ps = connection.prepareStatement(query);

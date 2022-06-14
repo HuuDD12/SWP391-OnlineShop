@@ -5,25 +5,23 @@
  */
 package Controller;
 
-import DAO.FeedbackDAO;
-import Model.Account;
-import Model.Feedback;
+import DAO.BlogDAO;
+import Model.Blog;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "ManagerFeedbackControl", urlPatterns = {"/feedbackmanager"})
-public class ManagerFeedbackControl extends HttpServlet {
+@WebServlet(name = "ManagerBlog", urlPatterns = {"/blogmanager"})
+public class ManagerBlog extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,13 +35,11 @@ public class ManagerFeedbackControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            HttpSession session = request.getSession();
-            FeedbackDAO fdao = new FeedbackDAO();
-            List<Feedback> list = fdao.getAllFeedback();
-            request.setAttribute("list", list);
-            request.getRequestDispatcher("ManagerFeedBack.jsp").forward(request, response);
-        }
+        BlogDAO BlogDAO = new BlogDAO();
+        // get List of Blog from database
+        ArrayList<Blog> blogList = BlogDAO.getAllBlogs();
+        request.setAttribute("blogList", blogList);
+        request.getRequestDispatcher("ManagerBlog.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

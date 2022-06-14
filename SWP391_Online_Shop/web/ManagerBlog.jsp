@@ -45,75 +45,71 @@
         <!-- Sidebar menu-->
         <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
         <jsp:include page="DashBoardNav.jsp"></jsp:include>
-        <main class="app-content">
-            <div class="app-title">
-                <ul class="app-breadcrumb breadcrumb side">
-                    <li class="breadcrumb-item active"><a href="#"><b>Danh sách đơn hàng</b></a></li>
-                </ul>
-                <div id="clock"></div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card-header">
-                        <i class="fas fa-table me-1"></i>
-                        Tất cả đơn hàng
-                    </div>
-                    <div class="card-body">
-                        <table  id="datatablesSimple">
-                            <thead>
-                                <tr>
-                                    <th style="text-align: center">ID đơn hàng</th>
-                                    <th style="text-align: center">Khách hàng</th>
-                                    <th style="text-align: center">Ngày mua</th>
-                                    <th style="text-align: center">Tổng tiền</th>
-                                    <th style="text-align: center">Trạng thái</th>
-                                    <th style="text-align: center">Ghi chú</th>
-                                    <th style="text-align: center">View</th>
-                                    <th style="text-align: center">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:forEach items="${list}" var="b">
+            <main class="app-content">
+                <div class="app-title">
+                    <ul class="app-breadcrumb breadcrumb side">
+                        <li class="breadcrumb-item active"><a href="#"><b>Danh sách Blog</b></a></li>
+                    </ul>
+                    <div id="clock"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-header">
+                            <i class="fas fa-table me-1"></i>
+                            Tất cả Blog
+                        </div>
+                        <div class="card-body">
+                            <table  id="datatablesSimple">
+                                <thead>
                                     <tr>
-                                        <td style="text-align: center">${b.id}</td>
-                                        <td style="text-align: center">${b.acc.username}</td>
-                                        <td style="text-align: center">${b.createdDate}</td>
-                                        <td style="text-align: center">${b.totalPrice}</td> 
-                                        <c:if test="${b.status == 1}">
-                                            <td style="text-align: center"><span class="badge rounded-pill bg-secondary">Waiting for Confirmation</span></td>
-                                        </c:if>
-                                        <c:if test="${b.status == 2}">
-                                            <td style="text-align: center"><span class="badge rounded-pill bg-warning text-dark">Packing</span></td>
-                                        </c:if>
-                                        <c:if test="${b.status == 3}">
-                                            <td style="text-align: center"><span class="badge rounded-pill bg-primary">Delivering</span></td>
-                                        </c:if>
-                                        <c:if test="${b.status == 4}">
-                                            <td style="text-align: center"><span class="badge bg-danger">Canceled</span></td>
-                                        </c:if>
-                                        <c:if test="${b.status == 5}">
-                                            <td style="text-align: center"><span class="badge bg-success">completed</span></td>
-                                        </c:if> 
-                                        <td style="text-align: center">${b.note}</td> 
-                                        <td style="text-align: center"><a class="btn btn-sm btn-primary" href="orderdetail?oid=${b.id}">View</a></td>
-                                        <c:if test="${b.status == 1}">
-                                            <td style="text-align: center"><a href="confirmorder?action=accept&oid=${b.id}"><span class="btn btn-sm btn-success rounded-pill">Accept</span></a>
-                                                <a href="confirmorder?action=reject&oid=${b.id}"><span class="btn btn-sm btn-danger rounded-pill">Reject</span></a> 
-                                            </td>
-                                        </c:if>
-                                        <c:if test="${b.status != 1}">
-                                            <td>
-                                            </td>
-                                        </c:if>
+                                        <th style="text-align: center">ID</th>
+                                        <th style="text-align: center">Tác giả</th>
+                                        <th style="text-align: center">Tiêu đề</th>
+                                        <th style="text-align: center">Ảnh</th>
+                                        <th style="text-align: center">Nội dung</th>
+                                        <th style="text-align: center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${blogList}" var="o">
+                                    <tr>
+                                        <td style="text-align: center">${o.id}</td>
+                                        <td style="text-align: center">${o.author}</td>
+                                        <td style="text-align: center">${o.title}</td>
+                                        <td style="text-align: center"><img style="height: 150px;width: 150px" src="${o.imageLink}"/></td>
+                                        <td style="text-align: center">${o.content}</td>
+                                        <td style="text-align: center"><a href="#" onclick="doDelete('${o.id}')" class="delete"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                                     </tr>
                                 </c:forEach>
-
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
+
+
         </main>
+        <div id="deleteEmployeeModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="DeleteBlog" method="post">
+                        <div class="modal-header">						
+                            <h4 class="modal-title">Delete Blog</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">					
+                            <p>Are you sure you want to delete?</p>
+                            <p class="text-warning"><small>You cannot undo this action.</small></p>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="text" id="pid" name="BlogID" visibility: hidden>
+                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                            <input type="submit" class="btn btn-danger" value="Delete">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <!-- Essential javascripts for application to work-->
         <script src="admin/js/jquery-3.2.1.min.js"></script>
         <script src="admin/js/popper.min.js"></script>
@@ -182,6 +178,13 @@
         </script>
         <script src="js/datatables-simple-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+        function doDelete(id_pro) {
+            if (confirm("Are you sure to delete this Blog")) {
+                window.location = "deleteblogmanage?id=" + id_pro;
+            }
+        }
+        </script>
     </body>
 
 </html>
