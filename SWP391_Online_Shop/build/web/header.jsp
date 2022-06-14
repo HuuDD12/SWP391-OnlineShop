@@ -266,6 +266,9 @@
                             <c:if test="${sessionScope.acc.getRoleId() ==  2}">
                                 <li><a  href="${pageContext.request.contextPath}/Dashboard">DashBoard</a></li>
                                 </c:if>
+                            <c:if test="${sessionScope.acc.getRoleId() ==  3}">
+                                <li><a href="${pageContext.request.contextPath}/sendfeedback">FeedBack</a></li>
+                            </c:if>
                             <!-- Marketing -->
                             <c:if test="${sessionScope.acc.getRoleId() ==  4}">
                                 <li><a  href="${pageContext.request.contextPath}/mkt/dashboard">Dashboard</a></li>

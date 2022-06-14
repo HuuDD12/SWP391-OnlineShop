@@ -20,6 +20,10 @@ public class Account {
     public Account() {
     }
 
+    public Account(String username) {
+        this.username = username;
+    }
+
     public Account(String userId, String username, String password, String email, int roleId, int block) {
         this.userId = userId;
         this.username = username;
