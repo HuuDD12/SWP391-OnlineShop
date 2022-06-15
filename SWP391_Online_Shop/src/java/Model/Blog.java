@@ -8,7 +8,8 @@ public class Blog {
     private String author;
     private String title;
     private String content;
-    private String imageLink;  
+    private String imageLink; 
+    private String userId;
     public Blog() {
     }
 
@@ -20,7 +21,24 @@ public class Blog {
         this.id = id;
     }
 
+    public Blog(int id, String author, String title, String content, String imageLink, String userId) {
+        this.id = id;
+        this.author = author;
+        this.title = title;
+        this.content = content;
+        this.imageLink = imageLink;
+        this.userId = userId;
+    }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    
 
     public String getAuthor() {
         return author;
