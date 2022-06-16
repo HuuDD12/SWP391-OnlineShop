@@ -50,7 +50,7 @@ public class AddBlogControl extends HttpServlet {
             response.sendRedirect("bloglist");
         } catch (Exception e) {
             
-
+            response.sendRedirect("Error.jsp");
         }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
