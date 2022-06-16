@@ -49,7 +49,6 @@ public class AddBlogControl extends HttpServlet {
             dao.add(author, title, content, imageLink,acc.getUserId());
             response.sendRedirect("bloglist");
         } catch (Exception e) {
-            
             response.sendRedirect("Error.jsp");
         }
     }
