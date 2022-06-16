@@ -218,10 +218,8 @@ public class UserDAO extends DBcontext.DBContext {
 
     public static void main(String[] args) {
         UserDAO u = new UserDAO();
-        List<Role> list = u.getAllUser(1);
-        for (Role o : list) {
-            System.out.println(o);
-        }
+        Account acc = u.checkAccExist("mĩaimax");
+        System.out.println(acc);
     }
 
     public Account login(String username, String password) {

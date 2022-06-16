@@ -37,18 +37,49 @@ public class UpdateCartQuantity extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            int productId = Integer.parseInt(request.getParameter("productId"));
-           int quantity = Integer.parseInt(request.getParameter("quantity"));
-           HttpSession session = request.getSession();
+//            int productId = Integer.parseInt(request.getParameter("productId"));
+//           int quantity = Integer.parseInt(request.getParameter("quantity"));
+//           HttpSession session = request.getSession();
+//            Map<Integer, Cart> carts = (Map<Integer, Cart>) session.getAttribute("carts");
+//            if(carts==null){
+//                carts = new LinkedHashMap<>();
+//            }
+//            if(carts.containsKey(productId)){
+//                carts.get(productId).setQuantity(quantity);
+//            }
+//            request.setAttribute("carts", carts);
+//            request.getRequestDispatcher("carts").forward(request, response);
+            String action = request.getParameter("action");
+            int id = Integer.parseInt(request.getParameter("id"));
+            HttpSession session = request.getSession();
             Map<Integer, Cart> carts = (Map<Integer, Cart>) session.getAttribute("carts");
-            if(carts==null){
-                carts = new LinkedHashMap<>();
+
+            if (action != null && id >= 1) {
+                if (action.equals("inc")) {
+
+                    if (carts.containsKey(id)) {
+                        int quantity = carts.get(id).getQuantity();
+                        quantity++;
+                        carts.get(id).setQuantity(quantity);
+
+                        response.sendRedirect("carts");
+                    }
+
+                }
+                if (action.equals("dec")) {
+
+                    if (carts.containsKey(id) && carts.get(id).getQuantity() > 1) {
+                        int quantity = carts.get(id).getQuantity();
+                        quantity--;
+                        carts.get(id).setQuantity(quantity);
+
+                        response.sendRedirect("carts");
+                    } else {
+                        response.sendRedirect("carts");
+                    }
+
+                }
             }
-            if(carts.containsKey(productId)){
-                carts.get(productId).setQuantity(quantity);
-            }
-            request.setAttribute("carts", carts);
-            request.getRequestDispatcher("carts").forward(request, response);
         }
     }
 
