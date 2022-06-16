@@ -16,9 +16,14 @@ public class OrderDetail {
     private double productPrice;
     private int quantity;
     private Product p;
+    
     public OrderDetail() {
     }
 
+    public OrderDetail(Product p) {
+        this.p = p;
+    }
+    
     public OrderDetail(int id, int orderId, String productName, double productPrice, int quantity, Product p) {
         this.id = id;
         this.orderId = orderId;

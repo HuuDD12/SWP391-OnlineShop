@@ -20,6 +20,7 @@ public class Product {
     private int brandID;
     private int sell_id;
     private String url;
+    
     public Product() {
     }
 
@@ -40,6 +41,13 @@ public class Product {
         this.productName = productName;
     }
 
+    public Product(String productName, String url) {
+        this.productName = productName;
+        this.url = url;
+    }
+    
+    
+    
    
     
 
@@ -128,10 +136,7 @@ public class Product {
         return "Product{" + "productID=" + productID + ", productName=" + productName + ", description=" + description + ", originalPrice=" + originalPrice + ", salePrice=" + salePrice + ", subID=" + subID + ", amount=" + amount + ", brandID=" + brandID + ", sell_id=" + sell_id + ", url=" + url + '}';
     }
 
-    public Product(String productName, String url) {
-        this.productName = productName;
-        this.url = url;
-    }
+    
     
     
     

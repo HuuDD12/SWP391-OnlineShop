@@ -113,16 +113,16 @@
             <div class="container">
                 <div class="col-md-12">
 
-
-
                     <img style="width: 100%; margin: 45px;" src="./resources/img/Blog/5233122.jpg" >
                     <div class="spotlight">
-                        <h2 class="card-title show_txt">Những item bạn nhất định không nên bỏ lỡ</h2>
+                        <button class="btn btn-success"><a href="addblog">Add Blogs</a></button>
+                        <h2 class="card-title show_txt">Những item bạn nhất định không nên bỏ lỡ</h2>                         
                         <p>Với sự thay đổi liên tục, xu hướng thời trang luôn được cập nhật mới mẻ hơn, độc đáo, hiện đại và thu hút hơn. Những phong cách mới, xu thế thời trang hot luôn được mọi người quan tâm, đặc biệt là giới trẻ. Không thể phủ nhận ngành công nghiệp thời trang đang phát triển rất mạnh mẽ. Không chỉ đơn giản là cách ăn mặc, cách mix&match đồ hay diện đồ theo phong cách yêu thích, thời trang còn là sự đổi mới, phá cách và tràn đầy sức sáng tạo ấn tượng. Vậy bạn đã có ý tưởng gì cho mình chưa? Cùng Shope khám phá ngay nhé.</p>
                     </div>
                 </div>
             <c:set var="i" value="0"></c:set>
             <c:forEach items="${blogList}" var="o" >
+
                 <c:set var="i" value="${i+1}"></c:set>
                 <c:choose>
                     <c:when test="${i%2==0}">
@@ -137,8 +137,14 @@
                             </div>
                             <div class="col-md-7">
                                 <article class="card-body p-5">
+                                    <c:if test="${o.userId == sessionScope.acc.userId}">
+                                        <button class="btn btn-warning"><a href="updateblog?bid=${o.id}">Update Blogs</a></button>
+                                        <button class="btn btn-danger"><a onclick="doDelete('${o.id}')" href="#">Delete Blogs</a></button>
+                                    </c:if>
                                     <h3 class="card-title show_txt"><a href="blogdetail?ID=${o.id}" title="View Blog">${o.title}</a></h3>  
+
                                     <p class="content">${o.content}</p>
+                                </article>
                             </div>
                         </div>  
                     </c:when>
@@ -146,8 +152,13 @@
                         <div class="row">
                             <div class="col-md-7">
                                 <article class="card-body p-5">
+                                    <c:if test="${o.userId == sessionScope.acc.userId}">
+                                        <button class="btn btn-warning"><a href="updateblog?bid=${o.id}">Update Blogs</a></button>
+                                        <button  class="btn btn-danger"><a onclick="doDelete('${o.id}')" href="#">Delete Blogs</a></button>
+                                    </c:if>
                                     <h3 class="card-title show_txt"><a href="blogdetail?ID=${o.id}" title="View Blog">${o.title}</a></h3>  
                                     <p class="content">${o.content}</p>
+                                </article>  
                             </div>
                             <div class="col-md-5 border-right">
                                 <article class="gallery-wrap"> 
@@ -162,7 +173,6 @@
                     </c:otherwise>
                 </c:choose>
 
-
             </c:forEach>
             <p style="font-family: 'Noto Serif Display', serif;  margin: 40px;">Nếu bạn muốn đóng góp bài viết cho chúng tôi, vui lòng gửi qua hòm thư shope@gmail.com</p>
         </div>
@@ -175,6 +185,12 @@
             ></script>
             <!-- SCRIPT -->
             <script src="${pageContext.request.contextPath}/js/script.js"></script>
-
+        <script type="text/javascript">
+                                            function doDelete(id_pro) {
+                                                if (confirm("Are you sure to delete this blog")) {
+                                                    window.location = "deletebyauthor?id=" + id_pro;
+                                                }
+                                            }
+        </script>
     </body>
 </html>

@@ -87,25 +87,25 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 
         <jsp:include page="header.jsp"></jsp:include>
 
-        <div class="main">
-            <div class="container">
-                <!-- BEGIN SIDEBAR & CONTENT -->
-                <div class="row margin-bottom-40">
-                    <!-- BEGIN CONTENT -->
-                    <div class="col-md-12 col-sm-12">
-                        <h1>Shopping cart</h1>
-                        <div class="goods-page">
-                            <div class="goods-data clearfix">
-                                <div class="table-wrapper-responsive">
-                                    <table summary="Shopping cart">
-                                        <tr>
-                                            <th class="goods-page-image">Name</th>
-                                            <th style="padding-left: 50px;" class="goods-page-description">Image</th>
-                                            <th style="padding-left: 70px;" class="goods-page-ref-no">Price</th>
-                                            <th style="padding-left: 50px;" class="goods-page-quantity">Quantity</th>
-                                            <th style="padding-left: 50px;" class="goods-page-total" colspan="2">Total</th>
+            <div class="main">
+                <div class="container">
+                    <!-- BEGIN SIDEBAR & CONTENT -->
+                    <div class="row margin-bottom-40">
+                        <!-- BEGIN CONTENT -->
+                        <div class="col-md-12 col-sm-12">
+                            <h1>Shopping cart</h1>
+                            <div class="goods-page">
+                                <div class="goods-data clearfix">
+                                    <div class="table-wrapper-responsive">
+                                        <table summary="Shopping cart">
+                                            <tr>
+                                                <th class="goods-page-image">Name</th>
+                                                <th style="padding-left: 50px;" class="goods-page-description">Image</th>
+                                                <th style="padding-left: 70px;" class="goods-page-ref-no">Price</th>
+                                                <th style="padding-left: 50px;" class="goods-page-quantity">Quantity</th>
+                                                <th style="padding-left: 50px;" class="goods-page-total" colspan="2">Total</th>
 
-                                        </tr>
+                                            </tr>
                                         <c:forEach items="${carts}" var="C">
                                             <form action="update-quantity">
                                                 <input type="hidden" name="productId" value="${C.value.product.productID}"
@@ -120,12 +120,25 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                                     <td style="padding-left: 70px;" class="goods-page-price">
                                                         <strong><span>$</span>${C.value.product.originalPrice}</strong>
                                                     </td>
-                                                    <td style="padding-left: 50px;" class="goods-page-quantity">
-                                                        <div class="product-quantity">
-                                                            <input onchange="this.form.submit()" name="quantity" id="product-quantity" type="number" value="${C.value.quantity}">
-                                                        </div>
+                                                    <!--                                                    <td style="padding-left: 50px;" class="goods-page-quantity">
+                                                                                                            <div class="product-quantity">
+                                                                                                                <input onchange="this.form.submit()" name="quantity" id="product-quantity" type="number" value="${C.value.quantity}">
+                                                                                                            </div>
+                                                                                                        </td>-->
+                                                    <td>
+                                                        <a class="btn btn-link px-2"
+                                                           href="update-quantity?action=dec&id=${C.value.product.productID}">
+                                                            <i class="fa fa-minus"></i>
+                                                        </a>
+                                                        <input id="form1" name="quantity" value="${C.value.quantity}" type="text"
+                                                               style="max-width: 3rem; text-align: center"
+                                                               class="form-control-sm"
+                                                               />
+                                                        <a class="btn btn-link px-2"
+                                                           href="update-quantity?action=inc&id=${C.value.product.productID}">
+                                                            <i class="fa fa-plus"></i>
+                                                        </a>
                                                     </td>
-
                                                     <td style="padding-left: 50px;" class="goods-page-total">
                                                         <strong><span>$</span>${C.value.product.originalPrice*C.value.quantity}</strong>
                                                     </td>
@@ -346,15 +359,15 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 
         <script src="assets/corporate/scripts/layout.js" type="text/javascript"></script>
         <script type="text/javascript">
-                                                                jQuery(document).ready(function () {
-                                                                    Layout.init();
-                                                                    Layout.initOWL();
-                                                                    Layout.initTwitter();
-                                                                    Layout.initImageZoom();
-                                                                    Layout.initTouchspin();
-                                                                    Layout.initUniform();
-                                                                    Layout.initSliderRange();
-                                                                });
+            jQuery(document).ready(function () {
+                Layout.init();
+                Layout.initOWL();
+                Layout.initTwitter();
+                Layout.initImageZoom();
+                Layout.initTouchspin();
+                Layout.initUniform();
+                Layout.initSliderRange();
+            });
         </script>
         <!-- END PAGE LEVEL JAVASCRIPTS -->
     </body>

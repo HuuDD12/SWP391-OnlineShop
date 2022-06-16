@@ -47,23 +47,42 @@
             <section class="section-50">
                 <div class="container">
                     <h3 class="m-b-50 heading-line">Notifications <i class="fa fa-bell text-muted"></i></h3>
-                <c:if test="${list.size() > 0}">
+                    <c:if test="${list.size() > 0}">
                     <div class="notification-ui_dd-content">
                         <c:forEach items="${list}" var="o">
-                            <div class="notification-list notification-list--unread">
-                                <div class="notification-list_content">
-                                    <div class="notification-list_img">
-                                        <img src="images/users/user1.jpg" alt="user">
+                            <c:if test="${o.getOrderID() == 0}">
+                                <div class="notification-list notification-list--unread">
+                                    <div class="notification-list_content">
+                                        <div class="notification-list_img">
+                                            <img src="images/users/user1.jpg" alt="user">
+                                        </div>
+                                        <div class="notification-list_detail">
+                                            <p><b>System</b> reply your Feedback</p><br>
+                                            <p class="text-muted">${o.content}</p>
+                                            <p class="text-muted"><small>${o.time}</small></p>
+                                            <p><a href="markasread?nid=${o.id}&uid=${sessionScope.acc.userId}">Mark As Read</a></p>
+                                        </div>
+
                                     </div>
-                                    <div class="notification-list_detail">
-                                        <p><b>System</b> sent a message to you</p><br>
-                                        <p class="text-muted">${o.content}</p>
-                                        <p class="text-muted"><small>${o.time}</small></p>
-                                        <p><a href="markasread?nid=${o.id}&uid=${sessionScope.acc.userId}">Mark As Read</a></p>
-                                    </div>
-                                        
                                 </div>
-                            </div>
+                            </c:if>
+                            <c:if test="${o.getOrderID() != 0}">
+                                <div class="notification-list notification-list--unread">
+                                    <div class="notification-list_content">
+                                        <div class="notification-list_img">
+                                            <img src="images/users/user1.jpg" alt="user">
+                                        </div>
+                                        <div class="notification-list_detail">
+                                            <p><b>System</b> sent a message to you</p><br>
+                                            <p class="text-muted">${o.content}</p>
+                                            <p class="text-muted"><small>${o.time}</small></p>
+                                            <p><a href="markasread?nid=${o.id}&uid=${sessionScope.acc.userId}">Mark As Read</a></p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </c:if>
+
                         </c:forEach>
                     </div>
 
