@@ -33,12 +33,9 @@
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h2>Manage <b>Product</b></h2>
+                            <h2>Customer <b>List</b></h2>
                         </div>
-                        <div class="col-sm-6">
-                            <a href="#addEmployeeModal"  class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Product</span></a>
-
-                        </div>
+                       
                     </div>
                 </div>
                 <table class="table table-striped table-hover">
@@ -49,8 +46,6 @@
                             
                             <th>Name customer</th>
                             <th>Email</th>
-                            
-
                             <th>Address</th>
                             <th>Phone number</th>
                         </tr>
