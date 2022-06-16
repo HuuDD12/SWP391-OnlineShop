@@ -57,7 +57,7 @@
             <div id="editEmployeeModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="addblog" method="post">
+                        <form action="addblog" method="post" enctype="multipart/form-data">
                             <div class="modal-header">						
                                 <h4 class="modal-title">Add Blog</h4>
                                 <a type="button" class="close" href="ManageFeedbackBySeller" aria-hidden="true">&times;</a>
@@ -80,11 +80,9 @@
                                 <textarea name="content" class="form-control" id="blog-text" rows="7" ></textarea>
                             </div>
                              <div class="form-group">
-                                <table>
-                                    <label>Img</label>
-                                    <input type="text" class="form-control"  name="img">
-                                </table>
-                            </div> 
+                                    <label>Image Link</label>
+                                    <input type="file" name="BlogImgURL" class="form-control" required>
+                            </div>     
                      
                         </div>
                                 <h3 class="text-success">${mess}</h3>

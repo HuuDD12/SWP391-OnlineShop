@@ -65,7 +65,7 @@ public class HomeControl extends HttpServlet {
                 indexPage = "1";
             }
             int index = Integer.parseInt(indexPage);
-            int count = pr.getTotalProduct();
+            int count = pr.count();
             int endPage = count / 6;
             if (count % 6 != 0) {
                 endPage++;

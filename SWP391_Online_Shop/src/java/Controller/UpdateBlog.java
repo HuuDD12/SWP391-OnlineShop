@@ -8,20 +8,27 @@ package Controller;
 import DAO.BlogDAO;
 import Model.Account;
 import Model.Blog;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author Admin
  */
+@MultipartConfig(location="/updateblog", fileSizeThreshold=1024*1024, maxFileSize=1024*1024*5, maxRequestSize=1024*1024*5*5)
 @WebServlet(name = "UpdateBlog", urlPatterns = {"/updateblog"})
 public class UpdateBlog extends HttpServlet {
 
@@ -82,23 +89,61 @@ public class UpdateBlog extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8"); 
-        try {
-            // get data from page Update
+//        try {
+//            // get data from page Update
+//            HttpSession session = request.getSession();
+//            Account acc = (Account) session.getAttribute("acc");
+//            String title = request.getParameter("title"); 
+//            String content = request.getParameter("content");           
+//            String imageLink = request.getParameter("img");
+//            String author = request.getParameter("author");
+//            int id = Integer.parseInt(request.getParameter("id"));
+//            // set Blog data to database
+//            BlogDAO dao = new BlogDAO();
+//            dao.update(author, title, content, imageLink,acc.getUserId(), id);           
+//            // Redirect to manage Blog after update successful
+//            response.sendRedirect("bloglist");
+//        } catch (Exception e) {
+//            //response.sendRedirect("error.jsp");
+//        }
+            BlogDAO dao = new BlogDAO();
+            Blog blog = new Blog();
             HttpSession session = request.getSession();
             Account acc = (Account) session.getAttribute("acc");
-            String title = request.getParameter("title"); 
-            String content = request.getParameter("content");           
-            String imageLink = request.getParameter("img");
-            String author = request.getParameter("author");
-            int id = Integer.parseInt(request.getParameter("id"));
-            // set Blog data to database
-            BlogDAO dao = new BlogDAO();
-            dao.update(author, title, content, imageLink,acc.getUserId(), id);           
-            // Redirect to manage Blog after update successful
-            response.sendRedirect("bloglist");
-        } catch (Exception e) {
-            //response.sendRedirect("error.jsp");
+            Part filePart = request.getPart("BlogImgURL");
+        if(!"".equals(filePart.getSubmittedFileName()))
+        {
+            String imgpath= "resources\\img\\banner\\";
+            String filePath = getServletContext().getRealPath("") + File.separator + imgpath + blog.getImageLink();
+            File file = new File(filePath); 
+            if (file.exists() && !file.isDirectory()) { 
+               file.delete();
+            } 
+            String fileName =  Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); 
+            InputStream inputStream = filePart.getInputStream();
+            String uploadPath = getServletContext().getRealPath("") + File.separator + imgpath;
+            File uploadDir = new File(uploadPath);
+            if (!uploadDir.exists()) {
+                uploadDir.mkdir();
+            }
+            FileOutputStream outputStream = new FileOutputStream(uploadPath + 
+            File.separator + fileName);
+            int read = 0;
+            final byte[] bytes = new byte[1024];
+            while ((read = inputStream.read(bytes)) != -1) {
+                outputStream.write(bytes, 0, read);
+            }
+            inputStream.close();
+            outputStream.close();
+            blog.setImageLink("resources\\img\\Blog\\"+filePart.getSubmittedFileName());
         }
+        blog.setTitle(request.getParameter("title"));
+        blog.setContent(request.getParameter("content"));
+        blog.setAuthor(request.getParameter("author"));
+        blog.setUserId(acc.getUserId());
+        blog.setId(Integer.parseInt(request.getParameter("id")));
+        dao.update(blog);
+        response.sendRedirect("bloglist");
     }
 
     /**

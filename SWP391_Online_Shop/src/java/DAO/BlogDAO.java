@@ -69,7 +69,7 @@ public class BlogDAO extends DBcontext.DBContext {
         return null;
     }
 
-    public void add(String author, String title, String content, String imageLink,String userId) {
+    public void add(Blog blog) {
         query = "INSERT INTO [dbo].[Blogs]\n"
                 + "           ([Author]\n"
                 + "           ,[Title]\n"
@@ -80,18 +80,18 @@ public class BlogDAO extends DBcontext.DBContext {
                 + "           (?,?,?,?,?)";
         try {
             ps = connection.prepareStatement(query);
-            ps.setString(1, author);
-            ps.setString(2, title);
-            ps.setString(3, content);
-            ps.setString(4, imageLink);
-            ps.setString(5, userId);
+            ps.setString(1, blog.getAuthor());
+            ps.setString(2, blog.getTitle());
+            ps.setString(3, blog.getContent());
+            ps.setString(4, blog.getImageLink());
+            ps.setString(5, blog.getUserId());
             ps.executeUpdate();
         } catch (SQLException e) {
         }
 
     }
 
-    public void update(String author, String title, String content, String imageLink, String userId, int id) {
+    public void update(Blog blog) {
         query = "UPDATE [dbo].[Blogs]\n"
                 + "   SET [Author] = ?\n"
                 + "      ,[Title] = ?\n"
@@ -101,12 +101,12 @@ public class BlogDAO extends DBcontext.DBContext {
                 + " WHERE ID = ?";
         try {
             ps = connection.prepareStatement(query);
-            ps.setString(1, author);
-            ps.setString(2, title);
-            ps.setString(3, content);
-            ps.setString(4, imageLink);
-            ps.setString(5, userId);
-            ps.setInt(6, id);
+            ps.setString(1, blog.getAuthor());
+            ps.setString(2, blog.getTitle());
+            ps.setString(3, blog.getContent());
+            ps.setString(4, blog.getImageLink());
+            ps.setString(5, blog.getUserId());
+            ps.setInt(6, blog.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
         }

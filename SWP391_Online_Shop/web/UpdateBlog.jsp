@@ -57,7 +57,7 @@
             <div id="editEmployeeModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="updateblog" method="post">
+                        <form action="updateblog" method="post" enctype="multipart/form-data">
                             <div class="modal-header">						
                                 <h4 class="modal-title">Update Blog</h4>
                                 <a type="button" class="close" href="ManageFeedbackBySeller" aria-hidden="true">&times;</a>
@@ -84,20 +84,18 @@
                                 <label>Content</label>
                                 <textarea name="content" class="form-control" id="blog-text" rows="7" >${requestScope.blog.content}</textarea>
                             </div>
-                             <div class="form-group">
-                                <table>
-                                    <label>Img</label>
-                                    <input type="text" class="form-control"  name="img" value="${requestScope.blog.imageLink}">
-                                </table>
-                            </div> 
-                     
-                        </div>
-                                <h3 class="text-success">${mess}</h3>
-                        <div class="modal-footer">
-                            <a type="button" class="btn btn-default" href="ManageFeedbackBySeller">Cancel</a>
-                            <input type="reset" class="btn btn" value="Clear">
-                            <button type="submit" class="btn btn-primary">Send</button>
-                        </div>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label>Image Link</label>
+                                    <input value="${requestScope.blog.imageLink}" type="file"  name="BlogImgURL" class="form-control" required>
+                                </div>    
+                            </div>
+                            <h3 class="text-success">${mess}</h3>
+                            <div class="modal-footer">
+                                <a type="button" class="btn btn-default" href="ManageFeedbackBySeller">Cancel</a>
+                                <input type="reset" class="btn btn" value="Clear">
+                                <button type="submit" class="btn btn-primary">Send</button>
+                            </div>
                     </form>
                 </div>
             </div>
