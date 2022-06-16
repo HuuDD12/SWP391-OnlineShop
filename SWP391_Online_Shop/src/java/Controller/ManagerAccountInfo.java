@@ -6,7 +6,7 @@
 package Controller;
 
 import DAO.User_info;
-import Model.Users_info;
+import Model.UserInfo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -37,8 +37,8 @@ public class ManagerAccountInfo extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String id = request.getParameter("cid");
-            User_info u = new User_info();
-            Users_info a = u.getAccountDetail(id);
+            UserInfo u = new UserInfo();
+           UserInfo a = u.getAccountDetail(id);
             
             
             request.setAttribute("info", a);
