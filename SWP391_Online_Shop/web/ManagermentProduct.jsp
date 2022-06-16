@@ -65,7 +65,7 @@
                                 <td>${o.productID}</td>
                                 <td>${o.productName}</td>
                                 <td>
-                                    <img src="${o.url}">
+                                    <img src="assets/pages/img/products/${o.url}">
                                 </td>
                                 <th>${o.description}</th>
                                 <th>${o.originalPrice}</th>
