@@ -63,33 +63,13 @@ public class ChangeRoleOfUser extends HttpServlet {
             throws ServletException, IOException {
          String User = request.getParameter("sid");
         String role = request.getParameter("RoleName");
-        String indexpage = request.getParameter("index");
-        String Search = request.getParameter("Search");
-        if(role == null){
-            role = "3";
-        }
         int Role = Integer.parseInt(role);
         
         UserDAO dao = new UserDAO();
-        dao.UpdateRoleUser(User, Role);
-        if (Search == null){
-            Search = "";
-        }
-        if(indexpage == null){
-            indexpage= "1";
-        }
-        int index = Integer.parseInt(indexpage);
-        int count = dao.getCountUserSearch(Search);
-        int endpage = count /5;
-        if(count % 5 != 0){
-            endpage++;
-        }
-        List<Role> list = dao.SearchUserByName(Search,index);     
-        request.setAttribute("Total", count);      
-        request.setAttribute("endPage", endpage);      
-        request.setAttribute("tag", index);
+        dao.UpdateRoleUser(User, Role);      
+         List<Role> list = dao.getAllUser();         
         request.setAttribute("List", list);
-        request.getRequestDispatcher("UserListAdmin.jsp").forward(request, response);
+        request.getRequestDispatcher("UserListManager.jsp").forward(request, response);
     }
 
     /**

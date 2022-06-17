@@ -259,8 +259,7 @@
 
                             <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ProfileControl">View profile</a></li>  
                             <!-- Admin -->
-                            <c:if test="${sessionScope.acc.getRoleId() ==  1}">
-                                <li><a  href="${pageContext.request.contextPath}/userlist">Manage Users</a></li>
+                            <c:if test="${sessionScope.acc.getRoleId() ==  1}">                               
                                 <li><a href="dashboard">DashBoard</a></li>
                                 </c:if>
                             <!-- Seller -->

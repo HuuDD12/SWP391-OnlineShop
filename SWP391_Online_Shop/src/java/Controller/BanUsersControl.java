@@ -36,33 +36,16 @@ public class BanUsersControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String User = request.getParameter("sid");
-        String block = request.getParameter("sid1");
-        String indexpage = request.getParameter("index");
-        String Search = request.getParameter("Search");
+        String block = request.getParameter("sid1");      
         int isblock = Integer.parseInt(block);
         if (isblock == 0){
             isblock = 1;
         }else{isblock = 0;}
         UserDAO dao = new UserDAO();
         dao.UpdateBanUser(User, isblock);
-        if (Search == null){
-            Search = "";
-        }
-        if(indexpage == null){
-            indexpage= "1";
-        }
-        int index = Integer.parseInt(indexpage);
-        int count = dao.getCountUserSearch(Search);
-        int endpage = count /5;
-        if(count % 5 != 0){
-            endpage++;
-        }
-        List<Role> list = dao.SearchUserByName(Search,index);     
-        request.setAttribute("Total", count);      
-        request.setAttribute("endPage", endpage);      
-        request.setAttribute("tag", index);
+         List<Role> list = dao.getAllUser();     
         request.setAttribute("List", list);
-        request.getRequestDispatcher("UserListAdmin.jsp").forward(request, response);
+        request.getRequestDispatcher("UserListManager.jsp").forward(request, response);
         }
     
 

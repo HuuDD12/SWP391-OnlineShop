@@ -36,26 +36,9 @@ public class UserListControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         UserDAO udao = new UserDAO();
-        String indexpage = request.getParameter("index");
-        String Search = request.getParameter("Search");
-        if (Search == null){
-            Search = "";
-        }
-        if(indexpage == null){
-            indexpage= "1";
-        }
-        int index = Integer.parseInt(indexpage);
-        int count = udao.getCountUserSearch(Search);
-        int endpage = count /5;
-        if(count % 5 != 0){
-            endpage++;
-        }
-        List<Role> list = udao.SearchUserByName(Search,index);     
-        request.setAttribute("Total", count);      
-        request.setAttribute("endPage", endpage);      
-        request.setAttribute("tag", index);
+        List<Role> list = udao.getAllUser();     
         request.setAttribute("List", list);
-        request.getRequestDispatcher("UserListAdmin.jsp").forward(request, response);
+        request.getRequestDispatcher("UserListManager.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -70,27 +53,10 @@ public class UserListControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserDAO udao = new UserDAO();
-        String indexpage = request.getParameter("index");
-        String Search = request.getParameter("Search");
-        if (Search == null){
-            Search = "";
-        }
-        if(indexpage == null){
-            indexpage= "1";
-        }
-        int index = Integer.parseInt(indexpage);
-        int count = udao.getCountUserSearch(Search);
-        int endpage = count /5;
-        if(count % 5 != 0){
-            endpage++;
-        }
-        List<Role> list = udao.SearchUserByName(Search,index);     
-        request.setAttribute("Total", count);      
-        request.setAttribute("endPage", endpage);      
-        request.setAttribute("tag", index);
+        UserDAO udao = new UserDAO();        
+        List<Role> list = udao.getAllUser();   
         request.setAttribute("List", list);
-        request.getRequestDispatcher("UserListAdmin.jsp").forward(request, response);
+        request.getRequestDispatcher("UserListManager.jsp").forward(request, response);
     }
 
     /**

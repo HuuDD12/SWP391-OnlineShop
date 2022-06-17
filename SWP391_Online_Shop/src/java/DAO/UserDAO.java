@@ -91,16 +91,12 @@ public class UserDAO extends DBcontext.DBContext {
         return null;
     }
 
-    public List<Role> getAllUser(int index) {
+    public List<Role> getAllUser() {
         List<Role> list = new ArrayList<>();
-        String sql = "select * from (\n"
-                + "select u.*,r.RoleName,ROW_NUMBER() OVER(ORDER BY u.[UserID],r.RoleName) as rownumber from Users u inner join role r on u.RoleID = r.RoleID \n"
-                + ")as TBL\n"
-                + "where [rownumber] between ? and ?";
+        String sql = "select u.*,r.RoleName,ROW_NUMBER() OVER(ORDER BY u.[UserID],r.RoleName) as rownumber from Users u inner join role r on u.RoleID = r.RoleID ";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, (index - 1) * 5 + 1);
-            ps.setInt(2, index * 5);
+           
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Account acc = new Account(
@@ -218,8 +214,10 @@ public class UserDAO extends DBcontext.DBContext {
 
     public static void main(String[] args) {
         UserDAO u = new UserDAO();
-        Account acc = u.checkAccExist("mĩaimax");
-        System.out.println(acc);
+        List<Role> list = u.getAllUser();
+        for (Role o : list) {
+            System.out.println(o);
+        }
     }
 
     public Account login(String username, String password) {
