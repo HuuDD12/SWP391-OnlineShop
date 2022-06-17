@@ -29,7 +29,7 @@
                     <!-- BEGIN CURRENCIES -->
                     <li class="shop-currencies">
                         <a href="javascript:void(0);">?</a>
-                        <a href="javascript:void(0);">£</a>
+                        <a href="javascript:void(0);">Â£</a>
                         <a href="javascript:void(0);" class="current">$</a>
                     </li>
                     <!-- END CURRENCIES -->
@@ -257,7 +257,7 @@
 
                             <!-- Default -->
 
-                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ProfileControl">View profile</a></li>  
+                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ManagerAccountInfo">View profile</a></li>  
                             <!-- Admin -->
                             <c:if test="${sessionScope.acc.getRoleId() ==  1}">                               
                                 <li><a href="dashboard">DashBoard</a></li>
