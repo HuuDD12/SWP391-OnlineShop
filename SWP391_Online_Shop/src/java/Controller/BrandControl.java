@@ -36,9 +36,9 @@ public class BrandControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String bid = request.getParameter("bid");
+            String page = request.getParameter("page");
             ProductDAO pdao = new ProductDAO();
-            List<Product> list = pdao.getProductByBrand(bid);
+            List<Product> list = pdao.getProductByBrand(page);
             request.setAttribute("listP", list);
             request.getRequestDispatcher("productlist.jsp").forward(request, response);
             

@@ -5,9 +5,9 @@
  */
 package DAO;
 
-import Model.Account;
 import Model.UserInfo;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -40,22 +40,33 @@ public class UserInfoDAO extends DBcontext.DBContext {
         }
     }
     public UserInfo getAccountDetail(String cid) {
-        String sql = "select ui.*,u.Username,u.Password,u.email,u.isBlock,r.* from User_info ui join Users u \n"
-                + "on ui.UserID = u.UserID \n"
-                + "join Role r on r.RoleID = u.RoleID\n"
-                + "where u.UserID = ?";
+        String sql = "select ui.*,u.email from User_info ui join Users u \n" +
+"                on ui.UserID = u.UserID \n" +
+"                join Role r on r.RoleID = u.RoleID\n" +
+"                where u.UserID = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, cid);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                return new Users_info(rs.getInt(1),
-                        new Users(rs.getInt(2), rs.getString(7), rs.getString(8), rs.getString(9), new Role(rs.getInt(11), rs.getString(12)), rs.getInt(10)),
-                        rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+                return new UserInfo(
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getInt(6),
+                        rs.getString(9),
+                        rs.getString(7),
+                        rs.getString(8));
             }
         } catch (Exception e) {
         }
 
         return null;
+    }
+    public static void main(String[] args) {
+        UserInfoDAO udao = new UserInfoDAO();
+        UserInfo info = udao.getAccountDetail("1");
+        System.out.println(info);
     }
 }

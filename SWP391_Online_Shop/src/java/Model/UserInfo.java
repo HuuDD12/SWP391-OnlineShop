@@ -12,18 +12,24 @@ package Model;
 public class UserInfo {
     private int id;
     private int uid;
+    private String uidImg;
     private String firstName;
     private String lastName;
+    private int gender;
+    private String email;
     private String address; 
     private String phonenum;
 
     public UserInfo() {
     }
 
-    public UserInfo(int uid, String firstName, String lastName, String address, String phonenum) {
+    public UserInfo(int uid, String uidImg, String firstName, String lastName, int gender, String email, String address, String phonenum) {
         this.uid = uid;
+        this.uidImg = uidImg;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.gender = gender;
+        this.email = email;
         this.address = address;
         this.phonenum = phonenum;
     }
@@ -44,6 +50,14 @@ public class UserInfo {
         this.uid = uid;
     }
 
+    public String getUidImg() {
+        return uidImg;
+    }
+
+    public void setUidImg(String uidImg) {
+        this.uidImg = uidImg;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -58,6 +72,22 @@ public class UserInfo {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getAddress() {
@@ -75,5 +105,11 @@ public class UserInfo {
     public void setPhonenum(String phonenum) {
         this.phonenum = phonenum;
     }
+
+    @Override
+    public String toString() {
+        return "UserInfo{" + "id=" + id + ", uid=" + uid + ", uidImg=" + uidImg + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", email=" + email + ", address=" + address + ", phonenum=" + phonenum + '}';
+    }
+
     
 }

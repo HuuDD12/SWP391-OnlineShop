@@ -4,15 +4,16 @@
     Author     : dell
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        
+
         <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <style href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" > </style>
-        
+
         <link rel="shortcut icon" href="favicon.ico">
 
         <!-- Fonts START -->
@@ -40,10 +41,27 @@
         <link href="assets/corporate/css/themes/red.css" rel="stylesheet" id="style-color">
         <link href="assets/corporate/css/custom.css" rel="stylesheet">
         <style>
-
-            body {
-                background: white
+            body{
+                background: white;
+                margin-top:20px;
             }
+            .card {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                min-width: 0;
+                word-wrap: break-word;
+                background-color: #fff;
+                background-clip: border-box;
+                border: 0 solid transparent;
+                border-radius: .25rem;
+                margin-bottom: 1.5rem;
+                box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+            }
+            .me-2 {
+                margin-right: .5rem!important;
+            }
+
 
             .form-control:focus {
                 box-shadow: none;
@@ -88,39 +106,111 @@
         </style>
     </head>
     <body>
-          <jsp:include page="header.jsp"></jsp:include>
+        <jsp:include page="header.jsp"></jsp:include>
+            <div class="main">
+                <div class="container">
+                    <div class="main-body">
 
-        <div class="container rounded bg-white mt-5 mb-5">
-            <div class="row">
-                <div class="col-md-3 border-right">
-                    <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">Edogaru</span><span class="text-black-50">edogaru@mail.com.my</span><span> </span></div>
-                </div>
-                <div class="col-md-5 border-right">
-                    <div class="p-3 py-5">
-<!--                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h4 class="text-right">Profile</h4>
-                        </div>-->
-                        <div class="row mt-2">
-                            <div class="col-md-6"><label class="labels">Name</label><input value="${info.firstName}" type="text" class="form-control" placeholder="first name" value=""></div>
-<!--                            <div class="col-md-6"><label class="labels"></label><input type="text" class="form-control" value="" placeholder="last name"></div>-->
+                        <!-- Breadcrumb -->
+                        <nav aria-label="breadcrumb" class="main-breadcrumb">
+                            <ol class="breadcrumb">                           
+                                <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+                            </ol>
+                        </nav>
+                        <!-- /Breadcrumb -->
+
+                        <div class="row gutters-sm">
+                            <div class="col-md-4">
+                                <div class="card" style="padding: 25px">
+                                    <div class="card-body">
+                                        <div class="d-flex flex-column align-items-center text-center">
+                                        <c:if test="${info.uidImg == null}">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                                        </c:if>
+                                        <c:if test="${info.uidImg != null}">
+                                            <img src="${info.uidImg}" alt="Admin" class="rounded-circle" width="150">
+                                        </c:if>                                      
+                                        <div class="mt-3" style="padding: 10px">
+                                            <h4>${info.firstName} ${info.lastName}</h4>                                            
+                                            <p class="text-muted font-size-sm">${info.address}</p>                                      
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
-                        <div class="row mt-3">
-                            <div class="col-md-12"><label class="labels">Mobile Number</label><input value="${info.phone}" type="text" class="form-control" placeholder="enter phone number" value=""></div>
-                            <div class="col-md-12"><label class="labels">Address</label><input type="text" class="form-control" placeholder="enter address" value="${info.address}"></div>
+                        <div class="col-md-8">
+                            <div class="card mb-3" style="padding: 25px">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Full Name</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            ${info.firstName} ${info.lastName}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Email</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            ${info.email}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Gender</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <c:if test="${info.gender == 1}">male</c:if>
+                                            <c:if test="${info.gender == 2}">Female</c:if>
+                                            <c:if test="${info.gender == 0}">secret</c:if>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Phone</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                            ${info.phonenum}
+                                        </div>
+                                    </div>
+                                    <hr>
 
-<!--                            <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" placeholder="enter email" value="" ></div>-->
-                            
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Address</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            ${info.address}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <button class="btn btn-primary px-4">
+                                                <a style="text-decoration: none;color: #fff " href="#">Edit</a>
+                                            </button>
+                                        </div>                                      
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
                         </div>
-                              
-
                     </div>
+
+
+
                 </div>
-             
             </div>
         </div>
-    </div>
-</div>
-
-  <jsp:include page="footer.jsp"></jsp:include>
-</body>
+        <jsp:include page="footer.jsp"></jsp:include>
+    </body>
 </html>

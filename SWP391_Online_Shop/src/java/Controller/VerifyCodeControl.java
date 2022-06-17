@@ -41,12 +41,13 @@ public class VerifyCodeControl extends HttpServlet {
 
             HttpSession session = request.getSession();
             Account user = (Account) session.getAttribute("authcode");
+            int gender = 0;
             UserDAO u = new UserDAO();
             String code = request.getParameter("authcode");
             UserInfoDAO uidao= new UserInfoDAO();
             if (code.equals(user.getCode())) {
                 int uid = new UserDAO().createReturnId(user);
-                UserInfo info = new UserInfo(uid, "", "", "", "");
+                UserInfo info = new UserInfo(uid, "", "", "",gender, "", "", "");
                 uidao.saveUserInfo(info);
                 request.setAttribute("success", "Register Successfully!!!!");
                 request.getRequestDispatcher("Register.jsp").forward(request, response);
