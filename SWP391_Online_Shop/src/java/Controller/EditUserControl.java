@@ -5,9 +5,7 @@
  */
 package Controller;
 
-import DAO.UserDAO;
 import DAO.UserInfoDAO;
-import Model.Account;
 import Model.UserInfo;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,14 +14,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Admin
+ * @author ADM
  */
-@WebServlet(name = "VerifyCodeControl", urlPatterns = {"/VerifyCode"})
-public class VerifyCodeControl extends HttpServlet {
+@WebServlet(name = "EditUserControl", urlPatterns = {"/EditUserControl"})
+public class EditUserControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,21 +36,6 @@ public class VerifyCodeControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
-            HttpSession session = request.getSession();
-            Account user = (Account) session.getAttribute("authcode");
-            int gender = 0;
-            UserDAO u = new UserDAO();
-            String code = request.getParameter("authcode");
-            UserInfoDAO uidao= new UserInfoDAO();
-            if (code.equals(user.getCode())) {
-                int uid = new UserDAO().createReturnId(user);
-                UserInfo info = new UserInfo(uid, "", "", "",gender,"", "", "", "");
-                uidao.saveUserInfo(info);
-                request.setAttribute("success", "Register Successfully!!!!");
-                request.getRequestDispatcher("Register.jsp").forward(request, response);
-            } else {
-                out.println("Incorrect verification code");
-            }
         }
     }
 
@@ -69,7 +51,11 @@ public class VerifyCodeControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String uid = request.getParameter("sid");
+        UserInfoDAO udao = new UserInfoDAO();
+        UserInfo a = udao.getAccountDetail(uid);        
+        request.setAttribute("info", a);
+        request.getRequestDispatcher("EditProfileUser.jsp").forward(request, response);
     }
 
     /**

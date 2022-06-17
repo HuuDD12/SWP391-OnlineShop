@@ -20,19 +20,25 @@ public class UserInfoDAO extends DBcontext.DBContext {
     public void saveUserInfo(UserInfo acc) {
             String sql = "INSERT INTO [dbo].[User_info]\n"
                 + "           ([UserID]\n"
+                + "           ,[UserImg]\n"
                 + "           ,[Firstname]\n"
                 + "           ,[Lastname]\n"
+                + "           ,[Gender]\n"
+                + "           ,[Birthday]\n"
                 + "           ,[Address]\n"
                 + "           ,[PhoneNum])\n"
                 + "     VALUES\n"
-                + "           (?,?,?,?,?)";
+                + "           (?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, acc.getUid());
-            ps.setString(2, acc.getFirstName());
-            ps.setString(3, acc.getLastName());
-            ps.setString(4, acc.getAddress());
-            ps.setString(5, acc.getPhonenum());
+            ps.setString(2, acc.getUidImg());
+            ps.setString(3, acc.getFirstName());
+            ps.setString(4, acc.getLastName());
+            ps.setInt(5, acc.getGender());
+            ps.setString(6, acc.getBirthday());
+            ps.setString(7, acc.getAddress());
+            ps.setString(8, acc.getPhonenum());
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -55,9 +61,10 @@ public class UserInfoDAO extends DBcontext.DBContext {
                         rs.getString(4),
                         rs.getString(5),
                         rs.getInt(6),
-                        rs.getString(9),
                         rs.getString(7),
-                        rs.getString(8));
+                        rs.getString(10),
+                        rs.getString(8),
+                        rs.getString(9));
             }
         } catch (Exception e) {
         }

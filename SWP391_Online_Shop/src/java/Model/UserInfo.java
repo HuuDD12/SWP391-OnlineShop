@@ -16,6 +16,7 @@ public class UserInfo {
     private String firstName;
     private String lastName;
     private int gender;
+    private String birthday;
     private String email;
     private String address; 
     private String phonenum;
@@ -23,12 +24,13 @@ public class UserInfo {
     public UserInfo() {
     }
 
-    public UserInfo(int uid, String uidImg, String firstName, String lastName, int gender, String email, String address, String phonenum) {
+    public UserInfo(int uid, String uidImg, String firstName, String lastName, int gender, String birthday, String email, String address, String phonenum) {
         this.uid = uid;
         this.uidImg = uidImg;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
+        this.birthday = birthday;
         this.email = email;
         this.address = address;
         this.phonenum = phonenum;
@@ -82,6 +84,14 @@ public class UserInfo {
         this.gender = gender;
     }
 
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -108,7 +118,7 @@ public class UserInfo {
 
     @Override
     public String toString() {
-        return "UserInfo{" + "id=" + id + ", uid=" + uid + ", uidImg=" + uidImg + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", email=" + email + ", address=" + address + ", phonenum=" + phonenum + '}';
+        return "UserInfo{" + "id=" + id + ", uid=" + uid + ", uidImg=" + uidImg + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", birthday=" + birthday + ", email=" + email + ", address=" + address + ", phonenum=" + phonenum + '}';
     }
 
     

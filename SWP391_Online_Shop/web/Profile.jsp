@@ -134,13 +134,13 @@
                                             <h4>${info.firstName} ${info.lastName}</h4>                                            
                                             <p class="text-muted font-size-sm">${info.address}</p>                                      
                                         </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card mb-3" style="padding: 25px">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card mb-3" style="padding: 25px">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-sm-3">
@@ -173,6 +173,15 @@
                                         <hr>
                                         <div class="row">
                                             <div class="col-sm-3">
+                                                <h6 class="mb-0">Birthday</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                            ${info.birthday}
+                                        </div>
+                                    </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
                                                 <h6 class="mb-0">Phone</h6>
                                             </div>
                                             <div class="col-sm-9 text-secondary">
@@ -193,7 +202,7 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <button class="btn btn-primary px-4">
-                                                <a style="text-decoration: none;color: #fff " href="#">Edit</a>
+                                                <a style="text-decoration: none;color: #fff " href="EditUserControl?sid=${info.uid}">Edit</a>
                                             </button>
                                         </div>                                      
                                     </div>
