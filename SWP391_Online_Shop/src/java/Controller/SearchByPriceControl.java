@@ -40,7 +40,9 @@ public class SearchByPriceControl extends HttpServlet {
             double max = Double.parseDouble(request.getParameter("max"));
             ProductDAO pdao = new ProductDAO();
             List<Product> listP = pdao.searchByPrice(min, max);
+            Product maxPrice = pdao.getMaxPrice();
             request.setAttribute("listP", listP);
+            request.setAttribute("maxPrice", maxPrice);
             request.getRequestDispatcher("productlist.jsp").forward(request, response);
         }
     }

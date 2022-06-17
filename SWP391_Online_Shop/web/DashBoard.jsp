@@ -38,7 +38,7 @@
 
 
                 <!-- User Menu-->
-                <li><a class="app-nav__item" href="home"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+                <li><a class="app-nav__item" href="productlist"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
                 </li>
             </ul>

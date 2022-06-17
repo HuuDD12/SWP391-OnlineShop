@@ -4,6 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/src/java/Controller/ProductListController.java</file>
+            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/web/productlist.jsp</file>
+            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/web/cartdetail.jsp</file>
+            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/web/checkout.jsp</file>
+            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/src/java/Controller/CartControl.java</file>
+            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/src/java/Controller/CheckoutControl.java</file>
+            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/src/java/Model/Product.java</file>
         </group>
     </open-files>
 </project-private>

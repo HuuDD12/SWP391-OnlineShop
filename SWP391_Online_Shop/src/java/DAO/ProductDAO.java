@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,11 +22,12 @@ public class ProductDAO extends DBcontext.DBContext {
 
     public List<Product> getAll() {
         String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
-                + "MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
-                + "MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n"
-                + "MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n"
-                + "MIN(ProI.ProductImgURL) AS ProductImgURL FROM \n"
-                + "dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t ";
+                + "                MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
+                + "				MIN(p.Sale) as SalePercent,\n"
+                + "                MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n"
+                + "                MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n"
+                + "                MIN(ProI.ProductImgURL) AS ProductImgURL FROM \n"
+                + "                dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t ";
         List<Product> list = new ArrayList<>();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -35,6 +38,7 @@ public class ProductDAO extends DBcontext.DBContext {
                         rs.getString("Description"),
                         rs.getDouble("OriginalPrice"),
                         rs.getDouble("SalePrice"),
+                        rs.getDouble("SalePercent"),
                         rs.getInt("SubCategoryID"),
                         rs.getInt("Amount"),
                         rs.getInt("BrandID"),
@@ -82,6 +86,36 @@ public class ProductDAO extends DBcontext.DBContext {
         return list;
     }
 
+    public Product getMaxPrice() {
+        String sql = "SELECT top 1 * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
+                + "                MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
+                + "                MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n"
+                + "                MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n"
+                + "                MIN(ProI.ProductImgURL) AS ProductImgURL FROM \n"
+                + "                dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t order by t.OriginalPrice desc ";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return new Product(rs.getInt("productID"),
+                        rs.getString("ProductName"),
+                        rs.getString("Description"),
+                        rs.getDouble("OriginalPrice"),
+                        rs.getDouble("SalePrice"),
+                        rs.getInt("SubCategoryID"),
+                        rs.getInt("Amount"),
+                        rs.getInt("BrandID"),
+                        rs.getInt("sell_id"),
+                        rs.getString("ProductImgURL")
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
     public Product getProductById(int productId) {
         String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
                 + "MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
@@ -113,7 +147,8 @@ public class ProductDAO extends DBcontext.DBContext {
         }
         return null;
     }
-public List<Product> pagingProductBy6(int indexPage) {
+
+    public List<Product> pagingProductBy6(int indexPage) {
         String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
                 + "MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
                 + "MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n"
@@ -147,6 +182,7 @@ public List<Product> pagingProductBy6(int indexPage) {
         return list;
 
     }
+
     public List<Product> getTop5Product() {
         String sql = "select top 5 p.*,pr.ProductImgURL from Product p join ProductImg pr\n"
                 + "on p.ProductID = pr.ProductID\n"
@@ -175,7 +211,7 @@ public List<Product> pagingProductBy6(int indexPage) {
         }
         return list;
     }
-    
+
     public List<Product> searchProductBySubCate(int subcate) {
         String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
                 + "MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
@@ -456,14 +492,6 @@ public List<Product> pagingProductBy6(int indexPage) {
         return list;
     }
 
-    public static void main(String[] args) {
-        ProductDAO pdao = new ProductDAO();
-        List<Product> list = pdao.searchByName("bo");
-        for (Product product : list) {
-            System.out.println(product);
-        }
-    }
-
     public List<Product> searchByName(String txtSearch) {
         String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
                 + "MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
@@ -526,8 +554,8 @@ public List<Product> pagingProductBy6(int indexPage) {
         }
         return list;
     }
-    
-        public int CountProductLow() {
+
+    public int CountProductLow() {
         int count = 0;
         String sql = "SELECT COUNT(*) as 'count'\n"
                 + "  FROM product where amount < 90 ";
@@ -543,12 +571,12 @@ public List<Product> pagingProductBy6(int indexPage) {
     }
 
     public List<Product> getProductBySellerName(String username) {
-       String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n" +
-"                MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n" +
-"                MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n" +
-"                MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n" +
-"                MIN(ProI.ProductImgURL) AS ProductImgURL FROM \n" +
-"                dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t where t.sell_id = (select UserID from Users where Username = ?)";
+        String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
+                + "                MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
+                + "                MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n"
+                + "                MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n"
+                + "                MIN(ProI.ProductImgURL) AS ProductImgURL FROM \n"
+                + "                dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t where t.sell_id = (select UserID from Users where Username = ?)";
         List<Product> list = new ArrayList<>();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -574,7 +602,7 @@ public List<Product> pagingProductBy6(int indexPage) {
         }
         return list;
     }
-        
+
     public void deleteProduct(String cid) {
         String query = "delete from ProductImg where ProductID = ?";
         try {
@@ -585,5 +613,29 @@ public List<Product> pagingProductBy6(int indexPage) {
         } catch (Exception e) {
 
         }
-}
+    }
+    
+        public void updateSale(int id,double sale){
+            String query = "UPDATE dbo.Product SET SalePrice = (OriginalPrice * (100 - ?)) /100.0 , Sale = ? WHERE ProductID = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setDouble(1, sale);
+            ps.setDouble(2, sale);
+            ps.setInt(3, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        finally{
+
+        }
+    }
+
+    public static void main(String[] args) {
+        ProductDAO pdao = new ProductDAO();
+        List<Product> list = pdao.getAll();
+        for (Product product : list) {
+            System.out.println(product);
+        }
+    }
 }

@@ -55,7 +55,7 @@ public class CheckoutControl extends HttpServlet {
             for (Map.Entry<Integer, Cart> entry : carts.entrySet()) {
                 Integer productId = entry.getKey();
                 Cart cart = entry.getValue();
-                totalMoney += cart.getQuantity() * cart.getProduct().getOriginalPrice();
+                totalMoney += cart.getQuantity() * cart.getProduct().getSalePrice();
 
             }
             request.setAttribute("totalMoney", totalMoney);

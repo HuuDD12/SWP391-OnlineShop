@@ -90,8 +90,7 @@
 
                 </c:choose>
             </div>
-            <i class="fa fa-shopping-cart"></i>
-           
+            <a href="carts"><i class="fa fa-shopping-cart"></i></a>         
         </div>
         <!--END CART -->
 

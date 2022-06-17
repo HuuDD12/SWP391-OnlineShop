@@ -5,24 +5,22 @@
  */
 package Controller;
 
-import Model.Cart;
+import DAO.ProductDAO;
+import Model.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "CartControl", urlPatterns = {"/carts"})
-public class CartControl extends HttpServlet {
+@WebServlet(name = "UpdateSaleControl", urlPatterns = {"/updatesale"})
+public class UpdateSaleControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,21 +35,16 @@ public class CartControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            HttpSession session = request.getSession();
-            Map<Integer, Cart> carts = (Map<Integer, Cart>) session.getAttribute("carts");
-            if (carts == null) {
-                carts = new LinkedHashMap<>();
-            }
-            double totalMoney = 0;
-            for (Map.Entry<Integer, Cart> entry : carts.entrySet()) {
-                Integer productId = entry.getKey();
-                Cart cart = entry.getValue();
-                totalMoney += cart.getQuantity() * cart.getProduct().getSalePrice();
-
-            }
-            request.setAttribute("totalMoney", totalMoney);
-            request.setAttribute("carts", carts);
-            request.getRequestDispatcher("cartdetail.jsp").forward(request, response);
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet UpdateSaleControl</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet UpdateSaleControl at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
@@ -67,7 +60,11 @@ public class CartControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        int pid = Integer.parseInt(request.getParameter("pid"));
+        ProductDAO pdao = new ProductDAO();
+        Product p = pdao.getProductById(pid);
+        request.setAttribute("p", p);
+        request.getRequestDispatcher("UpdateSale.jsp").forward(request, response);
     }
 
     /**
@@ -81,7 +78,11 @@ public class CartControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        int pid = Integer.parseInt(request.getParameter("pid"));
+        double sale = Double.parseDouble(request.getParameter("sale"));
+        ProductDAO pdao = new ProductDAO();
+        pdao.updateSale(pid, sale);
+        response.sendRedirect("salemanager");
     }
 
     /**

@@ -110,9 +110,9 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                 <th scope="row">${C.value.product.productID}</th>
                                 <td><img src="${C.value.product.url}" width="50"/></td>
                                 <td>${C.value.product.productName}</td>
-                                <td>${C.value.product.originalPrice}</td>
+                                <td>${C.value.product.salePrice}</td>
                                 <td style="padding-left: 25px">${C.value.quantity}</td>
-                                <td style="padding-left: 23px">$<fmt:formatNumber pattern="##.#" value="${C.value.product.originalPrice*C.value.quantity}"/></td>                                
+                                <td style="padding-left: 23px">$<fmt:formatNumber pattern="##.#" value="${C.value.product.salePrice*C.value.quantity}"/></td>                                
                                 </tr>
                             </form>
                         </c:forEach>

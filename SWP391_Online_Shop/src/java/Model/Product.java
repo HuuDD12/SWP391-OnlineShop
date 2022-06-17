@@ -15,6 +15,7 @@ public class Product {
     private String description;
     private double originalPrice;
     private double salePrice;
+    private double salePercent;
     private int subID;
     private int amount;
     private int brandID;
@@ -37,6 +38,28 @@ public class Product {
         this.url = url;
     }
 
+    public Product(int productID, String productName, String description, double originalPrice, double salePrice, double salePercent, int subID, int amount, int brandID, int sell_id, String url) {
+        this.productID = productID;
+        this.productName = productName;
+        this.description = description;
+        this.originalPrice = originalPrice;
+        this.salePrice = salePrice;
+        this.salePercent = salePercent;
+        this.subID = subID;
+        this.amount = amount;
+        this.brandID = brandID;
+        this.sell_id = sell_id;
+        this.url = url;
+    }
+
+    public double getSalePercent() {
+        return salePercent;
+    }
+
+    public void setSalePercent(double salePercent) {
+        this.salePercent = salePercent;
+    }
+    
     public Product(String productName) {
         this.productName = productName;
     }

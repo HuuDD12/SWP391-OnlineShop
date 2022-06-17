@@ -1,3 +1,4 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <!--
@@ -118,7 +119,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                                         <a href="javascript:;"><img src="${C.value.product.url}" alt="Berry Lace Dress"></a>
                                                     </td>
                                                     <td style="padding-left: 70px;" class="goods-page-price">
-                                                        <strong><span>$</span>${C.value.product.originalPrice}</strong>
+                                                        <strong><span>$</span>${C.value.product.salePrice}</strong>
                                                     </td>
                                                     <!--                                                    <td style="padding-left: 50px;" class="goods-page-quantity">
                                                                                                             <div class="product-quantity">
@@ -140,7 +141,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                                         </a>
                                                     </td>
                                                     <td style="padding-left: 50px;" class="goods-page-total">
-                                                        <strong><span>$</span>${C.value.product.originalPrice*C.value.quantity}</strong>
+                                                        <strong><span>$</span><fmt:formatNumber pattern="##.#" value="${C.value.product.salePrice*C.value.quantity}"/></strong>
                                                     </td>
                                                     <td style="padding-left: 50px;" class="del-goods-col">
                                                         <a class="del-goods" href="delete-cart?productId=${C.value.product.productID}">&nbsp;</a>
@@ -161,7 +162,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                         </li>
                                         <li class="shopping-total-price">
                                             <em>Total</em>
-                                            <strong class="price"><span>$</span>${totalMoney}</strong>
+                                            <strong class="price"><span>$</span><fmt:formatNumber pattern="##.#" value="${totalMoney}"/></strong>
                                         </li>
                                     </ul>
                                 </div>

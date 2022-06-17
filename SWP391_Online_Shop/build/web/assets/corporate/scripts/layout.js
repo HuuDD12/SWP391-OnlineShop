@@ -463,8 +463,8 @@ var Layout = function () {
                 range: true,
                 orientation: "horizontal",
                 min: 0,
-                max: 300000,
-                values: [0, 300000],
+                max: 10000000,
+                values: [0, 10000000],
                 step: 100,
 
                 slide: function (event, ui) {

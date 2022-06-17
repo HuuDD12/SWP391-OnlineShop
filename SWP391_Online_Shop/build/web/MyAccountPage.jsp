@@ -455,6 +455,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                 <li><a href="MyAddress.jsp">Modify your address book entries</a></li>
                 <li><a href="javascript:;">Modify your wish list</a></li>
                 <li><a href="ManagerProduct">Manager Product</a></li>
+                <li><a href="ManagerAccountInfo?cid=${acc.userId}">Profile</a></li>
               </ul>
               <hr>
 

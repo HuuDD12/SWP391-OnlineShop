@@ -144,7 +144,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                             </div>
                                         </div>
                                         <h3><a href="productdetail?pid=${p.productID}&sid=${p.subID}">${p.productName}</a></h3>
-                                        <div class="pi-price">${p.originalPrice}</div>
+                                        <div class="pi-price">${p.salePrice}</div>
                                         <a onclick="addTocartAsync(${p.productID})" class="btn btn-default add2cart">Add to cart</a>
                                     </div>
                                 </div>
@@ -157,9 +157,9 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                         <div class="row">                           
                             <div class="col-md-8 col-sm-8">
                                 <ul class="pagination pull-right">                               
-                                    <li class="page-item"><a class="page-link" href="productlist?page=1">&laquo;</a></li>
+                                    <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=1">&laquo;</a></li>
                                         <c:if test="${page!= '1'}">
-                                        <li class="page-item"><a class="page-link" href="productlist?page=${page - 1}">&lsaquo;</a></li>
+                                        <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${page - 1}">&lsaquo;</a></li>
                                         </c:if>
                                         <c:if test="${endPage <=7}">
                                             <c:forEach begin="1" end="${endPage}" var="i">
@@ -168,39 +168,39 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                         </c:if>
                                         <c:if test="${endPage > 7}">
                                             <c:if test="${page >= '1' && page <4}">
-                                            <li class="page-item"><a class="page-link" href="productlist?page=${1}">1</a></li>                                                                                       
-                                            <li class="page-item"><a class="page-link" href="productlist?page=${2}">2</a></li>                                                                                       
-                                            <li class="page-item"><a class="page-link" href="productlist?page=${3}">3</a></li>                                            
-                                            <li class="page-item"><a class="page-link" href="productlist?page=${4}">4</a></li>
-                                            <li class="page-item"><a class="page-link">....</a></li> 
-                                            <li class="page-item"><a class="page-link" href="productlist?page=${endPage}">${endPage}</a></li>
+                                            <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${1}">1</a></li>                                                                                       
+                                            <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${2}">2</a></li>                                                                                       
+                                            <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${3}">3</a></li>                                            
+                                            <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${4}">4</a></li>
+                                            <li class="page-item ${i==page?"active":""}"><a class="page-link">....</a></li> 
+                                            <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${endPage}">${endPage}</a></li>
                                             </c:if>
                                             <c:if test="${page >= '4' && page < (endPage-2)}">
-                                            <li class="page-item"><a class="page-link" href="productlist?page=${1}">1</a></li>  
-                                            <li class="page-item"><a class="page-link">...</a></li>
-                                            <li class="page-item"><a class="page-link" href="productlist?page=${page-1}">${page-1}</a></li>                                                                                       
-                                            <li class="page-item"><a class="page-link" href="productlist?page=${page}">${page}</a></li>                                                                                       
-                                            <li class="page-item"><a class="page-link" href="productlist?page=${page+1}">${page+1}</a></li>                                                                                       
-                                            <li class="page-item"><a class="page-link">...</a></li> 
-                                            <li class="page-item"><a class="page-link" href="productlist?page=${endPage}">${endPage}</a></li>
+                                            <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${1}">1</a></li>  
+                                            <li class="page-item ${i==page?"active":""}"><a class="page-link">...</a></li>
+                                            <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${page-1}">${page-1}</a></li>                                                                                       
+                                            <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${page}">${page}</a></li>                                                                                       
+                                            <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${page+1}">${page+1}</a></li>                                                                                       
+                                            <li class="page-item ${i==page?"active":""}"><a class="page-link">...</a></li> 
+                                            <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${endPage}">${endPage}</a></li>
                                             </c:if>
                                             <c:if test="${page >= (endPage-2) }">
-                                            <li class="page-item"><a class="page-link" href="productlist?page=${1}">1</a></li>                                                                                       
-                                            <li class="page-item"><a class="page-link" href="productlist?page=${2}">2</a></li>                                                                                                                                                                             
-                                            <li class="page-item"><a class="page-link">...</a></li>
+                                            <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${1}">1</a></li>                                                                                       
+                                            <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${2}">2</a></li>                                                                                                                                                                             
+                                            <li class="page-item ${i==page?"active":""}"><a class="page-link">...</a></li>
                                             <c:if test="${page == (endPage-2)}">
-                                                <li class="page-item"><a class="page-link" href="productlist?page=${endPage-3}">${endPage-3}</a></li>
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${endPage-3}">${endPage-3}</a></li>
                                             </c:if>
-                                            <li class="page-item"><a class="page-link" href="productlist?page=${endPage-2}">${endPage-2}</a></li>
-                                            <li class="page-item"><a class="page-link" href="productlist?page=${endPage-1}">${endPage-1}</a></li>
-                                            <li class="page-item"><a class="page-link" href="productlist?page=${endPage}">${endPage}</a></li>
+                                            <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${endPage-2}">${endPage-2}</a></li>
+                                            <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${endPage-1}">${endPage-1}</a></li>
+                                            <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${endPage}">${endPage}</a></li>
                                             
                                             </c:if>
                                         </c:if>
                                         <c:if test="${page<endPage}">
-                                        <li class="page-item"><a class="page-link" href="productlist?page=${page + 1}">&rsaquo;</a></li>
+                                        <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${page + 1}">&rsaquo;</a></li>
                                         </c:if> 
-                                    <li class="page-item"><a class="page-link" href="productlist?page=${endPage}">&raquo;</a></li>                                    
+                                    <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${endPage}">&raquo;</a></li>                                    
                                 </ul>
                             </div>
                         </div>
