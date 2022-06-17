@@ -80,12 +80,14 @@
                                                         <option value="5" ${x.account.roleId == 5?"selected":""} >Shipper</option>                                            
                                                     </select>
                                                     <input name="sid" value="${x.account.userId}" hidden>
-                                                  
+                                                    <c:if test="${x.account.roleId != 1}" >
                                                     <button type="submit" class="btn btn-primary" >Save</button> 
+                                                    </c:if>
                                                 </div>
                                             </form>
                                         </td>
                                         <td style="text-align: center">
+                                            <c:if test="${x.account.roleId != 1}" >
                                             <c:if test="${x.account.block == '0'}">
                                                 <button class="btn btn-danger">
                                                     <a style="text-decoration: none;color: #FFF" href="BanUsersControl?sid=${x.account.userId}&sid1=${x.account.block}">Block</a>
@@ -95,7 +97,8 @@
                                                 <button class="btn btn-success">
                                                 <a style="text-decoration: none;color: #FFF" href="BanUsersControl?sid=${x.account.userId}&sid1=${x.account.block}">Un Block</a>
                                                 </button>
-                                            </c:if>                                 
+                                            </c:if>  
+                                            </c:if>
                                         </td>
                                     </tr>
                                 </c:forEach>
