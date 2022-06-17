@@ -51,7 +51,7 @@
                 <div class="col-md-12">
                     <div class="app-title">
                         <ul class="app-breadcrumb breadcrumb">
-                            <li class="breadcrumb-item"><a href="#"><b>Bảng điều khiển</b></a></li>
+                            <li class="breadcrumb-item"><a href="#" style="text-decoration: none" ><b>Bảng điều khiển</b></a></li>
                         </ul>
                         <div id="clock"></div>
                     </div>
