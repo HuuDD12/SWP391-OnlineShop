@@ -124,11 +124,11 @@
                                 <div class="card" style="padding: 25px">
                                     <div class="card-body">
                                         <div class="d-flex flex-column align-items-center text-center">
-                                        <c:if test="${info.uidImg == null}">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                                        <c:if test="${info.uidImg == '' }">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="rounded-circle" width="150">
                                         </c:if>
                                         <c:if test="${info.uidImg != null}">
-                                            <img src="${info.uidImg}" alt="Admin" class="rounded-circle" width="150">
+                                            <img src="${info.uidImg}"  class="rounded-circle" width="150">
                                         </c:if>                                      
                                         <div class="mt-3" style="padding: 10px">
                                             <h4>${info.firstName} ${info.lastName}</h4>                                            
@@ -165,9 +165,9 @@
                                             <h6 class="mb-0">Gender</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <c:if test="${info.gender == 1}">male</c:if>
+                                            <c:if test="${info.gender == 1}">Male</c:if>
                                             <c:if test="${info.gender == 2}">Female</c:if>
-                                            <c:if test="${info.gender == 0}">secret</c:if>
+                                            <c:if test="${info.gender == 0}">Secret</c:if>
                                             </div>
                                         </div>
                                         <hr>
