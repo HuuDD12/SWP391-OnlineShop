@@ -17,6 +17,7 @@ public class Account {
     private int roleId;
     private int block;
     private String code;
+    private String img;
     public Account() {
     }
 
@@ -24,6 +25,26 @@ public class Account {
         this.username = username;
     }
 
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public Account(String userId, String username, String password, String email, int roleId, int block, String img) {
+        this.userId = userId;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.roleId = roleId;
+        this.block = block;
+        this.img = img;
+    }
+
+    
+    
     public Account(String userId, String username, String password, String email, int roleId, int block) {
         this.userId = userId;
         this.username = username;
@@ -111,8 +132,11 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account{" + "userId=" + userId + ", username=" + username + ", password=" + password + ", email=" + email + ", RoleId=" + roleId + ", block=" + block + ", code=" + code + '}';
+        return "Account{" + "userId=" + userId + ", username=" + username + ", password=" + password + ", email=" + email + ", roleId=" + roleId + ", block=" + block + ", code=" + code + ", img=" + img + '}';
     }
+
+   
+
     
     
     
