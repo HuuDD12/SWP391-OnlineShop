@@ -245,7 +245,7 @@ textarea.form-control:focus {
 	font-size: 0;
 	line-height: 0;
 }
-*html .clearfix {
+*html clearfix {
 	zoom: 1;
 }
 *+html .clearfix {
@@ -910,7 +910,6 @@ Sidebar
     font-size: 14px;
     list-style: none;
     margin: 0 -10px;
-    min-width: auto;
     padding: 5px 10px 1px 19px;
     position: relative;
     top: 0;
