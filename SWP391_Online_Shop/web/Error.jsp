@@ -9,22 +9,49 @@
 <html lang="en">
 
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+         <meta charset="utf-8">
+        <title>Men category | Metronic Shop UI</title>
 
-        <title>Error</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-        <!-- Google font -->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,900" rel="stylesheet">
+        <meta content="Metronic Shop UI description" name="description">
+        <meta content="Metronic Shop UI keywords" name="keywords">
+        <meta content="keenthemes" name="author">
 
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-                  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-                  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-                <![endif]-->
+        <meta property="og:site_name" content="-CUSTOMER VALUE-">
+        <meta property="og:title" content="-CUSTOMER VALUE-">
+        <meta property="og:description" content="-CUSTOMER VALUE-">
+        <meta property="og:type" content="website">
+        <meta property="og:image" content="-CUSTOMER VALUE-"><!-- link to image for socio -->
+        <meta property="og:url" content="-CUSTOMER VALUE-">
+
+        <link rel="shortcut icon" href="favicon.ico">
+
+        <!-- Fonts START -->
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css"> 
+        <!-- Fonts END -->
+
+        <!-- Global styles START -->          
+        <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Global styles END --> 
+
+        <!-- Page level plugin styles START -->
+        <link href="assets/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet">
+        <link href="assets/plugins/owl.carousel/assets/owl.carousel.css" rel="stylesheet">
+        <link href="assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css">
+        <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"><!-- for slider-range -->
+        <link href="assets/plugins/rateit/src/rateit.css" rel="stylesheet" type="text/css">
+        <!-- Page level plugin styles END -->
+        <!-- Theme styles START -->
+        <link href="assets/pages/css/components.css" rel="stylesheet">
+        <link href="assets/corporate/css/style.css" rel="stylesheet">
+        <link href="assets/pages/css/style-shop.css" rel="stylesheet" type="text/css">
+        <link href="assets/corporate/css/style-responsive.css" rel="stylesheet">
+        <link href="assets/corporate/css/themes/red.css" rel="stylesheet" id="style-color">
+        <link href="assets/corporate/css/custom.css" rel="stylesheet">
+        
         <style>
             * {
                 -webkit-box-sizing: border-box;
@@ -128,7 +155,7 @@
     </head>
 
     <body>
-
+        <jsp:include page="header.jsp"></jsp:include>
         <div id="notfound">
             <div class="notfound">
                 <div class="notfound-404">
@@ -139,6 +166,7 @@
                 <a href="productlist">Go To Homepage</a>
             </div>
         </div>
+        <jsp:include page="footer.jsp"></jsp:include>
 
     </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 
