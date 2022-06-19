@@ -7,7 +7,6 @@ package DAO;
 
 import Model.Account;
 import Model.Role;
-import Model.UserInfo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -215,12 +214,14 @@ public class UserDAO extends DBcontext.DBContext {
 
     public static void main(String[] args) {
         UserDAO u = new UserDAO();
-        Account acc = u.getUserById2("1");
-        System.out.println(acc);
+        List<Role> list = u.getAllUser();
+        for (Role o : list) {
+            System.out.println(o);
+        }
     }
 
     public Account login(String username, String password) {
-        String sql = "select u.*,ui.UserImg from Users u inner join User_info ui on u.UserID = ui.UserID where username=? and password=? ";
+        String sql = "select*from [users] where username=? and password=? ";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
 
@@ -233,7 +234,7 @@ public class UserDAO extends DBcontext.DBContext {
                         rs.getString(3),
                         rs.getString(4),
                         rs.getInt(5),
-                        rs.getInt(6),rs.getString(7));
+                        rs.getInt(6));
             }
 
         } catch (SQLException e) {
@@ -337,23 +338,6 @@ public class UserDAO extends DBcontext.DBContext {
                         rs.getString(4),
                         rs.getInt(5),
                         rs.getInt(6));
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return null;
-    }
-    
-    public Account getUserById2(String id) {
-        String sql = "select u.*,ui.UserImg from Users u inner join User_info ui on u.UserID = ui.UserID where u.UserID = ?";
-
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, id);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                return new Account(
-                        rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6), rs.getString(7));
             }
         } catch (SQLException e) {
             System.out.println(e);

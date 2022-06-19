@@ -13,7 +13,7 @@
         <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <style href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" > </style>
-
+        
 
         <link rel="shortcut icon" href="favicon.ico">
 
@@ -109,23 +109,15 @@
     <body>
         <jsp:include page="header.jsp"></jsp:include>
             <div class="main">
-                <form action="EditUserControl" method="post" enctype="multipart/form-data" >
-                    <div class="container bootstrap snippet">                   
-                        <div class="row gutters-sm">
-                            <div class="col-sm-3"><!--left col-->
+                <div class="container bootstrap snippet">                   
+                    <div class="row gutters-sm">
+                        <div class="col-sm-3"><!--left col-->
 
-                                <div class="card" style="padding: 25px">
-                                    <div class="text-center" style="padding:20px">
-                                        <img src="#" >
-                                    <c:if test="${info.uidImg == '' }">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="rounded-circle  img-circle img-thumbnail"  width="150">
-                                    </c:if>
-                                    <c:if test="${info.uidImg != null}">
-                                        <img src="${info.uidImg}" class="rounded-circle img-circle img-thumbnail" width="150" >
-                                        <input hidden name="imageu" value="${info.uidImg}">
-                                    </c:if>
+                            <div class="card" style="padding: 25px">
+                                <div class="text-center" style="padding:20px">
+                                    <img src="#" class="avatar img-circle img-thumbnail" alt="avatar">
                                     <h6>Upload a different photo...</h6>
-                                    <input type="file" class="text-center center-block file-upload" style="margin: 10px" name="image">
+                                    <input type="file" class="text-center center-block file-upload" style="margin: 10px" >
                                 </div></hr><br>
                             </div>
 
@@ -133,67 +125,60 @@
                         <div class="col-sm-9">    
                             <div class="card mb-3" style="padding: 25px">
                                 <div class="tab-content">
-                                    <div class="active" id="home"> 
-                                        <input value="${info.uid}" name="uid" hidden>
-                                        <div class="form-group">
-                                            <div class="col-xs-6">
-                                                <label for="first_name"><h4>First name</h4></label>
-                                                <input type="text" value="${info.firstName}" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
+                                    <div class="active" id="home">
+                                        <hr>
+                                        <form class="form" action="##" method="post" id="registrationForm">
+                                            <div class="form-group">
 
-                                            <div class="col-xs-6">
-                                                <label for="last_name"><h4>Last name</h4></label>
-                                                <input type="text" value="${info.lastName}" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
+                                                <div class="col-xs-6">
+                                                    <label for="first_name"><h4>First name</h4></label>
+                                                    <input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
+                                            <div class="form-group">
 
-                                            <div class="col-xs-6">
-                                                <label for="phone"><h4>Phone</h4></label>
-                                                <input type="text" value="${info.phonenum}" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
+                                                <div class="col-xs-6">
+                                                    <label for="last_name"><h4>Last name</h4></label>
+                                                    <input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
 
-                                            <div class="col-xs-6">
-                                                <label for="email"><h4>Email</h4></label>
-                                                <input type="email" value="${info.email}" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
+                                            <div class="form-group">
 
-                                            <div class="col-xs-6">
-                                                <label for="location"><h4>Location</h4></label>
-                                                <input type="text" value="${info.address}" class="form-control" name="location" id="location" placeholder="somewhere" title="enter a location">
+                                                <div class="col-xs-6">
+                                                    <label for="phone"><h4>Phone</h4></label>
+                                                    <input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
+                                            <div class="form-group">
 
-                                            <div class="col-xs-6">
-                                                <label for="gender"><h4>Gender</h4></label>
-                                                <select class="btn btn-outline-primary" name="gender" >                                                                                                                                                    
-                                                    <option value="0" ${info.gender == 0?"selected":""} >Secret</option>                                                                                                                                              
-                                                    <option value="1" ${info.gender == 1?"selected":""} >Male</option>                                                                                                                                              
-                                                    <option value="2" ${info.gender == 2?"selected":""} >Female</option>                                                                                                                                              
-                                                </select>
+                                                <div class="col-xs-6">
+                                                    <label for="email"><h4>Email</h4></label>
+                                                    <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
+                                            <div class="form-group">
 
-                                            <div class="col-xs-6">
-                                                <label for="birthday"><h4>Birthday</h4></label>
-                                                <input type="date" class="btn btn-outline-primary" value="${info.birthday}"class="form-control" name="birthday" id="gender" placeholder="gender" title="enter your gender.">
+                                                <div class="col-xs-6">
+                                                    <label for="email"><h4>Location</h4></label>
+                                                    <input type="email" class="form-control" id="location" placeholder="somewhere" title="enter a location">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-xs-12">
-                                                <br>
-                                                <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
-                                                <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+                                            <div class="form-group">
+
+                                                <div class="col-xs-6">
+                                                    <label for="password"><h4>Gender</h4></label>
+                                                    <input type="text" class="form-control" name="gender" id="gender" placeholder="gender" title="enter your gender.">
+                                                </div>
                                             </div>
-                                        </div>
+                                            <div class="form-group">
+                                                <div class="col-xs-12">
+                                                    <br>
+                                                    <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                                                    <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+                                                </div>
+                                            </div>
+                                        </form>
 
                                         <hr>
 
@@ -207,8 +192,7 @@
 
                     </div><!--/col-9-->
                 </div><!--/row-->
-            </form>
-        </div>
+            </div>
         <jsp:include page="footer.jsp"></jsp:include>
     </body>
     <script type="text/javascript">

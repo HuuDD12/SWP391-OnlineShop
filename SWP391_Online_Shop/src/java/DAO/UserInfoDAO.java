@@ -16,8 +16,9 @@ import java.sql.SQLException;
  */
 public class UserInfoDAO extends DBcontext.DBContext {
 
+
     public void saveUserInfo(UserInfo acc) {
-        String sql = "INSERT INTO [dbo].[User_info]\n"
+            String sql = "INSERT INTO [dbo].[User_info]\n"
                 + "           ([UserID]\n"
                 + "           ,[UserImg]\n"
                 + "           ,[Firstname]\n"
@@ -44,39 +45,11 @@ public class UserInfoDAO extends DBcontext.DBContext {
             System.out.println(e);
         }
     }
-
-    public void UpdateUserInfo(UserInfo acc) {
-        String sql = "UPDATE [User_info] \n"
-                + "  SET [UserImg] = ? ,\n"
-                + "  [Firstname] = ? ,\n"
-                + "  [Lastname] = ? ,\n"
-                + "  [Gender] = ? ,\n"
-                + "  [Birthday] = ? ,\n"
-                + "  [Address] = ? ,\n"
-                + "  [PhoneNum] = ?\n"
-                + "  WHERE [UserID] = ? ";
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, acc.getUidImg());
-            ps.setString(2, acc.getFirstName());
-            ps.setString(3, acc.getLastName());
-            ps.setInt(4, acc.getGender());
-            ps.setString(5, acc.getBirthday());
-            ps.setString(6, acc.getAddress());
-            ps.setString(7, acc.getPhonenum());
-            ps.setInt(8, acc.getUid());
-            ps.executeUpdate();
-
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-    }
-
     public UserInfo getAccountDetail(String cid) {
-        String sql = "select ui.*,u.email from User_info ui join Users u \n"
-                + "                on ui.UserID = u.UserID \n"
-                + "                join Role r on r.RoleID = u.RoleID\n"
-                + "                where u.UserID = ?";
+        String sql = "select ui.*,u.email from User_info ui join Users u \n" +
+"                on ui.UserID = u.UserID \n" +
+"                join Role r on r.RoleID = u.RoleID\n" +
+"                where u.UserID = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, cid);
@@ -98,12 +71,9 @@ public class UserInfoDAO extends DBcontext.DBContext {
 
         return null;
     }
-
     public static void main(String[] args) {
         UserInfoDAO udao = new UserInfoDAO();
-        UserInfo a = new UserInfo(14, "", "", "", 1, "", "", "", "");
-        udao.UpdateUserInfo(a);
-        UserInfo info = udao.getAccountDetail("14");
+        UserInfo info = udao.getAccountDetail("1");
         System.out.println(info);
     }
 }

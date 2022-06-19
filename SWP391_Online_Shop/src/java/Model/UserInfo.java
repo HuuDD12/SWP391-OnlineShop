@@ -24,10 +24,6 @@ public class UserInfo {
     public UserInfo() {
     }
 
-    public UserInfo(String uidImg) {
-        this.uidImg = uidImg;
-    }
-    
     public UserInfo(int uid, String uidImg, String firstName, String lastName, int gender, String birthday, String email, String address, String phonenum) {
         this.uid = uid;
         this.uidImg = uidImg;
@@ -124,8 +120,6 @@ public class UserInfo {
     public String toString() {
         return "UserInfo{" + "id=" + id + ", uid=" + uid + ", uidImg=" + uidImg + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", birthday=" + birthday + ", email=" + email + ", address=" + address + ", phonenum=" + phonenum + '}';
     }
-
-    
 
     
 }
