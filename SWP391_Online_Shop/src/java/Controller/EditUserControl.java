@@ -7,6 +7,7 @@ package Controller;
 
 import DAO.UserInfoDAO;
 import Model.UserInfo;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.IOException;
@@ -97,16 +98,17 @@ public class EditUserControl extends HttpServlet {
         }else {
             link = "resources\\img\\ImgUser\\" + image;
             UserInfo info = new UserInfo(userid, link, first_name, last_name,genderu,birthday, email, location, phone);
-            String UploadPart = "C:/Users/ADM/OneDrive/Documents/NetBeansProjects/Online-Shop/web/resources/img/ImgUser/" + image ;
+            String uploadPath = getServletContext().getRealPath("") + File.separator + link;
+          //  String UploadPart = "C:/Users/ADM/OneDrive/Documents/NetBeansProjects/Online-Shop/web/resources/img/ImgUser/" + image ;
             try {
-                FileOutputStream fos = new FileOutputStream(UploadPart);
-                InputStream  is =  file.getInputStream();
-                byte[] data = new byte[is.available()];
-                is.read(data);
-                fos.write(data);
-                fos.close();
+                try (FileOutputStream fos = new FileOutputStream(uploadPath)) {
+                    InputStream  is =  file.getInputStream();
+                    byte[] data = new byte[is.available()];
+                    is.read(data);
+                    fos.write(data);
+                }
                 
-            } catch (Exception e) {
+            } catch (IOException e) {
             }
             udao.UpdateUserInfo(info);
             

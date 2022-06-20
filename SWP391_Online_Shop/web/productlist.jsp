@@ -97,7 +97,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
             <div class="main">
                 <div class="container">
                     <ul class="breadcrumb">
-                        <li><a href="productlist">Home</a></li>
+                        <li><a href="index.html">Home</a></li>
                         <li><a href="">Store</a></li>
                         <li class="active">Men category</li>
                     </ul>
@@ -137,7 +137,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                 <div style="padding: 5px" class="product col-md-4">
                                     <div st class="product-item">
                                         <div class="pi-img-wrapper">
-                                            <img src="${p.url}" class="img-responsive" alt="Berry Lace Dress">
+                                            <img src="${p.url}"  style="max-width: 100%;height: 400px" alt="Berry Lace Dress">
                                             <div>
 
                                                 <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
@@ -156,7 +156,8 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                         <!-- BEGIN PAGINATOR -->
                         <div class="row">                           
                             <div class="col-md-8 col-sm-8">
-                                <ul class="pagination pull-right">                               
+                                <ul class="pagination pull-right">   
+                                    <c:if test="${Pid == 1}">
                                     <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=1">&laquo;</a></li>
                                         <c:if test="${page!= '1'}">
                                         <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${page - 1}">&lsaquo;</a></li>
@@ -200,7 +201,8 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                         <c:if test="${page<endPage}">
                                         <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${page + 1}">&rsaquo;</a></li>
                                         </c:if> 
-                                    <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${endPage}">&raquo;</a></li>                                    
+                                    <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${endPage}">&raquo;</a></li> 
+                                    </c:if>
                                 </ul>
                             </div>
                         </div>

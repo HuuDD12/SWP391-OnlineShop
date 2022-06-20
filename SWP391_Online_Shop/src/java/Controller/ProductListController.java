@@ -61,9 +61,11 @@ public class ProductListController extends HttpServlet {
         if (page == null) {
             page = "1";
         }
+        int Pid = 1;
         List<Product> listP = pdao.getAll();
         int pTid = Integer.parseInt(page);
         List<Product> list = pdao.pagingProduct(pTid);
+        request.setAttribute("Pid", Pid);
         request.setAttribute("listP", list);
         session.setAttribute("listB", listB);
         request.setAttribute("endPage", endPage);
