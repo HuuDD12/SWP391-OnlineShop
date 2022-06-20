@@ -7,19 +7,24 @@ package Controller;
 
 import DAO.UserInfoDAO;
 import Model.UserInfo;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author ADM
  */
 @WebServlet(name = "EditUserControl", urlPatterns = {"/EditUserControl"})
+@MultipartConfig
 public class EditUserControl extends HttpServlet {
 
     /**
@@ -69,7 +74,48 @@ public class EditUserControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String uid = request.getParameter("uid");
+        Part file = request.getPart("image");
+        String image = file.getSubmittedFileName();
+        String imageu = request.getParameter("imageu");
+        String first_name = request.getParameter("first_name");
+        String last_name = request.getParameter("last_name");
+        String gender = request.getParameter("gender");
+        String birthday = request.getParameter("birthday");
+        String email = request.getParameter("email");
+        String location = request.getParameter("location");
+        String phone = request.getParameter("phone");
+        int userid = Integer.parseInt(uid);
+        int genderu = Integer.parseInt(gender);
+        UserInfoDAO udao = new UserInfoDAO();
+        String link ="";
+        
+        if("".equals(image)){          
+            UserInfo info = new UserInfo(userid, imageu, first_name, last_name,genderu,birthday, email, location, phone);
+            udao.UpdateUserInfo(info);
+            
+        }else {
+            link = "resources\\img\\ImgUser\\" + image;
+            UserInfo info = new UserInfo(userid, link, first_name, last_name,genderu,birthday, email, location, phone);
+            String UploadPart = "C:/Users/ADM/OneDrive/Documents/NetBeansProjects/Online-Shop/web/resources/img/ImgUser/" + image ;
+            try {
+                FileOutputStream fos = new FileOutputStream(UploadPart);
+                InputStream  is =  file.getInputStream();
+                byte[] data = new byte[is.available()];
+                is.read(data);
+                fos.write(data);
+                fos.close();
+                
+            } catch (Exception e) {
+            }
+            udao.UpdateUserInfo(info);
+            
+        } 
+        UserInfo a = udao.getAccountDetail(uid);        
+        request.setAttribute("info", a);
+        request.getRequestDispatcher("Profile.jsp").forward(request, response);
+        
+        
     }
 
     /**
