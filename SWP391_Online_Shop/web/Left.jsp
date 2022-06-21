@@ -21,7 +21,6 @@
             </li>
         </c:forEach>
 
-
     </ul>
 
     <div class="sidebar-filter margin-bottom-25">

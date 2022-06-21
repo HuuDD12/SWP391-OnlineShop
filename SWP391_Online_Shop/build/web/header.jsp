@@ -60,8 +60,8 @@
                                     ${unreadnoti}
                                 </span> 
                             </a>                           
-                    </li>
-                        </c:if>
+                        </li>
+                    </c:if>
                 </ul>
             </div>
             <!-- END TOP BAR MENU -->
@@ -73,7 +73,7 @@
 <!-- BEGIN HEADER -->
 <div class="header">
     <div class="container">
-        <a class="site-logo" href="productlist"><img src="assets/corporate/img/logos/logo-shop-red.png" alt="Metronic Shop UI"></a>
+        <a class="site-logo" href="productlist"><img src="assets/corporate/img/logos/Logo1.png" alt="Online Shop" style="width: 70px;"></a>
 
         <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 
@@ -115,7 +115,9 @@
                     <!-- END DROPDOWN MENU -->
                 </li>
 
-                <li><a href="#">Kids</a></li>
+                <li>
+                    <a data-target="#" href="productlist">Product</a>
+                </li>
                 <li><a href="bloglist">Blog</a></li>
                 <li class="dropdown active">
                     <c:if test ="${sessionScope.acc !=  null}">
@@ -156,6 +158,7 @@
                         </ul>
                     </c:if>
                 </li>
+                <li><a href="AboutShope.jsp">About Shop</a></li>
                 <!-- BEGIN TOP SEARCH -->
                 <li class="menu-search">
                     <span class="sep"></span>
