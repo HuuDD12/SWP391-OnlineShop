@@ -88,15 +88,15 @@ public class OrderDetailDAO extends DBcontext.DBContext {
     }
 
     public List<OrderDetail> get3MostProductSell() {
-        String query = "select top 3 p.ProductName,pr.ProductImgURL from Order_Detail o inner join product p on p.ProductID=o.ProductID\n"
+        String query = "select top 3 p.ProductName,pr.ProductImgURL,p.SalePrice from Order_Detail o inner join product p on p.ProductID=o.ProductID\n"
                 + "join ProductImg pr on pr.ProductID = p.ProductID\n"
-                + "group by o.ProductName,p.ProductName,pr.ProductImgURL";
+                + "group by o.ProductName,p.ProductName,pr.ProductImgURL,p.SalePrice";
         List<OrderDetail> list = new ArrayList<>();
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Product p = new Product(rs.getString(1),rs.getString(2));
+                Product p = new Product(rs.getString(1), rs.getString(2), rs.getDouble(3));
                 OrderDetail od = new OrderDetail(p);
                 list.add(od);
             }
