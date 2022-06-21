@@ -83,7 +83,7 @@ public class SendFeedBackControl extends HttpServlet {
         Feedback feedback = new Feedback(acc.getUserId(), message);
         fdao.addFeedback(feedback);
         session.setAttribute("feedback", feedback);
-        request.setAttribute("mess", "Send Feedback succesfully");
+        request.setAttribute("mess", "Send Feedback succesfully . Thanks for your feedback !!!");
         request.getRequestDispatcher("Feedback.jsp").forward(request, response);
     }
 
