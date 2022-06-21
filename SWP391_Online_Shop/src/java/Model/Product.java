@@ -69,7 +69,11 @@ public class Product {
         this.url = url;
     }
     
-    
+    public Product(String productName, String url,double salePrice) {
+        this.productName = productName;
+        this.url = url;
+        this.salePrice = salePrice;
+    }
     
    
     
