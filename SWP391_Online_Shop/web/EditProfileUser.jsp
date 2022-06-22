@@ -116,7 +116,7 @@
 
                                 <div class="card" style="padding: 25px">
                                     <div class="text-center" style="padding:20px">
-                                        <img src="#" >
+                                       
                                     <c:if test="${info.uidImg == '' }">
                                         <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="rounded-circle  img-circle img-thumbnail"  width="150">
                                     </c:if>
@@ -125,7 +125,7 @@
                                         <input hidden name="imageu" value="${info.uidImg}">
                                     </c:if>
                                     <h6>Upload a different photo...</h6>
-                                    <input type="file" class="text-center center-block file-upload" style="margin: 10px" name="image">
+                                    <input type="file" class="text-center center-block file-upload" style="margin: 220px 20px" name="image">
                                 </div></hr><br>
                             </div>
 
