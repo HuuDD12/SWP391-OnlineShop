@@ -86,7 +86,7 @@
                                         <td>${p.amount}</td>
                                         <td>${p.subID}</td>
                                         <td style="text-align: center"><a class="btn btn-sm btn-primary" href="editproduct?pid=${p.productID}">Edit</a></td>
-                                        <td style="text-align: center"><a class="btn btn-sm btn-primary" href="deleteProduct?pid=${p.productID}">Delete</a></td>
+                                        <td style="text-align: center"><a class="btn btn-sm btn-primary" onclick="doDelete('${p.productID}')">Delete</a></td>
 
                                     </tr>
                                 </c:forEach>
@@ -177,6 +177,13 @@
         </script>
         <script src="js/datatables-simple-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+           <script type="text/javascript">
+        function doDelete(id_pro) {
+            if (confirm("Are you sure to delete this product")) {
+                window.location = "deleteProduct?pid=" + id_pro;
+            }
+        }
+        </script>
     </body>
 
 </html>

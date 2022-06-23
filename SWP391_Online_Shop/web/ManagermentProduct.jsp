@@ -75,7 +75,7 @@
                                     <a href="#editEmployeeModal"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
 
                                 </td>
-                                <td><a href="delete?pid=${o.productID}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a></td>
+                                <td><a href="#" onclick="doDelete('${o.id}')" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -208,6 +208,12 @@
                 </div>
             </div>
         </div>
-
+        <script type="text/javascript">
+        function doDelete(id_pro) {
+            if (confirm("Are you sure to delete this Blog")) {
+                window.location = "deleteblogmanage?id=" + id_pro;
+            }
+        }
+        </script>
     </body>
 </html>

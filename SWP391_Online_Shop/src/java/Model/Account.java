@@ -12,12 +12,31 @@ package Model;
 public class Account {
     private String userId;
     private String username;
+    private String img;
     private String password;
     private String email;
     private int roleId;
     private int block;
     private String code;
     public Account() {
+    }
+
+    public Account(String userId, String username, String password, String email, int roleId, int block, String img) {
+        this.userId = userId;
+        this.username = username;
+        this.img = img;
+        this.password = password;
+        this.email = email;
+        this.roleId = roleId;
+        this.block = block;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public Account(String username) {
@@ -111,8 +130,10 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account{" + "userId=" + userId + ", username=" + username + ", password=" + password + ", email=" + email + ", RoleId=" + roleId + ", block=" + block + ", code=" + code + '}';
+        return "Account{" + "userId=" + userId + ", username=" + username + ", img=" + img + ", password=" + password + ", email=" + email + ", roleId=" + roleId + ", block=" + block + ", code=" + code + '}';
     }
+
+    
     
     
     

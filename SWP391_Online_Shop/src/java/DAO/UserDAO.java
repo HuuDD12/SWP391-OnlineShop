@@ -237,14 +237,12 @@ public class UserDAO extends DBcontext.DBContext {
 
     public static void main(String[] args) {
         UserDAO u = new UserDAO();
-        List<Role> list = u.getAllUser();
-        for (Role o : list) {
-            System.out.println(o);
-        }
+        Account acc = u.login("admin", "123");
+        System.out.println(acc);
     }
 
     public Account login(String username, String password) {
-        String sql = "select*from [users] where username=? and password=? ";
+        String sql = "select u.*,ui.UserImg from Users u inner join User_info ui on u.UserID = ui.UserID where username=? and password=? ";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
 
@@ -257,7 +255,8 @@ public class UserDAO extends DBcontext.DBContext {
                         rs.getString(3),
                         rs.getString(4),
                         rs.getInt(5),
-                        rs.getInt(6));
+                        rs.getInt(6),
+                        rs.getString(7));
             }
 
         } catch (SQLException e) {

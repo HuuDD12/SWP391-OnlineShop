@@ -140,7 +140,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                             <img src="${p.url}"  style="max-width: 100%;height: 400px" alt="Berry Lace Dress">
                                             <div>
 
-                                                <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
+                                                <a href="${p.url}" class="btn btn-default fancybox-fast-view">View</a>
                                             </div>
                                         </div>
                                         <h3><a href="productdetail?pid=${p.productID}&sid=${p.subID}">${p.productName}</a></h3>

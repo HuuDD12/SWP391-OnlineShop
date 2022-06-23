@@ -54,7 +54,7 @@
                                 <div class="notification-list notification-list--unread">
                                     <div class="notification-list_content">
                                         <div class="notification-list_img">
-                                            <img src="images/users/user1.jpg" alt="user">
+                                            <img src="${sessionScope.acc.img}" alt="user">
                                         </div>
                                         <div class="notification-list_detail">
                                             <p><b>System</b> reply your Feedback</p><br>
@@ -70,7 +70,7 @@
                                 <div class="notification-list notification-list--unread">
                                     <div class="notification-list_content">
                                         <div class="notification-list_img">
-                                            <img src="images/users/user1.jpg" alt="user">
+                                            <img src="${sessionScope.acc.img}" alt="user">
                                         </div>
                                         <div class="notification-list_detail">
                                             <p><b>System</b> sent a message to you</p><br>
