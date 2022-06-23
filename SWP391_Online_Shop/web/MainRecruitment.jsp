@@ -24,7 +24,7 @@
             <div class="clearfix"></div>
             <div class="row">
                 <div class="heading-main-box">
-                    <h1 class="titles">Bắt đầu một công việc mới có thể khá khó khăn và áp lực nhưng cũng sẽ rất thú vị<br>Bạn sẽ có cơ hội để khẳng định bản thân và thành công với khởi đầu mới.<br>So join with us</h1>
+                    <h1 class="titles">You can do it .<br>We can help . <br>So join with us !</h1>
                 </div>
             </div>
         </header>
