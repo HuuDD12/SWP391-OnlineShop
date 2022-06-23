@@ -96,7 +96,7 @@ public class UserDAO extends DBcontext.DBContext {
         String sql = "select u.*,r.RoleName,ROW_NUMBER() OVER(ORDER BY u.[UserID],r.RoleName) as rownumber from Users u inner join role r on u.RoleID = r.RoleID ";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-           
+
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Account acc = new Account(
@@ -108,6 +108,29 @@ public class UserDAO extends DBcontext.DBContext {
                         rs.getInt(6));
                 Role r = new Role(acc, rs.getString(7));
                 list.add(r);
+            }
+
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<Account> getAllShipper() {
+        List<Account> list = new ArrayList<>();
+        String sql = "select u.*,r.RoleName,ROW_NUMBER() OVER(ORDER BY u.[UserID],r.RoleName) as rownumber from Users u inner join role r on u.RoleID = r.RoleID ";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Account acc = new Account(
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getInt(6));
+                list.add(acc);
             }
 
         } catch (Exception e) {

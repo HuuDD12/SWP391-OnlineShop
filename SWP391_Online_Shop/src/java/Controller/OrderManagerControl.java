@@ -6,6 +6,8 @@
 package Controller;
 
 import DAO.OrderDAO;
+import DAO.UserDAO;
+import Model.Account;
 import Model.Order;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,8 +39,11 @@ public class OrderManagerControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             OrderDAO odao = new OrderDAO();
+            UserDAO udao = new UserDAO();
             List<Order> list = odao.getAllBill();
+            List<Account> listA = udao.getAllShipper();
             request.setAttribute("list", list);
+            request.setAttribute("listA", listA);
             request.getRequestDispatcher("OrderManager.jsp").forward(request, response);
         }
     }

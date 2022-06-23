@@ -73,7 +73,7 @@ public class LoginControl extends HttpServlet {
                 response.addCookie(cuser);
                 response.addCookie(cpass);
                 response.addCookie(cremember);
-                response.sendRedirect("productlist");
+                response.sendRedirect("HomeControl");
             }
         } else {
             request.setAttribute("mess", "YOUR ACCOUNT BLOCKED");
@@ -90,7 +90,7 @@ public class LoginControl extends HttpServlet {
             } else {
                 HttpSession session = request.getSession();
                 session.setAttribute("acc", a);
-                response.sendRedirect("productlist");
+                response.sendRedirect("HomeControl");
             }
         }
     }

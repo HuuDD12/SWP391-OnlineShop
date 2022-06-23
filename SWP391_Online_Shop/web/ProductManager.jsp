@@ -62,56 +62,32 @@
                             <table  id="datatablesSimple">
                                 <thead>
                                     <tr>
-                                        <th style="text-align: center">ID đơn hàng</th>
-                                        <th style="text-align: center">Khách hàng</th>
-                                        <th style="text-align: center">Ngày mua</th>
-                                        <th style="text-align: center">Tổng tiền</th>
-                                        <th style="text-align: center">Trạng thái</th>
-                                        <th style="text-align: center">Ghi chú</th>
-                                        <th style="text-align: center">View</th>
+                                        <th style="text-align: center">ID</th>
+                                        <th style="text-align: center">Sản phẩm</th>
+                                        <th style="text-align: center">Ảnh</th>
+                                        <th style="text-align: center">Miêu tả</th>
+                                        <th style="text-align: center">Giá gốc</th>
+                                        <th style="text-align: center">Giá giảm</th>
+                                        <th style="text-align: center">Số lượng</th>
+                                        <th style="text-align: center">Loại</th>
+                                        <th style="text-align: center"></th>
                                         <th style="text-align: center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${list}" var="b">
+                                <c:forEach items="${listP}" var="p">
                                     <tr>
-                                        <td style="text-align: center">${b.id}</td>
-                                        <td style="text-align: center">${b.acc.username}</td>
-                                        <td style="text-align: center">${b.createdDate}</td>
-                                        <td style="text-align: center">${b.totalPrice}</td> 
-                                        <c:if test="${b.status == 1}">
-                                            <td style="text-align: center"><span class="badge rounded-pill bg-secondary">Waiting for Confirmation</span></td>
-                                        </c:if>
-                                        <c:if test="${b.status == 2}">
-                                            <td style="text-align: center"><span class="badge rounded-pill bg-warning text-dark">Packing</span></td>
-                                        </c:if>
-                                        <c:if test="${b.status == 3}">
-                                            <td style="text-align: center"><span class="badge rounded-pill bg-primary">Delivering</span></td>
-                                        </c:if>
-                                        <c:if test="${b.status == 4}">
-                                            <td style="text-align: center"><span class="badge bg-danger">Canceled</span></td>
-                                        </c:if>
-                                        <c:if test="${b.status == 5}">
-                                            <td style="text-align: center"><span class="badge bg-success">completed</span></td>
-                                        </c:if> 
-                                        <td style="text-align: center">${b.note}</td> 
-                                        <td style="text-align: center"><a class="btn btn-sm btn-primary" href="orderdetail?oid=${b.id}">View</a></td>
-                                        
-                                        <c:if test="${b.status == 1}">
-                                            <td style="text-align: center">
-                                                <a href="confirmorder?action=accept&oid=${b.id}"><span class="btn btn-sm btn-success rounded-pill">Accept</span></a>
-                                                <a href="confirmorder?action=reject&oid=${b.id}"><span class="btn btn-sm btn-danger rounded-pill">Reject</span></a> 
-                                            </td>
-                                        </c:if>
-                                        <c:if test="${b.status == 2}">
-                                            <td style="text-align: center">
-                                                <a href="confirmorder?action=done&oid=${b.id}"><span class="btn btn-sm btn-success rounded-pill">Done</span></a>
-                                            </td>
-                                        </c:if>
-                                        <c:if test="${b.status != 1}">
-                                            <td>
-                                            </td>
-                                        </c:if>
+                                        <td>${p.productID}</td>
+                                        <td>${p.productName}</td>
+                                        <td><img src="${p.url}" style="height: 100px;width: 100px"></td>
+                                        <td>${p.description}</td>
+                                        <td>${p.originalPrice}</td>
+                                        <td>${p.salePrice}</td>
+                                        <td>${p.amount}</td>
+                                        <td>${p.subID}</td>
+                                        <td style="text-align: center"><a class="btn btn-sm btn-primary" href="editproduct?pid=${p.productID}">Edit</a></td>
+                                        <td style="text-align: center"><a class="btn btn-sm btn-primary" href="deleteProduct?pid=${p.productID}">Delete</a></td>
+
                                     </tr>
                                 </c:forEach>
 
@@ -120,6 +96,18 @@
                     </div>
                 </div>
             </div>
+            <div class="row"><div class="col-md-8 col-sm-8">
+                <ul class="pagination pull-right">
+                    <ul class="pagination">
+                        <li class="page-item disabled"><a href="productmanager?index=${tag-1}">Previous</a></li>
+                            <c:forEach begin="${1}" end="${endP}" var="i">
+                            <li class="page-item"><a href="productmanager?index=${i}" class="${tag==i?"active":""}">${i}</a></li>
+                            </c:forEach>
+                        <li class="page-item"><a href="productmanager?index=${tag+1}" class="page-link">Next</a></li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
         </main>
         <!-- Essential javascripts for application to work-->
         <script src="admin/js/jquery-3.2.1.min.js"></script>

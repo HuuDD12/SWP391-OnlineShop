@@ -53,6 +53,18 @@ public class ConfirmOrderControl extends HttpServlet {
                 odao.OrderAction(oid, action);                  
                 response.sendRedirect("ordermanager");
             }
+            if (( action.equals("done"))) {
+                odao.OrderAction(oid, action);                  
+                response.sendRedirect("ordermanager");
+            }
+            if (( action.equals("complete"))) {
+                odao.OrderAction(oid, action);                  
+                response.sendRedirect("deliveringProduct");
+            }
+            if (( action.equals("refuse"))) {
+                odao.OrderAction(oid, action);                  
+                response.sendRedirect("deliveringProduct");
+            }
 
         } catch (Exception e) {
             response.sendRedirect("error.jsp");

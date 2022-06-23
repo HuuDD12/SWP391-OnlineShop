@@ -9,6 +9,7 @@ import DAO.OrderDetailDAO;
 import Model.OrderDetail;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,10 +35,13 @@ public class OrderDetailControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String oid = request.getParameter("oid");
+        //String oid = request.getParameter("oid");
+        int oid = Integer.valueOf(request.getParameter("oid"));
         OrderDetailDAO od = new OrderDetailDAO();
-        OrderDetail o = od.OrderDetailProduct(Integer.parseInt(oid));
+        OrderDetail o = od.OrderDetailProduct(oid);
+        List<OrderDetail> list = od.getOrderDetailProduct(oid);
         request.setAttribute("order", o);
+        request.setAttribute("list", list);
         request.getRequestDispatcher("OrderDetail.jsp").forward(request, response);
     }
 

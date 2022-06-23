@@ -44,7 +44,7 @@
         </header>
         <!-- Sidebar menu-->
         <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-        <jsp:include page="DashBoardNav.jsp"></jsp:include>
+        <jsp:include page="DeliveryNav.jsp"></jsp:include>
             <main class="app-content">
                 <div class="app-title">
                     <ul class="app-breadcrumb breadcrumb side">
@@ -96,16 +96,13 @@
                                         </c:if> 
                                         <td style="text-align: center">${b.note}</td> 
                                         <td style="text-align: center"><a class="btn btn-sm btn-primary" href="orderdetail?oid=${b.id}">View</a></td>
-                                        
                                         <c:if test="${b.status == 1}">
-                                            <td style="text-align: center">
-                                                <a href="confirmorder?action=accept&oid=${b.id}"><span class="btn btn-sm btn-success rounded-pill">Accept</span></a>
+                                            <td style="text-align: center"><a href="confirmorder?action=accept&oid=${b.id}"><span class="btn btn-sm btn-success rounded-pill">Accept</span></a>
                                                 <a href="confirmorder?action=reject&oid=${b.id}"><span class="btn btn-sm btn-danger rounded-pill">Reject</span></a> 
                                             </td>
                                         </c:if>
-                                        <c:if test="${b.status == 2}">
-                                            <td style="text-align: center">
-                                                <a href="confirmorder?action=done&oid=${b.id}"><span class="btn btn-sm btn-success rounded-pill">Done</span></a>
+                                        <c:if test="${b.status == 3}">
+                                            <td style="text-align: center"><a href="confirmorder?action=complete&oid=${b.id}"><span class="btn btn-sm btn-success rounded-pill">Complete</span></a>
                                             </td>
                                         </c:if>
                                         <c:if test="${b.status != 1}">

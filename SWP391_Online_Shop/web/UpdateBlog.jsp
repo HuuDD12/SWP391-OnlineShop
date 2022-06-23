@@ -92,7 +92,7 @@
                             </div>
                             <h3 class="text-success">${mess}</h3>
                             <div class="modal-footer">
-                                <a type="button" class="btn btn-default" href="bloglist">Cancel</a>
+                                <a type="button" class="btn btn-default" href="ManageFeedbackBySeller">Cancel</a>
                                 <input type="reset" class="btn btn" value="Clear">
                                 <button type="submit" class="btn btn-primary">Send</button>
                             </div>

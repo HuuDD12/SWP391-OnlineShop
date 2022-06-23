@@ -73,7 +73,7 @@
 <!-- BEGIN HEADER -->
 <div class="header">
     <div class="container">
-        <a class="site-logo" href="productlist"><img src="assets/corporate/img/logos/Logo1.png" alt="Online Shop" style="width: 70px;"></a>
+        <a class="site-logo" href="productlist"><img src="assets/corporate/img/logos/logo-shop-red.png" alt="Metronic Shop UI"></a>
 
         <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 
@@ -115,9 +115,7 @@
                     <!-- END DROPDOWN MENU -->
                 </li>
 
-                <li>
-                    <a data-target="#" href="productlist">Product</a>
-                </li>
+                <li><a href="#">Kids</a></li>
                 <li><a href="bloglist">Blog</a></li>
                 <li class="dropdown active">
                     <c:if test ="${sessionScope.acc !=  null}">
@@ -139,10 +137,14 @@
                             <c:if test="${sessionScope.acc.getRoleId() ==  2}">
                                 <li><a  href="${pageContext.request.contextPath}/Dashboard">DashBoard</a></li>
                                 </c:if>
-                                <c:if test="${sessionScope.acc.getRoleId() ==  3}">
-                                <li><a href="${pageContext.request.contextPath}/sendfeedback">FeedBack</a></li>
-                                </c:if>
+                                
                             <!-- Marketing -->
+                            <!-- Customer -->
+                            <c:if test="${sessionScope.acc.getRoleId() ==  3}">                               
+                                <li><a href="${pageContext.request.contextPath}/sendfeedback">FeedBack</a></li>
+                                <li><a href="${pageContext.request.contextPath}/purchase?sid=${sessionScope.acc.getUserId()}">Purchase order</a></li>
+
+                            </c:if>
                             <c:if test="${sessionScope.acc.getRoleId() ==  4}">
                                 <li><a  href="${pageContext.request.contextPath}/mkt/dashboard">Dashboard</a></li>
                                 </c:if>
@@ -158,7 +160,6 @@
                         </ul>
                     </c:if>
                 </li>
-                <li><a href="AboutShope.jsp">About Shop</a></li>
                 <!-- BEGIN TOP SEARCH -->
                 <li class="menu-search">
                     <span class="sep"></span>

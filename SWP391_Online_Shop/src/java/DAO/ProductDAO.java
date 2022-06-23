@@ -614,9 +614,9 @@ public class ProductDAO extends DBcontext.DBContext {
 
         }
     }
-    
-        public void updateSale(int id,double sale){
-            String query = "UPDATE dbo.Product SET SalePrice = (OriginalPrice * (100 - ?)) /100.0 , Sale = ? WHERE ProductID = ?";
+
+    public void updateSale(int id, double sale) {
+        String query = "UPDATE dbo.Product SET SalePrice = (OriginalPrice * (100 - ?)) /100.0 , Sale = ? WHERE ProductID = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setDouble(1, sale);
@@ -625,12 +625,11 @@ public class ProductDAO extends DBcontext.DBContext {
             ps.executeUpdate();
         } catch (SQLException e) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, e);
-        }
-        finally{
+        } finally {
 
         }
     }
-
+    
     public static void main(String[] args) {
         ProductDAO pdao = new ProductDAO();
         List<Product> list = pdao.getAll();

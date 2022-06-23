@@ -64,13 +64,25 @@ public class Product {
         this.productName = productName;
     }
 
+    public Product(String productName, String url,double salePrice) {
+        this.productName = productName;
+        this.url = url;
+        this.salePrice = salePrice;
+    }
+    public Product(String productName,double salePrice) {
+        this.productName = productName;
+        this.salePrice = salePrice;
+    }
+    public Product(String productName, String url,double salePrice,double originalPrice) {
+        this.productName = productName;
+        this.url = url;
+        this.salePrice = salePrice;
+        this.originalPrice = originalPrice;
+    }
     public Product(String productName, String url) {
         this.productName = productName;
         this.url = url;
     }
-    
-    
-    
    
     
 
