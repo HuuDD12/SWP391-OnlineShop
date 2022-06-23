@@ -16,7 +16,7 @@ public class Shipping {
     private String name;
     private String phone;
     private String address;
-
+    private Product p;
     public Shipping() {
     }
 
@@ -32,8 +32,13 @@ public class Shipping {
         this.phone = phone;
         this.address = address;
     }
-    
-    
+   
+    public Shipping(String name, String phone, String address,Product p) {
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+        this.p= p;
+    }
     public int getId() {
         return id;
     }

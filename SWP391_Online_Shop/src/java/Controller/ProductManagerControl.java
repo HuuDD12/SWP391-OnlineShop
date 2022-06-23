@@ -5,11 +5,19 @@
  */
 package Controller;
 
-import DAO.FeedbackDAO;
-import Model.Account;
-import Model.Feedback;
+import DAO.BrandDAO;
+import DAO.CategoryDAO;
+import DAO.OrderDetailDAO;
+import DAO.ProductDAO;
+import DAO.SubCategoryDAO;
+import Model.Brand;
+import Model.Category;
+import Model.OrderDetail;
+import Model.Product;
+import Model.Subcategory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,10 +27,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Admin
+ * @author VAN ANH
  */
-@WebServlet(name = "SendFeedBackControl", urlPatterns = {"/sendfeedback"})
-public class SendFeedBackControl extends HttpServlet {
+@WebServlet(name = "ProductManagerControl", urlPatterns = {"/productmanager"})
+public class ProductManagerControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,15 +46,42 @@ public class SendFeedBackControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SendFeedBackControl</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SendFeedBackControl at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            response.setContentType("text/html;charset=UTF-8");
+            HttpSession session = request.getSession();
+            String indexPage = request.getParameter("index");
+            ProductDAO pdao = new ProductDAO();
+            CategoryDAO cdao = new CategoryDAO();
+            List<Category> listC = cdao.getAllCategory();
+            SubCategoryDAO sdao = new SubCategoryDAO();
+            List<Subcategory> listS = sdao.getAllSubCategory();
+            List<Product> listTop3 = pdao.getTop3Product();
+            String page = request.getParameter("page");
+            BrandDAO bdao = new BrandDAO();
+            List<Brand> listB = bdao.getAllBrand();
+            if (indexPage == null) {
+                indexPage = "1";
+            }
+            int index = Integer.parseInt(indexPage);
+            int count = pdao.count();
+            int endPage = count / 6;
+            if (count % 6 != 0) {
+                endPage++;
+            }
+            List<Product> listP = pdao.getAll();
+            
+            List<Product> list = pdao.pagingProductBy6(index);
+            
+            request.setAttribute("listP", list);
+            session.setAttribute("listB", listB);
+            
+            request.setAttribute("count", count);
+            request.setAttribute("endP", endPage);
+            request.setAttribute("tag", index);
+            session.setAttribute("listTop3", listTop3);
+            session.setAttribute("listC", listC);
+            session.setAttribute("listS", listS);
+            
+            request.getRequestDispatcher("ProductManager.jsp").forward(request, response);
         }
     }
 
@@ -62,7 +97,7 @@ public class SendFeedBackControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("Feedback.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -76,15 +111,7 @@ public class SendFeedBackControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        Account acc = (Account) session.getAttribute("acc");
-        String message = request.getParameter("message");
-        FeedbackDAO fdao = new FeedbackDAO();
-        Feedback feedback = new Feedback(acc.getUserId(), message);
-        fdao.addFeedback(feedback);
-        session.setAttribute("feedback", feedback);
-        request.setAttribute("mess", "Send Feedback succesfully");
-        request.getRequestDispatcher("Feedback.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**

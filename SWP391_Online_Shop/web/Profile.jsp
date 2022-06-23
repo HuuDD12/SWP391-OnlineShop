@@ -131,7 +131,7 @@
                                             <img src="${info.uidImg}"  class="rounded-circle" width="150">
                                         </c:if>                                      
                                         <div class="mt-3" style="padding: 10px">
-                                            <h4>${info.firstName} ${info.lastName}</h4>                                            
+                                            <h4>${info.firstName}</h4>                                            
                                             <p class="text-muted font-size-sm">${info.address}</p>                                      
                                         </div>
                                         </div>

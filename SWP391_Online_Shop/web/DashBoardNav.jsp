@@ -12,7 +12,7 @@
                     class="app-menu__label" >DashBoard</span></a></li>
         <li><a class="app-menu__item" href="userlist" style="text-decoration: none" ><i class='app-menu__icon bx bxs-user-account'></i><span
                     class="app-menu__label">Manage Customer</span></a></li>
-        <li><a class="app-menu__item" href="manager-product" style="text-decoration: none" ><i class='app-menu__icon bx bx-purchase-tag-alt'></i><span
+        <li><a class="app-menu__item" href="productmanager" style="text-decoration: none" ><i class='app-menu__icon bx bx-purchase-tag-alt'></i><span
                     class="app-menu__label">Manage Product</span></a></li>
         <li><a class="app-menu__item" href="ordermanager" style="text-decoration: none" ><i class='app-menu__icon bx bx-task'></i><span
                     class="app-menu__label">Manage Order</span></a></li>

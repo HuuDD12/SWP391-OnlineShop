@@ -1,9 +1,3 @@
-<%-- 
-    Document   : order
-    Created on : Oct 19, 2021, 11:23:09 PM
-    Author     : Khuong Hung
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -37,86 +31,44 @@
 
 
                 <!-- User Menu-->
-                <li><a class="app-nav__item" href="productlist"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+                <li><a class="app-nav__item" href="dashboard"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
                 </li>
             </ul>
         </header>
         <!-- Sidebar menu-->
         <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-        <jsp:include page="DashBoardNav.jsp"></jsp:include>
+        <jsp:include page="DeliveryNav.jsp"></jsp:include>
             <main class="app-content">
                 <div class="app-title">
                     <ul class="app-breadcrumb breadcrumb side">
-                        <li class="breadcrumb-item active"><a href="#"><b>Danh sách đơn hàng</b></a></li>
+                        <li class="breadcrumb-item active"><a href="#" style="text-decoration: none"><b>Danh sách người dùng</b></a></li>
                     </ul>
                     <div id="clock"></div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="card-header">
-                            <i class="fas fa-table me-1"></i>
-                            Tất cả đơn hàng
+                    <div class="col-md-12 col-lg-12">
+                        <div class="row">
+                            <!-- col-6 -->
+                            <div class="col-md-6">
+                                <div class="widget-small primary coloured-icon"><i class='icon bx bxs-user-account fa-3x'></i>
+                                    <div class="info">
+                                        <h4>Tổng sản phẩm phải giao</h4>
+                                        <p><b>${countDelivering} sản phẩm</b></p>
+                                    <p class="info-tong">Tổng số đơn được quản lý.</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <table  id="datatablesSimple">
-                                <thead>
-                                    <tr>
-                                        <th style="text-align: center">ID đơn hàng</th>
-                                        <th style="text-align: center">Khách hàng</th>
-                                        <th style="text-align: center">Ngày mua</th>
-                                        <th style="text-align: center">Tổng tiền</th>
-                                        <th style="text-align: center">Trạng thái</th>
-                                        <th style="text-align: center">Ghi chú</th>
-                                        <th style="text-align: center">View</th>
-                                        <th style="text-align: center">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach items="${list}" var="b">
-                                    <tr>
-                                        <td style="text-align: center">${b.id}</td>
-                                        <td style="text-align: center">${b.acc.username}</td>
-                                        <td style="text-align: center">${b.createdDate}</td>
-                                        <td style="text-align: center">${b.totalPrice}</td> 
-                                        <c:if test="${b.status == 1}">
-                                            <td style="text-align: center"><span class="badge rounded-pill bg-secondary">Waiting for Confirmation</span></td>
-                                        </c:if>
-                                        <c:if test="${b.status == 2}">
-                                            <td style="text-align: center"><span class="badge rounded-pill bg-warning text-dark">Packing</span></td>
-                                        </c:if>
-                                        <c:if test="${b.status == 3}">
-                                            <td style="text-align: center"><span class="badge rounded-pill bg-primary">Delivering</span></td>
-                                        </c:if>
-                                        <c:if test="${b.status == 4}">
-                                            <td style="text-align: center"><span class="badge bg-danger">Canceled</span></td>
-                                        </c:if>
-                                        <c:if test="${b.status == 5}">
-                                            <td style="text-align: center"><span class="badge bg-success">completed</span></td>
-                                        </c:if> 
-                                        <td style="text-align: center">${b.note}</td> 
-                                        <td style="text-align: center"><a class="btn btn-sm btn-primary" href="orderdetail?oid=${b.id}">View</a></td>
-                                        
-                                        <c:if test="${b.status == 1}">
-                                            <td style="text-align: center">
-                                                <a href="confirmorder?action=accept&oid=${b.id}"><span class="btn btn-sm btn-success rounded-pill">Accept</span></a>
-                                                <a href="confirmorder?action=reject&oid=${b.id}"><span class="btn btn-sm btn-danger rounded-pill">Reject</span></a> 
-                                            </td>
-                                        </c:if>
-                                        <c:if test="${b.status == 2}">
-                                            <td style="text-align: center">
-                                                <a href="confirmorder?action=done&oid=${b.id}"><span class="btn btn-sm btn-success rounded-pill">Done</span></a>
-                                            </td>
-                                        </c:if>
-                                        <c:if test="${b.status != 1}">
-                                            <td>
-                                            </td>
-                                        </c:if>
-                                    </tr>
-                                </c:forEach>
-
-                            </tbody>
-                        </table>
+                        <!-- col-6 -->
+                        <div class="col-md-6">
+                            <div class="widget-small info coloured-icon"><i class='icon bx bxs-data fa-3x'></i>
+                                <div class="info">
+                                    <h4>Tổng sản phẩm đã giao</h4>
+                                    <p><b>${countCompleted} sản phẩm</b></p>
+                                    <p class="info-tong">Tổng số sản phẩm được quản lý.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -187,8 +139,12 @@
                 }
             }
         </script>
-        <script src="js/datatables-simple-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <script src="js/datatables-simple-demo.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     </body>
 
 </html>
+

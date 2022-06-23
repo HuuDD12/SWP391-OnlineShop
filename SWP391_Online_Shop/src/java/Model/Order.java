@@ -59,7 +59,9 @@ public class Order {
         this.os = os;
     }
 
-
+    public Order(String createdDate) {
+        this.createdDate = createdDate;
+    }
 
     public OrderStatus getOs() {
         return os;

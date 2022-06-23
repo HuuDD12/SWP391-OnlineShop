@@ -5,9 +5,8 @@
  */
 package Controller;
 
-import DAO.FeedbackDAO;
-import Model.Account;
-import Model.Feedback;
+import DAO.OrderDAO;
+import Model.Order;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -15,14 +14,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Admin
+ * @author VAN ANH
  */
-@WebServlet(name = "SendFeedBackControl", urlPatterns = {"/sendfeedback"})
-public class SendFeedBackControl extends HttpServlet {
+@WebServlet(name = "PurchaseOrder", urlPatterns = {"/purchase"})
+public class PurchaseOrder extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,15 +36,20 @@ public class SendFeedBackControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SendFeedBackControl</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SendFeedBackControl at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            int sid = Integer.valueOf(request.getParameter("sid"));
+            OrderDAO odao = new OrderDAO();
+            int countW = odao.countOrderWaiting(sid);
+            int countP = odao.countOrderPacking(sid);
+            int countD = odao.countOrderDelivery(sid);
+            int countC = odao.countOrderComplete(sid);
+            int countCa = odao.countOrderCanceled(sid);
+            
+            request.setAttribute("countW", countW);
+            request.setAttribute("countP", countP);
+            request.setAttribute("countD", countD);
+            request.setAttribute("countC", countC);
+            request.setAttribute("countCa", countCa);
+            request.getRequestDispatcher("PurchaseOrder.jsp").forward(request, response);
         }
     }
 
@@ -62,7 +65,7 @@ public class SendFeedBackControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("Feedback.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -76,15 +79,7 @@ public class SendFeedBackControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        Account acc = (Account) session.getAttribute("acc");
-        String message = request.getParameter("message");
-        FeedbackDAO fdao = new FeedbackDAO();
-        Feedback feedback = new Feedback(acc.getUserId(), message);
-        fdao.addFeedback(feedback);
-        session.setAttribute("feedback", feedback);
-        request.setAttribute("mess", "Send Feedback succesfully");
-        request.getRequestDispatcher("Feedback.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**

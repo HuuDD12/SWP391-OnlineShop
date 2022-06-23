@@ -5,24 +5,23 @@
  */
 package Controller;
 
-import DAO.FeedbackDAO;
-import Model.Account;
-import Model.Feedback;
+import DAO.OrderDAO;
+import Model.Order;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Admin
+ * @author VAN ANH
  */
-@WebServlet(name = "SendFeedBackControl", urlPatterns = {"/sendfeedback"})
-public class SendFeedBackControl extends HttpServlet {
+@WebServlet(name = "CompleteProductControl", urlPatterns = {"/completeProduct"})
+public class CompleteProductControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,15 +37,11 @@ public class SendFeedBackControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SendFeedBackControl</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SendFeedBackControl at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            OrderDAO odao = new OrderDAO();
+            List<Order> list = odao.getAllComplete();
+            
+            request.setAttribute("list", list);
+            request.getRequestDispatcher("CompleteProduct.jsp").forward(request, response);
         }
     }
 
@@ -62,7 +57,7 @@ public class SendFeedBackControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("Feedback.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -76,15 +71,7 @@ public class SendFeedBackControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        Account acc = (Account) session.getAttribute("acc");
-        String message = request.getParameter("message");
-        FeedbackDAO fdao = new FeedbackDAO();
-        Feedback feedback = new Feedback(acc.getUserId(), message);
-        fdao.addFeedback(feedback);
-        session.setAttribute("feedback", feedback);
-        request.setAttribute("mess", "Send Feedback succesfully");
-        request.getRequestDispatcher("Feedback.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**

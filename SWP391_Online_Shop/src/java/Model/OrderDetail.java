@@ -10,20 +10,27 @@ package Model;
  * @author Admin
  */
 public class OrderDetail {
+
     private int id;
     private int orderId;
     private String productName;
     private double productPrice;
     private int quantity;
     private Product p;
-    
+    private OrderStatus o;
+
     public OrderDetail() {
     }
 
     public OrderDetail(Product p) {
         this.p = p;
     }
-    
+
+    public OrderDetail(Product p,OrderStatus o) {
+        this.p = p;
+        this.o = o;
+    }
+
     public OrderDetail(int id, int orderId, String productName, double productPrice, int quantity, Product p) {
         this.id = id;
         this.orderId = orderId;
@@ -31,6 +38,16 @@ public class OrderDetail {
         this.productPrice = productPrice;
         this.quantity = quantity;
         this.p = p;
+    }
+
+    public OrderDetail(int id, int orderId, String productName, double productPrice, int quantity) {
+        this.id = id;
+        this.orderId = orderId;
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.quantity = quantity;
+        this.p = p;
+
     }
 
     public OrderDetail(int quantity, Product p) {
@@ -44,8 +61,6 @@ public class OrderDetail {
         this.quantity = quantity;
         this.p = p;
     }
-
-    
 
     public int getId() {
         return id;
@@ -94,7 +109,5 @@ public class OrderDetail {
     public void setP(Product p) {
         this.p = p;
     }
-    
-    
 
 }

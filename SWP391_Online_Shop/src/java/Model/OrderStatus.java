@@ -10,6 +10,7 @@ package Model;
  * @author Admin
  */
 public class OrderStatus {
+
     private int id;
     private String name;
 
@@ -19,6 +20,10 @@ public class OrderStatus {
     public OrderStatus(int id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public OrderStatus(int id) {
+        this.id = id;
     }
 
     public int getId() {
@@ -36,5 +41,5 @@ public class OrderStatus {
     public void setName(String name) {
         this.name = name;
     }
-    
+
 }

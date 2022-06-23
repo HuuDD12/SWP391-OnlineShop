@@ -89,28 +89,57 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Product Name</th>
-                                            <th scope="col">Quantity</th>
-                                            <th scope="col">Product IMG</th>
-                                            <th scope="col">Product Price</th>
+                                            <th style="text-align: center">ID</th>
+                                            <td><input value="${pro.productID}" style="width: 100%"></td>
+                                        </tr>
+                                        <tr>
+                                            <th style="text-align: center">Sản phẩm</th>
+                                            <td><input value="${pro.productName}" style="width: 100%"></td>
+                                        </tr>
+                                        <tr>
+                                            <th style="text-align: center">Ảnh</th>
+                                            <td><input value="${pro.url}" style="width: 100%"></td>
+                                        </tr>
+                                        <tr>
+                                            <th style="text-align: center">Miêu tả</th>
+                                            <td><input value="${pro.description}" style="width: 100%"></td>
+                                        </tr>
+                                        <tr>
+                                            <th style="text-align: center">Giá gốc</th>
+                                            <td><input value="${pro.originalPrice}" style="width: 100%"></td>
+                                        </tr>
+                                        <tr>
+                                            <th style="text-align: center">Giá giảm</th>
+                                            <td><input value="${pro.salePrice}" style="width: 100%"></td>
+                                        </tr>
+                                        <tr>
+                                            <th style="text-align: center">Loại</th>
+                                            <td>
+                                                <select>
+                                                    <c:forEach items="${listS}" var="s">
+                                                        <option>${s.subcate_name}</option>   
+                                                    </c:forEach>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th style="text-align: center">Thương hiệu</th>
+                                            <td>
+                                                <select>
+                                                    <c:forEach items="${listB}" var="b">
+                                                        <option>${b.brandName}</option>   
+                                                    </c:forEach>
+                                                </select>
+                                            </td>
+                                        </tr>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach items="${list}" var="order">
-                                            <tr>
-                                                <th scope="row">${order.orderId}</th>
-                                                <td>${order.p.productName}</td>
-                                                <td>${order.quantity}</td>
-                                                <td><img style="height: 70px;" class="img-responsive" src="${order.p.url}"></td>
-                                                <td>${order.productPrice}</td>
-                                            </tr>
-                                        </c:forEach> 
                                     </tbody>
                                 </table>
                             </div>
 
-                            <a class="btn btn-primary px-3" href="dashboard" role="button" style="margin:50px;">Back </a>
+                            <a class="btn btn-primary px-3" href="productmanager" role="button" style="margin:50px;">Back </a>
                         </div>
                     </div>
                 </div>

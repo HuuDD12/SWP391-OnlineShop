@@ -174,6 +174,96 @@ public class OrderDAO extends DBcontext.DBContext {
         return 0;
     }
 
+    public int countOrderWaiting(int sid) {
+        String query = "select count(*) from Orders o join Order_Status os\n"
+                + "on o.Status = os.ID\n"
+                + "where o.UserID = ? and os.ID = 1";
+        try {
+
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, sid);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+
+        }
+        return 0;
+    }
+
+    public int countOrderPacking(int sid) {
+        String query = "select count(*) from Orders o join Order_Status os\n"
+                + "on o.Status = os.ID\n"
+                + "where o.UserID = ? and os.ID = 2";
+        try {
+
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, sid);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+
+        }
+        return 0;
+    }
+
+    public int countOrderDelivery(int sid) {
+        String query = "select count(*) from Orders o join Order_Status os\n"
+                + "on o.Status = os.ID\n"
+                + "where o.UserID = ? and os.ID = 3";
+        try {
+
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, sid);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+
+        }
+        return 0;
+    }
+
+    public int countOrderCanceled(int sid) {
+        String query = "select count(*) from Orders o join Order_Status os\n"
+                + "on o.Status = os.ID\n"
+                + "where o.UserID = ? and os.ID = 4";
+        try {
+
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, sid);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+
+        }
+        return 0;
+    }
+
+    public int countOrderComplete(int sid) {
+        String query = "select count(*) from Orders o join Order_Status os\n"
+                + "on o.Status = os.ID\n"
+                + "where o.UserID = ? and os.ID = 5";
+        try {
+
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, sid);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+
+        }
+        return 0;
+    }
+
     public List<Order> getBillByDay() {
         List<Order> list = new ArrayList<>();
         String sql = "SELECT * from Orders inner join Users on Orders.UserID = Users.UserID where [Date] = cast(getdate() as Date)";
@@ -207,7 +297,64 @@ public class OrderDAO extends DBcontext.DBContext {
         }
         return list;
     }
-    
+
+    public List<Order> getAllDelivering() {
+        List<Order> list = new ArrayList<>();
+        String sql = "SELECT * from Orders inner join Users on Orders.UserID = Users.UserID\n"
+                + "inner join Order_Status os on Orders.Status = os.ID\n"
+                + "where os.ID = 3";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Account u = new Account(rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getInt(12), rs.getInt(13));
+                OrderStatus os = new OrderStatus(rs.getInt(14), rs.getString(15));
+                list.add(new Order(rs.getInt(1), rs.getInt(2), rs.getDouble(3), rs.getString(4), rs.getInt(5),
+                        rs.getString(6), rs.getInt(7), u, os));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<Order> getAllComplete() {
+        List<Order> list = new ArrayList<>();
+        String sql = "SELECT * from Orders inner join Users on Orders.UserID = Users.UserID\n"
+                + "inner join Order_Status os on Orders.Status = os.ID\n"
+                + "where os.ID = 5";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Account u = new Account(rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getInt(12), rs.getInt(13));
+                OrderStatus os = new OrderStatus(rs.getInt(14), rs.getString(15));
+                list.add(new Order(rs.getInt(1), rs.getInt(2), rs.getDouble(3), rs.getString(4), rs.getInt(5),
+                        rs.getString(6), rs.getInt(7), u, os));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<Order> getAllCanceled() {
+        List<Order> list = new ArrayList<>();
+        String sql = "SELECT * from Orders inner join Users on Orders.UserID = Users.UserID\n"
+                + "inner join Order_Status os on Orders.Status = os.ID\n"
+                + "where os.ID = 4";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Account u = new Account(rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getInt(12), rs.getInt(13));
+                OrderStatus os = new OrderStatus(rs.getInt(14), rs.getString(15));
+                list.add(new Order(rs.getInt(1), rs.getInt(2), rs.getDouble(3), rs.getString(4), rs.getInt(5),
+                        rs.getString(6), rs.getInt(7), u, os));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
     public void OrderAction(int orderID, String action) {
         String query = "";
         switch (action) {
@@ -219,17 +366,29 @@ public class OrderDAO extends DBcontext.DBContext {
                 query = "update Orders set Status = 4 \n"
                         + "where ID =  ? ";
                 break;
+            case "done":
+                query = "update Orders set Status = 3 \n"
+                        + "where ID =  ? ";
+                break;
+            case "complete":
+                query = "update Orders set Status = 5 \n"
+                        + "where ID =  ? ";
+                break;
+            case "refuse":
+                query = "update Orders set Status = 4 \n"
+                        + "where ID =  ? ";
+                break;
         }
 
         try {
-      
+
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, orderID);
             ps.executeUpdate();
         } catch (Exception e) {
         }
     }
-    
+
     public static void main(String[] args) {
         OrderDAO o = new OrderDAO();
         List<Order> list = o.getAllBill();
