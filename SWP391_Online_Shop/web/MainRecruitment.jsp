@@ -13,13 +13,12 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <body>
         <header>
-            <a href="${pageContext.request.contextPath}/productlist">
-                    <img class="logo" src="assets/corporate/img/logos/Logo1.png" alt="Online Shop" style="width: 150px; margin: 20px 20px"></a>
+      
             <ul class="main-nav">
                 <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
                 <li><a href="${pageContext.request.contextPath}/product?page=1&query=&subcategory=0&brand=0&price=0&sortType=0&sortMode=0">
                         Product</a></li>
-                <li><a href="AboutShope.jsp">About Shope</a></li>
+                <li><a href="AboutShope.jsp"> About Super Shop</a></li>
             </ul>
             <div class="clearfix"></div>
             <div class="row">
@@ -31,7 +30,7 @@
         <hr>
                 <div class="w3-content" style="max-width:1200px">
                     <a href="Recruitment.jsp"><img class="mySlides" src="resources/td.png" style="width:100%;display:none"></a>
-                    <a href="Recruitment2.jsp"><img class="mySlides" src="resources/td2.png" style="width:100%"></a>
+                    <a href="Recruitment2.jsp"><img class="mySlides" src="resources/td2.jpg" style="width:100%"></a>
                     <a href="Recruitment3.jsp"><img class="mySlides" src="resources/td3.png" style="width:100%;display:none"></a>
         
                     <div class="w3-row-padding w3-section">
@@ -39,7 +38,7 @@
                             <img class="demo w3-opacity w3-hover-opacity-off" src="resources/td.png" style="width:100%;cursor:pointer" onclick="currentDiv(1)">
                         </div>
                         <div class="w3-col s4">
-                            <img class="demo w3-opacity w3-hover-opacity-off" src="resources/td2.png" style="width:100%;cursor:pointer" onclick="currentDiv(2)">
+                            <img class="demo w3-opacity w3-hover-opacity-off" src="resources/td2.jpg" style="width:100%;cursor:pointer" onclick="currentDiv(2)">
                         </div>
                         <div class="w3-col s4">
                             <img class="demo w3-opacity w3-hover-opacity-off" src="resources/td3.png" style="width:100%;cursor:pointer" onclick="currentDiv(3)">
@@ -47,7 +46,7 @@
                     </div>
                 </div>
                 <br><hr><br>
-                 Copyright 
+      
                 <div class="text-center">
                     © 2021 Copyright:
                     <a class="text-white" href="#">SWP391 - JS1601</a>
