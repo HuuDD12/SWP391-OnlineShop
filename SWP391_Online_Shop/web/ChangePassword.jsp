@@ -107,8 +107,8 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                         <!-- BEGIN CONTENT -->
                         <div class="col-md-9 col-sm-7">    
                         <c:if test="${check == 0}">
-                            <c:if test="${mess == 1}"><a class="alert-link alert-warning">Wrong PassWord</a> <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button></c:if>
-                            <c:if test="${mess == 2}"><a class="alert-link alert-warning">Confirm Password false</a> <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button></c:if>
+                            <c:if test="${mess == 1}"><a class="alert-link alert-warning">Wrong Password</a> <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button></c:if>
+                            <c:if test="${mess == 2}"><a class="alert-link alert-warning">Confirm Password False</a> <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button></c:if>
                         </c:if>
                         <div class="col-md-12" style="padding: 0;">
                             <form action="ChangePasswordControl" method="post">

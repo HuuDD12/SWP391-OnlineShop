@@ -44,7 +44,6 @@ public class DashBoardControl extends HttpServlet {
        try {
             HttpSession session = request.getSession();
             Account acc = (Account) session.getAttribute("acc");
-            if (acc.getRoleId() == 1) {
                 ProductDAO dao = new ProductDAO();
                 OrderDAO odao = new OrderDAO();
                 UserDAO udao = new UserDAO();
@@ -61,10 +60,7 @@ public class DashBoardControl extends HttpServlet {
                 request.setAttribute("bill", countorder);
                 request.setAttribute("low", countproductlow);
                 request.setAttribute("billbyday", billbyday);
-                request.getRequestDispatcher("DashBoard.jsp").forward(request, response);
-            } else {
-                response.sendRedirect("login");
-            }
+                request.getRequestDispatcher("AdminDashBoard.jsp").forward(request, response);            
         } catch (Exception e) {
 
         }

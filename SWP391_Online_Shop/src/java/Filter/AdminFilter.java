@@ -24,22 +24,22 @@ import javax.servlet.http.HttpSession;
  *
  * @author Admin
  */
-public class AuthenticationFilter implements Filter {
-
+public class AdminFilter implements Filter {
+    
     private static final boolean debug = true;
 
     // The filter configuration object we are associated with.  If
     // this value is null, this filter instance is not currently
     // configured. 
     private FilterConfig filterConfig = null;
-
-    public AuthenticationFilter() {
-    }
-
+    
+    public AdminFilter() {
+    }    
+    
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("AuthenticationFilter:DoBeforeProcessing");
+            log("AdminFilter:DoBeforeProcessing");
         }
 
         // Write code here to process the request and/or response before
@@ -62,12 +62,12 @@ public class AuthenticationFilter implements Filter {
 	    log(buf.toString());
 	}
          */
-    }
-
+    }    
+    
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("AuthenticationFilter:DoAfterProcessing");
+            log("AdminFilter:DoAfterProcessing");
         }
 
         // Write code here to process the request and/or response after
@@ -101,15 +101,46 @@ public class AuthenticationFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
+        
+      if (debug) {
+            log("AdminFilter:doFilter()");
+        }
+        
+        doBeforeProcessing(request, response);
+        
+        Throwable problem = null;
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
+        try {
+            HttpSession session = req.getSession();
+            Account u=(Account) session.getAttribute("acc");
+            if(u!=null)
+                if( u.getRoleId()==1 )
+                    chain.doFilter(request, response);
+                else
+                    res.sendRedirect(req.getContextPath()+"/AccessError.jsp");
+                else 
+                res.sendRedirect(req.getContextPath()+"/LoginHere.jsp");
+        } catch (Throwable t) {
+            // If an exception is thrown somewhere down the filter chain,
+            // we still want to execute our after processing, and then
+            // rethrow the problem after that.
+            problem = t;
+            t.printStackTrace();
+        }
+        
+        doAfterProcessing(request, response);
 
-        HttpSession session = req.getSession();
-        Account u = (Account) session.getAttribute("acc");
-        if (u != null) {
-            chain.doFilter(request, response);
-        } else {
-            res.sendRedirect(req.getContextPath() + "/LoginHere.jsp");
+        // If there was a problem, we want to rethrow it if it is
+        // a known type, otherwise log it.
+        if (problem != null) {
+            if (problem instanceof ServletException) {
+                throw (ServletException) problem;
+            }
+            if (problem instanceof IOException) {
+                throw (IOException) problem;
+            }
+            sendProcessingError(problem, response);
         }
     }
 
@@ -132,17 +163,17 @@ public class AuthenticationFilter implements Filter {
     /**
      * Destroy method for this filter
      */
-    public void destroy() {
+    public void destroy() {        
     }
 
     /**
      * Init method for this filter
      */
-    public void init(FilterConfig filterConfig) {
+    public void init(FilterConfig filterConfig) {        
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
-            if (debug) {
-                log("AuthenticationFilter:Initializing filter");
+            if (debug) {                
+                log("AdminFilter:Initializing filter");
             }
         }
     }
@@ -153,27 +184,27 @@ public class AuthenticationFilter implements Filter {
     @Override
     public String toString() {
         if (filterConfig == null) {
-            return ("AuthenticationFilter()");
+            return ("AdminFilter()");
         }
-        StringBuffer sb = new StringBuffer("AuthenticationFilter(");
+        StringBuffer sb = new StringBuffer("AdminFilter(");
         sb.append(filterConfig);
         sb.append(")");
         return (sb.toString());
     }
-
+    
     private void sendProcessingError(Throwable t, ServletResponse response) {
-        String stackTrace = getStackTrace(t);
-
+        String stackTrace = getStackTrace(t);        
+        
         if (stackTrace != null && !stackTrace.equals("")) {
             try {
                 response.setContentType("text/html");
                 PrintStream ps = new PrintStream(response.getOutputStream());
-                PrintWriter pw = new PrintWriter(ps);
+                PrintWriter pw = new PrintWriter(ps);                
                 pw.print("<html>\n<head>\n<title>Error</title>\n</head>\n<body>\n"); //NOI18N
 
                 // PENDING! Localize this for next official release
-                pw.print("<h1>The resource did not process correctly</h1>\n<pre>\n");
-                pw.print(stackTrace);
+                pw.print("<h1>The resource did not process correctly</h1>\n<pre>\n");                
+                pw.print(stackTrace);                
                 pw.print("</pre></body>\n</html>"); //NOI18N
                 pw.close();
                 ps.close();
@@ -190,7 +221,7 @@ public class AuthenticationFilter implements Filter {
             }
         }
     }
-
+    
     public static String getStackTrace(Throwable t) {
         String stackTrace = null;
         try {
@@ -204,9 +235,9 @@ public class AuthenticationFilter implements Filter {
         }
         return stackTrace;
     }
-
+    
     public void log(String msg) {
-        filterConfig.getServletContext().log(msg);
+        filterConfig.getServletContext().log(msg);        
     }
-
+    
 }

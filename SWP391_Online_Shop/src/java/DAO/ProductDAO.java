@@ -606,7 +606,6 @@ public class ProductDAO extends DBcontext.DBContext {
     public void deleteProduct(String cid) {
         String query = "delete from ProductImg where ProductID = ?";
         try {
-
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, cid);
             ps.executeUpdate();

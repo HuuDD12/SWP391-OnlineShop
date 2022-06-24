@@ -53,15 +53,27 @@
                         <li><a href="LoginHere.jsp"><i class="fa fa-lock"></i>Login</a></li>
                         </c:if>
                         <c:if test="${sessionScope.acc != null}">
-                        <li class="nav-item d-block d-lg-none">
-                            <a class="nav-link d-inline-block" href="notification?nid=${sessionScope.acc.userId}" role="button" data-bs-toggle="offcanvas" data-bs-target="#notification" aria-controls="offcanvasRight"><i class="fa fa-bell"></i>
-
-                                <span class="position-relative translate-middle badge rounded-pill bg-danger">
-                                    ${unreadnoti}
-                                </span> 
-                            </a>                           
+                        <!--                        <li class="nav-item d-block d-lg-none">
+                                                    <a class="nav-link d-inline-block" href="notification?nid=${sessionScope.acc.userId}" role="button" data-bs-toggle="offcanvas" data-bs-target="#notification" aria-controls="offcanvasRight"><i class="fa fa-bell"></i>
+                        
+                                                        <span class="position-relative translate-middle badge rounded-pill bg-danger">
+                        ${unreadnoti}
+                    </span> 
+                </a>                           
+            </li>-->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link" href="notification?nid=${sessionScope.acc.userId}" target="_blank" rel="noopener" aria-label="GitHub">
+                                <i class="fa fa-lg fa-bell"></i>
+                                <span style=" position: relative;
+                                      top: -10px;
+                                      right: 17px;
+                                      border: white 1px solid;
+                                      background-color: red;
+                                      padding: 3px;" class=" badge badge-danger">${unreadnoti}</span>
+                            </a>
                         </li>
                     </c:if>
+
                 </ul>
             </div>
             <!-- END TOP BAR MENU -->
@@ -131,13 +143,13 @@
                             <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ManagerAccountInfo?cid=${sessionScope.acc.getUserId()}">View profile</a></li>  
                             <!-- Admin -->
                             <c:if test="${sessionScope.acc.getRoleId() ==  1}">                               
-                                <li><a href="dashboard">DashBoard</a></li>
+                                <li><a href="${pageContext.request.contextPath}/dashboard">DashBoard</a></li>
                                 </c:if>
                             <!-- Seller -->
                             <c:if test="${sessionScope.acc.getRoleId() ==  2}">
                                 <li><a  href="${pageContext.request.contextPath}/Dashboard">DashBoard</a></li>
                                 </c:if>
-                                
+
                             <!-- Marketing -->
                             <!-- Customer -->
                             <c:if test="${sessionScope.acc.getRoleId() ==  3}">                               
