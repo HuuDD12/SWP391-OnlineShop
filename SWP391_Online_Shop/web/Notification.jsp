@@ -60,7 +60,9 @@
                                             <p><b>System</b> reply your Feedback</p><br>
                                             <p class="text-muted">${o.content}</p>
                                             <p class="text-muted"><small>${o.time}</small></p>
-                                            <p><a href="markasread?nid=${o.id}&uid=${sessionScope.acc.userId}">Mark As Read</a></p>
+                                            <c:if test="${o.status == 0}">
+                                                <p><a href="markasread?nid=${o.id}&uid=${sessionScope.acc.userId}">Mark As Read</a></p>
+                                            </c:if>
                                         </div>
 
                                     </div>
@@ -76,7 +78,9 @@
                                             <p><b>System</b> sent a message to you</p><br>
                                             <p class="text-muted">${o.content}</p>
                                             <p class="text-muted"><small>${o.time}</small></p>
-                                            <p><a href="markasread?nid=${o.id}&uid=${sessionScope.acc.userId}">Mark As Read</a></p>
+                                            <c:if test="${o.status == 0}">
+                                                <p><a href="markasread?nid=${o.id}&uid=${sessionScope.acc.userId}">Mark As Read</a></p>
+                                            </c:if>
                                         </div>
 
                                     </div>

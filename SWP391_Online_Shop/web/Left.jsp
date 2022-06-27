@@ -30,8 +30,8 @@
             <h3>Price</h3>
             <div id="slider-range" class="price-filter-range" name="rangeInput"></div></br>
             <label for="amount">Range:</label><br>
-            <input name="min" type="number" min=0 max="299999" oninput="validity.valid||(value='0');" id="min_price" class="price-range-field" />                         
-            <input name="max" type="number" min=1 max="300000" oninput="validity.valid||(value='300000');" id="max_price" class="price-range-field" /></br></br>
+            <input name="min" type="number" min=0 max="5000000" oninput="validity.valid||(value='0');" id="min_price" class="price-range-field" />                         
+            <input name="max" type="number" min=1 max="10000000" oninput="validity.valid||(value='10000000');" id="max_price" class="price-range-field" /></br></br>
             <button class="price-range-search" id="price-range-submit">Search</button></br>
         </form>
 

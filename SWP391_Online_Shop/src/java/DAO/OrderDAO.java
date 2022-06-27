@@ -388,10 +388,28 @@ public class OrderDAO extends DBcontext.DBContext {
         } catch (Exception e) {
         }
     }
-
+    
+    public List<Order> getAllBillById(String uid) {
+        List<Order> list = new ArrayList<>();
+        String sql = "SELECT * from Orders inner join Users on Orders.UserID = Users.UserID \n" +
+"                inner join Order_Status os on Orders.Status = os.ID where Orders.UserID = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, uid);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Account u = new Account(rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getInt(12), rs.getInt(13));
+                OrderStatus os = new OrderStatus(rs.getInt(14), rs.getString(15));
+                list.add(new Order(rs.getInt(1), rs.getInt(2), rs.getDouble(3), rs.getString(4), rs.getInt(5),
+                        rs.getString(6), rs.getInt(7), u, os));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
     public static void main(String[] args) {
         OrderDAO o = new OrderDAO();
-        List<Order> list = o.getAllBill();
+        List<Order> list = o.getAllBillById("1");
         for (Order order : list) {
             System.out.println(order);
         }

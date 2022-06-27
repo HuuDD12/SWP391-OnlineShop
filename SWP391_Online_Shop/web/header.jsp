@@ -154,7 +154,7 @@
                             <!-- Customer -->
                             <c:if test="${sessionScope.acc.getRoleId() ==  3}">                               
                                 <li><a href="${pageContext.request.contextPath}/sendfeedback">FeedBack</a></li>
-                                <li><a href="${pageContext.request.contextPath}/purchase?sid=${sessionScope.acc.getUserId()}">Purchase order</a></li>
+                                <li><a href="${pageContext.request.contextPath}/orderinfo">Order Information</a></li>
 
                             </c:if>
                             <c:if test="${sessionScope.acc.getRoleId() ==  4}">

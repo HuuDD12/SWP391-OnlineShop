@@ -113,7 +113,7 @@ public class CheckoutControl extends HttpServlet {
         int shippingId = new ShippingDAO().createReturnId(shipping); //trả về Id tự tăng của bản ghi vừa lưu vào database
 
         //lưu Order
-        Order order = new Order(1, totalMoney, 1, note, shippingId);
+        Order order = new Order(Integer.parseInt(acc.getUserId()), totalMoney, 1, note, shippingId);
         int orderId = new OrderDAO().createReturnId(order);
 
         //lưu OrderDetail
