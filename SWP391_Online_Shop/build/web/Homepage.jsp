@@ -9,6 +9,8 @@
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
+    <link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon">
+
     <title>Metronic Shop UI</title>
 
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -159,7 +161,7 @@
                             <div>
                                 <div class="product-item">
                                     <div class="pi-img-wrapper">
-                                            <img src= "${o.url}" class="img-responsive" alt="Berry Lace Dress">
+                                        <img src= "${o.url}" class="img-responsive" alt="Berry Lace Dress">
                                         <div>
                                             <a href="${o.url}" class="btn btn-default fancybox-button">Zoom</a>
                                             <a href="" class="btn btn-default fancybox-fast-view">View</a>
