@@ -14,7 +14,7 @@
         <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <style href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" > </style>
 
-        <link rel="shortcut icon" href="favicon.ico">
+        <link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon">
 
         <!-- Fonts START -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">

@@ -29,6 +29,7 @@
         <link href="assets/corporate/css/style-responsive.css" rel="stylesheet">
         <link href="assets/corporate/css/themes/red.css" rel="stylesheet" id="style-color">
         <link href="assets/corporate/css/custom.css" rel="stylesheet">
+        <link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon">
         <!-- Theme styles END -->
     </head>
     <body style="background: purple; height: 100%;">

@@ -26,6 +26,7 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
         <link rel="stylesheet" href="css/styles.css" type="text/css">
+        <link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon">
     </head>
 
     <body onload="time()" class="app sidebar-mini rtl">

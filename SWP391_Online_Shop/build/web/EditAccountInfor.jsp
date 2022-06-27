@@ -24,6 +24,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 
     <!-- Head BEGIN -->
     <head>
+        <link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon">
         <meta charset="utf-8">
         <title>My Account | Metronic Shop UI</title>
 

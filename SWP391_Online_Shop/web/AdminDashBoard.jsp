@@ -10,6 +10,7 @@
 <html lang="en">
 
     <head>
+        <link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon">
         <title>Quản trị Admin</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,26 +47,26 @@
         <!-- Sidebar menu-->
         <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
         <jsp:include page="DashBoardNav.jsp"></jsp:include>
-        <main class="app-content">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="app-title">
-                        <ul class="app-breadcrumb breadcrumb">
-                            <li class="breadcrumb-item"><a href="#" style="text-decoration: none" ><b>Bảng điều khiển</b></a></li>
-                        </ul>
-                        <div id="clock"></div>
+            <main class="app-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="app-title">
+                            <ul class="app-breadcrumb breadcrumb">
+                                <li class="breadcrumb-item"><a href="#" style="text-decoration: none" ><b>Bảng điều khiển</b></a></li>
+                            </ul>
+                            <div id="clock"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 col-lg-12">
-                    <div class="row">
-                        <!-- col-6 -->
-                        <div class="col-md-6">
-                            <div class="widget-small primary coloured-icon"><i class='icon bx bxs-user-account fa-3x'></i>
-                                <div class="info">
-                                    <h4>Tổng khách hàng</h4>
-                                    <p><b>${user} khách hàng</b></p>
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <div class="row">
+                            <!-- col-6 -->
+                            <div class="col-md-6">
+                                <div class="widget-small primary coloured-icon"><i class='icon bx bxs-user-account fa-3x'></i>
+                                    <div class="info">
+                                        <h4>Tổng khách hàng</h4>
+                                        <p><b>${user} khách hàng</b></p>
                                     <p class="info-tong">Tổng số khách hàng được quản lý.</p>
                                 </div>
                             </div>

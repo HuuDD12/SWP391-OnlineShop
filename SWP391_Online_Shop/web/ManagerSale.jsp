@@ -14,6 +14,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Main CSS-->
+        <link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon">
         <link href="css/main_2.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
         <!-- or -->

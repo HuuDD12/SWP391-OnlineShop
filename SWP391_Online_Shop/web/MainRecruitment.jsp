@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Shop</title>
+    
     <!--CSS-->
     <link href="css/AboutShope.css" rel="stylesheet" type="text/css"/> 
     <!--ICON-->

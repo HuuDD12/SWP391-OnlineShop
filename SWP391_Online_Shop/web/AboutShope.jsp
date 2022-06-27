@@ -9,6 +9,8 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon">
+
         <title>Online Shop</title>
         <!--CSS-->
         <link href="css/aboutshop.css" rel="stylesheet" type="text/css"/> 
@@ -17,13 +19,13 @@
     </head>
     <body>
         <header>
-                <a href="${pageContext.request.contextPath}/productlist">
-                    <img class="logo" src="assets/corporate/img/logos/Logo1.png" alt="Online Shop" style="width: 150px; margin: 20px 20px"></a>
-                <ul class="main-nav">
-                    <li><a href="productlist" style="color: wheat">Home</a></li>
-                    <li><a href="${pageContext.request.contextPath}/productlist" style="color: wheat">
-                            Product</a></li>
-                </ul>
+            <a href="${pageContext.request.contextPath}/productlist">
+                <img class="logo" src="assets/corporate/img/logos/Logo1.png" alt="Online Shop" style="width: 150px; margin: 20px 20px"></a>
+            <ul class="main-nav">
+                <li><a href="productlist" style="color: wheat">Home</a></li>
+                <li><a href="${pageContext.request.contextPath}/productlist" style="color: wheat">
+                        Product</a></li>
+            </ul>
             <div class="clearfix"></div>
             <div class="row">
                 <div class="heading-main-box">

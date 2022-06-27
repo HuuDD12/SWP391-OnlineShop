@@ -9,7 +9,9 @@
 <html lang="en">
 
     <head>
-         <meta charset="utf-8">
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon">
+
         <title>Men category | Metronic Shop UI</title>
 
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -51,7 +53,7 @@
         <link href="assets/corporate/css/style-responsive.css" rel="stylesheet">
         <link href="assets/corporate/css/themes/red.css" rel="stylesheet" id="style-color">
         <link href="assets/corporate/css/custom.css" rel="stylesheet">
-        
+
         <style>
             * {
                 -webkit-box-sizing: border-box;
@@ -156,15 +158,15 @@
 
     <body>
         <jsp:include page="header.jsp"></jsp:include>
-        <div id="notfound">
-            <div class="notfound">
-                <div class="notfound-404">
-                    <h1>Oops!</h1>
+            <div id="notfound">
+                <div class="notfound">
+                    <div class="notfound-404">
+                        <h1>Oops!</h1>
+                    </div>
+                    <h2>You do not have permission to access</h2>       
+                    <a href="productlist">Go To Homepage</a>
                 </div>
-                <h2>You do not have permission to access</h2>       
-                <a href="productlist">Go To Homepage</a>
             </div>
-        </div>
         <jsp:include page="footer.jsp"></jsp:include>
 
     </body><!-- This templates was made by Colorlib (https://colorlib.com) -->

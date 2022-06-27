@@ -18,6 +18,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
 <!-- Head BEGIN -->
 <head>
   <meta charset="utf-8">
+  <link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon">
   <title>Cool green dress with red bell | Metronic Shop UI</title>
 
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
