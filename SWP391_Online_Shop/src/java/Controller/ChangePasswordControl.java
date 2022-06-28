@@ -94,6 +94,7 @@ public class ChangePasswordControl extends HttpServlet {
         } else {
             if (newpass.equals(confirmpass)) {
                 HttpSession session = request.getSession();
+                 dao.UpdatePassWordUser(newpass, username, oldpass);
                 session.removeAttribute("acc");
                 session.removeAttribute("carts");
                 response.sendRedirect("productlist");
