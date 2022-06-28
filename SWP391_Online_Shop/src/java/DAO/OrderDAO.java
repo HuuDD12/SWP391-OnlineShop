@@ -33,7 +33,7 @@ public class OrderDAO extends DBcontext.DBContext {
                 + "           ,[Date]\n"
                 + "           ,[ShippingID])\n"
                 + "     VALUES\n"
-                + "           (?,?,?,?,GETDATE(),?)";
+                + "           (?,?,?,?,'2022-07-12',?)";
         Connection conn;
         try {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);

@@ -499,7 +499,55 @@ public class ProductDAO extends DBcontext.DBContext {
                 + "MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n"
                 + "MIN(ProI.ProductImgURL) AS ProductImgURL FROM \n"
                 + "dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t where t.ProductName like ? ";
+
         List<Product> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, "%" + txtSearch + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("productID"),
+                        rs.getString("ProductName"),
+                        rs.getString("Description"),
+                        rs.getDouble("OriginalPrice"),
+                        rs.getDouble("SalePrice"),
+                        rs.getInt("SubCategoryID"),
+                        rs.getInt("Amount"),
+                        rs.getInt("BrandID"),
+                        rs.getInt("sell_id"),
+                        rs.getString("ProductImgURL"));
+                list.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Product> searchAdvance(String txtSearch, int sort) {
+        String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
+                + "MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
+                + "MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n"
+                + "MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n"
+                + "MIN(ProI.ProductImgURL) AS ProductImgURL FROM \n"
+                + "dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t where t.ProductName like ? ";
+        List<Product> list = new ArrayList<>();
+        switch (sort) {
+            case 0:
+                break;
+            case 1:
+                sql += " order by t.ProductName  ";
+                break;
+            case 2:
+                sql += " order by t.ProductName desc ";
+                break;
+            case 3:
+                sql += " order by SalePrice ";
+                break;
+            case 4:
+                sql += " order by SalePrice desc";
+                break;
+        }
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, "%" + txtSearch + "%");
@@ -628,7 +676,7 @@ public class ProductDAO extends DBcontext.DBContext {
 
         }
     }
-    
+
     public static void main(String[] args) {
         ProductDAO pdao = new ProductDAO();
         List<Product> list = pdao.getAll();

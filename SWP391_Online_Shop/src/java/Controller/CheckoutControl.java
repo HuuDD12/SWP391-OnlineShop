@@ -107,7 +107,7 @@ public class CheckoutControl extends HttpServlet {
 
         }
         //lưu vào database
-
+        
         //lưu Shipping
         Shipping shipping = new Shipping(name, address, phone);
         int shippingId = new ShippingDAO().createReturnId(shipping); //trả về Id tự tăng của bản ghi vừa lưu vào database

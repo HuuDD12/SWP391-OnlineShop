@@ -41,170 +41,164 @@
         <!-- Sidebar menu-->
         <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
         <jsp:include page="DashBoardNav.jsp"></jsp:include>
-        <main class="app-content">
-            <div class="app-title">
-                <ul class="app-breadcrumb breadcrumb side">
-                    <li class="breadcrumb-item active"><a href="#" style="text-decoration: none"><b>Danh sách Chart </b></a></li>
-                </ul>
-                <div id="clock"></div>
+            <main class="app-content">
+                <div class="app-title">
+                    <ul class="app-breadcrumb breadcrumb side">
+                        <li class="breadcrumb-item active"><a href="#" style="text-decoration: none"><b>Danh sách Chart </b></a></li>
+                    </ul>
+                    <div id="clock"></div>
+                </div>
+                <div class="container-fluid px-4">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-chart-area me-1"></i>
+                            Area Chart 
+                        </div>
+                        <div class="card-body">
+                            <canvas id="myAreaChart" width="100%" height="30"></canvas>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-chart-bar me-1"></i>
+                                    Bar Chart 
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="myBarChart" width="100%" height="50"></canvas>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>              
             </div>
-            <div class="container-fluid px-4">
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <i class="fas fa-chart-area me-1"></i>
-                        Area Chart Example
-                    </div>
-                    <div class="card-body">
-                        <canvas id="myAreaChart" width="100%" height="30"></canvas>
-                    </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-chart-bar me-1"></i>
-                                Bar Chart Example
-                            </div>
-                            <div class="card-body">
-                                <canvas id="myBarChart" width="100%" height="50"></canvas>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-chart-pie me-1"></i>
-                                Pie Chart Example
-                            </div>
-                            <div class="card-body">
-                                <canvas id="myPieChart" width="100%" height="50"></canvas>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>              
-        </div>
-    </main>
-    <!-- Essential javascripts for application to work-->
-    <script src="admin/js/jquery-3.2.1.min.js"></script>
-    <script src="admin/js/popper.min.js"></script>
-    <script src="admin/js/bootstrap.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="admin/js/main.js"></script>
-    <!-- The javascript plugin to display page loading on top-->
-    <script src="admin/js/plugins/pace.min.js"></script>
-    <!-- Page specific javascripts-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-    <!-- Data table plugin-->
-    <script type="text/javascript" src="admin/js/plugins/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="admin/js/plugins/dataTables.bootstrap.min.js"></script>
-    <script type="text/javascript">$('#sampleTable').DataTable();</script>
-    <script>
-        //Thời Gian
-        function time() {
-            var today = new Date();
-            var weekday = new Array(7);
-            weekday[0] = "Chủ Nhật";
-            weekday[1] = "Thứ Hai";
-            weekday[2] = "Thứ Ba";
-            weekday[3] = "Thứ Tư";
-            weekday[4] = "Thứ Năm";
-            weekday[5] = "Thứ Sáu";
-            weekday[6] = "Thứ Bảy";
-            var day = weekday[today.getDay()];
-            var dd = today.getDate();
-            var mm = today.getMonth() + 1;
-            var yyyy = today.getFullYear();
-            var h = today.getHours();
-            var m = today.getMinutes();
-            var s = today.getSeconds();
-            m = checkTime(m);
-            s = checkTime(s);
-            nowTime = h + " giờ " + m + " phút " + s + " giây";
-            if (dd < 10) {
-                dd = '0' + dd
-            }
-            if (mm < 10) {
-                mm = '0' + mm
-            }
-            today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-            tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-                    '</span>';
-            document.getElementById("clock").innerHTML = tmp;
-            clocktime = setTimeout("time()", "1000", "Javascript");
-
-            function checkTime(i) {
-                if (i < 10) {
-                    i = "0" + i;
+        </main>
+        <!-- Essential javascripts for application to work-->
+        <script src="admin/js/jquery-3.2.1.min.js"></script>
+        <script src="admin/js/popper.min.js"></script>
+        <script src="admin/js/bootstrap.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="admin/js/main.js"></script>
+        <!-- The javascript plugin to display page loading on top-->
+        <script src="admin/js/plugins/pace.min.js"></script>
+        <!-- Page specific javascripts-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+        <!-- Data table plugin-->
+        <script type="text/javascript" src="admin/js/plugins/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="admin/js/plugins/dataTables.bootstrap.min.js"></script>
+        <script type="text/javascript">$('#sampleTable').DataTable();</script>
+        <script>
+            //Thời Gian
+            function time() {
+                var today = new Date();
+                var weekday = new Array(7);
+                weekday[0] = "Chủ Nhật";
+                weekday[1] = "Thứ Hai";
+                weekday[2] = "Thứ Ba";
+                weekday[3] = "Thứ Tư";
+                weekday[4] = "Thứ Năm";
+                weekday[5] = "Thứ Sáu";
+                weekday[6] = "Thứ Bảy";
+                var day = weekday[today.getDay()];
+                var dd = today.getDate();
+                var mm = today.getMonth() + 1;
+                var yyyy = today.getFullYear();
+                var h = today.getHours();
+                var m = today.getMinutes();
+                var s = today.getSeconds();
+                m = checkTime(m);
+                s = checkTime(s);
+                nowTime = h + " giờ " + m + " phút " + s + " giây";
+                if (dd < 10) {
+                    dd = '0' + dd
                 }
-                return i;
-            }
-        }
-        //In dữ liệu
-        var myApp = new function () {
-            this.printTable = function () {
-                var tab = document.getElementById('sampleTable');
-                var win = window.open('', '', 'height=700,width=700');
-                win.document.write(tab.outerHTML);
-                win.document.close();
-                win.print();
-            }
-        }
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-    <script src="js/datatables-simple-demo.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="js/scripts.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-    <!--  Area -->
-    <script>
-        const labelsArea = [
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-        ];
+                if (mm < 10) {
+                    mm = '0' + mm
+                }
+                today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+                tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+                        '</span>';
+                document.getElementById("clock").innerHTML = tmp;
+                clocktime = setTimeout("time()", "1000", "Javascript");
 
-        const dataArea = {
-            labels: labelsArea,
-            datasets: [{
-                    label: 'My First dataset',
-                    backgroundColor: 'rgb(255, 99, 132)',
-                    borderColor: 'rgb(255, 99, 132)',
-                    data: [0, 10, 5, 2, 20, 30, 45],
-                }]
-        };
+                function checkTime(i) {
+                    if (i < 10) {
+                        i = "0" + i;
+                    }
+                    return i;
+                }
+            }
+            //In dữ liệu
+            var myApp = new function () {
+                this.printTable = function () {
+                    var tab = document.getElementById('sampleTable');
+                    var win = window.open('', '', 'height=700,width=700');
+                    win.document.write(tab.outerHTML);
+                    win.document.close();
+                    win.print();
+                }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <script src="js/datatables-simple-demo.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <!--  Area -->
+        <script>
+            const labelsArea = [
+                'January',
+                'February',
+                'March',
+                'April',
+                'May',
+                'June',
+                'July',
+                'August',
+                'September',
+                'October',
+                'November',
+                'December',
+            ];
 
-        const configArea = {
-            type: 'line',
-            data: dataArea,
-            options: {}
-        };
-        const myAreaChart = new Chart(
-                document.getElementById('myAreaChart'),
-                configArea
-                );
+            const dataArea = {
+                labels: labelsArea,
+                datasets: [{
+                        label: 'Tổng doanh thu theo tháng',
+                        backgroundColor: 'rgb(255, 99, 132)',
+                        borderColor: 'rgb(255, 99, 132)',
+                        data: [${totalPriceMonth1}, ${totalPriceMonth2}, ${totalPriceMonth3}, ${totalPriceMonth4}, ${totalPriceMonth5}, ${totalPriceMonth6}, ${totalPriceMonth7}, ${totalPriceMonth8}, ${totalPriceMonth9}, ${totalPriceMonth10}, ${totalPriceMonth11}, ${totalPriceMonth12}, ${totalPriceMonth5}],
+                    }]
+            };
+
+            const configArea = {
+                type: 'line',
+                data: dataArea,
+                options: {}
+            };
+            const myAreaChart = new Chart(
+                    document.getElementById('myAreaChart'),
+                    configArea
+                    );
     </script>
     <!-- Bar -->
     <script>
+        
         const labelsBar = [
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
+            <c:forEach items="${listC}" var="c">
+            '${c.cate_name}',
+            </c:forEach>
         ];
+        
+
         const dataBar = {
             labels: labelsBar,
             datasets: [{
-                    label: 'My First Dataset',
-                    data: [65, 59, 80, 81, 56, 55, 40],
+                    label: 'Tổng danh mục đã được đặt hàng',
+                    data: [${categoryOrder1.totalCategoryOrder}, ${categoryOrder2.totalCategoryOrder}, ${categoryOrder3.totalCategoryOrder}, ${categoryOrder4.totalCategoryOrder}, ${categoryOrder5.totalCategoryOrder}],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(255, 159, 64, 0.2)',

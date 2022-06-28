@@ -6,6 +6,7 @@
 package DAO;
 
 import Model.Cart;
+import Model.CategoryOrder;
 import Model.Order;
 import Model.OrderDetail;
 import Model.OrderStatus;
@@ -13,7 +14,10 @@ import Model.Product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -265,11 +269,63 @@ public class OrderDetailDAO extends DBcontext.DBContext {
         return list;
     }
 
-    public static void main(String[] args) {
-        OrderDetailDAO o = new OrderDetailDAO();
-        List<OrderDetail> od = o.getProductWaiting(4);
-        for (OrderDetail orderDetail : od) {
-            System.out.println(orderDetail);
+    public String totalPricePerMonth(int month) {
+        String query = "select totalPrice from \n"
+                + "                (select MONTH(date) as SalesMonth,\n"
+                + "                SUM(od.ProductPrice) as totalPrice\n"
+                + "                from [Orders] o , Order_Detail od\n"
+                + "                where o.ID = od.orderID\n"
+                + "                GROUP BY MONTH(date)) as t where t.SalesMonth = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, month);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String totalPrice = rs.getString("totalPrice");
+                return totalPrice;
+            }
+            ps.close();
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
+        return null;
+    }
+    
+    public int getMonth() {
+        Date date = new Date();
+        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        int month = localDate.getMonthValue();
+        return month;
+    }
+    
+    public CategoryOrder getTotalCategoryOrderByID(int ID) {
+        String query = "select t.* from  \n" +
+"                (select c.CategoryID,categoryName, COUNT(sc.categoryID) as totalCategoryOrder from Order_Detail od inner join product p \n" +
+"                on p.productID = od.productID left join SubCategory sc on p.SubCategoryID = sc.SubCategoryID right join category c on sc.CategoryID = c.CategoryID\n" +
+"                GROUP BY c.categoryID, c.categoryName) as t  \n" +
+"                where t.categoryID = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, ID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return new CategoryOrder(rs.getInt("categoryID"),
+                        rs.getString("categoryName"),
+                        rs.getInt("totalCategoryOrder"));
+            }
+            ps.close();
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return null;
+    }
+    public static void main(String[] args) {
+        OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
+        CategoryOrder co = orderDetailDAO.getTotalCategoryOrderByID(2);
+        System.out.println(co);
     }
 }

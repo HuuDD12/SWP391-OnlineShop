@@ -84,25 +84,25 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
         <!-- END BEGIN STYLE CUSTOMIZER --> 
 
         <jsp:include page="header.jsp"></jsp:include>
-        
-        <div class="container" style="min-height: 590px">
 
-            <div class="row">
-                <h1>Checkout</h1>
-                <div class="col-md-8" style="border: 1px solid #ccc; border-radius: 5px; padding: 1rem">
-                    <h3>List Products</h3>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Image</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Total Price</th>                             
-                            </tr>
-                        </thead>
-                        <tbody>
+            <div class="container" style="min-height: 590px">
+
+                <div class="row">
+                    <h1>Checkout</h1>
+                    <div class="col-md-8" style="border: 1px solid #ccc; border-radius: 5px; padding: 1rem">
+                        <h3>List Products</h3>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Total Price</th>                             
+                                </tr>
+                            </thead>
+                            <tbody>
                             <c:forEach items="${carts}" var="C">
                             <form action="update-quantity">
                                 <tr>
@@ -139,13 +139,30 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                             <label for="note" class="form-label">Note</label>
                             <textarea class="form-control" id="note" name="note" rows="3"></textarea>
                         </div>
+                        <div class="payment_method">
+                            <div class="panel-default">
+                                <input id="payment_defult" value="MOMO" name="payment_method" type="radio"
+                                       data-target="createp_account" />
+                                <label for="payment_defult" data-toggle="collapse" data-target="#collapsedefult"
+                                       aria-controls="collapsedefult">Momo <img style="height: 25px;
+                                                                         margin-top: 3px;" src="resources/momo1.jpg"
+                                                                         alt=""></label>
+                            </div>
+                            <div class="panel-default">
+                                <input id="payment_defult" value="COD" name="payment_method" type="radio"
+                                       data-target="createp_account" />
+                                <label for="payment_defult" data-toggle="collapse" data-target="#collapsedefult"
+                                       aria-controls="collapsedefult">Payment on Delivery <img src="assets/img/icon/papyel.png"
+                                                                                        alt=""></label>
+                            </div>
+                        </div>
                         <button type="submit" class="btn btn-primary w-100">Submit</button>
                     </form>
                 </div>
             </div>
         </div>
 
-         <jsp:include page="footer.jsp"></jsp:include>
+        <jsp:include page="footer.jsp"></jsp:include>
 
         <!-- Load javascripts at bottom, this will reduce page load time -->
         <!-- BEGIN CORE PLUGINS(REQUIRED FOR ALL PAGES) -->
