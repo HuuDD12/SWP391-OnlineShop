@@ -47,39 +47,18 @@ public class ProductManagerControl extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             response.setContentType("text/html;charset=UTF-8");
-            HttpSession session = request.getSession();
-            String indexPage = request.getParameter("index");
+
+            
             ProductDAO pdao = new ProductDAO();
-            CategoryDAO cdao = new CategoryDAO();
-            List<Category> listC = cdao.getAllCategory();
-            SubCategoryDAO sdao = new SubCategoryDAO();
-            List<Subcategory> listS = sdao.getAllSubCategory();
-            List<Product> listTop3 = pdao.getTop3Product();
-            String page = request.getParameter("page");
-            BrandDAO bdao = new BrandDAO();
-            List<Brand> listB = bdao.getAllBrand();
-            if (indexPage == null) {
-                indexPage = "1";
-            }
-            int index = Integer.parseInt(indexPage);
-            int count = pdao.count();
-            int endPage = count / 6;
-            if (count % 6 != 0) {
-                endPage++;
-            }
+
+
+
+
+
             List<Product> listP = pdao.getAll();
+           
             
-            List<Product> list = pdao.pagingProductBy6(index);
-            
-            request.setAttribute("listP", list);
-            session.setAttribute("listB", listB);
-            
-            request.setAttribute("count", count);
-            request.setAttribute("endP", endPage);
-            request.setAttribute("tag", index);
-            session.setAttribute("listTop3", listTop3);
-            session.setAttribute("listC", listC);
-            session.setAttribute("listS", listS);
+            request.setAttribute("listP", listP);
             
             request.getRequestDispatcher("ProductManager.jsp").forward(request, response);
         }

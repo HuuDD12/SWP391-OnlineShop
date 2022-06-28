@@ -97,18 +97,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row"><div class="col-md-8 col-sm-8">
-                <ul class="pagination pull-right">
-                    <ul class="pagination">
-                        <li class="page-item disabled"><a href="productmanager?index=${tag-1}">Previous</a></li>
-                            <c:forEach begin="${1}" end="${endP}" var="i">
-                            <li class="page-item"><a href="productmanager?index=${i}" class="${tag==i?"active":""}">${i}</a></li>
-                            </c:forEach>
-                        <li class="page-item"><a href="productmanager?index=${tag+1}" class="page-link">Next</a></li>
-                    </ul>
-                </ul>
-            </div>
-        </div>
+            
         </main>
         <!-- Essential javascripts for application to work-->
         <script src="admin/js/jquery-3.2.1.min.js"></script>
