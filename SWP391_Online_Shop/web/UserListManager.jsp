@@ -61,6 +61,7 @@
                                         <th style="text-align: center">User Name</th>
                                         <th style="text-align: center">Email</th>
                                         <th style="text-align: center">Role Name</th>
+                                        <th style="text-align: center">View</th>
                                         <th style="text-align: center" colspan="2">Action</th>
                                     </tr>
                                 </thead>
@@ -87,6 +88,11 @@
                                                 </div>
                                             </form>
                                         </td>
+                                        <td style="text-align: center"> 
+                                        <button class="btn btn-primary">
+                                                    <a  style="text-decoration: none;color: #FFF" href="ViewUsersControl?sid=${x.account.userId}">View</a>
+                                                </button>
+                                                </td>
                                         <td style="text-align: center">
                                             <c:if test="${x.account.roleId != 1}" >
                                             <c:if test="${x.account.block == '0'}">
