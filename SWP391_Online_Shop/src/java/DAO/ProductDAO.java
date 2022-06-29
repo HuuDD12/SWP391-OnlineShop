@@ -572,7 +572,7 @@ public class ProductDAO extends DBcontext.DBContext {
     }
 
     public List<Product> getTop3ListProByCat(String sid, int pid) {
-        String sql = "SELECT top 3 * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
+        String sql = "SELECT top 4 * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
                 + "                MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
                 + "                MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n"
                 + "                MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n"

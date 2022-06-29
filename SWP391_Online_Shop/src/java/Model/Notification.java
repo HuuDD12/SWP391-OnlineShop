@@ -12,6 +12,7 @@ import java.util.Date;
  * @author Admin
  */
 public class Notification {
+    
     private int id;
     private String UserID;
     private int OrderID;

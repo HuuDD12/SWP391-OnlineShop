@@ -110,7 +110,7 @@
                                         <p>${product.description}</p>
                                     </div>
                                     <div class="product-page-cart">                                    
-                                        <button class="btn btn-primary" type="submit">Add to cart</button>
+                                        <button onclick="addTocartAsync(${product.productID})" class="btn btn-primary" type="submit">Add to cart</button>
                                     </div>
                                     <div class="review">
                                         <input type="range" value="4" step="0.25" id="backing4">
@@ -198,8 +198,7 @@
                 <div class="row margin-bottom-40">
                     <div class="col-md-12 col-sm-12">
                         <h2 style="text-align: center">Most popular products</h2>
-                        <div style="display: flex;
-                             justify-content: space-around;margin-left: 76px;" class="owl-carousel owl-carousel4">
+                        <div class="owl-carousel owl-carousel4">
                             <c:forEach items="${list}" var="o">    
                                 <div class="d-flex justify-content-around">
                                     <div class="product-item">
@@ -473,15 +472,29 @@
 
         <script src="assets/corporate/scripts/layout.js" type="text/javascript"></script>
         <script type="text/javascript">
-            jQuery(document).ready(function () {
-                Layout.init();
-                Layout.initOWL();
-                Layout.initTwitter();
-                Layout.initImageZoom();
-                Layout.initTouchspin();
-                Layout.initUniform();
-            });
+                                            jQuery(document).ready(function () {
+                                                Layout.init();
+                                                Layout.initOWL();
+                                                Layout.initTwitter();
+                                                Layout.initImageZoom();
+                                                Layout.initTouchspin();
+                                                Layout.initUniform();
+                                            });
         </script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script>
+                                                    function addTocartAsync(productId) {
+                                                        axios.get('add-to-cart-async', {
+                                                            params: {
+                                                                productId: productId
+                                                            }
+                                                        }).then((response) => {
+                                                            //lay data thanh cong
+                                                            document.getElementById("cart_number").innerHTML = response.data + " items";
+                                                            //cap nhat view
+                                                        })
+                                                    }
+        </script>   
         <!-- END PAGE LEVEL JAVASCRIPTS -->
     </body>
     <!-- END BODY -->

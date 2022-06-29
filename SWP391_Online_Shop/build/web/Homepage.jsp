@@ -169,7 +169,7 @@
                                     </div>
                                     <h3><a href="Detail?cid=${o.productID}">${o.productName}</a></h3>
                                     <div class="pi-price">${o.salePrice}</div>
-                                    <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
+                                    <a onclick="addTocartAsync(${o.productID})" class="btn btn-default add2cart">Add to cart</a>
                                     <div class="sticker sticker-sale"></div>
                                 </div>
                             </div>
@@ -226,7 +226,7 @@
                                 </div>
                                 <h3><a href="Detail?cid=${p.p.productID}">${p.p.productName}</a></h3>
                                 <a href="#">${p.p.salePrice}</a></h3>
-                                <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
+                                <a onclick="addTocartAsync(${p.p.productID})" class="btn btn-default add2cart">Add to cart</a>
                             </div>
                         </div>
                     </c:forEach>                 
@@ -488,6 +488,20 @@
                 dropdownContent.style.display = "block";
             }
         });
+    }
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    function addTocartAsync(productId) {
+        axios.get('add-to-cart-async', {
+            params: {
+                productId: productId
+            }
+        }).then((response) => {
+            //lay data thanh cong
+            document.getElementById("cart_number").innerHTML = response.data + " items";
+            //cap nhat view
+        })
     }
 </script>
 <!-- END PAGE LEVEL JAVASCRIPTS -->
