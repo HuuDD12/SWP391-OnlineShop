@@ -97,7 +97,7 @@
                         <a href="javascript:void(0);" class="top-cart-info-count">0 items</a>
                     </c:when>
                     <c:otherwise>
-                        <a id="cart_number" href="javascript:void(0);" class="top-cart-info-count">${sessionScope.carts.size()} items</a>
+                        <a id="cart_number" class="top-cart-info-count">${sessionScope.carts.size()} items</a>
                     </c:otherwise> 
 
                 </c:choose>
@@ -109,9 +109,6 @@
         <!-- BEGIN NAVIGATION -->
         <div class="header-navigation">
             <ul>
-
-
-                <li><a href="productlist">Product</a></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
                         Brand 
@@ -129,8 +126,9 @@
 
                     <!-- END DROPDOWN MENU -->
                 </li>
+
+                <li><a href="#">Kids</a></li>
                 <li><a href="bloglist">Blog</a></li>
-                <li><a href="AboutShope.jsp">About Shop</a></li>
                 <li class="dropdown active">
                     <c:if test ="${sessionScope.acc !=  null}">
                         <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">

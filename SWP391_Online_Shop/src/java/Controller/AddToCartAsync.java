@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Utils;
+package Controller;
 
+import Controller.*;
 import DAO.ProductDAO;
 import Model.Cart;
 import Model.Product;
