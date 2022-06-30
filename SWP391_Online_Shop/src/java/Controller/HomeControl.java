@@ -6,7 +6,6 @@
 package Controller;
 
 import DAO.BrandDAO;
-import DAO.BannerDAO;
 import DAO.CategoryDAO;
 import DAO.OrderDetailDAO;
 import DAO.ProductDAO;
@@ -16,7 +15,6 @@ import Model.Category;
 import Model.OrderDetail;
 import Model.Product;
 import Model.Subcategory;
-import Model.Banner;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -55,10 +53,8 @@ public class HomeControl extends HttpServlet {
             CategoryDAO c = new CategoryDAO();
             BrandDAO b = new BrandDAO();
             OrderDetailDAO o = new OrderDetailDAO();
-            BannerDAO dao = new BannerDAO();
             
             List<Product> listTop5 = pr.getTop5Product();
-            List<Banner> listBanner = dao.getAllBanner();
             List<Category> listC = c.getAllCategory();
             List<Subcategory> listS = s.getAllSubCategory();
             //Subcategory a = s.getSubCategoryByID(id);
@@ -77,7 +73,6 @@ public class HomeControl extends HttpServlet {
                 endPage++;
             }
             List<Product> list6 = pr.pagingProductBy6(index);
-            request.setAttribute("listBanner", listBanner);
             request.setAttribute("listP", list6);
             request.setAttribute("listSell", listSell);
             request.setAttribute("listC", listC);

@@ -126,7 +126,7 @@
                                     </c:if>
                                     <h6>Upload a different photo...</h6>
                                     <input type="file" class="text-center center-block file-upload" style="margin: 10px" name="image">
-                                </div><br>
+                                </div></hr><br>
                             </div>
 
                         </div><!--/col-3-->
