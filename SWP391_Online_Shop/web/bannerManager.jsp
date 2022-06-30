@@ -1,15 +1,10 @@
-<%-- 
-    Document   : order
-    Created on : Oct 19, 2021, 11:23:09 PM
-    Author     : Khuong Hung
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
     <head>
+        <link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,58 +32,56 @@
 
 
                 <!-- User Menu-->
-                <li><a class="app-nav__item" href="productlist"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+                <li><a class="app-nav__item" href="dashboard"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
                 </li>
             </ul>
         </header>
         <!-- Sidebar menu-->
         <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-        <jsp:include page="DashBoardNav.jsp"></jsp:include>
-        
+        <jsp:include page="MKTNav.jsp"></jsp:include>
             <main class="app-content">
                 <div class="app-title">
                     <ul class="app-breadcrumb breadcrumb side">
-                        <li class="breadcrumb-item active"><a href="#"><b>Danh sách đơn hàng</b></a></li>
+                        <li class="breadcrumb-item active"><a href="#" style="text-decoration: none"><b>Danh sách BannerSale</b></a></li>
                     </ul>
                     <div id="clock"></div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="card-header">
-                            <i class="fas fa-table me-1"></i>
-                            Tất cả đơn hàng
-                            <a class="btn btn-sm btn-primary" href="addproduct" >Add Product</a>
+                        <div class="card-header row">
+                            <div class="col-md-6">
+                                <i class="fas fa-table me-1"> Tất cả banner Sale</i>
+                            </div>
+                            <div class="col-md-6" style="text-align: right"> 
+                                <button class="btn btn-primary">
+                                    <a style="text-decoration: none;color: #FFF" href="addbannercontrol">Add banner sale</a>
+                                </button>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <table id="datatablesSimple">
+                        <div class="card-body" >
+                            <table  id="datatablesSimple">
                                 <thead>
                                     <tr>
-                                        <th style="text-align: center">ID</th>
-                                        <th style="text-align: center">Sản phẩm</th>
-                                        <th style="text-align: center">Ảnh</th>
-                                        <th style="text-align: center">Miêu tả</th>
-                                        <th style="text-align: center">Giá gốc</th>
-                                        <th style="text-align: center">Giá giảm</th>
-                                        <th style="text-align: center">Số lượng</th>
-                                        <th style="text-align: center">Loại</th>
-                                        <th style="text-align: center"></th>
-                                        <th style="text-align: center">Action</th>
+                                        <th style="text-align: center">Banner ID</th>
+                                        <th style="text-align: center">User Img</th>
+                                        <th style="text-align: center">Title Sale</th>
+                                        <th style="text-align: center" colspan="2">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${list}" var="p">
-                                    <tr>
-                                        <td>${p.productID}</td>
-                                        <td>${p.productName}</td>
-                                        <td><img src="${p.url}" style="height: 100px;width: 100px"></td>
-                                        <td>${p.description}</td>
-                                        <td>${p.originalPrice}</td>
-                                        <td>${p.salePrice}</td>
-                                        <td>${p.amount}</td>
-                                        <td>${p.subID}</td>
-                                        <td style="text-align: center"><a class="btn btn-sm btn-primary" href="editproduct?pid=${p.productID}">Edit</a></td>
-                                        <td style="text-align: center"><a class="btn btn-sm btn-primary" href="deleteProduct?pid=${p.productID}">Delete</a></td>
+                                <c:forEach items="${List}" var="x">
+                                    <tr>                                          
+                                        <td style="text-align: center">${x.bannerId}</td>
+                                        <td style="text-align: center"><img src="${x.bannerImg}" style="height: 100px;width: 360px"></td>
+                                        <td style="text-align: center">${x.bannerImgSale} %</td>
+
+                                        <td style="text-align: center"> 
+                                            <button class="btn btn-danger">
+                                                <a style="text-decoration: none;color: #FFF" onclick="doDelete('${p.productID}')">Delete</a>
+                                            </button>
+                                        </td>
+
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -163,8 +156,19 @@
                 }
             }
         </script>
-        <script src="js/datatables-simple-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <script src="js/datatables-simple-demo.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            function doDelete(id_pro) {
+                if (confirm("Are you sure to delete this product")) {
+                    window.location = "#?pid=" + id_pro;
+                }
+            }
+        </script>
     </body>
 
 </html>
+

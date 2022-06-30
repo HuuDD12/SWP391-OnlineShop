@@ -97,7 +97,7 @@
                         <a href="javascript:void(0);" class="top-cart-info-count">0 items</a>
                     </c:when>
                     <c:otherwise>
-                        <a id="cart_number" class="top-cart-info-count">${sessionScope.carts.size()} items</a>
+                        <a id="cart_number" href="javascript:void(0);" class="top-cart-info-count">${sessionScope.carts.size()} items</a>
                     </c:otherwise> 
 
                 </c:choose>
@@ -158,7 +158,7 @@
 
                             </c:if>
                             <c:if test="${sessionScope.acc.getRoleId() ==  4}">
-                                <li><a  href="${pageContext.request.contextPath}/mkt/dashboard">Dashboard</a></li>
+                                <li><a  href="${pageContext.request.contextPath}/mktdashboard">Dashboard</a></li>
                                 </c:if>
                                 <c:if test="${sessionScope.acc.getRoleId() ==  5}">
                                 <li><a  href="${pageContext.request.contextPath}/DeliveryDashboard">Delivery Dashboard</a></li>
