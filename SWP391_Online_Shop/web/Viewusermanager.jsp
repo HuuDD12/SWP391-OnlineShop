@@ -21,7 +21,6 @@
     </head>
     <body>
 
-        <div class="wrapper">
             <!-- Sidebar Holder -->
             <nav id="sidebar">
                 <div id="dismiss">
@@ -164,7 +163,7 @@
                             </div>
                         </div>
 
-                        <a class="btn btn-primary px-3" href="dashboard" role="button" style="margin:50px;">Back </a>
+                        <a class="btn btn-primary px-3" href="userlist" role="button" style="margin:50px;">Back </a>
 
                     </div>
                 </div>

@@ -5,32 +5,20 @@
  */
 package Controller;
 
-import DAO.BrandDAO;
-import DAO.CategoryDAO;
-import DAO.OrderDetailDAO;
-import DAO.ProductDAO;
-import DAO.SubCategoryDAO;
-import Model.Brand;
-import Model.Category;
-import Model.OrderDetail;
-import Model.Product;
-import Model.Subcategory;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author VAN ANH
+ * @author ADM
  */
-@WebServlet(name = "ProductManagerControl", urlPatterns = {"/productmanager"})
-public class ProductManagerControl extends HttpServlet {
+@WebServlet(name = "AddbannerControl", urlPatterns = {"/addbannercontrol"})
+public class AddbannerControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,32 +32,7 @@ public class ProductManagerControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            response.setContentType("text/html;charset=UTF-8");
-
-             HttpSession session = request.getSession();
-            
-            ProductDAO pdao = new ProductDAO();
-            CategoryDAO cdao = new CategoryDAO();
-            List<Category> listC = cdao.getAllCategory();
-            SubCategoryDAO sdao = new SubCategoryDAO();
-            List<Subcategory> listS = sdao.getAllSubCategory();
-            List<Product> list = pdao.getAll();
-            String page = request.getParameter("page");
-            BrandDAO bdao = new BrandDAO();
-            List<Brand> listB = bdao.getAllBrand();
-            
-            
-            session.setAttribute("listB", listB);
-            
-            
-            session.setAttribute("list", list);
-            session.setAttribute("listC", listC);
-            session.setAttribute("listS", listS);
-            
-            request.getRequestDispatcher("ProductManager.jsp").forward(request, response);
-        }
+        request.getRequestDispatcher("AddBanner.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
