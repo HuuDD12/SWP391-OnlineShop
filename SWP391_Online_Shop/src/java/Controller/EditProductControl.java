@@ -11,27 +11,20 @@ import DAO.SubCategoryDAO;
 import Model.Brand;
 import Model.Product;
 import Model.Subcategory;
-import Model.UserInfo;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 
 /**
  *
  * @author VAN ANH
  */
 @WebServlet(name = "EditProductControl", urlPatterns = {"/editproduct"})
-@MultipartConfig
 public class EditProductControl extends HttpServlet {
 
     /**
@@ -88,50 +81,7 @@ public class EditProductControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String uid = request.getParameter("uid");
-        Part file = request.getPart("image");
-        String image = file.getSubmittedFileName();
-        String imageu = request.getParameter("imageu");
-        String Product_name = request.getParameter("Product_name");
-        String Description = request.getParameter("Description");
-        Double Original_Price = Double.valueOf(request.getParameter("Original_Price"));
-        Double Sale_Price = Double.valueOf(request.getParameter("Sale_Price"));
-        int amount = Integer.valueOf(request.getParameter("amount"));
-        String Subcategory = request.getParameter("Subcategory");
-        String Brand = request.getParameter("Brand");
-        int userid = Integer.parseInt(uid);
-        int subCate = Integer.parseInt(Subcategory);
-        int brand = Integer.parseInt(Brand);
-        ProductDAO pdao = new ProductDAO();
-        String link = "";
-
-        if ("".equals(image)) {
-            Product pro = new Product(userid, Product_name, Description, Original_Price, Sale_Price, subCate, amount, brand);
-            Product product = new Product(userid, imageu);
-            pdao.UpdateProductInfo(pro);
-        } else {
-            link = "resources\\img\\\\products\\" + image;
-            Product pro = new Product(userid, Product_name, Description, Original_Price, Sale_Price, subCate, amount, brand);
-            Product product = new Product(userid, link);
-            String uploadPath = getServletContext().getRealPath("") + File.separator + link;
-            //  String UploadPart = "C:/Users/ADM/OneDrive/Documents/NetBeansProjects/Online-Shop/web/resources/img/ImgUser/" + image ;
-            try {
-                try (FileOutputStream fos = new FileOutputStream(uploadPath)) {
-                    InputStream is = file.getInputStream();
-                    byte[] data = new byte[is.available()];
-                    is.read(data);
-                    fos.write(data);
-                }
-
-            } catch (IOException e) {
-            }
-            pdao.UpdateProductInfo(pro);
-            pdao.UpdateProductImgInfo(product);
-        }
-        Product pro = pdao.getProductById(userid);
-        request.setAttribute("pro", pro);
-        //request.getRequestDispatcher(".jsp").forward(request, response);
-        response.sendRedirect("productmanager");
+        processRequest(request, response);
     }
 
     /**

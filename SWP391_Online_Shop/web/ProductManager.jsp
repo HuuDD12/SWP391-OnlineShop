@@ -25,6 +25,7 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
         <link rel="stylesheet" href="css/styles.css" type="text/css">
+        <link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon">
     </head>
 
     <body onload="time()" class="app sidebar-mini rtl">
@@ -45,7 +46,6 @@
         <!-- Sidebar menu-->
         <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
         <jsp:include page="DashBoardNav.jsp"></jsp:include>
-        
             <main class="app-content">
                 <div class="app-title">
                     <ul class="app-breadcrumb breadcrumb side">
@@ -58,10 +58,9 @@
                         <div class="card-header">
                             <i class="fas fa-table me-1"></i>
                             Tất cả đơn hàng
-                            <a class="btn btn-sm btn-primary" href="addproduct" >Add Product</a>
                         </div>
                         <div class="card-body">
-                            <table id="datatablesSimple">
+                            <table  id="datatablesSimple">
                                 <thead>
                                     <tr>
                                         <th style="text-align: center">ID</th>
@@ -77,7 +76,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${list}" var="p">
+                                <c:forEach items="${listP}" var="p">
                                     <tr>
                                         <td>${p.productID}</td>
                                         <td>${p.productName}</td>
@@ -88,14 +87,17 @@
                                         <td>${p.amount}</td>
                                         <td>${p.subID}</td>
                                         <td style="text-align: center"><a class="btn btn-sm btn-primary" href="editproduct?pid=${p.productID}">Edit</a></td>
-                                        <td style="text-align: center"><a class="btn btn-sm btn-primary" href="deleteProduct?pid=${p.productID}">Delete</a></td>
+                                        <td style="text-align: center"><a class="btn btn-sm btn-primary" onclick="doDelete('${p.productID}')">Delete</a></td>
+
                                     </tr>
                                 </c:forEach>
+
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
+            
         </main>
         <!-- Essential javascripts for application to work-->
         <script src="admin/js/jquery-3.2.1.min.js"></script>
@@ -165,6 +167,13 @@
         </script>
         <script src="js/datatables-simple-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+           <script type="text/javascript">
+        function doDelete(id_pro) {
+            if (confirm("Are you sure to delete this product")) {
+                window.location = "deleteProduct?pid=" + id_pro;
+            }
+        }
+        </script>
     </body>
 
 </html>
