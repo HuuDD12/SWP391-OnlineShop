@@ -58,4 +58,21 @@ public class CategoryDAO extends DBcontext.DBContext{
 
         }
     }
+    
+    public Category getCategoryById(int cid) {
+        String sql = "select * from Category where CategoryID = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, cid);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return new Category(rs.getInt(1),
+                        rs.getString(2)
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
 }
