@@ -48,17 +48,25 @@ public class ProductManagerControl extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             response.setContentType("text/html;charset=UTF-8");
 
+             HttpSession session = request.getSession();
             
             ProductDAO pdao = new ProductDAO();
-
-
-
-
-
-            List<Product> listP = pdao.getAll();
-           
+            CategoryDAO cdao = new CategoryDAO();
+            List<Category> listC = cdao.getAllCategory();
+            SubCategoryDAO sdao = new SubCategoryDAO();
+            List<Subcategory> listS = sdao.getAllSubCategory();
+            List<Product> list = pdao.getAll();
+            String page = request.getParameter("page");
+            BrandDAO bdao = new BrandDAO();
+            List<Brand> listB = bdao.getAllBrand();
             
-            request.setAttribute("listP", listP);
+            
+            session.setAttribute("listB", listB);
+            
+            
+            session.setAttribute("list", list);
+            session.setAttribute("listC", listC);
+            session.setAttribute("listS", listS);
             
             request.getRequestDispatcher("ProductManager.jsp").forward(request, response);
         }
