@@ -6,8 +6,10 @@
 package Controller;
 
 import DAO.CategoryDAO;
+import Model.Category;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,7 +36,10 @@ public class CategoryControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            CategoryDAO cdao = new CategoryDAO();
+            CategoryDAO cate = new CategoryDAO();
+            List<Category> list = cate.getAllCategory();
+            request.setAttribute("list", list);
+            request.getRequestDispatcher("CategoryView.jsp").forward(request, response);
         }
     }
 
@@ -64,7 +69,10 @@ public class CategoryControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        CategoryDAO cdao = new CategoryDAO();
+//        String category = request.getParameter("category");
+//        cdao.InsertCategory(category);
+//        response.sendRedirect(category);
     }
 
     /**
