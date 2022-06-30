@@ -26,8 +26,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Admin
  */
-@WebServlet(name = "DashBoardControl", urlPatterns = {"/dashboard"})
-public class DashBoardControl extends HttpServlet {
+@WebServlet(name = "SellDashBoardControl", urlPatterns = {"/selldashboard"})
+public class SellDashBoardControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,7 +41,7 @@ public class DashBoardControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       try {
+           try {
             HttpSession session = request.getSession();
             Account acc = (Account) session.getAttribute("acc");
                 ProductDAO dao = new ProductDAO();
@@ -60,7 +60,7 @@ public class DashBoardControl extends HttpServlet {
                 request.setAttribute("bill", countorder);
                 request.setAttribute("low", countproductlow);
                 request.setAttribute("billbyday", billbyday);
-                request.getRequestDispatcher("AdminDashBoard.jsp").forward(request, response);            
+                request.getRequestDispatcher("SellDashboard.jsp").forward(request, response);            
         } catch (Exception e) {
             request.getRequestDispatcher("Error.jsp").forward(request, response); 
         }

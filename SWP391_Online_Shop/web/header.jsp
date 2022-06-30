@@ -147,7 +147,7 @@
                                 </c:if>
                             <!-- Seller -->
                             <c:if test="${sessionScope.acc.getRoleId() ==  2}">
-                                <li><a  href="${pageContext.request.contextPath}/Dashboard">DashBoard</a></li>
+                                <li><a  href="${pageContext.request.contextPath}/selldashboard">DashBoard</a></li>
                                 </c:if>
 
                             <!-- Marketing -->

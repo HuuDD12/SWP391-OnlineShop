@@ -132,10 +132,5 @@ public class Account {
     public String toString() {
         return "Account{" + "userId=" + userId + ", username=" + username + ", img=" + img + ", password=" + password + ", email=" + email + ", roleId=" + roleId + ", block=" + block + ", code=" + code + '}';
     }
-
-    
-    
-    
-    
     
 }

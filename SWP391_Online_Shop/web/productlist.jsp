@@ -139,7 +139,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                 <div style="padding: 5px" class="product col-md-4">
                                     <div st class="product-item">
                                         <div class="pi-img-wrapper">
-                                            <img src="${p.url}"  style="max-width: 100%;height: 400px" alt="Berry Lace Dress">
+                                            <img src="${p.url}"  style="max-width: 100%;height: 300px" alt="Berry Lace Dress">
                                             <div>
 
                                                 <a href="${p.url}" class="btn btn-default fancybox-fast-view">View</a>
