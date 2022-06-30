@@ -9,13 +9,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
+
         <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <style href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" > </style>
 
 
-        <link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="favicon.ico">
 
         <!-- Fonts START -->
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
@@ -109,7 +109,7 @@
     <body>
         <jsp:include page="header.jsp"></jsp:include>
             <div class="main">
-                <form action="EditUserControl" method="post" enctype="multipart/form-data" >
+                <form action="addproduct" method="post" enctype="multipart/form-data" >
                     <div class="container bootstrap snippet">                   
                         <div class="row gutters-sm">
                             <div class="col-sm-3"><!--left col-->
@@ -117,16 +117,16 @@
                                 <div class="card" style="padding: 25px">
                                     <div class="text-center" style="padding:20px">
                                         <img src="#" >
-                                    <c:if test="${info.uidImg == '' }">
+                                    <c:if test="${pro.url == '' }">
                                         <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="rounded-circle  img-circle img-thumbnail"  width="150">
                                     </c:if>
-                                    <c:if test="${info.uidImg != null}">
-                                        <img src="${info.uidImg}" class="rounded-circle img-circle img-thumbnail" width="150" >
-                                        <input hidden name="imageu" value="${info.uidImg}">
+                                    <c:if test="${pro.url != null}">
+                                        <img src="${pro.url}" class="rounded-circle img-circle img-thumbnail" width="150" >
+                                        <input hidden name="imageu" value="${pro.url}">
                                     </c:if>
                                     <h6>Upload a different photo...</h6>
                                     <input type="file" class="text-center center-block file-upload" style="margin: 10px" name="image">
-                                </div><br>
+                                </div></hr><br>
                             </div>
 
                         </div><!--/col-3-->
@@ -134,64 +134,80 @@
                             <div class="card mb-3" style="padding: 25px">
                                 <div class="tab-content">
                                     <div class="active" id="home"> 
-                                        <input value="${info.uid}" name="uid" hidden>
+                                        <input value="${pro.productID}" name="uid" hidden>
                                         <div class="form-group">
                                             <div class="col-xs-6">
-                                                <label for="first_name"><h4>First name</h4></label>
-                                                <input type="text" value="${info.firstName}" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
+                                                <label for="Product_name"><h4>Product name</h4></label>
+                                                <input type="text" value="${pro.productName}" class="form-control" name="Product_name" id="first_name" placeholder="Product_name" title="enter your first name if any.">
                                             </div>
                                         </div>
                                         <div class="form-group">
 
                                             <div class="col-xs-6">
-                                                <label for="last_name"><h4>Last name</h4></label>
-                                                <input type="text" value="${info.lastName}" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
+                                                <label for="Description"><h4>Description</h4></label>
+                                                <input type="text" value="${pro.description}" class="form-control" name="Description" id="last_name" placeholder="Description" title="enter your last name if any.">
                                             </div>
                                         </div>
                                         <div class="form-group">
 
                                             <div class="col-xs-6">
-                                                <label for="phone"><h4>Phone</h4></label>
-                                                <input type="text" value="${info.phonenum}" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
+                                                <label for="Original_Price"><h4>Original Price</h4></label>
+                                                <input type="text" value="${pro.originalPrice}" class="form-control" name="Original_Price" id="phone" placeholder="Original_Price" title="enter your phone number if any.">
                                             </div>
                                         </div>
                                         <div class="form-group">
 
                                             <div class="col-xs-6">
-                                                <label for="email"><h4>Email</h4></label>
-                                                <input type="email" value="${info.email}" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
+                                                <label for="Sale_Price"><h4>Sale Price</h4></label>
+                                                <input type="text" value="${pro.salePrice}" class="form-control" name="Sale_Price" id="email" placeholder="Sale_Price" title="enter your email.">
                                             </div>
                                         </div>
                                         <div class="form-group">
 
                                             <div class="col-xs-6">
-                                                <label for="location"><h4>Location</h4></label>
-                                                <input type="text" value="${info.address}" class="form-control" name="location" id="location" placeholder="somewhere" title="enter a location">
+                                                <label for="amount"><h4>Amount</h4></label>
+                                                <input type="text" value="${pro.amount}" class="form-control" name="amount" id="location" placeholder="amount" title="enter a location">
                                             </div>
                                         </div>
-                                        <div class="form-group">
-
-                                            <div class="col-xs-6">
-                                                <label for="gender"><h4>Gender</h4></label>
-                                                <select class="btn btn-outline-primary" name="gender" >                                                                                                                                                    
-                                                    <option value="0" ${info.gender == 0?"selected":""} >Secret</option>                                                                                                                                              
-                                                    <option value="1" ${info.gender == 1?"selected":""} >Male</option>                                                                                                                                              
-                                                    <option value="2" ${info.gender == 2?"selected":""} >Female</option>                                                                                                                                              
-                                                </select>
-                                            </div>
+                                        <div class="col-xs-6">
+                                            <label for="Subcategory"><h4>Subcategory</h4></label>
+                                            <select class="btn btn-outline-primary" name="Subcategory" >
+                                                <option value="0" ${pro.subID == 0?"selected":""}>Fedora</option>
+                                                <option value="1" ${pro.subID == 1?"selected":""}>Panama</option>
+                                                <option value="2" ${pro.subID == 2?"selected":""}>T-Shirt</option>
+                                                <option value="3" ${pro.subID== 3?"selected":""}>Sweater</option>
+                                                <option value="4" ${pro.subID == 4?"selected":""}>Jean</option>
+                                                <option value="5" ${pro.subID == 5?"selected":""}>Shirt</option>
+                                                <option value="6" ${pro.subID == 6?"selected":""}>Shoe</option>
+                                                <option value="7" ${pro.subID == 7?"selected":""}>Sock</option>
+                                                <option value="8" ${pro.subID == 8?"selected":""}>Backpacks</option>
+                                                <option value="9" ${pro.subID == 9?"selected":""}>Rings and Chains</option>
+                                            </select>
                                         </div>
-                                        <div class="form-group">
-
-                                            <div class="col-xs-6">
-                                                <label for="birthday"><h4>Birthday</h4></label>
-                                                <input type="date" class="btn btn-outline-primary" value="${info.birthday}"class="form-control" name="birthday" id="gender" placeholder="gender" title="enter your gender.">
-                                            </div>
+                                        <div class="col-xs-6">
+                                            <label for="Brand"><h4>Brand</h4></label>
+                                            <select class="btn btn-outline-primary" name="Brand" >  
+                                                <option value="0" ${pro.brandID == 0?"selected":""}>Borsalino</option>
+                                                <option value="1" ${pro.brandID == 1?"selected":""}>Bailey</option>
+                                                <option value="2" ${pro.brandID == 2?"selected":""}>Mayser</option>
+                                                <option value="3" ${pro.brandID == 3?"selected":""}>Tokyo Life</option>
+                                                <option value="4" ${pro.brandID == 4?"selected":""}>Zombie</option>
+                                                <option value="5" ${pro.brandID == 5?"selected":""}>FREAKERS</option>
+                                                <option value="6" ${pro.brandID == 6?"selected":""}>Karihada</option>
+                                                <option value="7" ${pro.brandID == 7?"selected":""}>Icon Denim</option>
+                                                <option value="8" ${pro.brandID == 8?"selected":""}>Hyperdenim VN</option>
+                                                <option value="9" ${pro.brandID == 9?"selected":""}>Davies</option>
+                                                <option value="10" ${pro.brandID == 10?"selected":""}>EnvyLook</option>
+                                                <option value="11" ${pro.brandID == 11?"selected":""}>Nike</option>
+                                                <option value="12" ${pro.brandID == 12?"selected":""}>Vans</option>
+                                                <option value="13" ${pro.brandID == 13?"selected":""}>Adidas</option>
+                                                <option value="14" ${pro.brandID == 14?"selected":""}>Flaans</option>
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-xs-12">
                                                 <br>
                                                 <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
-                                                <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
                                             </div>
                                         </div>
 
