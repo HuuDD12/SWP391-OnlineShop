@@ -34,6 +34,39 @@ public class SubCategoryDAO extends DBcontext.DBContext{
         }
         return list;
     }
-    
-    
+    public List<Subcategory> getSubByCateId(int cid) {
+        String sql = "select * from SubCategory where CategoryID = ?";
+        List<Subcategory> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, cid);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Subcategory c = new Subcategory(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getInt(3)
+                );
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public void InsertSubCateName(String subname, int cateid) {
+        String sql = "INSERT INTO [dbo].[SubCategory]\n"
+                + "           ([SubCategoryName]\n"
+                + "           ,[CategoryID])\n"
+                + "     VALUES\n"
+                + "           (?,?)";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, subname);
+            ps.setInt(2, cateid);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }   
 }
