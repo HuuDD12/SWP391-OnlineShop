@@ -158,11 +158,49 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                             <div class="col-md-8 col-sm-8">
                                 <ul class="pagination pull-right">                               
                                     <li class="page-item"><a class="page-link" href="productlist?page=1">&laquo;</a></li>
-
-                                    <c:forEach begin="1" end="${endPage}" var="i">
-                                        <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${i}">${i}</a></li>
-                                        </c:forEach>                
-                                    <li class="page-item"><a class="page-link" href="productlist?page=${endPage}">&raquo;</a></li>
+                                        <c:if test="${page!= '1'}">
+                                        <li class="page-item"><a class="page-link" href="productlist?page=${page - 1}">&lsaquo;</a></li>
+                                        </c:if>
+                                        <c:if test="${endPage <=7}">
+                                            <c:forEach begin="1" end="${endPage}" var="i">
+                                            <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${i}">${i}</a></li>
+                                            </c:forEach> 
+                                        </c:if>
+                                        <c:if test="${endPage > 7}">
+                                            <c:if test="${page >= '1' && page <4}">
+                                            <li class="page-item"><a class="page-link" href="productlist?page=${1}">1</a></li>                                                                                       
+                                            <li class="page-item"><a class="page-link" href="productlist?page=${2}">2</a></li>                                                                                       
+                                            <li class="page-item"><a class="page-link" href="productlist?page=${3}">3</a></li>                                            
+                                            <li class="page-item"><a class="page-link" href="productlist?page=${4}">4</a></li>
+                                            <li class="page-item"><a class="page-link">....</a></li> 
+                                            <li class="page-item"><a class="page-link" href="productlist?page=${endPage}">${endPage}</a></li>
+                                            </c:if>
+                                            <c:if test="${page >= '4' && page < (endPage-2)}">
+                                            <li class="page-item"><a class="page-link" href="productlist?page=${1}">1</a></li>  
+                                            <li class="page-item"><a class="page-link">...</a></li>
+                                            <li class="page-item"><a class="page-link" href="productlist?page=${page-1}">${page-1}</a></li>                                                                                       
+                                            <li class="page-item"><a class="page-link" href="productlist?page=${page}">${page}</a></li>                                                                                       
+                                            <li class="page-item"><a class="page-link" href="productlist?page=${page+1}">${page+1}</a></li>                                                                                       
+                                            <li class="page-item"><a class="page-link">...</a></li> 
+                                            <li class="page-item"><a class="page-link" href="productlist?page=${endPage}">${endPage}</a></li>
+                                            </c:if>
+                                            <c:if test="${page >= (endPage-2) }">
+                                            <li class="page-item"><a class="page-link" href="productlist?page=${1}">1</a></li>                                                                                       
+                                            <li class="page-item"><a class="page-link" href="productlist?page=${2}">2</a></li>                                                                                                                                                                             
+                                            <li class="page-item"><a class="page-link">...</a></li>
+                                            <c:if test="${page == (endPage-2)}">
+                                                <li class="page-item"><a class="page-link" href="productlist?page=${endPage-3}">${endPage-3}</a></li>
+                                            </c:if>
+                                            <li class="page-item"><a class="page-link" href="productlist?page=${endPage-2}">${endPage-2}</a></li>
+                                            <li class="page-item"><a class="page-link" href="productlist?page=${endPage-1}">${endPage-1}</a></li>
+                                            <li class="page-item"><a class="page-link" href="productlist?page=${endPage}">${endPage}</a></li>
+                                            
+                                            </c:if>
+                                        </c:if>
+                                        <c:if test="${page<endPage}">
+                                        <li class="page-item"><a class="page-link" href="productlist?page=${page + 1}">&rsaquo;</a></li>
+                                        </c:if> 
+                                    <li class="page-item"><a class="page-link" href="productlist?page=${endPage}">&raquo;</a></li>                                    
                                 </ul>
                             </div>
                         </div>
