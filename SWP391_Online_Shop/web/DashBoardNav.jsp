@@ -24,5 +24,7 @@
                     class="app-menu__label">Manage Chart</span></a></li>
         <li><a class="app-menu__item" href="salemanager" style="text-decoration: none" ><i class='app-menu__icon bx bx-user-voice'></i><span
                     class="app-menu__label">Manage Sale</span></a></li>
+        <li><a class="app-menu__item" href="category" style="text-decoration: none" ><i class='app-menu__icon bx bxs-message-add'></i><span
+                    class="app-menu__label">Add Category</span></a></li>
     </ul>
 </aside>
