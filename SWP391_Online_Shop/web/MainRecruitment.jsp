@@ -50,7 +50,7 @@
                 <br><hr><br>
                  Copyright 
                 <div class="text-center">
-                    © 2021 Copyright:
+                    © 2022 Copyright:
                     <a class="text-white" href="#">SWP391 - JS1601</a>
                 </div>
                 <script>
