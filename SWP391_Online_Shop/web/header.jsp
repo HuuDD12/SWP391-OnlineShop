@@ -127,7 +127,7 @@
                     <!-- END DROPDOWN MENU -->
                 </li>
 
-                <li><a href="#">Kids</a></li>
+                <li><a href="productlist"> Product</a></li>
                 <li><a href="bloglist">Blog</a></li>
                 <li class="dropdown active">
                     <c:if test ="${sessionScope.acc !=  null}">
@@ -172,6 +172,7 @@
                         </ul>
                     </c:if>
                 </li>
+                <li><a href="AboutShope.jsp"> About Shop</a></li>
                 <!-- BEGIN TOP SEARCH -->
                 <li class="menu-search">
                     <span class="sep"></span>
