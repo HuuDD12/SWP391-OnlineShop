@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Admin
  */
 @WebServlet(name = "MktDashBoardControl", urlPatterns = {"/salemanager"})
-public class MktDashBoardControl extends HttpServlet {
+public class ManagerSale extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

@@ -8,7 +8,7 @@
     </div>
     <hr>
     <ul class="app-menu">
-        <li><a class="app-menu__item" href="dashboard" style="text-decoration: none" ><i class='app-menu__icon bx bx-tachometer'></i><span
+        <li><a class="app-menu__item" href="selldashboard" style="text-decoration: none" ><i class='app-menu__icon bx bx-tachometer'></i><span
                     class="app-menu__label" >DashBoard</span></a></li>
         <li><a class="app-menu__item" href="productmanager" style="text-decoration: none" ><i class='app-menu__icon bx bx-purchase-tag-alt'></i><span
                     class="app-menu__label">Manage Product</span></a></li>
@@ -16,8 +16,6 @@
                     class="app-menu__label">Manage Order</span></a></li>
         <li><a class="app-menu__item" href="feedbackmanager" style="text-decoration: none" ><i class='app-menu__icon bx bx-user-voice'></i><span
                     class="app-menu__label">Manage Feedback</span></a></li>
-        <li><a class="app-menu__item" href="blogmanager" style="text-decoration: none" ><i class='app-menu__icon bx bx-user-voice'></i><span
-                    class="app-menu__label">Manage Blog</span></a></li>
         <li><a class="app-menu__item" href="ChartControl" style="text-decoration: none" ><i class='app-menu__icon bx bx-user-voice'></i><span
                     class="app-menu__label">Manage Chart</span></a></li>
         <li><a class="app-menu__item" href="salemanager" style="text-decoration: none" ><i class='app-menu__icon bx bx-user-voice'></i><span

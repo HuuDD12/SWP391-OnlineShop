@@ -97,7 +97,7 @@
                         <a href="javascript:void(0);" class="top-cart-info-count">0 items</a>
                     </c:when>
                     <c:otherwise>
-                        <a id="cart_number" class="top-cart-info-count">${sessionScope.carts.size()} items</a>
+                        <a id="cart_number" href="javascript:void(0);" class="top-cart-info-count">${sessionScope.carts.size()} items</a>
                     </c:otherwise> 
 
                 </c:choose>
@@ -127,7 +127,7 @@
                     <!-- END DROPDOWN MENU -->
                 </li>
 
-                <li><a href="#">Kids</a></li>
+                <li><a href="productlist"> Product</a></li>
                 <li><a href="bloglist">Blog</a></li>
                 <li class="dropdown active">
                     <c:if test ="${sessionScope.acc !=  null}">
@@ -147,7 +147,7 @@
                                 </c:if>
                             <!-- Seller -->
                             <c:if test="${sessionScope.acc.getRoleId() ==  2}">
-                                <li><a  href="${pageContext.request.contextPath}/Dashboard">DashBoard</a></li>
+                                <li><a  href="${pageContext.request.contextPath}/selldashboard">DashBoard</a></li>
                                 </c:if>
 
                             <!-- Marketing -->
@@ -158,7 +158,7 @@
 
                             </c:if>
                             <c:if test="${sessionScope.acc.getRoleId() ==  4}">
-                                <li><a  href="${pageContext.request.contextPath}/mkt/dashboard">Dashboard</a></li>
+                                <li><a  href="${pageContext.request.contextPath}/mktdashboard">Dashboard</a></li>
                                 </c:if>
                                 <c:if test="${sessionScope.acc.getRoleId() ==  5}">
                                 <li><a  href="${pageContext.request.contextPath}/DeliveryDashboard">Delivery Dashboard</a></li>
@@ -172,6 +172,7 @@
                         </ul>
                     </c:if>
                 </li>
+                <li><a href="AboutShope.jsp"> About Shop</a></li>
                 <!-- BEGIN TOP SEARCH -->
                 <li class="menu-search">
                     <span class="sep"></span>
