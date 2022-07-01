@@ -1,5 +1,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--
 Template: Metronic Frontend Freebie - Responsive HTML Template Based On Twitter Bootstrap 3.3.4
@@ -95,7 +96,25 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                         <!-- BEGIN CONTENT -->
                         <div class="col-md-12 col-sm-12">
                             <h1>Shopping cart</h1>
-                            <div class="goods-page">
+                        <c:choose>
+                            <c:when test="${carts.size() == 0}">
+                                <div class="container" style="min-height: 300px">
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+                                            <div class="card-body cart">
+                                                <div class="col-sm-12 empty-cart-cls text-center"> <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+                                                    <h3 style="color: black"><strong>Your Cart is Empty</strong></h3>
+                                                    <h4 style="color: black">Add something to make me happy :)</h4> <a href="productlist" class="btn btn-success cart-btn-transform m-3" data-abc="true">Continue Shopping</a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="goods-page">
                                 <div class="goods-data clearfix">
                                     <div class="table-wrapper-responsive">
                                         <table summary="Shopping cart">
@@ -107,177 +126,121 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                                 <th style="padding-left: 50px;" class="goods-page-total" colspan="2">Total</th>
 
                                             </tr>
-                                        <c:forEach items="${carts}" var="C">
-                                            <form action="update-quantity">
-                                                <input type="hidden" name="productId" value="${C.value.product.productID}"
-                                                       <tr>
+                                            <c:forEach items="${carts}" var="C">
+                                                <form action="update-quantity">
+                                                    <input type="hidden" name="productId" value="${C.value.product.productID}"
+                                                           <tr>
 
-                                                    <td class="goods-page-description">
-                                                        ${C.value.product.productName}
-                                                    </td>
-                                                    <td style="padding-left: 50px;" class="goods-page-image">
-                                                        <a href="javascript:;"><img src="${C.value.product.url}" alt="Berry Lace Dress"></a>
-                                                    </td>
-                                                    <td style="padding-left: 70px;" class="goods-page-price">
-                                                        <strong><span>$</span>${C.value.product.salePrice}</strong>
-                                                    </td>
-                                                    <!--                                                    <td style="padding-left: 50px;" class="goods-page-quantity">
-                                                                                                            <div class="product-quantity">
-                                                                                                                <input onchange="this.form.submit()" name="quantity" id="product-quantity" type="number" value="${C.value.quantity}">
-                                                                                                            </div>
-                                                                                                        </td>-->
-                                                    <td>
-                                                        <a class="btn btn-link px-2"
-                                                           href="update-quantity?action=dec&id=${C.value.product.productID}">
-                                                            <i class="fa fa-minus"></i>
-                                                        </a>
-                                                        <input id="form1" name="quantity" value="${C.value.quantity}" type="text"
-                                                               style="max-width: 3rem; text-align: center"
-                                                               class="form-control-sm"
-                                                               />
-                                                        <a class="btn btn-link px-2"
-                                                           href="update-quantity?action=inc&id=${C.value.product.productID}">
-                                                            <i class="fa fa-plus"></i>
-                                                        </a>
-                                                    </td>
-                                                    <td style="padding-left: 50px;" class="goods-page-total">
-                                                        <strong><span>$</span><fmt:formatNumber pattern="##.#" value="${C.value.product.salePrice*C.value.quantity}"/></strong>
-                                                    </td>
-                                                    <td style="padding-left: 50px;" class="del-goods-col">
-                                                        <a class="del-goods" href="delete-cart?productId=${C.value.product.productID}">&nbsp;</a>
-                                                    </td>
-                                                </tr>
-                                            </form>
+                                                        <td class="goods-page-description">
+                                                            ${C.value.product.productName}
+                                                        </td>
+                                                        <td style="padding-left: 50px;" class="goods-page-image">
+                                                            <a href="javascript:;"><img src="${C.value.product.url}" alt="Berry Lace Dress"></a>
+                                                        </td>
+                                                        <td style="padding-left: 70px;" class="goods-page-price">
+                                                            <strong><fmt:formatNumber pattern="##.#" value="${C.value.product.salePrice}"/><span>đ</span></strong>
+                                                        </td>
+                                                        <!--                                                    <td style="padding-left: 50px;" class="goods-page-quantity">
+                                                                                                                <div class="product-quantity">
+                                                                                                                    <input onchange="this.form.submit()" name="quantity" id="product-quantity" type="number" value="${C.value.quantity}">
+                                                                                                                </div>
+                                                                                                            </td>-->
+                                                        <td>
+                                                            <a class="btn btn-link px-2"
+                                                               href="update-quantity?action=dec&id=${C.value.product.productID}">
+                                                                <i class="fa fa-minus"></i>
+                                                            </a>
+                                                            <input id="form1" name="quantity" value="${C.value.quantity}" type="text"
+                                                                   style="max-width: 3rem; text-align: center"
+                                                                   class="form-control-sm"
+                                                                   />
+                                                            <a class="btn btn-link px-2"
+                                                               href="update-quantity?action=inc&id=${C.value.product.productID}">
+                                                                <i class="fa fa-plus"></i>
+                                                            </a>
+                                                        </td>
+                                                        <td style="padding-left: 50px;" class="goods-page-total">
+                                                            <strong><fmt:formatNumber pattern="##.#" value="${C.value.product.salePrice*C.value.quantity}"/><span>đ</span></strong>
+                                                        </td>
+                                                        <td style="padding-left: 50px;" class="del-goods-col">
+                                                            <a class="del-goods" href="delete-cart?productId=${C.value.product.productID}">&nbsp;</a>
+                                                        </td>
+                                                    </tr>
+                                                </form>
 
-                                        </c:forEach> 
+                                            </c:forEach> 
 
-                                    </table>
+                                        </table>
+                                    </div>
+
+                                    <div class="shopping-total">
+                                        <ul>        
+                                            <li>
+                                                <em>Shipping cost</em>
+                                                <strong class="price">Free</strong>
+                                            </li>
+                                            <li class="shopping-total-price">
+                                                <em>Total</em>
+                                                <strong class="price"><fmt:formatNumber pattern="##.#" value="${totalMoney}"/><span>đ</span></strong>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
-
-                                <div class="shopping-total">
-                                    <ul>        
-                                        <li>
-                                            <em>Shipping cost</em>
-                                            <strong class="price">Free</strong>
-                                        </li>
-                                        <li class="shopping-total-price">
-                                            <em>Total</em>
-                                            <strong class="price"><span>$</span><fmt:formatNumber pattern="##.#" value="${totalMoney}"/></strong>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <button class="btn btn-default" type="submit"><a style="color: #FFF" href="productlist">Continue shopping </a><i class="fa fa-shopping-cart"></i></button>
+                                <button class="btn btn-primary" type="submit"><a style="color: #FFF" href="checkout">Checkout <i class="fa fa-check"></a></i></button>
                             </div>
-                            <button class="btn btn-default" type="submit"><a style="color: #FFF" href="productlist">Continue shopping </a><i class="fa fa-shopping-cart"></i></button>
-                            <button class="btn btn-primary" type="submit"><a style="color: #FFF" href="checkout">Checkout <i class="fa fa-check"></a></i></button>
+                            </c:otherwise>
+                        </c:choose>
                         </div>
+                        <!-- END CONTENT -->
                     </div>
-                    <!-- END CONTENT -->
-                </div>
-                <!-- END SIDEBAR & CONTENT -->
+                    <!-- END SIDEBAR & CONTENT -->
 
-                <!-- BEGIN SIMILAR PRODUCTS -->
-                <!-- END SIMILAR PRODUCTS -->
-            </div>
-        </div>
-
-        <jsp:include page="footer.jsp"></jsp:include>
-
-        <!-- BEGIN fast view of a product -->
-        <div id="product-pop-up" style="display: none; width: 700px;">
-            <div class="product-page product-pop-up">
-                <div class="row">
-                    <div class="col-md-6 col-sm-6 col-xs-3">
-                        <div class="product-main-image">
-                            <img src="assets/pages/img/products/model7.jpg" alt="Cool green dress with red bell" class="img-responsive">
-                        </div>
-                        <div class="product-other-images">
-                            <a href="javascript:;" class="active"><img alt="Berry Lace Dress" src="assets/pages/img/products/model3.jpg"></a>
-                            <a href="javascript:;"><img alt="Berry Lace Dress" src="assets/pages/img/products/model4.jpg"></a>
-                            <a href="javascript:;"><img alt="Berry Lace Dress" src="assets/pages/img/products/model5.jpg"></a>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-9">
-                        <h1>Cool green dress with red bell</h1>
-                        <div class="price-availability-block clearfix">
-                            <div class="price">
-                                <strong><span>$</span>47.00</strong>
-                                <em>$<span>62.00</span></em>
-                            </div>
-                            <div class="availability">
-                                Availability: <strong>In Stock</strong>
-                            </div>
-                        </div>
-                        <div class="description">
-                            <p>Lorem ipsum dolor ut sit ame dolore  adipiscing elit, sed nonumy nibh sed euismod laoreet dolore magna aliquarm erat volutpat 
-                                Nostrud duis molestie at dolore.</p>
-                        </div>
-                        <div class="product-page-options">
-                            <div class="pull-left">
-                                <label class="control-label">Size:</label>
-                                <select class="form-control input-sm">
-                                    <option>L</option>
-                                    <option>M</option>
-                                    <option>XL</option>
-                                </select>
-                            </div>
-                            <div class="pull-left">
-                                <label class="control-label">Color:</label>
-                                <select class="form-control input-sm">
-                                    <option>Red</option>
-                                    <option>Blue</option>
-                                    <option>Black</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="product-page-cart">
-                            <div class="product-quantity">
-                                <input id="product-quantity3" type="text" value="1" readonly class="form-control input-sm">
-                            </div>
-                            <button class="btn btn-primary" type="submit">Add to cart</button>
-                            <a href="shop-item.html" class="btn btn-default">More details</a>
-                        </div>
-                    </div>
-
-                    <div class="sticker sticker-sale"></div>
+                    <!-- BEGIN SIMILAR PRODUCTS -->
+                    <!-- END SIMILAR PRODUCTS -->
                 </div>
             </div>
-        </div>
-        <!-- END fast view of a product -->
 
-        <!-- Load javascripts at bottom, this will reduce page load time -->
-        <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
-        <!--[if lt IE 9]>
-        <script src="assets/plugins/respond.min.js"></script>  
-        <![endif]-->  
-        <script src="assets/plugins/jquery.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>      
-        <script src="assets/corporate/scripts/back-to-top.js" type="text/javascript"></script>
-        <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-        <!-- END CORE PLUGINS -->
+            <jsp:include page="footer.jsp"></jsp:include>
 
-        <!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
-        <script src="assets/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
-        <script src="assets/plugins/owl.carousel/owl.carousel.min.js" type="text/javascript"></script><!-- slider for products -->
-        <script src='assets/plugins/zoom/jquery.zoom.min.js' type="text/javascript"></script><!-- product zoom -->
-        <script src="assets/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script><!-- Quantity -->
-        <script src="assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/rateit/src/jquery.rateit.js" type="text/javascript"></script>
-        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js" type="text/javascript"></script><!-- for slider-range -->
+            <!-- BEGIN fast view of a product -->
 
-        <script src="assets/corporate/scripts/layout.js" type="text/javascript"></script>
-        <script type="text/javascript">
-            jQuery(document).ready(function () {
-                Layout.init();
-                Layout.initOWL();
-                Layout.initTwitter();
-                Layout.initImageZoom();
-                Layout.initTouchspin();
-                Layout.initUniform();
-                Layout.initSliderRange();
-            });
-        </script>
-        <!-- END PAGE LEVEL JAVASCRIPTS -->
-    </body>
-    <!-- END BODY -->
-</html>
+            <!-- END fast view of a product -->
+
+            <!-- Load javascripts at bottom, this will reduce page load time -->
+            <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
+            <!--[if lt IE 9]>
+            <script src="assets/plugins/respond.min.js"></script>  
+            <![endif]-->  
+            <script src="assets/plugins/jquery.min.js" type="text/javascript"></script>
+            <script src="assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+            <script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>      
+            <script src="assets/corporate/scripts/back-to-top.js" type="text/javascript"></script>
+            <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+            <!-- END CORE PLUGINS -->
+
+            <!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
+            <script src="assets/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
+            <script src="assets/plugins/owl.carousel/owl.carousel.min.js" type="text/javascript"></script><!-- slider for products -->
+            <script src='assets/plugins/zoom/jquery.zoom.min.js' type="text/javascript"></script><!-- product zoom -->
+            <script src="assets/plugins/bootstrap-touchspin/bootstrap.touchspin.js" type="text/javascript"></script><!-- Quantity -->
+            <script src="assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+            <script src="assets/plugins/rateit/src/jquery.rateit.js" type="text/javascript"></script>
+            <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js" type="text/javascript"></script><!-- for slider-range -->
+
+            <script src="assets/corporate/scripts/layout.js" type="text/javascript"></script>
+            <script type="text/javascript">
+                jQuery(document).ready(function () {
+                    Layout.init();
+                    Layout.initOWL();
+                    Layout.initTwitter();
+                    Layout.initImageZoom();
+                    Layout.initTouchspin();
+                    Layout.initUniform();
+                    Layout.initSliderRange();
+                });
+            </script>
+            <!-- END PAGE LEVEL JAVASCRIPTS -->
+        </body>
+        <!-- END BODY -->
+    </html>

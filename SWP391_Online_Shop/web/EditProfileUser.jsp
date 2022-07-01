@@ -116,7 +116,7 @@
 
                                 <div class="card" style="padding: 25px">
                                     <div class="text-center" style="padding:20px">
-                                        <img src="#" >
+                                       
                                     <c:if test="${info.uidImg == '' }">
                                         <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="rounded-circle  img-circle img-thumbnail"  width="150">
                                     </c:if>

@@ -1,4 +1,6 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html lang="en">
     <!--<![endif]-->
 
@@ -102,8 +104,8 @@
                                     <h1>${product.productName}</h1>
                                     <div class="price-availability-block clearfix">
                                         <div class="price">
-                                            <strong><span>$</span>${product.salePrice}</strong>
-                                            <em>$<span>${product.originalPrice}</span></em>
+                                            <strong><fmt:formatNumber pattern="##.#" value="${product.salePrice}"/><span>đ</span></strong>
+                                            <em><span><fmt:formatNumber pattern="##.#" value="${product.originalPrice}"/></span>đ</em>
                                         </div>                             
                                     </div>
                                     <div class="description">
@@ -364,7 +366,7 @@
                 <div class="row">
                     <!-- BEGIN COPYRIGHT -->
                     <div class="col-md-4 col-sm-4 padding-top-10">
-                        2015 � Keenthemes. ALL Rights Reserved. 
+                        2015 © Keenthemes. ALL Rights Reserved. 
                     </div>
                     <!-- END COPYRIGHT -->
                     <!-- BEGIN PAYMENTS -->

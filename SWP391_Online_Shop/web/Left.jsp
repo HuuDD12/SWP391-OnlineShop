@@ -1,3 +1,4 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="sidebar col-md-3 col-sm-5">
     <ul class="list-group margin-bottom-25 sidebar-menu">
@@ -43,7 +44,7 @@
             <div class="item">
                 <a href="shop-item.html"><img src="${listTop3.url}" alt="Some Shoes in Animal with Cut Out"></a>
                 <h3><a href="shop-item.html">${listTop3.productName}</a></h3>
-                <div class="price">${listTop3.originalPrice}</div>
+                <div class="price"><fmt:formatNumber pattern="##.#" value="${listTop3.originalPrice}"/></div>
             </div>
         </c:forEach>
 

@@ -384,7 +384,7 @@ public class ProductDAO extends DBcontext.DBContext {
         List<Product> list = new ArrayList<>();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, (index - 1) * 3);
+            ps.setInt(1, (index - 1) * 6);
             //ps.setInt(2, entry);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

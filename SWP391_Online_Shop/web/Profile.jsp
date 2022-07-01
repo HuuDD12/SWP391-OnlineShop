@@ -123,10 +123,7 @@
                             <div class="col-md-4">
                                 <div class="card" style="padding: 25px">
                                     <div class="card-body">
-                                        <div class="d-flex flex-column align-items-center text-center">
-                                        <c:if test="${info.uidImg == '' }">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="rounded-circle" width="150">
-                                        </c:if>
+                                        <div class="d-flex flex-column align-items-center text-center">        
                                         <c:if test="${info.uidImg != null}">
                                             <img src="${info.uidImg}"  class="rounded-circle" width="150">
                                         </c:if>                                      

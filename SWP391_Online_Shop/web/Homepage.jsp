@@ -4,6 +4,7 @@
     Author     : VAN ANH
 --%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -168,7 +169,7 @@
                                         </div>
                                     </div>
                                     <h3><a href="Detail?cid=${o.productID}">${o.productName}</a></h3>
-                                    <div class="pi-price">${o.salePrice}</div>
+                                    <div class="pi-price"><fmt:formatNumber pattern="##.#" value="${o.salePrice}"/></div>
                                     <a onclick="addTocartAsync(${o.productID})" class="btn btn-default add2cart">Add to cart</a>
                                     <div class="sticker sticker-sale"></div>
                                 </div>
@@ -225,7 +226,7 @@
                                     </div>
                                 </div>
                                 <h3><a href="Detail?cid=${p.p.productID}">${p.p.productName}</a></h3>
-                                <a href="#">${p.p.salePrice}</a></h3>
+                                <a href="#"><fmt:formatNumber pattern="##.#" value="${p.p.salePrice}"/></a></h3>
                                 <a onclick="addTocartAsync(${p.p.productID})" class="btn btn-default add2cart">Add to cart</a>
                             </div>
                         </div>

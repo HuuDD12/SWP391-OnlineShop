@@ -1,5 +1,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--
 Template: Metronic Frontend Freebie - Responsive HTML Template Based On Twitter Bootstrap 3.3.4
@@ -110,15 +111,15 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                 <th scope="row">${C.value.product.productID}</th>
                                 <td><img src="${C.value.product.url}" width="50"/></td>
                                 <td>${C.value.product.productName}</td>
-                                <td>${C.value.product.salePrice}</td>
+                                <td><fmt:formatNumber pattern="##.#" value="${C.value.product.salePrice}"/><span>đ</span></td>
                                 <td style="padding-left: 25px">${C.value.quantity}</td>
-                                <td style="padding-left: 23px">$<fmt:formatNumber pattern="##.#" value="${C.value.product.salePrice*C.value.quantity}"/></td>                                
+                                <td style="padding-left: 23px"><fmt:formatNumber pattern="##.#" value="${C.value.product.salePrice*C.value.quantity}"/>đ</td>                                
                                 </tr>
                             </form>
                         </c:forEach>
                         </tbody>
                     </table>
-                    <h3>Total Amount: $<fmt:formatNumber pattern="##.#" value="${totalMoney}"/></h3>
+                    <h3>Total Amount: <fmt:formatNumber pattern="##.#" value="${totalMoney}"/>đ</h3>
                 </div>
                 <div class="col-md-4" style="border: 1px solid #ccc; border-radius: 5px; padding: 1rem">
                     <h3>Information of customer</h3>

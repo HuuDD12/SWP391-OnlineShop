@@ -47,7 +47,7 @@ public class VerifyCodeControl extends HttpServlet {
             UserInfoDAO uidao= new UserInfoDAO();
             if (code.equals(user.getCode())) {
                 int uid = new UserDAO().createReturnId(user);
-                UserInfo info = new UserInfo(uid, "", "", "",gender,"", "", "", "");
+                UserInfo info = new UserInfo(uid, "", "resources/img/ImgUser/ava1.jpg", "",gender,"", "", "", "");
                 uidao.saveUserInfo(info);
                 request.setAttribute("success", "Register Successfully!!!!");
                 request.getRequestDispatcher("Register.jsp").forward(request, response);

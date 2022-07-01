@@ -3,16 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/src/java/Controller/UpdateBlog.java</file>
-            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/src/java/Controller/BrandControl.java</file>
-            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/src/java/Controller/HomeControl.java</file>
-            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/src/java/DAO/OrderDetailDAO.java</file>
-            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/src/java/DBcontext/DBContext.java</file>
-            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/src/java/Controller/ProductListController.java</file>
-            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/src/java/Controller/BlogListControl.java</file>
-            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/src/java/DAO/BlogDAO.java</file>
-            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/src/java/Controller/ProductDetailControl.java</file>
-            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/web/BlogList.jsp</file>
+            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/web/SellDashboardNav.jsp</file>
+            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/web/ManagerBlog.jsp</file>
+            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/web/MKTNav.jsp</file>
+            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/src/java/Controller/ManagerSale.java</file>
+            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/src/java/Controller/MKDashboardControl.java</file>
+            <file>file:/G:/FPT/SE%20kì%205/SWP391/SWP391-OnlineShop/SWP391_Online_Shop/src/java/Controller/Addproduct.java</file>
         </group>
     </open-files>
 </project-private>
