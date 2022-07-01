@@ -12,6 +12,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +24,7 @@ import javax.servlet.http.Part;
  * @author ADM
  */
 @WebServlet(name = "EditbannerControl", urlPatterns = {"/EditbannerControl"})
+@MultipartConfig
 public class EditbannerControl extends HttpServlet {
 
     /**
@@ -72,12 +74,15 @@ public class EditbannerControl extends HttpServlet {
             throws ServletException, IOException {
         Part file = request.getPart("image");
         String image = file.getSubmittedFileName();
+        String imageu = request.getParameter("imageu");
         String sale = request.getParameter("sale");
         String id = request.getParameter("id");
         int bannerid = Integer.parseInt(id);
         BannerDAO dao = new BannerDAO();
         String link = "";
-
+       if("".equals(image)){        
+            dao.UpdateBanner(imageu, sale,bannerid );
+        }else{
         link = "resources\\img\\ImgUser\\" + image;
         String uploadPath = getServletContext().getRealPath("") + File.separator + link;
         //  String UploadPart = "C:/Users/ADM/OneDrive/Documents/NetBeansProjects/Online-Shop/web/resources/img/ImgUser/" + image ;
@@ -92,6 +97,7 @@ public class EditbannerControl extends HttpServlet {
         } catch (IOException e) {
         }
         dao.UpdateBanner(link, sale,bannerid );
+       }
         response.sendRedirect("bannercontrol");
     }
 

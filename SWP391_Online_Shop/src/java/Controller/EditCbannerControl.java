@@ -5,29 +5,27 @@
  */
 package Controller;
 
-import DAO.BannerDAO;
 import DAO.CBannerDAO;
-import DAO.CategoryDAO;
-import DAO.OrderDetailDAO;
-import Model.Account;
-import Model.Category;
-import Model.CategoryOrder;
-import Model.OrderDetail;
+import Model.CBanner;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.List;
+import java.io.InputStream;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author ADM
  */
-@WebServlet(name = "MKDashboardControl", urlPatterns = {"/mktdashboard"})
-public class MKDashboardControl extends HttpServlet {
+@WebServlet(name = "EditCbannerControl", urlPatterns = {"/EditcbannerControl"})
+@MultipartConfig
+public class EditCbannerControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,35 +39,11 @@ public class MKDashboardControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-        Account acc = (Account) session.getAttribute("acc");
-        BannerDAO dao = new BannerDAO();
-        CBannerDAO cdao = new CBannerDAO();
-        int countB = dao.getCountBanner();
-        int countCB = cdao.getCountCBanner();
-        OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
-
-        CategoryDAO cadao = new CategoryDAO();
-        OrderDetailDAO o = new OrderDetailDAO();
-        List<Category> listC = cadao.getAllCategory();
-        List<OrderDetail> listSell = o.get3MostOderSell();
-
-        CategoryOrder categoryOrder1 = orderDetailDAO.getTotalCategoryOrderByID(1);
-        CategoryOrder categoryOrder2 = orderDetailDAO.getTotalCategoryOrderByID(2);
-        CategoryOrder categoryOrder3 = orderDetailDAO.getTotalCategoryOrderByID(3);
-        CategoryOrder categoryOrder4 = orderDetailDAO.getTotalCategoryOrderByID(4);
-        CategoryOrder categoryOrder5 = orderDetailDAO.getTotalCategoryOrderByID(5);
-        
-        request.setAttribute("categoryOrder1", categoryOrder1);
-        request.setAttribute("categoryOrder2", categoryOrder2);
-        request.setAttribute("categoryOrder3", categoryOrder3);
-        request.setAttribute("categoryOrder4", categoryOrder4);
-        request.setAttribute("categoryOrder5", categoryOrder5);
-        request.setAttribute("listSell", listSell);
-        request.setAttribute("listC", listC);
-        request.setAttribute("countB", countB);
-        request.setAttribute("countCB", countCB);
-        request.getRequestDispatcher("MktDashboard.jsp").forward(request, response);
+        String id  = request.getParameter("sid");
+        CBannerDAO dao = new CBannerDAO();
+        CBanner a = dao.getAccountDetail(id);
+        request.setAttribute("Banner", a);
+        request.getRequestDispatcher("EditCBannerManager.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -98,8 +72,36 @@ public class MKDashboardControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        Part file = request.getPart("image");
+        String image = file.getSubmittedFileName();
+        String imageu = request.getParameter("imageu");
+        String title = request.getParameter("title");
+        String desc = request.getParameter("desc");
+        String id = request.getParameter("id");
+        int bannerid = Integer.parseInt(id);
+        CBannerDAO dao = new CBannerDAO();
+        String link = "";
+        if("".equals(image)){        
+            dao.UpdateCBanner(imageu, title,desc,bannerid );
+        }else{
+        link = "resources\\img\\ImgUser\\" + image;
+        String uploadPath = getServletContext().getRealPath("") + File.separator + link;
+        //  String UploadPart = "C:/Users/ADM/OneDrive/Documents/NetBeansProjects/Online-Shop/web/resources/img/ImgUser/" + image ;
+        try {
+            try (FileOutputStream fos = new FileOutputStream(uploadPath)) {
+                InputStream is = file.getInputStream();
+                byte[] data = new byte[is.available()];
+                is.read(data);
+                fos.write(data);
+            }
+
+        } catch (IOException e) {
+        }
+        dao.UpdateCBanner(link, title,desc,bannerid );
+        }
+        response.sendRedirect("cbannercontrol");
     }
+    
 
     /**
      * Returns a short description of the servlet.
