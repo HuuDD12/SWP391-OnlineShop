@@ -47,7 +47,7 @@ public class BannerDAO extends DBcontext.DBContext {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Banner r = new Banner(rs.getInt(1), rs.getString(2),rs.getInt(3));
+                Banner r = new Banner(rs.getInt(1), rs.getString(2), rs.getInt(3));
                 list.add(r);
             }
 
@@ -55,6 +55,7 @@ public class BannerDAO extends DBcontext.DBContext {
         }
         return list;
     }
+
     public int getCountBanner() {
         String query = "select count(*) from [Banner]";
         try {
@@ -67,9 +68,52 @@ public class BannerDAO extends DBcontext.DBContext {
         }
         return 0;
     }
+
+    public void UpdateBanner(String img,String title, int id) {
+        String query = "UPDATE [Banner]\n"
+                + "  SET [Img] = ?,\n"
+                + "  [Title] = ?\n"
+                + "  WHERE [ID] = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, img);
+            ps.setString(2, title);
+            ps.setInt(3, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
+    public void DeleteBanner(int id) {
+        String query = "DELETE FROM [Banner] WHERE [ID] = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);      
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
     
+    public Banner getAccountDetail(String cid) {
+        String sql = "select * from [Banner] WHERE [ID] = ? ";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, cid);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return new Banner(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getInt(3));
+            }
+        } catch (SQLException e) {
+        }
+
+        return null;
+    }
+
     public static void main(String[] args) {
-        BannerDAO dao = new BannerDAO();      
-        dao.createReturnId("","");
+        BannerDAO dao = new BannerDAO();
+        Banner a =dao.getAccountDetail("11");
+        System.out.println(a);
     }
 }

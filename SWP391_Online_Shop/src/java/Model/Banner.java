@@ -53,6 +53,11 @@ public class Banner {
         this.bannerImgSale = bannerImgSale;
     }
 
+    @Override
+    public String toString() {
+        return "Banner{" + "bannerId=" + bannerId + ", bannerImg=" + bannerImg + ", bannerImgSale=" + bannerImgSale + '}';
+    }
+
     
     
     

@@ -54,9 +54,16 @@
                             <div class="col-md-6">
                                 <div class="widget-small primary coloured-icon"><i class='icon bx bxs-user-account fa-3x'></i>
                                     <div class="info">
-                                        <h4>Tổng Banner</h4>
-                                        <p><b>${count} Banner </b></p>
-                                    <p class="info-tong">Tổng số Banner quản lý.</p>
+                                        <h4>Tổng Banner Sale</h4>
+                                        <p><b>${count} Banner Sale </b></p>
+                                    <p class="info-tong">Tổng số Banner Sale quản lý.</p>
+                                </div>
+                            </div>
+                                <div class="widget-small primary coloured-icon"><i class='icon bx bxs-user-account fa-3x'></i>
+                                    <div class="info">
+                                        <h4>Tổng Banner </h4>
+                                        <p><b>${countC} Banner  </b></p>
+                                    <p class="info-tong">Tổng số Banner  quản lý.</p>
                                 </div>
                             </div>
                         </div>

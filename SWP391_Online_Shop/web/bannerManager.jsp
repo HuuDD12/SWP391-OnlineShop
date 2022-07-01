@@ -66,6 +66,7 @@
                                         <th style="text-align: center">Banner ID</th>
                                         <th style="text-align: center">User Img</th>
                                         <th style="text-align: center">Title Sale</th>
+                                        <th style="text-align: center">Update</th>
                                         <th style="text-align: center" colspan="2">Action</th>
                                     </tr>
                                 </thead>
@@ -77,8 +78,13 @@
                                         <td style="text-align: center">${x.bannerImgSale} %</td>
 
                                         <td style="text-align: center"> 
+                                            <button class="btn btn-primary">
+                                                <a style="text-decoration: none;color: #FFF" href="EditbannerControl?sid=${x.bannerId}" >Change</a>
+                                            </button>
+                                        </td>
+                                        <td style="text-align: center"> 
                                             <button class="btn btn-danger">
-                                                <a style="text-decoration: none;color: #FFF" onclick="doDelete('${p.productID}')">Delete</a>
+                                                <a style="text-decoration: none;color: #FFF" onclick="doDelete('${x.bannerId}')">Delete</a>
                                             </button>
                                         </td>
 
@@ -164,7 +170,7 @@
         <script type="text/javascript">
             function doDelete(id_pro) {
                 if (confirm("Are you sure to delete this product")) {
-                    window.location = "#?pid=" + id_pro;
+                    window.location = "deletebannerControl?pid=" + id_pro;
                 }
             }
         </script>

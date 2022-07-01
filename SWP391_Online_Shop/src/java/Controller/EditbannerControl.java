@@ -6,12 +6,12 @@
 package Controller;
 
 import DAO.BannerDAO;
+import Model.Banner;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,9 +22,8 @@ import javax.servlet.http.Part;
  *
  * @author ADM
  */
-@WebServlet(name = "AddbannerControl", urlPatterns = {"/addbannercontrol"})
-@MultipartConfig
-public class AddbannerControl extends HttpServlet {
+@WebServlet(name = "EditbannerControl", urlPatterns = {"/EditbannerControl"})
+public class EditbannerControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,7 +37,11 @@ public class AddbannerControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.getRequestDispatcher("AddBanner.jsp").forward(request, response);
+        String id  = request.getParameter("sid");
+        BannerDAO dao = new BannerDAO();
+        Banner a = dao.getAccountDetail(id);
+        request.setAttribute("Banner", a);
+        request.getRequestDispatcher("EditBannerManager.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -70,6 +73,8 @@ public class AddbannerControl extends HttpServlet {
         Part file = request.getPart("image");
         String image = file.getSubmittedFileName();
         String sale = request.getParameter("sale");
+        String id = request.getParameter("id");
+        int bannerid = Integer.parseInt(id);
         BannerDAO dao = new BannerDAO();
         String link = "";
 
@@ -86,9 +91,8 @@ public class AddbannerControl extends HttpServlet {
 
         } catch (IOException e) {
         }
-        dao.createReturnId(link, sale);
+        dao.UpdateBanner(link, sale,bannerid );
         response.sendRedirect("bannercontrol");
-
     }
 
     /**

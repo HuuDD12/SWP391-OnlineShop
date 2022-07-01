@@ -41,21 +41,23 @@
 
             <div class="row gutters-sm">
                 <div class="col-md-12">
-                    <form action="addbannercontrol" method="post" enctype="multipart/form-data">
+                    <form action="EditbannerControl" method="post" enctype="multipart/form-data">
                         <div class="card" style="padding: 25px">
                             <div class="card-body">
                                 <div class="card" style="padding: 25px">
                                     <div class="text-center" style="padding:20px">  
                                         <div class="row">
+                                            <input hidden name="id" value="${Banner.bannerId}">
 
                                             <div class="col-md-6">
+                                                <img src="${Banner.bannerImg}" class="rounded-circle img-circle img-thumbnail" width="150" >                                                
                                                 <h6>Upload a  photo...</h6>
                                                 <input type="file" class="text-center center-block file-upload" style="margin: 10px" name="image">
                                             </div>
                                             <div class="col-md-6">
 
                                                 <label for="first_name"><h4>Title Sale</h4></label>
-                                                <input type="number" class="form-control" name="sale"  placeholder="sale" title="enter number">
+                                                <input type="number" value="${Banner.bannerImgSale}" class="form-control" name="sale"  placeholder="sale" title="enter number">
 
 
                                             </div>
@@ -66,7 +68,8 @@
                         </div>
                         <div>
                             <a class="btn btn-primary px-3" href="bannercontrol" role="button" style="margin:50px;">Back </a>
-                            <button type="submit" class="btn btn-success" >Create</button>
+                            <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                            <button class="btn btn-lg btn-primary" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
                         </div>
                     </form>
                 </div>
@@ -105,4 +108,3 @@
         </script>
     </body>
 </html>
-
