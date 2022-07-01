@@ -10,12 +10,11 @@
     <ul class="app-menu">
         <li><a class="app-menu__item" href="mktdashboard" style="text-decoration: none" ><i class='app-menu__icon bx bx-tachometer'></i><span
                     class="app-menu__label" >Home</span></a></li>
-        <li><a class="app-menu__item" href="#" style="text-decoration: none" ><i class='app-menu__icon bx bx-tachometer'></i><span
+        <li><a class="app-menu__item" href="cbannercontrol" style="text-decoration: none" ><i class='app-menu__icon bx bx-tachometer'></i><span
                     class="app-menu__label" >Banner</span></a></li>
         <li><a class="app-menu__item" href="bannercontrol" style="text-decoration: none" ><i class='app-menu__icon bx bx-tachometer'></i><span
                     class="app-menu__label" >Banner sale</span></a></li>
-        <li><a class="app-menu__item" href="blogmanager" style="text-decoration: none" ><i class='app-menu__icon bx bx-user-voice'></i><span
-                    class="app-menu__label">Manage Blog</span></a></li>
+        
 
     </ul>
 </aside>

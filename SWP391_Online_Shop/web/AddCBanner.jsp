@@ -41,24 +41,28 @@
 
             <div class="row gutters-sm">
                 <div class="col-md-12">
-                    <form action="EditbannerControl" method="post" enctype="multipart/form-data">
+                    <form action="addcbannercontrol" method="post" enctype="multipart/form-data">
                         <div class="card" style="padding: 25px">
                             <div class="card-body">
                                 <div class="card" style="padding: 25px">
                                     <div class="text-center" style="padding:20px">  
                                         <div class="row">
-                                            <input hidden name="id" value="${Banner.bannerId}">
-                                            <input hidden name="imageu" value="${Banner.bannerImg}">
 
-                                            <div class="col-md-6">
-                                                <img src="${Banner.bannerImg}" class="rounded-circle img-circle img-thumbnail" width="150" >                                                
+                                            <div class="col-md-4">
                                                 <h6>Upload a  photo...</h6>
                                                 <input type="file" class="text-center center-block file-upload" style="margin: 10px" name="image">
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
 
-                                                <label for="first_name"><h4>Title Sale</h4></label>
-                                                <input type="number" value="${Banner.bannerImgSale}" class="form-control" name="sale"  placeholder="sale" title="enter number">
+                                                <label for="first_name"><h4>Title </h4></label>
+                                                <input type="text" class="form-control" name="title"  placeholder="Title" title="enter Title">
+
+
+                                            </div>
+                                            <div class="col-md-4">
+
+                                                <label for="first_name"><h4>Desc </h4></label>
+                                                <input type="text" class="form-control" name="desc"  placeholder="desc" title="enter Desc">
 
 
                                             </div>
@@ -68,9 +72,8 @@
                             </div>
                         </div>
                         <div>
-                            <a class="btn btn-primary px-3" href="bannercontrol" role="button" style="margin:50px;">Back </a>
-                            <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
-                            <button class="btn btn-lg btn-primary" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+                            <a class="btn btn-primary px-3" href="cbannercontrol" role="button" style="margin:50px;">Back </a>
+                            <button type="submit" class="btn btn-success" >Create</button>
                         </div>
                     </form>
                 </div>
@@ -109,3 +112,5 @@
         </script>
     </body>
 </html>
+
+

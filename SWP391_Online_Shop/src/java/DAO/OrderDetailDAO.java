@@ -14,6 +14,7 @@ import Model.Product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -126,6 +127,23 @@ public class OrderDetailDAO extends DBcontext.DBContext {
                 list.add(od);
             }
         } catch (Exception e) {
+        }
+        return list;
+    }
+    public List<OrderDetail> get3MostOderSell() {
+        String query = "select top 3 p.ProductName,p.SalePrice,Sum(o.Quantity) as Quantity from Order_Detail o inner join product p on p.ProductID=o.ProductID\n" +
+"                join ProductImg pr on pr.ProductID = p.ProductID\n" +
+"                group by o.ProductName,p.ProductName,p.SalePrice, o.Quantity";
+        List<OrderDetail> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getString(1), rs.getString(2), rs.getDouble(3));
+                OrderDetail od = new OrderDetail(p);
+                list.add(od);
+            }
+        } catch (SQLException e) {
         }
         return list;
     }

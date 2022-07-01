@@ -43,60 +43,57 @@
             <main class="app-content">
                 <div class="app-title">
                     <ul class="app-breadcrumb breadcrumb side">
-                        <li class="breadcrumb-item active"><a href="#" style="text-decoration: none"><b>Danh sách người dùng</b></a></li>
+                        <li class="breadcrumb-item active"><a href="#" style="text-decoration: none"><b>Danh sách BannerSale</b></a></li>
                     </ul>
                     <div id="clock"></div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 col-lg-12">
-                        <div class="row">
-                            <!-- col-6 -->
+                    <div class="col-md-12">
+                        <div class="card-header row">
                             <div class="col-md-6">
-                                <div class="widget-small primary coloured-icon"><i class='icon bx bxs-data fa-3x'></i>
-                                    <div class="info">
-                                        <a href="bannercontrol" style="text-decoration: none" ><h4>Tổng Banner Sale</h4></a>                                       
-                                        <p><b>${countB} Banner Sale </b></p>
-                                    <p class="info-tong">Tổng số Banner Sale quản lý.</p>
-                                </div>
+                                <i class="fas fa-table me-1"> Tất cả banner Sale</i>
+                            </div>
+                            <div class="col-md-6" style="text-align: right"> 
+                                <button class="btn btn-primary">
+                                    <a style="text-decoration: none;color: #FFF" href="addcbannercontrol">Add banner </a>
+                                </button>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="widget-small primary coloured-icon"><i class='icon bx bxs-shopping-bags fa-3x'></i>
-                                <div class="info">
-                                    <a href="cbannercontrol" style="text-decoration: none" ><h4>Tổng Banner </h4></a>
-                                    <p><b>${countCB} Banner  </b></p>
-                                    <p class="info-tong">Tổng số Banner  quản lý.</p>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="card-body" >
+                            <table  id="datatablesSimple">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center">Banner ID</th>
+                                        <th style="text-align: center">User Img</th>
+                                        <th style="text-align: center">Title </th>
+                                        <th style="text-align: center">Desc </th>
+                                        <th style="text-align: center">Update</th>
+                                        <th style="text-align: center" colspan="2">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${List}" var="x">
+                                    <tr>                                          
+                                        <td style="text-align: center">${x.cbannerId}</td>
+                                        <td style="text-align: center"><img src="${x.cbannerImg}" style="height: 100px;width: 360px"></td>
+                                        <td style="text-align: center">${x.cbannerTitle} </td>
+                                        <td style="text-align: center">${x.cbannerdesc} </td>
 
-                        <div class="col-lg-6">
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <i class="fas fa-chart-bar me-1"></i>
-                                    Bar Chart 
-                                </div>
-                                <div class="card-body">
-                                    <canvas id="myBarChart" width="100%" height="50"></canvas>
-                                </div>
+                                        <td style="text-align: center"> 
+                                            <button class="btn btn-primary">
+                                                <a style="text-decoration: none;color: #FFF" href="EditcbannerControl?sid=${x.cbannerId}" >Change</a>
+                                            </button>
+                                        </td>
+                                        <td style="text-align: center"> 
+                                            <button class="btn btn-danger">
+                                                <a style="text-decoration: none;color: #FFF" onclick="doDelete('${x.cbannerId}')">Delete</a>
+                                            </button>
+                                        </td>
 
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <i class="fas fa-chart-pie me-1"></i>
-                                    Pie Chart 
-                                </div>
-                                <div class="card-body">
-                                    <canvas id="myPieChart" width="100%" height="50"></canvas>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <!-- col-6 -->
-
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -167,97 +164,20 @@
                 }
             }
         </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <!-- Bar -->
-        <script>
-
-            const labelsBar = [
-            <c:forEach items="${listC}" var="c">
-                '${c.cate_name}',
-            </c:forEach>
-            ];
-
-
-            const dataBar = {
-                labels: labelsBar,
-                datasets: [{
-                        label: 'Tổng danh mục đã được đặt hàng',
-                        data: [${categoryOrder1.totalCategoryOrder}, ${categoryOrder2.totalCategoryOrder}, ${categoryOrder3.totalCategoryOrder}, ${categoryOrder4.totalCategoryOrder}, ${categoryOrder5.totalCategoryOrder}],
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 159, 64, 0.2)',
-                            'rgba(255, 205, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(201, 203, 207, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgb(255, 99, 132)',
-                            'rgb(255, 159, 64)',
-                            'rgb(255, 205, 86)',
-                            'rgb(75, 192, 192)',
-                            'rgb(54, 162, 235)',
-                            'rgb(153, 102, 255)',
-                            'rgb(201, 203, 207)'
-                        ],
-                        borderWidth: 1
-                    }]
-            };
-            const configBar = {
-                type: 'bar',
-                data: dataBar,
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                },
-            };
-            const myBarChart = new Chart(
-                    document.getElementById('myBarChart'),
-                    configBar
-                    );
-        </script>
-        <!-- Pie   -->
-        <script>
-            const dataPie = {
-                labels: [
-                    <c:forEach items="${listSell}" var="x">
-                '${x.p.productName}',
-            </c:forEach>
-
-                ],
-                datasets: [{
-                        label: 'My First Dataset',
-                        data: [
-                            <c:forEach items="${listSell}" var="x">
-                '${x.p.salePrice}',
-            </c:forEach>                           
-                        ],
-                        backgroundColor: [
-                            'rgb(255, 99, 132)',
-                            'rgb(54, 162, 235)',
-                            'rgb(255, 205, 86)'
-                        ],
-                        hoverOffset: 4
-                    }]
-            };
-            const configPie = {
-                type: 'pie',
-                data: dataPie,
-            };
-            const myPieChart = new Chart(
-                    document.getElementById('myPieChart'),
-                    configPie
-                    );
-        </script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            function doDelete(id_pro) {
+                if (confirm("Are you sure to delete this product")) {
+                    window.location = "deletecbannerControl?pid=" + id_pro;
+                }
+            }
+        </script>
     </body>
 
 </html>
+
+
