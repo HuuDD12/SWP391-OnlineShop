@@ -37,14 +37,14 @@
 
 
                 <!-- User Menu-->
-                <li><a class="app-nav__item" href="selldashboard"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+                <li><a class="app-nav__item" href="productlist"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
                 </li>
             </ul>
         </header>
         <!-- Sidebar menu-->
         <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-        <jsp:include page="SellDashboardNav.jsp"></jsp:include>
+        <jsp:include page="DashBoardNav.jsp"></jsp:include>
         
             <main class="app-content">
                 <div class="app-title">

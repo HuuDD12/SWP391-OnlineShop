@@ -774,6 +774,19 @@ public class ProductDAO extends DBcontext.DBContext {
         } catch (SQLException e) {
             System.out.println(e);
         }
+        
+        
+    public void deleteProductImg(String cid) {
+        String query = "delete from ProductImg where ProductID = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, cid);
+            ps.executeUpdate();
+        } catch (Exception e) {
+
+        }
+    }
+
     }
 
     public static void main(String[] args) {

@@ -10,6 +10,7 @@ package Model;
  * @author Admin
  */
 public class Product {
+
     private int productID;
     private String productName;
     private String description;
@@ -21,7 +22,7 @@ public class Product {
     private int brandID;
     private int sell_id;
     private String url;
-    
+
     public Product() {
     }
 
@@ -38,6 +39,27 @@ public class Product {
         this.url = url;
     }
 
+    public Product(int productID, String productName, String description, double originalPrice, double salePrice, int subID, int amount, int brandID) {
+        this.productID = productID;
+        this.productName = productName;
+        this.description = description;
+        this.originalPrice = originalPrice;
+        this.salePrice = salePrice;
+        this.subID = subID;
+        this.amount = amount;
+        this.brandID = brandID;
+    }
+
+    public Product(String productName, String description, double originalPrice, double salePrice, int subID, int amount, int brandID) {
+        this.productName = productName;
+        this.description = description;
+        this.originalPrice = originalPrice;
+        this.salePrice = salePrice;
+        this.subID = subID;
+        this.amount = amount;
+        this.brandID = brandID;
+    }
+
     public Product(int productID, String productName, String description, double originalPrice, double salePrice, double salePercent, int subID, int amount, int brandID, int sell_id, String url) {
         this.productID = productID;
         this.productName = productName;
@@ -52,6 +74,11 @@ public class Product {
         this.url = url;
     }
 
+    public Product(int productID, String url) {
+        this.productID = productID;
+        this.url = url;
+    }
+
     public double getSalePercent() {
         return salePercent;
     }
@@ -59,33 +86,33 @@ public class Product {
     public void setSalePercent(double salePercent) {
         this.salePercent = salePercent;
     }
-    
+
     public Product(String productName) {
         this.productName = productName;
     }
 
-    public Product(String productName, String url,double salePrice) {
+    public Product(String productName, String url, double salePrice) {
         this.productName = productName;
         this.url = url;
         this.salePrice = salePrice;
     }
-    
-    public Product(String productName,double salePrice) {
+
+    public Product(String productName, double salePrice) {
         this.productName = productName;
         this.salePrice = salePrice;
     }
-    public Product(String productName, String url,double salePrice,double originalPrice) {
+
+    public Product(String productName, String url, double salePrice, double originalPrice) {
         this.productName = productName;
         this.url = url;
         this.salePrice = salePrice;
         this.originalPrice = originalPrice;
     }
+
     public Product(String productName, String url) {
         this.productName = productName;
         this.url = url;
     }
-   
-    
 
     public int getProductID() {
         return productID;
@@ -172,11 +199,4 @@ public class Product {
         return "Product{" + "productID=" + productID + ", productName=" + productName + ", description=" + description + ", originalPrice=" + originalPrice + ", salePrice=" + salePrice + ", subID=" + subID + ", amount=" + amount + ", brandID=" + brandID + ", sell_id=" + sell_id + ", url=" + url + '}';
     }
 
-    
-    
-    
-    
-    
-    
-    
 }
