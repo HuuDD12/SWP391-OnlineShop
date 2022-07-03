@@ -156,58 +156,33 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                         </div>
                         <!-- END PRODUCT LIST -->
                         <!-- BEGIN PAGINATOR -->
-                        <div id="content" class="row">                           
-                            <div class="col-md-8 col-sm-8">
-                                <ul class="pagination pull-right">   
-                                    <c:if test="${Pid == 1}">
-                                        <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=1">&laquo;</a></li>
-                                            <c:if test="${page!= '1'}">
-                                            <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${page - 1}">&lsaquo;</a></li>
-                                            </c:if>
-                                            <c:if test="${endPage <=7}">
-                                                <c:forEach begin="1" end="${endPage}" var="i">
-                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${i}">${i}</a></li>
-                                                </c:forEach> 
-                                            </c:if>
-                                            <c:if test="${endPage > 7}">
-                                                <c:if test="${page >= '1' && page <4}">
-                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${1}">1</a></li>                                                                                       
-                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${2}">2</a></li>                                                                                       
-                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${3}">3</a></li>                                            
-                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${4}">4</a></li>
-                                                <li class="page-item ${i==page?"active":""}"><a class="page-link">....</a></li> 
-                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${endPage}">${endPage}</a></li>
+                        <c:choose>
+                            <c:when test="${listP==null||listP.size()==0}">
+                                <div style="text-align: center;font-size: 30px">Search No Result<br>
+                                    We're sorry. We cannot find any matches for your search term.
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div id="content" class="row">                           
+                                    <div class="col-md-8 col-sm-8">
+                                        <ul class="pagination pull-right">   
+                                            <c:if test="${page>1}">
+                                                <li class="page-item"><a class="page-link" href="searchbyname?page=${page-1}&txt=${txtSearch}">Previous</a></li>
                                                 </c:if>
-                                                <c:if test="${page >= '4' && page < (endPage-2)}">
-                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${1}">1</a></li>  
-                                                <li class="page-item ${i==page?"active":""}"><a class="page-link">...</a></li>
-                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${page-1}">${page-1}</a></li>                                                                                       
-                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${page}">${page}</a></li>                                                                                       
-                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${page+1}">${page+1}</a></li>                                                                                       
-                                                <li class="page-item ${i==page?"active":""}"><a class="page-link">...</a></li> 
-                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${endPage}">${endPage}</a></li>
-                                                </c:if>
-                                                <c:if test="${page >= (endPage-2) }">
-                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${1}">1</a></li>                                                                                       
-                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${2}">2</a></li>                                                                                                                                                                             
-                                                <li class="page-item ${i==page?"active":""}"><a class="page-link">...</a></li>
-                                                    <c:if test="${page == (endPage-2)}">
-                                                    <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${endPage-3}">${endPage-3}</a></li>
-                                                    </c:if>
-                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${endPage-2}">${endPage-2}</a></li>
-                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${endPage-1}">${endPage-1}</a></li>
-                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${endPage}">${endPage}</a></li>
 
-                                            </c:if>
-                                        </c:if>
-                                        <c:if test="${page<endPage}">
-                                            <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${page + 1}">&rsaquo;</a></li>
-                                            </c:if> 
-                                        <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${endPage}">&raquo;</a></li> 
-                                        </c:if>
-                                </ul>
-                            </div>
-                        </div>
+                                            <c:forEach begin="1" end="${endPage}" var="i">
+                                                <li class="page-item ${i==page?"active":""}"><a onclick="SearchByNamePaging(${i},${txtSearch})" class="page-link" href="searchbyname?page=${i}&txt=${txtSearch}">${i}</a></li>
+                                                </c:forEach>
+
+                                            <c:if test="${page<endPage}">
+                                                <li class="page-item"><a class="page-link"  href="searchbyname?page=${page+1}&txt=${txtSearch}">Next</a></li>
+                                                </c:if>
+                                    </div>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
+
+
                         <!-- END PAGINATOR -->
                     </div>
                     <!-- END CONTENT -->
@@ -355,19 +330,32 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
         </script>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script>
-                   function addTocartAsync(productId) {
-                       axios.get('add-to-cart-async', {
-                           params: {
-                               productId: productId
-                           }
-                       }).then((response) => {
-                           //lay data thanh cong
-                           document.getElementById("cart_number").innerHTML = response.data + " items";
-                           //cap nhat view
-                       })
-                   }
+            function addTocartAsync(productId) {
+                axios.get('add-to-cart-async', {
+                    params: {
+                        productId: productId
+                    }
+                }).then((response) => {
+                    //lay data thanh cong
+                    document.getElementById("cart_number").innerHTML = response.data + " items";
+                    //cap nhat view
+                })
+            }
         </script>
-
+        <script>
+            function SearchByNamePaging(page,txtSearch) {
+                axios.get('searchAjax', {
+                    params: {
+                        page: page,
+                        txt: txtSearch
+                    }
+                }).then((response) => {
+                    //lay data thanh cong
+                    document.getElementById("cart_number").innerHTML = response.data + " items";
+                    //cap nhat view
+                })
+            }
+        </script>
         <!-- END PAGE LEVEL JAVASCRIPTS -->
     </body>
     <!-- END BODY -->

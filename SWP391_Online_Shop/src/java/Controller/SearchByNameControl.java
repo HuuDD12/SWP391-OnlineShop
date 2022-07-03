@@ -36,12 +36,27 @@ public class SearchByNameControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-        String txtSearch = request.getParameter("txt");
-        ProductDAO pdao = new ProductDAO();
-        List<Product> list = pdao.searchByName(txtSearch);
-        request.setAttribute("listP", list);
-        request.setAttribute("txtSearch", txtSearch);
-        request.getRequestDispatcher("productlist.jsp").forward(request, response);
+            final int size = 6;
+            String page = request.getParameter("page");
+            String txtSearch = request.getParameter("txt");
+            ProductDAO pdao = new ProductDAO();
+            int count = pdao.countSearchByName(txtSearch);
+            int endPage = count / size;
+            if (count % size != 0) {
+                endPage++;
+            }
+            if (page == null) {
+                page = "1";
+            }
+            int Pid = 1;
+            int pTid = Integer.parseInt(page);
+            List<Product> list = pdao.pagingProductSearchByName(pTid, txtSearch);
+            request.setAttribute("Pid", Pid);
+            request.setAttribute("endPage", endPage);
+            request.setAttribute("page", page);
+            request.setAttribute("listP", list);
+            request.setAttribute("txtSearch", txtSearch);
+            request.getRequestDispatcher("productlistsearch.jsp").forward(request, response);
         }
     }
 

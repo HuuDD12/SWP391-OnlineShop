@@ -524,32 +524,18 @@ public class ProductDAO extends DBcontext.DBContext {
         return list;
     }
 
-    public List<Product> searchAdvance(String txtSearch, int sort) {
+    public List<Product> pagingProductSearchByName(int index, String txtSearch) {
         String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
-                + "MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
-                + "MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n"
-                + "MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n"
-                + "MIN(ProI.ProductImgURL) AS ProductImgURL FROM \n"
-                + "dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t where t.ProductName like ? ";
+                + "                MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
+                + "                MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n"
+                + "                MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n"
+                + "                MIN(ProI.ProductImgURL) AS ProductImgURL FROM \n"
+                + "                dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t  where t.ProductName like ?\n"
+                + "                order by t.productID OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY";
         List<Product> list = new ArrayList<>();
-        switch (sort) {
-            case 0:
-                break;
-            case 1:
-                sql += " order by t.ProductName  ";
-                break;
-            case 2:
-                sql += " order by t.ProductName desc ";
-                break;
-            case 3:
-                sql += " order by SalePrice ";
-                break;
-            case 4:
-                sql += " order by SalePrice desc";
-                break;
-        }
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(2, (index - 1) * 6);
             ps.setString(1, "%" + txtSearch + "%");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -565,11 +551,35 @@ public class ProductDAO extends DBcontext.DBContext {
                         rs.getString("ProductImgURL"));
                 list.add(p);
             }
+
         } catch (SQLException e) {
             System.out.println(e);
         }
         return list;
+
     }
+    
+    public int countSearchByName(String name) {
+        String query = "SELECT count(*) FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
+                + "MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
+                + "MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n"
+                + "MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n"
+                + "MIN(ProI.ProductImgURL) AS ProductImgURL FROM \n"
+                + "dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t where t.ProductName like ? ";
+        try {
+
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, "%" + name + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+
+        }
+        return 0;
+    }
+    
 
     public List<Product> getTop3ListProByCat(String sid, int pid) {
         String sql = "SELECT top 4 * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
@@ -676,6 +686,7 @@ public class ProductDAO extends DBcontext.DBContext {
 
         }
     }
+
     public void UpdateProductInfo(Product p) {
         String sql = "UPDATE [dbo].[Product]\n"
                 + "   SET [ProductName] = ?\n"
@@ -702,6 +713,7 @@ public class ProductDAO extends DBcontext.DBContext {
             System.out.println(e);
         }
     }
+
     public void UpdateProductImgInfo(Product p) {
         String sql = "UPDATE [dbo].[ProductImg]\n"
                 + "   SET [ProductImgURL] = ?\n"
@@ -716,6 +728,7 @@ public class ProductDAO extends DBcontext.DBContext {
             System.out.println(e);
         }
     }
+
     public void InsertProductInfo(Product p) {
         String sql = "INSERT INTO [dbo].[Product]\n"
                 + "           ([ProductName]\n"
@@ -747,6 +760,7 @@ public class ProductDAO extends DBcontext.DBContext {
             System.out.println(e);
         }
     }
+
     public void InsertProductImgInfo(Product p) {
         String sql = "INSERT INTO [dbo].[ProductImg]\n"
                 + "           ([ProductImgURL])\n"
@@ -764,7 +778,7 @@ public class ProductDAO extends DBcontext.DBContext {
 
     public static void main(String[] args) {
         ProductDAO pdao = new ProductDAO();
-        List<Product> list = pdao.getAll();
+        List<Product> list = pdao.pagingProductSearchByName(1, "ba");
         for (Product product : list) {
             System.out.println(product);
         }

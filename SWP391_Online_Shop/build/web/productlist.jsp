@@ -145,7 +145,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                                 <a href="${p.url}" class="btn btn-default fancybox-fast-view">View</a>
                                             </div>
                                         </div>
-                                         <h3 style="font: 11px 'Open Sans', sans-serif; text-align: center"><a href="productdetail?pid=${p.productID}&sid=${p.subID}">${p.productName}</a></h3>
+                                        <h3 style="font: 11px 'Open Sans', sans-serif; text-align: center"><a href="productdetail?pid=${p.productID}&sid=${p.subID}">${p.productName}</a></h3>
                                         <div class="pi-price" data-type="currency"><fmt:formatNumber pattern="##.#" value="${p.salePrice}"/></div>
                                         <a onclick="addTocartAsync(${p.productID})" class="btn btn-default add2cart" >Add to cart</a>
                                     </div>
@@ -156,7 +156,7 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                         </div>
                         <!-- END PRODUCT LIST -->
                         <!-- BEGIN PAGINATOR -->
-                        <div class="row">                           
+                        <div id="content" class="row">                           
                             <div class="col-md-8 col-sm-8">
                                 <ul class="pagination pull-right">   
                                     <c:if test="${Pid == 1}">
@@ -355,17 +355,17 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
         </script>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script>
-            function addTocartAsync(productId) {
-                axios.get('add-to-cart-async', {
-                    params: {
-                        productId: productId
-                    }
-                }).then((response) => {
-                    //lay data thanh cong
-                    document.getElementById("cart_number").innerHTML = response.data + " items";
-                    //cap nhat view
-                })
-            }
+                   function addTocartAsync(productId) {
+                       axios.get('add-to-cart-async', {
+                           params: {
+                               productId: productId
+                           }
+                       }).then((response) => {
+                           //lay data thanh cong
+                           document.getElementById("cart_number").innerHTML = response.data + " items";
+                           //cap nhat view
+                       })
+                   }
         </script>
 
         <!-- END PAGE LEVEL JAVASCRIPTS -->
