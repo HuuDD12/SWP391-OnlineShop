@@ -47,8 +47,7 @@ public class ProductManagerControl extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             response.setContentType("text/html;charset=UTF-8");
-
-             HttpSession session = request.getSession();
+            HttpSession session = request.getSession();
             
             ProductDAO pdao = new ProductDAO();
             CategoryDAO cdao = new CategoryDAO();
