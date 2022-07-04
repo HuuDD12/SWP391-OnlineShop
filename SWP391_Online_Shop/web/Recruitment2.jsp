@@ -25,12 +25,12 @@
                 <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
                 <li><a href="${pageContext.request.contextPath}/product?page=1&query=&subcategory=0&brand=0&price=0&sortType=0&sortMode=0">
                         Product</a></li>
-                <li><a href="AboutShope.jsp">About SHOPE</a></li>
+                <li><a href="AboutShope.jsp">About Shope</a></li>
             </ul>
             <div class="clearfix"></div>
             <div class="row">
                 <div class="heading-main-box">
-                    <h1 class="titles">Vietnamese people<br>use Vietnamese goods.<br>So join with us</h1>
+                    <h1 class="titles">You can do it .<br>We can help . <br>So join with us !</h1>
                 </div>
             </div>
         </header>

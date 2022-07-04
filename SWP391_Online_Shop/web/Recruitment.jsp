@@ -25,7 +25,7 @@
             <div class="clearfix"></div>
             <div class="row">
                 <div class="heading-main-box">
-                    <h1 class="titles">Vietnamese people<br>use Vietnamese goods.<br>So join with us</h1>
+                    <h1 class="titles">You can do it .<br>We can help . <br>So join with us !</h1>
                 </div>
             </div>
         </header>
