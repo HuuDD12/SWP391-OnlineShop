@@ -6,7 +6,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>SHOPE</title>
+        <title>Online Shop</title>
         <!--CSS-->
         <link href="css/AboutShope.css" rel="stylesheet" type="text/css"/> 
         <!--ICON-->
@@ -66,7 +66,7 @@
         <br><hr><br>
         <!-- Copyright -->
         <div class="text-center">
-            © 2021 Copyright:
+            © 2022 Copyright:
             <a class="text-white" href="#">SWP391 - JS1601</a>
         </div>
         <!-- Copyright -->
