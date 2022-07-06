@@ -51,9 +51,10 @@
                                             <input hidden name="imageu" value="${Banner.cbannerImg}">
 
                                             <div class="col-md-4">
-                                                <img src="${Banner.cbannerImg}" class="rounded-circle img-circle img-thumbnail" width="150" >                                                
-                                                <h6>Upload a  photo...</h6>
-                                                <input type="file" class="text-center center-block file-upload" style="margin: 10px" name="image">
+                                                <img src="${Banner.cbannerImg}" class="rounded-circle img-circle img-thumbnail" alt="" id="image" width="100" height="100" >                                                
+                                                <h6>Upload a  photo...</h6>                                               
+                                                <input type="file" class="text-center center-block file-upload" style="margin: 10px" name="image" id="imageFile" onchange="choosefile(this)"
+                                                       accept="image/gif, image/jpeg, image/png">
                                             </div>
                                             <div class="col-md-4">
 
@@ -90,6 +91,18 @@
 
         <!-- jQuery CDN -->
         <script src="https://code.jquery.com/jquery-1.12.0.min.js "></script>
+        <script>
+            function choosefile(fileinput) {
+                if(fileinput.files && fileinput.files[0]){
+                    var reader = new FileReader();
+                    reader.onload = function (e){
+                        $('#image').attr('src',e.target.result);
+                    }
+                    reader.readAsDataURL(fileinput.files[0]);
+                }
+            }
+
+        </script>
         <!-- Bootstrap Js CDN -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js "></script>
         <!-- jQuery Custom Scroller CDN -->

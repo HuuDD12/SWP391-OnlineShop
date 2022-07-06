@@ -116,16 +116,17 @@
 
                                 <div class="card" style="padding: 25px">
                                     <div class="text-center" style="padding:20px">
-                                       
+
                                     <c:if test="${info.uidImg == '' }">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="rounded-circle  img-circle img-thumbnail"  width="150">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="rounded-circle  img-circle img-thumbnail"  alt="" id="image" width="100" height="100">
                                     </c:if>
                                     <c:if test="${info.uidImg != null}">
-                                        <img src="${info.uidImg}" class="rounded-circle img-circle img-thumbnail" width="150" >
+                                        <img src="${info.uidImg}" class="rounded-circle img-circle img-thumbnail" alt="" id="image" width="100" height="100" >
                                         <input hidden name="imageu" value="${info.uidImg}">
                                     </c:if>
                                     <h6>Upload a different photo...</h6>
-                                    <input type="file" class="text-center center-block file-upload" style="margin: 10px" name="image">
+                                    <input type="file" class="text-center center-block file-upload" style="margin: 10px" name="image" id="imageFile" onchange="choosefile(this)"
+                                           accept="image/gif, image/jpeg, image/png">                                  
                                 </div><br>
                             </div>
 
@@ -211,6 +212,19 @@
         </div>
         <jsp:include page="footer.jsp"></jsp:include>
     </body>
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js "></script>
+        <script>
+            function choosefile(fileinput) {
+                if(fileinput.files && fileinput.files[0]){
+                    var reader = new FileReader();
+                    reader.onload = function (e){
+                        $('#image').attr('src',e.target.result);
+                    }
+                    reader.readAsDataURL(fileinput.files[0]);
+                }
+            }
+
+        </script>
     <script type="text/javascript">
         $(document).ready(function () {
 
