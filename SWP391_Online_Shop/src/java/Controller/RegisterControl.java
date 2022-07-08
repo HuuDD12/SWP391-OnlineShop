@@ -63,7 +63,7 @@ public class RegisterControl extends HttpServlet {
                         session.setAttribute("authcode", acc);
                         response.sendRedirect("verify.jsp");
                     } else {
-                        out.println("Failed to send verification email");
+                        out.println("Failed to send verification email!");
                     }
                 }
             } else {
