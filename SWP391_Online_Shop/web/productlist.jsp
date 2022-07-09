@@ -115,22 +115,41 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                     <a href="javascript:;"><i class="fa fa-th-large"></i></a>
                                     <a href="javascript:;"><i class="fa fa-th-list"></i></a>
                                 </div>
-                                <div class="col-md-10 col-sm-10">
-                                    <div class="pull-right">
+                                <form action="locproductlistcontrol" >
+                                    <div class="col-md-10 col-sm-10">
+                                        <div class="pull-left" style="margin: 10px">                                      
+                                            <select name="cate" class="btn btn-light form-control input-sm">
+                                                <option ${cate==0?"selected":""} value="0" selected="selected">Category&nbsp</option>
+                                            <c:forEach items="${sessionScope.listC}" var="c">
+                                                <option ${cate == c.cate_id?"selected":""} value="${c.cate_id}" >${c.cate_name}</option>
+                                            </c:forEach>
+                                        </select>  
+                                    </div>
+                                    <div class="pull-left" style="margin: 10px">
+                                        <select name="brand"  class="btn btn-light form-control input-sm">
+                                            <option ${brand==0?"selected":""} value="0" selected="selected">Brand&nbsp;</option>
+                                            <c:forEach items="${sessionScope.listB}" var="b">
+                                                <option ${brand== b.brandId?"selected":""} value="${b.brandId}" >${b.brandName}</option>
+                                            </c:forEach>
+                                        </select>  
 
-                                        <label class="control-label">Sort&nbsp;By:</label>
-                                        <form action="sort">
-                                            <select name="type" onchange="this.form.submit()" class="form-control input-sm">
-                                                <option ${type==0?"selected":""} value="0" selected="selected">Default</option>
+                                    </div>
+                                    <div class="pull-left" style="margin: 10px">
+                                        <select name="type" class="btn btn-light form-control input-sm" >
+                                            <option ${type==0?"selected":""} value="0" selected="selected">Sort&nbsp;</option>
                                             <option ${type==1?"selected":""} value="1">Name (A - Z)</option>
                                             <option ${type==2?"selected":""} value="2">Name (Z - A)</option>
                                             <option ${type==3?"selected":""} value="3">Price (Low &gt; High)</option>
                                             <option ${type==4?"selected":""} value="4">Price (High &gt; Low)</option>
                                         </select>  
-                                    </form>
 
+                                    </div>
+                                    <div class="pull-right" style="margin: 10px">                                   
+                                        <button onchange="this.form.submit()" class="btn btn-success" >Search</button>
+
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                         <!-- BEGIN PRODUCT LIST -->
                         <div id="content" class="row product-list">
@@ -204,7 +223,53 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                             <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${page + 1}">&rsaquo;</a></li>
                                             </c:if> 
                                         <li class="page-item ${i==page?"active":""}"><a class="page-link" href="productlist?page=${endPage}">&raquo;</a></li> 
+                                        </c:if>                                   
+                                    <c:if test="${Pid == 2}">
+                                        <li class="page-item ${i==page?"active":""}"><a class="page-link" href="locproductlistcontrol?page=1&cate=${cate}&type=${type}&brand=${brand}">&laquo;</a></li>
+                                            <c:if test="${page!= '1'}">
+                                            <li class="page-item ${i==page?"active":""}"><a class="page-link" href="locproductlistcontrol?page=${page - 1}&cate=${cate}&type=${type}&brand=${brand}">&lsaquo;</a></li>
+                                            </c:if>
+                                            <c:if test="${endPage <=7}">
+                                                <c:forEach begin="1" end="${endPage}" var="i">
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="locproductlistcontrol?page=${i}&cate=${cate}&type=${type}&brand=${brand}">${i}</a></li>
+                                                </c:forEach> 
+                                            </c:if>
+                                            <c:if test="${endPage > 7}">
+                                                <c:if test="${page >= '1' && page <4}">
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="locproductlistcontrol?page=${1}&cate=${cate}&type=${type}&brand=${brand}">1</a></li>                                                                                       
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="locproductlistcontrol?page=${2}&cate=${cate}&type=${type}&brand=${brand}">2</a></li>                                                                                       
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="locproductlistcontrol?page=${3}&cate=${cate}&type=${type}&brand=${brand}">3</a></li>                                            
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="locproductlistcontrol?page=${4}&cate=${cate}&type=${type}&brand=${brand}">4</a></li>
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link">....</a></li> 
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="locproductlistcontrol?page=${endPage}&cate=${cate}&type=${type}&brand=${brand}">${endPage}</a></li>
+                                                </c:if>
+                                                <c:if test="${page >= '4' && page < (endPage-2)}">
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="locproductlistcontrol?page=${1}&cate=${cate}&type=${type}&brand=${brand}">1</a></li>  
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link">...</a></li>
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="locproductlistcontrol?page=${page-1}&cate=${cate}&type=${type}&brand=${brand}">${page-1}</a></li>                                                                                       
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="locproductlistcontrol?page=${page}&cate=${cate}&type=${type}&brand=${brand}">${page}</a></li>                                                                                       
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="locproductlistcontrol?page=${page+1}&cate=${cate}&type=${type}&brand=${brand}">${page+1}</a></li>                                                                                       
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link">...</a></li> 
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="locproductlistcontrol?page=${endPage}&cate=${cate}&type=${type}&brand=${brand}">${endPage}</a></li>
+                                                </c:if>
+                                                <c:if test="${page >= (endPage-2) }">
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="locproductlistcontrol?page=${1}&cate=${cate}&type=${type}&brand=${brand}">1</a></li>                                                                                       
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="locproductlistcontrol?page=${2}&cate=${cate}&type=${type}&brand=${brand}">2</a></li>                                                                                                                                                                             
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link">...</a></li>
+                                                    <c:if test="${page == (endPage-2)}">
+                                                    <li class="page-item ${i==page?"active":""}"><a class="page-link" href="locproductlistcontrol?page=${endPage-3}&cate=${cate}&type=${type}&brand=${brand}">${endPage-3}</a></li>
+                                                    </c:if>
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="locproductlistcontrol?page=${endPage-2}&cate=${cate}&type=${type}&brand=${brand}">${endPage-2}</a></li>
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="locproductlistcontrol?page=${endPage-1}&cate=${cate}&type=${type}&brand=${brand}">${endPage-1}</a></li>
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="locproductlistcontrol?page=${endPage}&cate=${cate}&type=${type}&brand=${brand}">${endPage}</a></li>
+
+                                            </c:if>
                                         </c:if>
+                                        <c:if test="${page<endPage}">
+                                            <li class="page-item ${i==page?"active":""}"><a class="page-link" href="locproductlistcontrol?page=${page + 1}&cate=${cate}&type=${type}&brand=${brand}">&rsaquo;</a></li>
+                                            </c:if> 
+                                        <li class="page-item ${i==page?"active":""}"><a class="page-link" href="locproductlistcontrol?page=${endPage}&cate=${cate}&type=${type}&brand=${brand}">&raquo;</a></li> 
+                                        </c:if>                                   
                                 </ul>
                             </div>
                         </div>
@@ -355,17 +420,17 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
         </script>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script>
-                   function addTocartAsync(productId) {
-                       axios.get('add-to-cart-async', {
-                           params: {
-                               productId: productId
-                           }
-                       }).then((response) => {
-                           //lay data thanh cong
-                           document.getElementById("cart_number").innerHTML = response.data + " items";
-                           //cap nhat view
-                       })
-                   }
+            function addTocartAsync(productId) {
+                axios.get('add-to-cart-async', {
+                    params: {
+                        productId: productId
+                    }
+                }).then((response) => {
+                    //lay data thanh cong
+                    document.getElementById("cart_number").innerHTML = response.data + " items";
+                    //cap nhat view
+                })
+            }
         </script>
 
         <!-- END PAGE LEVEL JAVASCRIPTS -->

@@ -245,16 +245,133 @@ public class ProductDAO extends DBcontext.DBContext {
         return list;
     }
 
-    public List<Product> sortProductByNameAsc() {
+    public List<Product> sortProductByNameAsc(int indexPage) {
         String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
                 + "MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
                 + "MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n"
                 + "MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n"
                 + "MIN(ProI.ProductImgURL) AS ProductImgURL FROM \n"
-                + "dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t  order by t.ProductName";
+                + "dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t  order by t.ProductName \n"
+                + "OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY";
         List<Product> list = new ArrayList<>();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, (indexPage - 1) * 6);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("productID"),
+                        rs.getString("ProductName"),
+                        rs.getString("Description"),
+                        rs.getDouble("OriginalPrice"),
+                        rs.getDouble("SalePrice"),
+                        rs.getInt("SubCategoryID"),
+                        rs.getInt("Amount"),
+                        rs.getInt("BrandID"),
+                        rs.getInt("sell_id"),
+                        rs.getString("ProductImgURL")
+                );
+                list.add(p);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    public List<Product> sortProductByNameAscAndbrandcate(int indexPage,int brand,int cate) {
+        String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n" +
+"                MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n" +
+"                MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n" +
+"                MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n" +
+"                MIN(ProI.ProductImgURL) AS ProductImgURL ,MIN(c.CategoryID) AS CategoryID\n" +
+"				FROM dbo.Product p \n" +
+"				JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n" +
+"				JOIN dbo.Category c ON p.SubCategoryID = c.CategoryID	\n" +
+"				WHERE p.BrandID = ?	AND c.CategoryID = ?		\n" +
+"				GROUP BY p.ProductID ) t  order by t.ProductName \n" +
+"				OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY";
+        List<Product> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, brand);
+            ps.setInt(2, cate);
+            ps.setInt(3, (indexPage - 1) * 6);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("productID"),
+                        rs.getString("ProductName"),
+                        rs.getString("Description"),
+                        rs.getDouble("OriginalPrice"),
+                        rs.getDouble("SalePrice"),
+                        rs.getInt("SubCategoryID"),
+                        rs.getInt("Amount"),
+                        rs.getInt("BrandID"),
+                        rs.getInt("sell_id"),
+                        rs.getString("ProductImgURL")
+                );
+                list.add(p);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    public List<Product> sortProductByNameAscAndbrand(int indexPage,int brand) {
+        String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n" +
+"                MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n" +
+"                MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n" +
+"                MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n" +
+"                MIN(ProI.ProductImgURL) AS ProductImgURL ,MIN(c.CategoryID) AS CategoryID\n" +
+"				FROM dbo.Product p \n" +
+"				JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n" +
+"				JOIN dbo.Category c ON p.SubCategoryID = c.CategoryID	\n" +
+"				WHERE p.BrandID = ?	\n" +
+"				GROUP BY p.ProductID ) t  order by t.ProductName \n" +
+"				OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY";
+        List<Product> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, brand);
+            ps.setInt(2, (indexPage - 1) * 6);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("productID"),
+                        rs.getString("ProductName"),
+                        rs.getString("Description"),
+                        rs.getDouble("OriginalPrice"),
+                        rs.getDouble("SalePrice"),
+                        rs.getInt("SubCategoryID"),
+                        rs.getInt("Amount"),
+                        rs.getInt("BrandID"),
+                        rs.getInt("sell_id"),
+                        rs.getString("ProductImgURL")
+                );
+                list.add(p);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    public List<Product> sortProductByNameAscAndcate(int indexPage,int cate) {
+        String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n" +
+"                MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n" +
+"                MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n" +
+"                MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n" +
+"                MIN(ProI.ProductImgURL) AS ProductImgURL ,MIN(c.CategoryID) AS CategoryID\n" +
+"				FROM dbo.Product p \n" +
+"				JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n" +
+"				JOIN dbo.Category c ON p.SubCategoryID = c.CategoryID	\n" +
+"				WHERE c.CategoryID = ?		\n" +
+"				GROUP BY p.ProductID ) t  order by t.ProductName \n" +
+"				OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY";
+        List<Product> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, cate);
+            ps.setInt(2, (indexPage - 1) * 6);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Product p = new Product(rs.getInt("productID"),
@@ -277,16 +394,133 @@ public class ProductDAO extends DBcontext.DBContext {
         return list;
     }
 
-    public List<Product> sortProductByNameDesc() {
+    public List<Product> sortProductByNameDesc(int indexPage) {
         String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
                 + "MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
                 + "MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n"
                 + "MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n"
                 + "MIN(ProI.ProductImgURL) AS ProductImgURL FROM \n"
-                + "dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t  order by t.ProductName desc";
+                + "dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t  order by t.ProductName desc \n"
+                + "OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY";
         List<Product> list = new ArrayList<>();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, (indexPage - 1) * 6);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("productID"),
+                        rs.getString("ProductName"),
+                        rs.getString("Description"),
+                        rs.getDouble("OriginalPrice"),
+                        rs.getDouble("SalePrice"),
+                        rs.getInt("SubCategoryID"),
+                        rs.getInt("Amount"),
+                        rs.getInt("BrandID"),
+                        rs.getInt("sell_id"),
+                        rs.getString("ProductImgURL")
+                );
+                list.add(p);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    public List<Product> sortProductByNameDescAndbrandcate(int indexPage,int brand,int cate) {
+        String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n" +
+"                MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n" +
+"                MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n" +
+"                MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n" +
+"                MIN(ProI.ProductImgURL) AS ProductImgURL ,MIN(c.CategoryID) AS CategoryID\n" +
+"				FROM dbo.Product p \n" +
+"				JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n" +
+"				JOIN dbo.Category c ON p.SubCategoryID = c.CategoryID	\n" +
+"				WHERE p.BrandID = ?	AND c.CategoryID = ?		\n" +
+"				GROUP BY p.ProductID ) t  order by t.ProductName desc \n" +
+"				OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY";
+        List<Product> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, brand);
+            ps.setInt(2, cate);
+            ps.setInt(3, (indexPage - 1) * 6);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("productID"),
+                        rs.getString("ProductName"),
+                        rs.getString("Description"),
+                        rs.getDouble("OriginalPrice"),
+                        rs.getDouble("SalePrice"),
+                        rs.getInt("SubCategoryID"),
+                        rs.getInt("Amount"),
+                        rs.getInt("BrandID"),
+                        rs.getInt("sell_id"),
+                        rs.getString("ProductImgURL")
+                );
+                list.add(p);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    public List<Product> sortProductByNameDescAndbrand(int indexPage,int brand) {
+        String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n" +
+"                MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n" +
+"                MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n" +
+"                MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n" +
+"                MIN(ProI.ProductImgURL) AS ProductImgURL ,MIN(c.CategoryID) AS CategoryID\n" +
+"				FROM dbo.Product p \n" +
+"				JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n" +
+"				JOIN dbo.Category c ON p.SubCategoryID = c.CategoryID	\n" +
+"				WHERE p.BrandID = ?	\n" +
+"				GROUP BY p.ProductID ) t  order by t.ProductName desc \n" +
+"				OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY";
+        List<Product> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, brand);
+            ps.setInt(2, (indexPage - 1) * 6);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("productID"),
+                        rs.getString("ProductName"),
+                        rs.getString("Description"),
+                        rs.getDouble("OriginalPrice"),
+                        rs.getDouble("SalePrice"),
+                        rs.getInt("SubCategoryID"),
+                        rs.getInt("Amount"),
+                        rs.getInt("BrandID"),
+                        rs.getInt("sell_id"),
+                        rs.getString("ProductImgURL")
+                );
+                list.add(p);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    public List<Product> sortProductByNameDescAndcate(int indexPage,int cate) {
+        String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n" +
+"                MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n" +
+"                MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n" +
+"                MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n" +
+"                MIN(ProI.ProductImgURL) AS ProductImgURL ,MIN(c.CategoryID) AS CategoryID\n" +
+"				FROM dbo.Product p \n" +
+"				JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n" +
+"				JOIN dbo.Category c ON p.SubCategoryID = c.CategoryID	\n" +
+"				WHERE c.CategoryID = ?		\n" +
+"				GROUP BY p.ProductID ) t  order by t.ProductName desc \n" +
+"				OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY";
+        List<Product> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, cate);
+            ps.setInt(2, (indexPage - 1) * 6);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Product p = new Product(rs.getInt("productID"),
@@ -309,16 +543,133 @@ public class ProductDAO extends DBcontext.DBContext {
         return list;
     }
 
-    public List<Product> sortProductByPriceAsc() {
+    public List<Product> sortProductByPriceAsc(int indexPage) {
         String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
                 + "MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
                 + "MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n"
                 + "MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n"
                 + "MIN(ProI.ProductImgURL) AS ProductImgURL FROM \n"
-                + "dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t order by t.OriginalPrice";
+                + "dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t order by t.OriginalPrice \n"
+                + "OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY";
         List<Product> list = new ArrayList<>();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, (indexPage - 1) * 6);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("productID"),
+                        rs.getString("ProductName"),
+                        rs.getString("Description"),
+                        rs.getDouble("OriginalPrice"),
+                        rs.getDouble("SalePrice"),
+                        rs.getInt("SubCategoryID"),
+                        rs.getInt("Amount"),
+                        rs.getInt("BrandID"),
+                        rs.getInt("sell_id"),
+                        rs.getString("ProductImgURL")
+                );
+                list.add(p);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    public List<Product> sortProductByPriceAscbrandcate(int indexPage,int brand,int cate) {
+        String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n" +
+"                MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n" +
+"                MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n" +
+"                MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n" +
+"                MIN(ProI.ProductImgURL) AS ProductImgURL ,MIN(c.CategoryID) AS CategoryID\n" +
+"				FROM dbo.Product p \n" +
+"				JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n" +
+"				JOIN dbo.Category c ON p.SubCategoryID = c.CategoryID	\n" +
+"				WHERE p.BrandID = ?	AND c.CategoryID = ?		\n" +
+"				GROUP BY p.ProductID ) t  order by t.OriginalPrice \n" +
+"				OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY";
+        List<Product> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, brand);
+            ps.setInt(2, cate);
+            ps.setInt(3, (indexPage - 1) * 6);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("productID"),
+                        rs.getString("ProductName"),
+                        rs.getString("Description"),
+                        rs.getDouble("OriginalPrice"),
+                        rs.getDouble("SalePrice"),
+                        rs.getInt("SubCategoryID"),
+                        rs.getInt("Amount"),
+                        rs.getInt("BrandID"),
+                        rs.getInt("sell_id"),
+                        rs.getString("ProductImgURL")
+                );
+                list.add(p);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    public List<Product> sortProductByPriceAscbrand(int indexPage,int brand) {
+        String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n" +
+"                MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n" +
+"                MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n" +
+"                MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n" +
+"                MIN(ProI.ProductImgURL) AS ProductImgURL ,MIN(c.CategoryID) AS CategoryID\n" +
+"				FROM dbo.Product p \n" +
+"				JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n" +
+"				JOIN dbo.Category c ON p.SubCategoryID = c.CategoryID	\n" +
+"				WHERE p.BrandID = ?	\n" +
+"				GROUP BY p.ProductID ) t  order by t.OriginalPrice \n" +
+"				OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY";
+        List<Product> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, brand);
+            ps.setInt(2, (indexPage - 1) * 6);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("productID"),
+                        rs.getString("ProductName"),
+                        rs.getString("Description"),
+                        rs.getDouble("OriginalPrice"),
+                        rs.getDouble("SalePrice"),
+                        rs.getInt("SubCategoryID"),
+                        rs.getInt("Amount"),
+                        rs.getInt("BrandID"),
+                        rs.getInt("sell_id"),
+                        rs.getString("ProductImgURL")
+                );
+                list.add(p);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    public List<Product> sortProductByPriceAsccate(int indexPage,int cate) {
+        String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n" +
+"                MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n" +
+"                MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n" +
+"                MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n" +
+"                MIN(ProI.ProductImgURL) AS ProductImgURL ,MIN(c.CategoryID) AS CategoryID\n" +
+"				FROM dbo.Product p \n" +
+"				JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n" +
+"				JOIN dbo.Category c ON p.SubCategoryID = c.CategoryID	\n" +
+"				WHERE c.CategoryID = ?		\n" +
+"				GROUP BY p.ProductID ) t  order by t.OriginalPrice \n" +
+"				OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY";
+        List<Product> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, cate);
+            ps.setInt(2, (indexPage - 1) * 6);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Product p = new Product(rs.getInt("productID"),
@@ -341,16 +692,133 @@ public class ProductDAO extends DBcontext.DBContext {
         return list;
     }
 
-    public List<Product> sortProductByPriceDesc() {
+    public List<Product> sortProductByPriceDesc(int indexPage) {
         String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
                 + "MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
                 + "MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n"
                 + "MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n"
                 + "MIN(ProI.ProductImgURL) AS ProductImgURL FROM \n"
-                + "dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t order by t.OriginalPrice desc";
+                + "dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t order by t.OriginalPrice desc \n"
+                + "OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY";
         List<Product> list = new ArrayList<>();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, (indexPage - 1) * 6);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("productID"),
+                        rs.getString("ProductName"),
+                        rs.getString("Description"),
+                        rs.getDouble("OriginalPrice"),
+                        rs.getDouble("SalePrice"),
+                        rs.getInt("SubCategoryID"),
+                        rs.getInt("Amount"),
+                        rs.getInt("BrandID"),
+                        rs.getInt("sell_id"),
+                        rs.getString("ProductImgURL")
+                );
+                list.add(p);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    public List<Product> sortProductByPriceDescbrandcate(int indexPage,int brand, int cate) {
+        String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n" +
+"                MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n" +
+"                MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n" +
+"                MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n" +
+"                MIN(ProI.ProductImgURL) AS ProductImgURL ,MIN(c.CategoryID) AS CategoryID\n" +
+"				FROM dbo.Product p \n" +
+"				JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n" +
+"				JOIN dbo.Category c ON p.SubCategoryID = c.CategoryID	\n" +
+"				WHERE p.BrandID = ?	AND c.CategoryID = ?		\n" +
+"				GROUP BY p.ProductID ) t  order by t.OriginalPrice desc\n" +
+"				OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY";
+        List<Product> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, brand);
+            ps.setInt(2, cate);
+            ps.setInt(3, (indexPage - 1) * 6);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("productID"),
+                        rs.getString("ProductName"),
+                        rs.getString("Description"),
+                        rs.getDouble("OriginalPrice"),
+                        rs.getDouble("SalePrice"),
+                        rs.getInt("SubCategoryID"),
+                        rs.getInt("Amount"),
+                        rs.getInt("BrandID"),
+                        rs.getInt("sell_id"),
+                        rs.getString("ProductImgURL")
+                );
+                list.add(p);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    public List<Product> sortProductByPriceDescbrand(int indexPage,int brand) {
+        String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n" +
+"                MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n" +
+"                MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n" +
+"                MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n" +
+"                MIN(ProI.ProductImgURL) AS ProductImgURL ,MIN(c.CategoryID) AS CategoryID\n" +
+"				FROM dbo.Product p \n" +
+"				JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n" +
+"				JOIN dbo.Category c ON p.SubCategoryID = c.CategoryID	\n" +
+"				WHERE p.BrandID = ?	\n" +
+"				GROUP BY p.ProductID ) t  order by t.OriginalPrice desc\n" +
+"				OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY";
+        List<Product> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, brand);
+            ps.setInt(2, (indexPage - 1) * 6);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("productID"),
+                        rs.getString("ProductName"),
+                        rs.getString("Description"),
+                        rs.getDouble("OriginalPrice"),
+                        rs.getDouble("SalePrice"),
+                        rs.getInt("SubCategoryID"),
+                        rs.getInt("Amount"),
+                        rs.getInt("BrandID"),
+                        rs.getInt("sell_id"),
+                        rs.getString("ProductImgURL")
+                );
+                list.add(p);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    public List<Product> sortProductByPriceDesccate(int indexPage, int cate) {
+        String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n" +
+"                MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n" +
+"                MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n" +
+"                MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n" +
+"                MIN(ProI.ProductImgURL) AS ProductImgURL ,MIN(c.CategoryID) AS CategoryID\n" +
+"				FROM dbo.Product p \n" +
+"				JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n" +
+"				JOIN dbo.Category c ON p.SubCategoryID = c.CategoryID	\n" +
+"				WHERE c.CategoryID = ?		\n" +
+"				GROUP BY p.ProductID ) t  order by t.OriginalPrice desc\n" +
+"				OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY";
+        List<Product> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, cate);
+            ps.setInt(2, (indexPage - 1) * 6);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Product p = new Product(rs.getInt("productID"),
@@ -407,6 +875,124 @@ public class ProductDAO extends DBcontext.DBContext {
         return list;
 
     }
+    public List<Product> pagingProductByBrand(int index,int brand) {
+        String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n" +
+"                MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n" +
+"                MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n" +
+"                MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n" +
+"                MIN(ProI.ProductImgURL) AS ProductImgURL ,MIN(c.CategoryID) AS CategoryID\n" +
+"				FROM dbo.Product p \n" +
+"				JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n" +
+"				JOIN dbo.Category c ON p.SubCategoryID = c.CategoryID	\n" +
+"				WHERE p.BrandID = ?			\n" +
+"				GROUP BY p.ProductID ) t  order by t.ProductName desc\n" +
+"				OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY";
+        List<Product> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, brand);
+            ps.setInt(2, (index - 1) * 6);
+            //ps.setInt(2, entry);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("productID"),
+                        rs.getString("ProductName"),
+                        rs.getString("Description"),
+                        rs.getDouble("OriginalPrice"),
+                        rs.getDouble("SalePrice"),
+                        rs.getInt("SubCategoryID"),
+                        rs.getInt("Amount"),
+                        rs.getInt("BrandID"),
+                        rs.getInt("sell_id"),
+                        rs.getString("ProductImgURL"));
+                list.add(p);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+
+    }
+    public List<Product> pagingProductByCateandbrand(int index,int brand, int cate) {
+        String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n" +
+"                MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n" +
+"                MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n" +
+"                MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n" +
+"                MIN(ProI.ProductImgURL) AS ProductImgURL ,MIN(c.CategoryID) AS CategoryID\n" +
+"				FROM dbo.Product p \n" +
+"				JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n" +
+"				JOIN dbo.Category c ON p.SubCategoryID = c.CategoryID	\n" +
+"				WHERE p.BrandID = ?	AND c.CategoryID = ?		\n" +
+"				GROUP BY p.ProductID ) t  order by t.ProductName desc\n" +
+"				OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY";
+        List<Product> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, brand);
+            ps.setInt(2, cate);
+            ps.setInt(3, (index - 1) * 6);
+            //ps.setInt(2, entry);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("productID"),
+                        rs.getString("ProductName"),
+                        rs.getString("Description"),
+                        rs.getDouble("OriginalPrice"),
+                        rs.getDouble("SalePrice"),
+                        rs.getInt("SubCategoryID"),
+                        rs.getInt("Amount"),
+                        rs.getInt("BrandID"),
+                        rs.getInt("sell_id"),
+                        rs.getString("ProductImgURL"));
+                list.add(p);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+
+    }
+    public List<Product> pagingProductByCate(int index, int cate) {
+        String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n" +
+"                MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n" +
+"                MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n" +
+"                MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n" +
+"                MIN(ProI.ProductImgURL) AS ProductImgURL ,MIN(c.CategoryID) AS CategoryID\n" +
+"				FROM dbo.Product p \n" +
+"				JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n" +
+"				JOIN dbo.Category c ON p.SubCategoryID = c.CategoryID	\n" +
+"				WHERE  c.CategoryID = ?		\n" +
+"				GROUP BY p.ProductID ) t  order by t.ProductName desc\n" +
+"				OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY";
+        List<Product> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, cate);
+            ps.setInt(2, (index - 1) * 6);
+            //ps.setInt(2, entry);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("productID"),
+                        rs.getString("ProductName"),
+                        rs.getString("Description"),
+                        rs.getDouble("OriginalPrice"),
+                        rs.getDouble("SalePrice"),
+                        rs.getInt("SubCategoryID"),
+                        rs.getInt("Amount"),
+                        rs.getInt("BrandID"),
+                        rs.getInt("sell_id"),
+                        rs.getString("ProductImgURL"));
+                list.add(p);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+
+    }
 
     public int count() {
         String query = "SELECT count(*) FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
@@ -422,7 +1008,83 @@ public class ProductDAO extends DBcontext.DBContext {
             while (rs.next()) {
                 return rs.getInt(1);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
+
+        }
+        return 0;
+    }
+
+    public int countBrandandSort(int brand) {
+        String query = "SELECT count(*) FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
+                + "                MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
+                + "                MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n"
+                + "                MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n"
+                + "                MIN(ProI.ProductImgURL) AS ProductImgURL ,MIN(c.CategoryID) AS CategoryID\n"
+                + "				FROM dbo.Product p \n"
+                + "				JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n"
+                + "				JOIN dbo.Category c ON p.SubCategoryID = c.CategoryID	\n"
+                + "				WHERE p.BrandID = ?			\n"
+                + "				GROUP BY p.ProductID ) t";
+        try {
+
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1,brand);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+
+        }
+        return 0;
+    }
+
+    public int countCategoryandSort(int cate) {
+        String query = "SELECT count(*) FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
+                + "                MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
+                + "                MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n"
+                + "                MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n"
+                + "                MIN(ProI.ProductImgURL) AS ProductImgURL ,MIN(c.CategoryID) AS CategoryID\n"
+                + "				FROM dbo.Product p \n"
+                + "				JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n"
+                + "				JOIN dbo.Category c ON p.SubCategoryID = c.CategoryID	\n"
+                + "				WHERE c.CategoryID = ?			\n"
+                + "				GROUP BY p.ProductID ) t";
+        try {
+
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1,cate);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+
+        }
+        return 0;
+    }
+
+    public int countBrandandCategoryandSort(int brand, int cate) {
+        String query = "SELECT count(*) FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
+                + "                MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
+                + "                MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n"
+                + "                MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n"
+                + "                MIN(ProI.ProductImgURL) AS ProductImgURL ,MIN(c.CategoryID) AS CategoryID\n"
+                + "				FROM dbo.Product p \n"
+                + "				JOIN dbo.ProductImg ProI ON ProI.ProductID = p.ProductID\n"
+                + "				JOIN dbo.Category c ON p.SubCategoryID = c.CategoryID	\n"
+                + "				WHERE p.BrandID = ?	AND c.CategoryID = ?			\n"
+                + "				GROUP BY p.ProductID ) t";
+        try {
+
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, brand);
+            ps.setInt(2, cate);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
 
         }
         return 0;
@@ -558,7 +1220,7 @@ public class ProductDAO extends DBcontext.DBContext {
         return list;
 
     }
-    
+
     public int countSearchByName(String name) {
         String query = "SELECT count(*) FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
                 + "MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
@@ -579,7 +1241,6 @@ public class ProductDAO extends DBcontext.DBContext {
         }
         return 0;
     }
-    
 
     public List<Product> getTop3ListProByCat(String sid, int pid) {
         String sql = "SELECT top 4 * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
@@ -774,8 +1435,9 @@ public class ProductDAO extends DBcontext.DBContext {
         } catch (SQLException e) {
             System.out.println(e);
         }
-        
-        
+
+    }
+
     public void deleteProductImg(String cid) {
         String query = "delete from ProductImg where ProductID = ?";
         try {
@@ -787,13 +1449,4 @@ public class ProductDAO extends DBcontext.DBContext {
         }
     }
 
-    }
-
-    public static void main(String[] args) {
-        ProductDAO pdao = new ProductDAO();
-        List<Product> list = pdao.pagingProductSearchByName(1, "ba");
-        for (Product product : list) {
-            System.out.println(product);
-        }
-    }
 }

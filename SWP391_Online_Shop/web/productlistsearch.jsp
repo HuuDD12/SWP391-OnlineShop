@@ -115,22 +115,41 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                     <a href="javascript:;"><i class="fa fa-th-large"></i></a>
                                     <a href="javascript:;"><i class="fa fa-th-list"></i></a>
                                 </div>
+                                <form action="locproductlistcontrol">
                                 <div class="col-md-10 col-sm-10">
-                                    <div class="pull-right">
+                                    <div class="pull-left" style="margin: 10px">                                      
+                                            <select name="cate" class="btn btn-light form-control input-sm">
+                                                <option ${cate==0?"selected":""} value="0" selected="selected">Category&nbsp</option>
+                                            <c:forEach items="${sessionScope.listC}" var="c">
+                                                <option ${cate == c.cate_id?"selected":""} value="${c.cate_id}" >${c.cate_name}</option>
+                                            </c:forEach>
+                                        </select>  
+                                </div>
+                                    <div class="pull-left" style="margin: 10px">
+                                            <select name="brand"  class="btn btn-light form-control input-sm">
+                                                <option ${brand==0?"selected":""} value="0" selected="selected">Brand&nbsp;</option>
+                                            <c:forEach items="${sessionScope.listB}" var="b">
+                                                <option ${brand== b.brandId?"selected":""} value="${b.brandId}" >${b.brandName}</option>
+                                            </c:forEach>
+                                        </select>  
 
-                                        <label class="control-label">Sort&nbsp;By:</label>
-                                        <form action="sort">
-                                            <select name="type" onchange="this.form.submit()" class="form-control input-sm">
-                                                <option ${type==0?"selected":""} value="0" selected="selected">Default</option>
+                                </div>
+                                <div class="pull-left" style="margin: 10px">
+                                        <select name="type" class="btn btn-light form-control input-sm" >
+                                            <option ${type==0?"selected":""} value="0" selected="selected">Sort&nbsp;</option>
                                             <option ${type==1?"selected":""} value="1">Name (A - Z)</option>
                                             <option ${type==2?"selected":""} value="2">Name (Z - A)</option>
                                             <option ${type==3?"selected":""} value="3">Price (Low &gt; High)</option>
                                             <option ${type==4?"selected":""} value="4">Price (High &gt; Low)</option>
                                         </select>  
-                                    </form>
+
+                                </div>
+                                <div class="pull-right" style="margin: 10px">                                   
+                                    <button onchange="this.form.submit()" class="btn btn-success" >Search</button>
 
                                 </div>
                             </div>
+                             </form>
                         </div>
                         <!-- BEGIN PRODUCT LIST -->
                         <div id="content" class="row product-list">
