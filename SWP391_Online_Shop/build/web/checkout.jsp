@@ -140,23 +140,6 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                             <label for="note" class="form-label">Note</label>
                             <textarea class="form-control" id="note" name="note" rows="3"></textarea>
                         </div>
-                        <div class="payment_method">
-                            <div class="panel-default">
-                                <input id="payment_defult" value="MOMO" name="payment_method" type="radio"
-                                       data-target="createp_account" />
-                                <label for="payment_defult" data-toggle="collapse" data-target="#collapsedefult"
-                                       aria-controls="collapsedefult">Momo <img style="height: 25px;
-                                                                         margin-top: 3px;" src="resources/momo1.jpg"
-                                                                         alt=""></label>
-                            </div>
-                            <div class="panel-default">
-                                <input id="payment_defult" value="COD" name="payment_method" type="radio"
-                                       data-target="createp_account" />
-                                <label for="payment_defult" data-toggle="collapse" data-target="#collapsedefult"
-                                       aria-controls="collapsedefult">Payment on Delivery <img src="assets/img/icon/papyel.png"
-                                                                                        alt=""></label>
-                            </div>
-                        </div>
                         <button type="submit" class="btn btn-primary w-100">Submit</button>
                     </form>
                 </div>

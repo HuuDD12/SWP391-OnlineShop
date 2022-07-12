@@ -4,6 +4,7 @@
     Author     : Khuong Hung
 --%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -74,7 +75,7 @@
                                     <tr>
                                         <td style="text-align: center">${b.id}</td>
                                         <td style="text-align: center">${b.createdDate}</td>
-                                        <td style="text-align: center">${b.totalPrice}</td> 
+                                        <td style="text-align: center"><fmt:formatNumber pattern="##.#" value="${b.totalPrice}"/></td> 
                                         <c:if test="${b.status == 1}">
                                             <td style="text-align: center"><span class="badge rounded-pill bg-secondary">Waiting for Confirmation</span></td>
                                         </c:if>

@@ -1,5 +1,5 @@
 <aside class="app-sidebar">
-    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="image/user.png" width="50px"
+    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="${sessionScope.acc.img}" width="50px"
                                         alt="User Image">
         <div>
             <p class="app-sidebar__user-name"><b>${sessionScope.acc.username}</b></p>

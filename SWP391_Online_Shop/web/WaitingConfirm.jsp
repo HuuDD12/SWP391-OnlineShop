@@ -61,17 +61,15 @@
                                         <th style="text-align: center">Image</th>
                                         <th style="text-align: center">Orginal Price</th>
                                         <th style="text-align: center">Sale Price</th>
-                                        <th style="text-align: center" colspan="2">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <c:forEach items="${list}" var="order">
                                     <tr>  
-                                        <td>${order.p.productName}</td>
-                                        <td><img src="${order.p.url}" style="height: 100px;width: 100px"></td>
-                                        <td><em>$<span>${order.p.originalPrice}</span></em></td>
-                                        <td><strong><span>$</span>${order.p.salePrice}</strong></td>
-                                        
+                                        <td  style="text-align: center">${order.p.productName}</td>
+                                        <td  style="text-align: center"><img src="${order.p.url}" style="height: 100px;width: 100px"></td>
+                                        <td  style="text-align: center"><em>$<span>${order.p.originalPrice}</span></em></td>
+                                        <td  style="text-align: center"><strong><span>$</span>${order.p.salePrice}</strong></td>                                        
                                     </tr>
                                 </c:forEach>
 

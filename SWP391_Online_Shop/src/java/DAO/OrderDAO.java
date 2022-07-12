@@ -302,7 +302,7 @@ public class OrderDAO extends DBcontext.DBContext {
         List<Order> list = new ArrayList<>();
         String sql = "SELECT * from Orders inner join Users on Orders.UserID = Users.UserID\n"
                 + "inner join Order_Status os on Orders.Status = os.ID\n"
-                + "where os.ID = 3";
+                + "where os.ID = 2";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();

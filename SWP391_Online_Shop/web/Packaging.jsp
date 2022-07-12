@@ -60,8 +60,7 @@
                                         <th style="text-align: center">Product Name</th>
                                         <th style="text-align: center">Image</th>
                                         <th style="text-align: center">Orginal Price</th>
-                                        <th style="text-align: center">Sale Price</th>
-                                        <th style="text-align: center" colspan="2">Action</th>
+                                        <th style="text-align: center">Sale Price</th>      
                                     </tr>
                                 </thead>
                                 <tbody>

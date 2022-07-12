@@ -102,12 +102,11 @@
                                                 <a href="confirmorder?action=reject&oid=${b.id}"><span class="btn btn-sm btn-danger rounded-pill">Reject</span></a> 
                                             </td>
                                         </c:if>
-                                        <c:if test="${b.status == 3}">
+                                        <c:if test="${b.status == 2}">
                                             <td style="text-align: center">
                                                 <a href="confirmorder?action=complete&oid=${b.id}"><span class="btn btn-sm btn-success rounded-pill">Complete</span></a>
                                                 <a href="confirmorder?action=refuse&oid=${b.id}"><span class="btn btn-sm btn-success rounded-pill">Refuse</span></a>
-                                            </td>
-                                            
+                                            </td>                                     
                                         </c:if>
                                         <c:if test="${b.status != 1}">
                                         </c:if>

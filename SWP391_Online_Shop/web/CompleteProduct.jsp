@@ -93,7 +93,7 @@
                                             <td style="text-align: center"><span class="badge bg-danger">Canceled</span></td>
                                         </c:if>
                                         <c:if test="${b.status == 5}">
-                                            <td style="text-align: center"><span class="badge bg-success">completed</span></td>
+                                            <td style="text-align: center"><span class="badge bg-success">Completed</span></td>
                                         </c:if> 
                                         <td style="text-align: center">${b.note}</td> 
                                         <td style="text-align: center"><a class="btn btn-sm btn-primary" href="orderdetail?oid=${b.id}">View</a></td>
