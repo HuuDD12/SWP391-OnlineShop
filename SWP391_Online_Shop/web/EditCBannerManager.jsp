@@ -51,7 +51,7 @@
                                             <input hidden name="imageu" value="${Banner.cbannerImg}">
 
                                             <div class="col-md-4">
-                                                <img src="${Banner.cbannerImg}" class="rounded-circle img-circle img-thumbnail" alt="" id="image" width="100" height="100" >                                                
+                                                <img src="${Banner.cbannerImg}"  alt="" id="image" width="421" height="155" >                                                
                                                 <h6>Upload a  photo...</h6>                                               
                                                 <input type="file" class="text-center center-block file-upload" style="margin: 10px" name="image" id="imageFile" onchange="choosefile(this)"
                                                        accept="image/gif, image/jpeg, image/png">
@@ -59,16 +59,11 @@
                                             <div class="col-md-4">
 
                                                 <label for="title"><h4>Title Sale</h4></label>
-                                                <input type="text" value="${Banner.cbannerTitle}" class="form-control" name="title"  placeholder="title" title="enter title">
-
-
+                                                <textarea class="form-control" name="title"  placeholder="title" title="enter title" aria-label="With textarea">${Banner.cbannerTitle}</textarea>
                                             </div>
                                             <div class="col-md-4">
-
                                                 <label for="desc"><h4>Title Sale</h4></label>
-                                                <input type="text" value="${Banner.cbannerdesc}" class="form-control" name="desc"  placeholder="desc" title="enter Desc">
-
-
+                                                <textarea class="form-control" name="desc"  placeholder="desc" title="enter Desc" aria-label="With textarea">${Banner.cbannerdesc}</textarea>
                                             </div>
                                         </div>
                                     </div><br>

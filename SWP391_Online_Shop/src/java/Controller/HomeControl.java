@@ -58,15 +58,13 @@ public class HomeControl extends HttpServlet {
             CBannerDAO dao = new CBannerDAO();
             
             List<Product> listTop5 = pr.getTop5Product();
-            List<CBanner> listBanner = dao.getAllCBanner();
-            int countCB = dao.getCountCBanner();
+            List<CBanner> listBanner = dao.getAllCBannerActive(1);
+            int countCB = dao.getCountCBannerAC(1);
             List<Category> listC = c.getAllCategory();
             List<Subcategory> listS = s.getAllSubCategory();
             //Subcategory a = s.getSubCategoryByID(id);
             List<Brand> listB = b.getAllBrand();
             List<OrderDetail> listSell = o.get3MostProductSell();
-
-            
 
             if (indexPage == null) {
                 indexPage = "1";
