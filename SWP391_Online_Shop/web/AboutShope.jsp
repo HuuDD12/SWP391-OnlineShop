@@ -22,7 +22,7 @@
             <a href="${pageContext.request.contextPath}/productlist">
                 <img class="logo" src="assets/corporate/img/logos/Logo1.png" alt="Online Shop" style="width: 150px; margin: 20px 20px"></a>
             <ul class="main-nav">
-                <li><a href="productlist" style="color: wheat">Home</a></li>
+                <li><a href="HomeControl" style="color: wheat">Home</a></li>
                 <li><a href="${pageContext.request.contextPath}/productlist" style="color: wheat">
                         Product</a></li>
             </ul>
