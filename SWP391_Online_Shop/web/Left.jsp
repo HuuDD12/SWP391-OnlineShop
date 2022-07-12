@@ -42,8 +42,8 @@
         <h2>Bestsellers</h2>
         <c:forEach items="${sessionScope.listTop3}" var="listTop3">
             <div class="item">
-                <a href="shop-item.html"><img src="${listTop3.url}" alt="Some Shoes in Animal with Cut Out"></a>
-                <h3><a href="shop-item.html">${listTop3.productName}</a></h3>
+                <a href="productdetail?pid=${listTop3.productID}&sid=${listTop3.subID}"><img src="${listTop3.url}" alt="Some Shoes in Animal with Cut Out"></a>
+                <h3><a href="productdetail?pid=${listTop3.productID}&sid=${listTop3.subID}">${listTop3.productName}</a></h3>
                 <div class="price"><fmt:formatNumber pattern="##.#" value="${listTop3.originalPrice}"/></div>
             </div>
         </c:forEach>

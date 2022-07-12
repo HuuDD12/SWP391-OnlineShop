@@ -55,6 +55,53 @@
     <link href="assets/corporate/css/themes/red.css" rel="stylesheet" id="style-color">
     <link href="assets/corporate/css/custom.css" rel="stylesheet">
     <!-- Theme styles END -->
+    <!-- CSS-->
+    <style>
+        <!--slider-->
+        .jk-slider{
+            width:100%;
+        }
+        /*          Hero Headers        */
+        /********************************/
+        .hero {
+            position: absolute;
+            top: 80%;
+            left: 50%;
+            z-index: 3;
+            color: #fff;
+            text-align: center;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 0 rgba(0,0,0,.75);
+            -webkit-transform: translate3d(-50%,-50%,0);
+            -moz-transform: translate3d(-50%,-50%,0);
+            -ms-transform: translate3d(-50%,-50%,0);
+            -o-transform: translate3d(-50%,-50%,0);
+            transform: translate3d(-50%,-50%,0);
+        }
+        .hero h1 {
+            font-size: 6em;    
+            font-weight: bold;
+            margin: 0;
+            padding: 0;
+        }
+
+        .fade-carousel .carousel-inner .item .hero {
+            opacity: 0;
+            -webkit-transition: 2s all ease-in-out .1s;
+            -moz-transition: 2s all ease-in-out .1s; 
+            -ms-transition: 2s all ease-in-out .1s; 
+            -o-transition: 2s all ease-in-out .1s; 
+            transition: 2s all ease-in-out .1s; 
+        }
+        .fade-carousel .carousel-inner .item.active .hero {
+            opacity: 1;
+            -webkit-transition: 2s all ease-in-out .1s;
+            -moz-transition: 2s all ease-in-out .1s; 
+            -ms-transition: 2s all ease-in-out .1s; 
+            -o-transition: 2s all ease-in-out .1s; 
+            transition: 2s all ease-in-out .1s;    
+        }
+    </style>
 </head>
 <!-- Head END -->
 
@@ -62,92 +109,52 @@
 <body class="ecommerce">
     <jsp:include page="header.jsp"></jsp:include>
         <!-- BEGIN SLIDER -->
-        <div class="page-slider margin-bottom-35">
-            <div id="carousel-example-generic" class="carousel slide carousel-slider">
-                <!-- Indicators -->
+        <section class="jk-slider">
+            <div id="carousel-example" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
-                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                    <li data-target="#carousel-example" data-slide-to="0" class="active"></li>
+                <c:forEach begin="1" end="${CountCB}"var="i">
+                    <li data-target="#carousel-example" data-slide-to="${i}"></li>
+                </c:forEach>
+                    
                 </ol>
 
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner" role="listbox">
-                    <!-- First slide -->
-                    <div class="item carousel-item-four active">
-                        <div class="container">
-                            <div class="carousel-position-four text-center">
-                                <h2 class="margin-bottom-20 animate-delay carousel-title-v3 border-bottom-title text-uppercase" data-animation="animated fadeInDown">
-                                    Tones of <br/><span class="color-red-v2">Shop UI Features</span><br/> designed
-                                </h2>
-                                <p class="carousel-subtitle-v2" data-animation="animated fadeInUp">Lorem ipsum dolor sit amet constectetuer diam <br/>
-                                    adipiscing elit euismod ut laoreet dolore.</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <a href="#"><img src="assets\corporate\img\logos\Logo.png" style="width:350px;height:310px"/></a>
+                        <div class="hero">
+                            <hgroup style="color: #001b19">
+                                <h1>Welcome Online Shop !!</h1>        
+                                <h3> ai rảnh thì  </h3>
+                            </hgroup>
 
-                    <!-- Second slide -->
-                    <div class="item carousel-item-five">
-                        <div class="container">
-                            <div class="carousel-position-four text-center">
-                                <h2 class="animate-delay carousel-title-v4" data-animation="animated fadeInDown">
-                                    Unlimted
-                                </h2>
-                                <p class="carousel-subtitle-v2" data-animation="animated fadeInDown">
-                                    Layout Options
-                                </p>
-                                <p class="carousel-subtitle-v3 margin-bottom-30" data-animation="animated fadeInUp">
-                                    Fully Responsive
-                                </p>
-                                <a class="carousel-btn" href="#" data-animation="animated fadeInUp">See More Details</a>
-                            </div>
-                            <img class="carousel-position-five animate-delay hidden-sm hidden-xs" src="assets/pages/img/shop-slider/slide2/price.png" alt="Price" data-animation="animated zoomIn">
                         </div>
                     </div>
+                <c:forEach items="${listBanner}" var="x">
+                    <div class="item">
+                        <div style="text-align: center;">
+                            <a href="#" style="display: "><img src="${x.cbannerImg}" style="width:842px;height:310px"/></a>
+                        </div>
+                        <div class="hero">
+                            <hgroup>
+                                <h1>${x.cbannerTitle}</h1>        
+                                <h3>${x.cbannerdesc} !!!</h3>
+                            </hgroup>
 
-                    <!-- Third slide -->
-                    <div class="item carousel-item-six">
-                        <div class="container">
-                            <div class="carousel-position-four text-center">
-                                <span class="carousel-subtitle-v3 margin-bottom-15" data-animation="animated fadeInDown">
-                                    Full Admin &amp; Frontend
-                                </span>
-                                <p class="carousel-subtitle-v4" data-animation="animated fadeInDown">
-                                    eCommerce UI
-                                </p>
-                                <p class="carousel-subtitle-v3" data-animation="animated fadeInDown">
-                                    Is Ready For Your Project
-                                </p>
-                            </div>
                         </div>
                     </div>
-
-                    <!-- Fourth slide -->
-                    <div class="item carousel-item-seven">
-                        <div class="center-block">
-                            <div class="center-block-wrap">
-                                <div class="center-block-body">
-                                    <h2 class="carousel-title-v1 margin-bottom-20" data-animation="animated fadeInDown">
-                                        The most <br/>
-                                        wanted bijouterie
-                                    </h2>
-                                    <a class="carousel-btn" href="#" data-animation="animated fadeInUp">But It Now!</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </c:forEach>
                 </div>
 
-                <!-- Controls -->
-                <a class="left carousel-control carousel-control-shop" href="#carousel-example-generic" role="button" data-slide="prev">
-                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                <a class="left carousel-control" href="#carousel-example" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
-                <a class="right carousel-control carousel-control-shop" href="#carousel-example-generic" role="button" data-slide="next">
-                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                <a class="right carousel-control" href="#carousel-example" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
                 </a>
             </div>
-        </div>
+
+        </section>
         <!-- END SLIDER -->
 
         <div class="main">
@@ -466,13 +473,13 @@
 <script src="assets/corporate/scripts/layout.js" type="text/javascript"></script>
 <script src="assets/pages/scripts/bs-carousel.js" type="text/javascript"></script>
 <script type="text/javascript">
-    jQuery(document).ready(function () {
-        Layout.init();
-        Layout.initOWL();
-        Layout.initImageZoom();
-        Layout.initTouchspin();
-        Layout.initTwitter();
-    });
+                                    jQuery(document).ready(function () {
+                                        Layout.init();
+                                        Layout.initOWL();
+                                        Layout.initImageZoom();
+                                        Layout.initTouchspin();
+                                        Layout.initTwitter();
+                                    });
 </script>
 <script>
     /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
@@ -491,7 +498,7 @@
         });
     }
 </script>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
     function addTocartAsync(productId) {
         axios.get('add-to-cart-async', {
