@@ -18,18 +18,20 @@ import java.sql.Statement;
  */
 public class CBannerDAO extends DBcontext.DBContext {
     
-    public int createReturnId(String img,String Title,String desc) {
+    public int createReturnId(String img,String Title,String desc,int action) {
         String sql = "INSERT INTO [dbo].[CBanner]\n"
                 + "           ([Img]\n"
                 + "           ,[Title]\n"
-                + "           ,[desc])\n"
+                + "           ,[desc]\n"
+                + "           ,[Active])\n"
                 + "     VALUES\n"
-                + "           (?,?,?)";
+                + "           (?,?,?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, img);
             ps.setString(2, Title);
             ps.setString(3, desc);
+            ps.setInt(4, action);
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -48,7 +50,23 @@ public class CBannerDAO extends DBcontext.DBContext {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                CBanner r = new CBanner(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getString(4));
+                CBanner r = new CBanner(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getString(4),rs.getInt(5));
+                list.add(r);
+            }
+
+        } catch (SQLException e) {
+        }
+        return list;
+    }
+    public List<CBanner> getAllCBannerActive(int active) {
+        List<CBanner> list = new ArrayList<>();
+        String sql = "select * from [CBanner] WHERE [Active] = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, active);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                CBanner r = new CBanner(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getString(4),rs.getInt(5));
                 list.add(r);
             }
 
@@ -58,9 +76,22 @@ public class CBannerDAO extends DBcontext.DBContext {
     }
 
     public int getCountCBanner() {
-        String query = "select count(*) from [CBanner]";
+        String query = "select count(*) from [CBanner] ";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+        }
+        return 0;
+    }
+    public int getCountCBannerAC(int active) {
+        String query = "select count(*) from [CBanner] WHERE [Active] = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, active);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 return rs.getInt(1);
@@ -86,6 +117,18 @@ public class CBannerDAO extends DBcontext.DBContext {
         } catch (SQLException e) {
         }
     }
+    public void UpdateCBannerAc(String id,int active) {
+        String query = "UPDATE [CBanner]\n"
+                + "  SET [Active] = ?\n"
+                + "  WHERE [ID] = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, active);
+            ps.setString(2, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
     public void DeleteCBanner(int id) {
         String query = "DELETE FROM [CBanner] WHERE [ID] = ?";
         try {
@@ -107,7 +150,8 @@ public class CBannerDAO extends DBcontext.DBContext {
                         rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
-                        rs.getString(4));
+                        rs.getString(4),
+                        rs.getInt(5));
             }
         } catch (SQLException e) {
         }

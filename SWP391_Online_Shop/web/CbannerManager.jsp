@@ -68,6 +68,8 @@
                                         <th style="text-align: center">Title </th>
                                         <th style="text-align: center">Desc </th>
                                         <th style="text-align: center">Update</th>
+                                        <th style="text-align: center">Show</th>
+                                        <th style="text-align: center">Active</th>
                                         <th style="text-align: center" colspan="2">Action</th>
                                     </tr>
                                 </thead>
@@ -83,6 +85,24 @@
                                             <button class="btn btn-primary">
                                                 <a style="text-decoration: none;color: #FFF" href="EditcbannerControl?sid=${x.cbannerId}" >Change</a>
                                             </button>
+                                        </td>
+                                        <td style="text-align: center"> 
+                                            <button class="btn btn-info">
+                                                <a style="text-decoration: none;color: #FFF" href="viewcheckcbanner?sid=${x.cbannerId}" >View</a>
+                                            </button>
+                                        </td>
+                                        <td style="text-align: center">
+                                            <c:if test="${x.cbannerActive == 1}">
+                                                <button class="btn btn-success">
+                                                    <a style="text-decoration: none;color: #FFF" href="updateactivecbanner?sid=${x.cbannerId}&active=${x.cbannerActive}" >Active</a>
+                                                </button>
+                                            </c:if>
+                                            <c:if test="${x.cbannerActive == 0}">
+                                                <button class="btn btn-danger">
+                                                    <a style="text-decoration: none;color: #FFF" href="updateactivecbanner?sid=${x.cbannerId}&active=${x.cbannerActive}" >Not</a>
+                                                </button>
+                                            </c:if>
+
                                         </td>
                                         <td style="text-align: center"> 
                                             <button class="btn btn-danger">

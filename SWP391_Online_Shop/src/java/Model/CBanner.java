@@ -14,15 +14,22 @@ public class CBanner {
     private String cbannerImg;
     private String cbannerTitle;
     private String cbannerdesc;
+    private int cbannerActive;
 
-    public CBanner() {
-    }
-
-    public CBanner(int cbannerId, String cbannerImg, String cbannerTitle, String cbannerdesc) {
+    public CBanner(int cbannerId, String cbannerImg, String cbannerTitle, String cbannerdesc, int cbannerActive) {
         this.cbannerId = cbannerId;
         this.cbannerImg = cbannerImg;
         this.cbannerTitle = cbannerTitle;
         this.cbannerdesc = cbannerdesc;
+        this.cbannerActive = cbannerActive;
+    }
+
+    public CBanner() {
+    }
+
+    @Override
+    public String toString() {
+        return "CBanner{" + "cbannerId=" + cbannerId + ", cbannerImg=" + cbannerImg + ", cbannerTitle=" + cbannerTitle + ", cbannerdesc=" + cbannerdesc + ", cbannerActive=" + cbannerActive + '}';
     }
 
     public int getCbannerId() {
@@ -57,10 +64,14 @@ public class CBanner {
         this.cbannerdesc = cbannerdesc;
     }
 
-    @Override
-    public String toString() {
-        return "CBanner{" + "cbannerId=" + cbannerId + ", cbannerImg=" + cbannerImg + ", cbannerTitle=" + cbannerTitle + ", cbannerdesc=" + cbannerdesc + '}';
+    public int getCbannerActive() {
+        return cbannerActive;
     }
+
+    public void setCbannerActive(int cbannerActive) {
+        this.cbannerActive = cbannerActive;
+    }
+
     
 
     

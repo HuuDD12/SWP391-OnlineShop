@@ -6,25 +6,22 @@
 package Controller;
 
 import DAO.CBannerDAO;
-import java.io.File;
-import java.io.FileOutputStream;
+import Model.CBanner;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 
 /**
  *
  * @author ADM
  */
-@WebServlet(name = "AddCBannerControl", urlPatterns = {"/addcbannercontrol"})
-@MultipartConfig
-public class AddCBannerControl extends HttpServlet {
+@WebServlet(name = "UpdateActiveCbannerControl", urlPatterns = {"/updateactivecbanner"})
+public class UpdateActiveCbannerControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,7 +35,18 @@ public class AddCBannerControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.getRequestDispatcher("AddCBanner.jsp").forward(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet UpdateActiveCbannerControl</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet UpdateActiveCbannerControl at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -53,7 +61,18 @@ public class AddCBannerControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String id = request.getParameter("sid");       
+        int active = Integer.parseInt(request.getParameter("active"));
+        if(active == 1){
+            active = 0;        
+        }else{
+            active = 1;
+        }
+        CBannerDAO dao = new CBannerDAO();
+        dao.UpdateCBannerAc(id, active);      
+        List<CBanner> a = dao.getAllCBanner();
+        request.setAttribute("List", a);
+        request.getRequestDispatcher("CbannerManager.jsp").forward(request, response);
     }
 
     /**
@@ -67,29 +86,7 @@ public class AddCBannerControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Part file = request.getPart("image");
-        String image = file.getSubmittedFileName();
-        String title = request.getParameter("title");
-        String desc = request.getParameter("desc");
-        CBannerDAO dao = new CBannerDAO();
-        int active = 0;
-        String link = "";
-
-        link = "resources\\img\\ImgUser\\" + image;
-        String uploadPath = getServletContext().getRealPath("") + File.separator + link;
-        //  String UploadPart = "C:/Users/ADM/OneDrive/Documents/NetBeansProjects/Online-Shop/web/resources/img/ImgUser/" + image ;
-        try {
-            try (FileOutputStream fos = new FileOutputStream(uploadPath)) {
-                InputStream is = file.getInputStream();
-                byte[] data = new byte[is.available()];
-                is.read(data);
-                fos.write(data);
-            }
-
-        } catch (IOException e) {
-        }
-        dao.createReturnId(link, title,desc,active);
-        response.sendRedirect("cbannercontrol");
+        processRequest(request, response);
     }
 
     /**

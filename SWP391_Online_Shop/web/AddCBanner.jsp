@@ -57,14 +57,14 @@
                                             <div class="col-md-4">
 
                                                 <label for="first_name"><h4>Title </h4></label>
-                                                <input type="text" class="form-control" name="title"  placeholder="Title" title="enter Title">
+                                                <textarea class="form-control" name="title"  placeholder="Title" title="enter Title" aria-label="With textarea"></textarea>
 
 
                                             </div>
                                             <div class="col-md-4">
 
                                                 <label for="first_name"><h4>Desc </h4></label>
-                                                <input type="text" class="form-control" name="desc"  placeholder="desc" title="enter Desc">
+                                                <textarea class="form-control" name="desc"  placeholder="desc" title="enter Desc" aria-label="With textarea"></textarea>
 
 
                                             </div>
