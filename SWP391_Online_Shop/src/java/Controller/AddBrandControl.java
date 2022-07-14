@@ -5,11 +5,9 @@
  */
 package Controller;
 
-import DAO.OrderDetailDAO;
-import Model.OrderDetail;
+import DAO.BrandDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author VAN ANH
  */
-@WebServlet(name = "CompleteOrderControl", urlPatterns = {"/complete"})
-public class CompleteOrderControl extends HttpServlet {
+@WebServlet(name = "AddBrandControl", urlPatterns = {"/AddBrandControl"})
+public class AddBrandControl extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,12 +35,7 @@ public class CompleteOrderControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            int sid = Integer.valueOf(request.getParameter("sid"));
-            OrderDetailDAO o = new OrderDetailDAO();
-            List<OrderDetail> list = o.getProductComplete(sid);
-
-            request.setAttribute("list", list);
-            request.getRequestDispatcher("CompleteOrder.jsp").forward(request, response);
+            request.getRequestDispatcher("AddBrand.jsp").forward(request, response);
         }
     }
 
@@ -72,7 +65,10 @@ public class CompleteOrderControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String brandName = request.getParameter("brandName");
+        BrandDAO bdao = new BrandDAO();
+        bdao.InsertBrand(brandName);
+        response.sendRedirect("brand");
     }
 
     /**

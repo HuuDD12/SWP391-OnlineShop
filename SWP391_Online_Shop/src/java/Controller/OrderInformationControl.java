@@ -38,11 +38,24 @@ public class OrderInformationControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            int sid = Integer.valueOf(request.getParameter("sid"));
             OrderDAO odao = new OrderDAO();
             HttpSession session = request.getSession();
             Account acc = (Account) session.getAttribute("acc");
             List<Order> listo = odao.getAllBillById(acc.getUserId());
             request.setAttribute("list", listo);
+            int countW = odao.countOrderWaiting(sid);
+            int countP = odao.countOrderPacking(sid);
+            int countD = odao.countOrderDelivery(sid);
+            int countC = odao.countOrderComplete(sid);
+            int countCa = odao.countOrderCanceled(sid);
+            
+            request.setAttribute("countW", countW);
+            request.setAttribute("countP", countP);
+            request.setAttribute("countD", countD);
+            request.setAttribute("countC", countC);
+            request.setAttribute("countCa", countCa);
+            
             request.getRequestDispatcher("OrderInformation.jsp").forward(request, response);
         }
     }

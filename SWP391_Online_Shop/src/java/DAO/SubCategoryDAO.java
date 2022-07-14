@@ -17,7 +17,8 @@ import java.util.List;
  *
  * @author Admin
  */
-public class SubCategoryDAO extends DBcontext.DBContext{
+public class SubCategoryDAO extends DBcontext.DBContext {
+
     public List<Subcategory> getAllSubCategory() {
         String sql = "SELECT * FROM dbo.SubCategory";
         List<Subcategory> list = new ArrayList<>();
@@ -25,8 +26,8 @@ public class SubCategoryDAO extends DBcontext.DBContext{
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                   Subcategory s = new Subcategory(rs.getInt(1), rs.getString(2),rs.getInt(3));               
-                    list.add(s);
+                Subcategory s = new Subcategory(rs.getInt(1), rs.getString(2), rs.getInt(3));
+                list.add(s);
             }
 
         } catch (SQLException e) {
@@ -34,6 +35,7 @@ public class SubCategoryDAO extends DBcontext.DBContext{
         }
         return list;
     }
+
     public List<Subcategory> getSubByCateId(int cid) {
         String sql = "select * from SubCategory where CategoryID = ?";
         List<Subcategory> list = new ArrayList<>();
@@ -68,5 +70,16 @@ public class SubCategoryDAO extends DBcontext.DBContext{
         } catch (SQLException e) {
             System.out.println(e);
         }
-    }   
+    }
+
+    public void DeleteSubId(int subid) {
+        String sql = "delete from SubCategory where SubCategoryID = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, subid);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 }

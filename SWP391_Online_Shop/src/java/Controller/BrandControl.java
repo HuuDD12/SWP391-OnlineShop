@@ -5,7 +5,9 @@
  */
 package Controller;
 
+import DAO.BrandDAO;
 import DAO.ProductDAO;
+import Model.Brand;
 import Model.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,12 +38,10 @@ public class BrandControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String page = request.getParameter("page");
-            ProductDAO pdao = new ProductDAO();
-            List<Product> list = pdao.getProductByBrand(page);
-            request.setAttribute("listP", list);
-            request.getRequestDispatcher("productlist.jsp").forward(request, response);
-            
+           BrandDAO bdao = new BrandDAO();
+            List<Brand> list = bdao.getAllBrand();
+            request.setAttribute("list", list);
+            request.getRequestDispatcher("BrandView.jsp").forward(request, response);
         }
     }
 

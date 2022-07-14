@@ -75,4 +75,18 @@ public class CategoryDAO extends DBcontext.DBContext{
         }
         return null;
     }
+    
+     public void UpdateCategory(String cate_name, int uid) {
+        String sql = "UPDATE [dbo].[Category]\n"
+                + "   SET [CategoryName] = ?\n"
+                + " WHERE CategoryID = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, cate_name);
+            ps.setInt(2, uid);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 }

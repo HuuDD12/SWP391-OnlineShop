@@ -5,11 +5,10 @@
  */
 package Controller;
 
-import DAO.OrderDetailDAO;
-import Model.OrderDetail;
+import DAO.CategoryDAO;
+import DAO.SubCategoryDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,8 +19,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author VAN ANH
  */
-@WebServlet(name = "CompleteOrderControl", urlPatterns = {"/complete"})
-public class CompleteOrderControl extends HttpServlet {
+@WebServlet(name = "AddSubcategory", urlPatterns = {"/addSubcategory"})
+public class AddSubcategory extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,12 +36,16 @@ public class CompleteOrderControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            int sid = Integer.valueOf(request.getParameter("sid"));
-            OrderDetailDAO o = new OrderDetailDAO();
-            List<OrderDetail> list = o.getProductComplete(sid);
-
-            request.setAttribute("list", list);
-            request.getRequestDispatcher("CompleteOrder.jsp").forward(request, response);
+            int uid = Integer.valueOf(request.getParameter("uid"));
+            SubCategoryDAO sdao = new SubCategoryDAO();
+            String catename = request.getParameter("catename");
+            String subName = request.getParameter("subName");
+            CategoryDAO cdao = new CategoryDAO();
+            cdao.UpdateCategory(catename, uid);
+            if (subName != "") {
+                sdao.InsertSubCateName(subName, uid);
+            }
+            response.sendRedirect("category");
         }
     }
 

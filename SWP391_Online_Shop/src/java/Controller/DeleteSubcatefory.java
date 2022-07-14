@@ -5,8 +5,10 @@
  */
 package Controller;
 
-import DAO.OrderDetailDAO;
-import Model.OrderDetail;
+import DAO.CategoryDAO;
+import DAO.SubCategoryDAO;
+import Model.Category;
+import Model.Subcategory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -20,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author VAN ANH
  */
-@WebServlet(name = "CompleteOrderControl", urlPatterns = {"/complete"})
-public class CompleteOrderControl extends HttpServlet {
+@WebServlet(name = "DeleteSubcatefory", urlPatterns = {"/deleteSubcatefory"})
+public class DeleteSubcatefory extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,12 +39,7 @@ public class CompleteOrderControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            int sid = Integer.valueOf(request.getParameter("sid"));
-            OrderDetailDAO o = new OrderDetailDAO();
-            List<OrderDetail> list = o.getProductComplete(sid);
-
-            request.setAttribute("list", list);
-            request.getRequestDispatcher("CompleteOrder.jsp").forward(request, response);
+            
         }
     }
 
@@ -58,7 +55,16 @@ public class CompleteOrderControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        int cid = Integer.valueOf(request.getParameter("cid"));
+            int id = Integer.valueOf(request.getParameter("id"));
+            CategoryDAO cdao = new CategoryDAO();
+            SubCategoryDAO sdao = new SubCategoryDAO();
+            Category p = cdao.getCategoryById(cid);
+            List<Subcategory> list = sdao.getSubByCateId(cid);
+            sdao.DeleteSubId(id);
+            request.setAttribute("cate", p);
+            request.setAttribute("list", list);
+            request.getRequestDispatcher("EditCategory.jsp").forward(request, response);
     }
 
     /**

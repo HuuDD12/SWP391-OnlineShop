@@ -77,12 +77,13 @@ public class EditCategory extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int uid = Integer.valueOf(request.getParameter("uid"));
-        SubCategoryDAO sdao = new SubCategoryDAO();
-        String catename = request.getParameter("catename");
-        String subName = request.getParameter("subName");
-        sdao.InsertSubCateName(subName,uid);
-        response.sendRedirect("editcategory");
+        processRequest(request, response);
+//        int uid = Integer.valueOf(request.getParameter("uid"));
+//        SubCategoryDAO sdao = new SubCategoryDAO();
+//        String catename = request.getParameter("catename");
+//        String subName = request.getParameter("subName");
+//        sdao.InsertSubCateName(subName,uid);
+//        response.sendRedirect("editcategory");
     }
 
     /**
