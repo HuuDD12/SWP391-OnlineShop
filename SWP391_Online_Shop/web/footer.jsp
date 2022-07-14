@@ -40,7 +40,7 @@
                 <div class="row">
                     <!-- BEGIN COPYRIGHT -->
                     <div class="col-md-4 col-sm-4 padding-top-10">
-                        2015 © Keenthemes. ALL Rights Reserved. 
+                        2022 © Group1_SWP391. ALL Rights Reserved. 
                     </div>
                     <!-- END COPYRIGHT -->
                     <!-- BEGIN PAYMENTS -->
@@ -56,7 +56,7 @@
                     <!-- END PAYMENTS -->
                     <!-- BEGIN POWERED -->
                     <div class="col-md-4 col-sm-4 text-right">
-                        <p class="powered">Powered by: <a href="http://www.keenthemes.com/">KeenThemes.com</a></p>
+                        <p class="powered">Powered by: Group 1<a href="#">Group1vippro.com</a></p>
                     </div>
                     <!-- END POWERED -->
                 </div>

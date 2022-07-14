@@ -116,11 +116,14 @@
 
                     <img style="width: 100%; margin: 45px;" src="./resources/img/Blog/5233122.jpg" >
                     <div class="spotlight">
+                    <c:if test="${o.userId == sessionScope.acc.userId}">
                         <button class="btn btn-success"><a href="addblog">Add Blogs</a></button>
-                        <h2 class="card-title show_txt">Những item bạn nhất định không nên bỏ lỡ</h2>                         
-                        <p>Với sự thay đổi liên tục, xu hướng thời trang luôn được cập nhật mới mẻ hơn, độc đáo, hiện đại và thu hút hơn. Những phong cách mới, xu thế thời trang hot luôn được mọi người quan tâm, đặc biệt là giới trẻ. Không thể phủ nhận ngành công nghiệp thời trang đang phát triển rất mạnh mẽ. Không chỉ đơn giản là cách ăn mặc, cách mix&match đồ hay diện đồ theo phong cách yêu thích, thời trang còn là sự đổi mới, phá cách và tràn đầy sức sáng tạo ấn tượng. Vậy bạn đã có ý tưởng gì cho mình chưa? Cùng Shope khám phá ngay nhé.</p>
-                    </div>
+                    </c:if>
+
+                    <h2 class="card-title show_txt">Những item bạn nhất định không nên bỏ lỡ</h2>                         
+                    <p>Với sự thay đổi liên tục, xu hướng thời trang luôn được cập nhật mới mẻ hơn, độc đáo, hiện đại và thu hút hơn. Những phong cách mới, xu thế thời trang hot luôn được mọi người quan tâm, đặc biệt là giới trẻ. Không thể phủ nhận ngành công nghiệp thời trang đang phát triển rất mạnh mẽ. Không chỉ đơn giản là cách ăn mặc, cách mix&match đồ hay diện đồ theo phong cách yêu thích, thời trang còn là sự đổi mới, phá cách và tràn đầy sức sáng tạo ấn tượng. Vậy bạn đã có ý tưởng gì cho mình chưa? Cùng Shope khám phá ngay nhé.</p>
                 </div>
+            </div>
             <c:set var="i" value="0"></c:set>
             <c:forEach items="${blogList}" var="o" >
 

@@ -1,19 +1,12 @@
-<%-- 
-    Document   : BlogDetail
-    Created on : Oct 1, 2021, 3:08:45 PM
-    Author     : Ottelia
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon">
-
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <!-- icon -->
         <link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon">
         <!-- link Fonts -->
@@ -40,23 +33,13 @@
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
             />
-        <!-- CSS -->
-        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
-        <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css"><!--- fonts for slider on the index page -->  
-        <!-- Fonts END -->
-
         <!-- Global styles START -->          
         <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
         <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <!-- Global styles END --> 
 
-        <!-- Page level plugin styles START -->
-        <link href="assets/pages/css/animate.css" rel="stylesheet">
-        <link href="assets/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet">
-        <link href="assets/plugins/owl.carousel/assets/owl.carousel.css" rel="stylesheet">
-        <!-- Page level plugin styles END -->
-
         <!-- Theme styles START -->
+                <!-- Theme styles START -->
         <link href="assets/pages/css/components.css" rel="stylesheet">
         <link href="assets/pages/css/slider.css" rel="stylesheet">
         <link href="assets/pages/css/style-shop.css" rel="stylesheet" type="text/css">
@@ -138,7 +121,7 @@
     </head>
 
     <body>
-        <jsp:include page="header.jsp"></jsp:include>
+        <%@include file="header.jsp" %>
 
         <%-- Content here--%>
     <center>
@@ -171,14 +154,15 @@
             </div>
         </div>
     </center>
-    <jsp:include page="footer.jsp"></jsp:include>
-        <!-- BOOTSTRAP5-->
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"
-        ></script>
-        <!-- SCRIPT -->
-        <script src="${pageContext.request.contextPath}/js/script.js"></script>
+
+    <%@include file="footer.jsp" %>
+    <!-- BOOTSTRAP5-->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"
+    ></script>
+    <!-- SCRIPT -->
+    <script src="${pageContext.request.contextPath}/js/script.js"></script>
 </body>
 </html>
