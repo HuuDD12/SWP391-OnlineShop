@@ -68,7 +68,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <a type="button" class="btn btn-default" href="ManageFeedbackBySeller">Cancel</a>
+                            <a type="button" class="btn btn-default" href="salemanager">Back</a>
                             <input type="reset" class="btn btn" value="Clear">
                             <button type="submit" class="btn btn-primary">Send</button>
                         </div>
@@ -76,6 +76,6 @@
 
                 </div>
             </div>
-        <jsp:include page="footer.jsp"></jsp:include>
+        
     </body>
 </html>

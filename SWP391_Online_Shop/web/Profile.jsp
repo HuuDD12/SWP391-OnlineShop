@@ -126,7 +126,10 @@
                                         <div class="d-flex flex-column align-items-center text-center">        
                                         <c:if test="${info.uidImg != null}">
                                             <img src="${info.uidImg}"  class="rounded-circle" width="150">
-                                        </c:if>                                      
+                                        </c:if> 
+                                            <c:if test="${info.uidImg == '' or info.uidImg == null  }">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="rounded-circle" width="150">
+                                        </c:if>
                                         <div class="mt-3" style="padding: 10px">
                                             <h4>${info.firstName}</h4>                                            
                                             <p class="text-muted font-size-sm">${info.address}</p>                                      

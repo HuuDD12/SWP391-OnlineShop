@@ -62,15 +62,7 @@
                     <div class="col-md-12 col-lg-12">
                         <div class="row">
                             <!-- col-6 -->
-                            <div class="col-md-6">
-                                <div class="widget-small primary coloured-icon"><i class='icon bx bxs-user-account fa-3x'></i>
-                                    <div class="info">
-                                        <h4>Tổng khách hàng</h4>
-                                        <p><b>${user} khách hàng</b></p>
-                                    <p class="info-tong">Tổng số khách hàng được quản lý.</p>
-                                </div>
-                            </div>
-                        </div>
+                            
                         <!-- col-6 -->
                         <div class="col-md-6">
                             <div class="widget-small info coloured-icon"><i class='icon bx bxs-data fa-3x'></i>

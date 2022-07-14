@@ -17,8 +17,8 @@
             <a href="${pageContext.request.contextPath}/productlist">
                     <img class="logo" src="assets/corporate/img/logos/Logo1.png" alt="Online Shop" style="width: 150px; margin: 20px 20px"></a>
             <ul class="main-nav">
-                <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
-                <li><a href="${pageContext.request.contextPath}/product?page=1&query=&subcategory=0&brand=0&price=0&sortType=0&sortMode=0">
+                <li><a href="HomeControl" style="color: wheat">Home</a></li>
+                <li><a href="${pageContext.request.contextPath}/productlist" style="color: wheat">
                         Product</a></li>
                 <li><a href="AboutShope.jsp">About Shope</a></li>
             </ul>

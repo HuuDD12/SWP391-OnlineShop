@@ -44,7 +44,7 @@
         </header>
         <!-- Sidebar menu-->
         <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-        <jsp:include page="DashBoardNav.jsp"></jsp:include>
+        <jsp:include page="SellDashboardNav.jsp"></jsp:include>
         
             <main class="app-content">
                 <div class="app-title">
