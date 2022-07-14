@@ -266,10 +266,56 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                                             </c:if>
                                         </c:if>
                                         <c:if test="${page<endPage}">
-                                            <li class="page-item ${i==page?"active":""}"><a class="page-link" href="locproductlistcontrol?page=${page + 1}&cate=${cate}&type=${type}&brand=${brand}">&rsaquo;</a></li>
+                                            <li class="page-item ${i==page?"active":""}"><a class="page-link" href="searchbyprice?page=${page + 1}&min=${min}&max=${max}">&rsaquo;</a></li>
                                             </c:if> 
-                                        <li class="page-item ${i==page?"active":""}"><a class="page-link" href="locproductlistcontrol?page=${endPage}&cate=${cate}&type=${type}&brand=${brand}">&raquo;</a></li> 
-                                        </c:if>                                   
+                                        <li class="page-item ${i==page?"active":""}"><a class="page-link" href="searchbyprice?page=${endPage}&min=${min}&max=${max}">&raquo;</a></li> 
+                                        </c:if>  
+                                         <c:if test="${Pid == 3}">
+                                        <li class="page-item ${i==page?"active":""}"><a class="page-link" href="searchbyprice?page=1&min=${min}&max=${max}">&laquo;</a></li>
+                                            <c:if test="${page!= '1'}">
+                                            <li class="page-item ${i==page?"active":""}"><a class="page-link" href="searchbyprice?page=${page - 1}&min=${min}&max=${max}">&lsaquo;</a></li>
+                                            </c:if>
+                                            <c:if test="${endPage <=7}">
+                                                <c:forEach begin="1" end="${endPage}" var="i">
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="searchbyprice?page=${i}&min=${min}&max=${max}">${i}</a></li>
+                                                </c:forEach> 
+                                            </c:if>
+                                            <c:if test="${endPage > 7}">
+                                                <c:if test="${page >= '1' && page <4}">
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="searchbyprice?page=${1}&min=${min}&max=${max}">1</a></li>                                                                                       
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="searchbyprice?page=${2}&min=${min}&max=${max}">2</a></li>                                                                                       
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="searchbyprice?page=${3}&min=${min}&max=${max}">3</a></li>                                            
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="searchbyprice?page=${4}&min=${min}&max=${max}">4</a></li>
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link">....</a></li> 
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="searchbyprice?page=${endPage}&min=${min}&max=${max}">${endPage}</a></li>
+                                                </c:if>
+                                                <c:if test="${page >= '4' && page < (endPage-2)}">
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="searchbyprice?page=${1}&min=${min}&max=${max}">1</a></li>  
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link">...</a></li>
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="searchbyprice?page=${page-1}&min=${min}&max=${max}">${page-1}</a></li>                                                                                       
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="searchbyprice?page=${page}&min=${min}&max=${max}">${page}</a></li>                                                                                       
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="searchbyprice?page=${page+1}&min=${min}&max=${max}">${page+1}</a></li>                                                                                       
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link">...</a></li> 
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="searchbyprice?page=${endPage}&min=${min}&max=${max}">${endPage}</a></li>
+                                                </c:if>
+                                                <c:if test="${page >= (endPage-2) }">
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="searchbyprice?page=${1}&min=${min}&max=${max}">1</a></li>                                                                                       
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="searchbyprice?page=${2}&min=${min}&max=${max}">2</a></li>                                                                                                                                                                             
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link">...</a></li>
+                                                    <c:if test="${page == (endPage-2)}">
+                                                    <li class="page-item ${i==page?"active":""}"><a class="page-link" href="searchbyprice?page=${endPage-3}&min=${min}&max=${max}">${endPage-3}</a></li>
+                                                    </c:if>
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="searchbyprice?page=${endPage-2}&min=${min}&max=${max}">${endPage-2}</a></li>
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="searchbyprice?page=${endPage-1}&min=${min}&max=${max}">${endPage-1}</a></li>
+                                                <li class="page-item ${i==page?"active":""}"><a class="page-link" href="searchbyprice?page=${endPage}&min=${min}&max=${max}">${endPage}</a></li>
+
+                                            </c:if>
+                                        </c:if>
+                                        <c:if test="${page<endPage}">
+                                            <li class="page-item ${i==page?"active":""}"><a class="page-link" href="searchbyprice?page=${page + 1}&min=${min}&max=${max}">&rsaquo;</a></li>
+                                            </c:if> 
+                                        <li class="page-item ${i==page?"active":""}"><a class="page-link" href="searchbyprice?page=${endPage}&min=${min}&max=${max}">&raquo;</a></li> 
+                                        </c:if>
                                 </ul>
                             </div>
                         </div>

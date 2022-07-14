@@ -7,6 +7,7 @@ package DAO;
 
 import Model.Cart;
 import Model.Product;
+import Model.ProductImg;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -1414,52 +1415,47 @@ public class ProductDAO extends DBcontext.DBContext {
         }
     }
 
-    public void InsertProductInfo(Product p) {
-        String sql = "INSERT INTO [dbo].[Product]\n"
+    public void AddProduct(Product p) {
+        String query = "INSERT INTO [dbo].[Product]\n"
                 + "           ([ProductName]\n"
                 + "           ,[Description]\n"
                 + "           ,[OriginalPrice]\n"
                 + "           ,[SalePrice]\n"
+                + "           ,[Sale]\n"
                 + "           ,[SubCategoryID]\n"
                 + "           ,[Amount]\n"
-                + "           ,[BrandID])\n"
+                + "           ,[BrandID]\n"
+                + "           ,[sell_id])\n"
                 + "     VALUES\n"
-                + "           (?\n"
-                + "           ,?\n"
-                + "           ,?\n"
-                + "           ,?\n"
-                + "           ,?\n"
-                + "           ,?\n"
-                + "           ,?)";
+                + "           (?,?,?,?,?,?,?,?,?)";
         try {
-            PreparedStatement ps = connection.prepareStatement(sql);
+            PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, p.getProductName());
             ps.setString(2, p.getDescription());
             ps.setDouble(3, p.getOriginalPrice());
             ps.setDouble(4, p.getSalePrice());
-            ps.setInt(5, p.getSubID());
-            ps.setInt(6, p.getAmount());
-            ps.setInt(7, p.getBrandID());
+            ps.setDouble(5, p.getSalePercent());
+            ps.setInt(6, p.getSubID());
+            ps.setInt(7, p.getAmount());
+            ps.setInt(8, p.getBrandID());
+            ps.setInt(9, p.getSell_id());
             ps.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e);
+        } catch (Exception e) {
         }
     }
 
-    public void InsertProductImgInfo(Product p) {
-        String sql = "INSERT INTO [dbo].[ProductImg]\n"
-                + "           ([ProductImgURL])\n"
-                + "     VALUES\n"
-                + "           (?)";
+    public void AddProductImg(String pname, String url) {
+        String query = "INSERT INTO [dbo].[ProductImg]\n"
+                + "           ([ProductID]\n"
+                + "           ,[ProductImgURL])"
+                + " values (((select ProductID from Product where ProductName= ? )), ? )";
         try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, p.getUrl());
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, pname);
+            ps.setString(2, url);
             ps.executeUpdate();
-
-        } catch (SQLException e) {
-            System.out.println(e);
+        } catch (Exception e) {
         }
-
     }
 
     public void deleteProductImg(String cid) {
@@ -1477,7 +1473,7 @@ public class ProductDAO extends DBcontext.DBContext {
         String query = "update Product set Amount = Amount - ? where ProductID = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
-            
+
             for (Map.Entry<Integer, Cart> entry : carts.entrySet()) {
                 Integer productId = entry.getKey();
                 Cart cart = entry.getValue();
@@ -1485,10 +1481,65 @@ public class ProductDAO extends DBcontext.DBContext {
                 ps.setInt(2, cart.getProduct().getProductID());
                 ps.executeUpdate();
             }
-            
 
         } catch (Exception e) {
         }
+    }
+
+    public List<Product> searchByPricePaging(double min, double max, int index) {
+        String sql = "SELECT * FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
+                + "                MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
+                + "                MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n"
+                + "                MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n"
+                + "                MIN(ProI.ProductImgURL) AS ProductImgURL FROM \n"
+                + "                dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t where t.SalePrice between ? and ?\n"
+                + "                                order by t.SalePrice OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY";
+        List<Product> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setDouble(1, min);
+            ps.setDouble(2, max);
+            ps.setInt(3, (index - 1) * 6);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("productID"),
+                        rs.getString("ProductName"),
+                        rs.getString("Description"),
+                        rs.getDouble("OriginalPrice"),
+                        rs.getDouble("SalePrice"),
+                        rs.getInt("SubCategoryID"),
+                        rs.getInt("Amount"),
+                        rs.getInt("BrandID"),
+                        rs.getInt("sell_id"),
+                        rs.getString("ProductImgURL"));
+                list.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public int countSearchByPrice(double min, double max) {
+        String query = "SELECT count(*) FROM (SELECT p.ProductID,MIN(p.ProductName) AS ProductName,MIN(p.Description) AS Description,\n"
+                + "                MIN(p.OriginalPrice) AS OriginalPrice,MIN(p.SalePrice) AS SalePrice,\n"
+                + "                MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n"
+                + "                MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n"
+                + "                MIN(ProI.ProductImgURL) AS ProductImgURL FROM \n"
+                + "                dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t where t.SalePrice between ? and ?";
+        try {
+
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setDouble(1, min);
+            ps.setDouble(2, max);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+
+        }
+        return 0;
     }
 
     public static void main(String[] args) {

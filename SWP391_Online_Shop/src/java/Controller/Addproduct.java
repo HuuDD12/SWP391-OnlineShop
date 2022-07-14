@@ -8,6 +8,7 @@ package Controller;
 import DAO.BrandDAO;
 import DAO.ProductDAO;
 import DAO.SubCategoryDAO;
+import Model.Account;
 import Model.Brand;
 import Model.Product;
 import Model.Subcategory;
@@ -23,6 +24,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 /**
@@ -84,45 +86,24 @@ public class Addproduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Part file = request.getPart("image");
-        String image = file.getSubmittedFileName();
-        String imageu = request.getParameter("imageu");
+        HttpSession session = request.getSession();
+        Account acc = (Account) session.getAttribute("acc");
+        String img = request.getParameter("img");
         String Product_name = request.getParameter("Product_name");
         String Description = request.getParameter("Description");
-        Double Original_Price = Double.valueOf(request.getParameter("Original_Price"));
-        Double Sale_Price = Double.valueOf(request.getParameter("Sale_Price"));
-        int amount = Integer.valueOf(request.getParameter("amount"));
+        Double Original_Price = Double.parseDouble(request.getParameter("Original_Price"));
+        Double salePercent = Double.parseDouble((request.getParameter("salePercent")));
+        int amount = Integer.parseInt((request.getParameter("amount")));
         String Subcategory = request.getParameter("Subcategory");
-        String Brand = request.getParameter("Brand");
-       
+        String Brand = request.getParameter("Brand");       
         int subCate = Integer.parseInt(Subcategory);
         int brand = Integer.parseInt(Brand);
         ProductDAO pdao = new ProductDAO();
-        String link = "";
-
-        if ("".equals(image)) {
-            Product pro = new Product(Product_name, Description, Original_Price, Sale_Price, subCate, amount, brand);
-            Product product = new Product(imageu);
-            pdao.InsertProductInfo(pro);
-        } 
-        else {
-            link = "resources\\img\\\\products\\" + image;
-            Product pro = new Product(Product_name, Description, Original_Price, Sale_Price, subCate, amount, brand);
-            Product product = new Product(link);
-            String uploadPath = getServletContext().getRealPath("") + File.separator + link;
-            //  String UploadPart = "C:/Users/ADM/OneDrive/Documents/NetBeansProjects/Online-Shop/web/resources/img/ImgUser/" + image ;
-            try {
-                try (FileOutputStream fos = new FileOutputStream(uploadPath)) {
-                    InputStream is = file.getInputStream();
-                    byte[] data = new byte[is.available()];
-                    is.read(data);
-                    fos.write(data);
-                }
-            } catch (IOException e) {
-            }
-            pdao.InsertProductInfo(pro);
-            pdao.InsertProductImgInfo(product);
-        }
+        Product p = new Product(Product_name, Description, Original_Price, (Original_Price * (100 - salePercent)) / 100, salePercent, subCate, amount, brand, Integer.parseInt(acc.getUserId()));
+        pdao.AddProduct(p);
+        pdao.AddProductImg(Product_name, img);
+        
+        
         //request.getRequestDispatcher(".jsp").forward(request, response);
         response.sendRedirect("productmanager");
     }

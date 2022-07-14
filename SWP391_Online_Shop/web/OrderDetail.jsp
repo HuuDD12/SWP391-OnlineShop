@@ -22,58 +22,9 @@
     <body>
 
         <div class="wrapper">
-            <!-- Sidebar Holder -->
-            <nav id="sidebar">
-                <div id="dismiss">
-                    <i class="bi bi-arrow-left"></i>
-                </div>
-
-                <div class="sidebar-header">
-
-                    <h3>Shope</h3>
-                </div>
-
-                <ul class="list-unstyled components">
-                    <p>Dummy Heading</p>
-                    <li>
-                        <a href="dashboard">Home
-                            <i class="bi bi-house float-end"></i>
-                        </a>
-
-                    </li>
-                    <li>
-                        <a href="ManagerOrder">Manager Order <i class="bi bi-cart-check float-end"></i></i></a>
-                    </li>
-                    <li>
-                        <a href="ManagerProduct">Manager Product <i class="bi bi-bag-fill float-end"></i></a>
-                    </li>
-                    <li>
-                        <a href="ManagerBlog">Manager Blog <i class="bi bi-bootstrap float-end"></i></a>
-                    </li>
-                    <li>
-                        <a href="ManagerAccount">Manager Account<i class="bi bi-person float-end"></i></a>
-                    </li>
-                </ul>
-
-                <ul class="list-unstyled CTAs">
-                    <li><a href="home" class="download">Logout</a></li>
-                </ul>
-            </nav>
-
+            <!-- Sidebar Holder -->         
             <!-- Page Content Holder -->
             <div id="content">
-
-                <nav class="navbar navbar-default">
-                    <div class="container-fluid">
-
-                        <div class="navbar-header">
-                            <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
-                                <i class="glyphicon glyphicon-align-left"></i>
-                                <span>Open Sidebar</span>
-                            </button>
-                        </div>
-                    </div>
-                </nav>
 
 
                 <div class="container-fluid">
@@ -111,7 +62,12 @@
                                 </table>
                             </div>
 
-                            <a class="btn btn-primary px-3" href="dashboard" role="button" style="margin:50px;">Back </a>
+                            <c:if test="${sessionScope.acc.getRoleId() == 1 || sessionScope.acc.getRoleId() == 2}">
+                                <a class="btn btn-primary px-3" href="dashboard" role="button" style="margin:50px;">Back </a>
+                            </c:if>
+                            <c:if test="${sessionScope.acc.getRoleId() == 3}">
+                                <a class="btn btn-primary px-3" href="orderinfo" role="button" style="margin:50px;">Back </a>
+                            </c:if>
                         </div>
                     </div>
                 </div>

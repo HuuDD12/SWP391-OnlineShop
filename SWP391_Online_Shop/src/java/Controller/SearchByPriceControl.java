@@ -36,11 +36,29 @@ public class SearchByPriceControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            final int size = 6;
+            final int Pid = 3;
+            String page = request.getParameter("page");
             double min = Double.parseDouble(request.getParameter("min"));
             double max = Double.parseDouble(request.getParameter("max"));
             ProductDAO pdao = new ProductDAO();
-            List<Product> listP = pdao.searchByPrice(min, max);
+            int count = pdao.countSearchByPrice(min, max);
+            int endPage = count / size;
+            if (count % size != 0) {
+                endPage++;
+            }
+            if (page == null) {
+                page = "1";
+            }
+            int pTid = Integer.parseInt(page);
+            List<Product> listP = pdao.searchByPricePaging(min, max, pTid);
             Product maxPrice = pdao.getMaxPrice();
+            request.setAttribute("min", min);
+            request.setAttribute("max", max);
+            request.setAttribute("Pid", Pid);
+            request.setAttribute("endPage", endPage);
+            request.setAttribute("page", page);
+          
             request.setAttribute("listP", listP);
             request.setAttribute("maxPrice", maxPrice);
             request.getRequestDispatcher("productlist.jsp").forward(request, response);

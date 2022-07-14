@@ -26,6 +26,18 @@ public class Product {
     public Product() {
     }
 
+    public Product(String productName, String description, double originalPrice, double salePrice, double salePercent, int subID, int amount, int brandID, int sell_id) {
+        this.productName = productName;
+        this.description = description;
+        this.originalPrice = originalPrice;
+        this.salePrice = salePrice;
+        this.salePercent = salePercent;
+        this.subID = subID;
+        this.amount = amount;
+        this.brandID = brandID;
+        this.sell_id = sell_id;
+    }
+
     public Product(int productID, String productName, String description, double originalPrice, double salePrice, int subID, int amount, int brandID, int sell_id, String url) {
         this.productID = productID;
         this.productName = productName;
