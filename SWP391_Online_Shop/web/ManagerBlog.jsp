@@ -79,7 +79,7 @@
                                         <td style="text-align: center">${o.title}</td>
                                         <td style="text-align: center"><img style="height: 150px;width: 150px" src="${o.imageLink}"/></td>
                                         <td style="text-align: center">${o.content}</td>
-                                        <td style="text-align: center"><a href="#" onclick="doDelete('${o.id}')" class="delete"><i class="fa fa-times" aria-hidden="true"></i></a></td>
+                                        <td style="text-align: center"><a href="#" onclick="doDelete('${o.id}')" class="delete"><button class="btn btn-danger">Delete</button></a></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
