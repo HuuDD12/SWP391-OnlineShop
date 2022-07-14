@@ -124,6 +124,9 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
                 <div class="col-md-4" style="border: 1px solid #ccc; border-radius: 5px; padding: 1rem">
                     <h3>Information of customer</h3>
                     <form action="checkout" method="post">
+                        <c:forEach items="${carts}" var="C">
+                            <input type="hidden" name="productId" value="${C.value.product.productID}"/>
+                        </c:forEach>
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp">

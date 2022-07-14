@@ -4,6 +4,7 @@
     Author     : Khuong Hung
 --%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -141,7 +142,7 @@
                                                 <td>${b.id}</td>
                                                 <td>${b.acc.username}</td>
                                                 <td>${b.createdDate}</td>
-                                                <td>${b.totalPrice}</td> 
+                                                <td><fmt:formatNumber pattern="###,###" value="${b.totalPrice}"/></td> 
                                                 <th><a href="orderdetail?oid=${b.id}">View</a></th>
                                             </tr>
                                         </c:forEach>

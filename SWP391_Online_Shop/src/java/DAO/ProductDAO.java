@@ -5,12 +5,14 @@
  */
 package DAO;
 
+import Model.Cart;
 import Model.Product;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -143,7 +145,7 @@ public class ProductDAO extends DBcontext.DBContext {
             }
 
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println("Can't not be negative");
         }
         return null;
     }
@@ -1118,7 +1120,7 @@ public class ProductDAO extends DBcontext.DBContext {
                 + "MIN(p.SubCategoryID) AS SubCategoryID,MIN(p.Amount) AS Amount,\n"
                 + "MIN(p.BrandID) AS BrandID,MIN(p.sell_id) AS sell_id,\n"
                 + "MIN(ProI.ProductImgURL) AS ProductImgURL FROM \n"
-                + "dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t where t.OriginalPrice between ? and ?";
+                + "dbo.Product p JOIN  dbo.ProductImg ProI ON ProI.ProductID = p.ProductID GROUP BY p.ProductID ) t where t.SalePrice between ? and ?";
         List<Product> list = new ArrayList<>();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -1471,4 +1473,24 @@ public class ProductDAO extends DBcontext.DBContext {
         }
     }
 
+    public void updateQuantity(Map<Integer, Cart> carts, int ProductID) {
+        String query = "update Product set Amount = Amount - ? where ProductID = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            
+            for (Map.Entry<Integer, Cart> entry : carts.entrySet()) {
+                Integer productId = entry.getKey();
+                Cart cart = entry.getValue();
+                ps.setInt(1, cart.getQuantity());
+                ps.setInt(2, cart.getProduct().getProductID());
+                ps.executeUpdate();
+            }
+            
+
+        } catch (Exception e) {
+        }
+    }
+
+    public static void main(String[] args) {
+    }
 }

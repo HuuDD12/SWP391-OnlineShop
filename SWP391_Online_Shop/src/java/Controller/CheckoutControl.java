@@ -8,6 +8,7 @@ package Controller;
 import DAO.NotificationDAO;
 import DAO.OrderDAO;
 import DAO.OrderDetailDAO;
+import DAO.ProductDAO;
 import DAO.ShippingDAO;
 import Model.Account;
 import Model.Cart;
@@ -93,6 +94,7 @@ public class CheckoutControl extends HttpServlet {
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
         String note = request.getParameter("note");
+        int ProductID = Integer.parseInt(request.getParameter("productId"));
         HttpSession session = request.getSession();
         Map<Integer, Cart> carts = (Map<Integer, Cart>) session.getAttribute("carts");
         Account acc = (Account) session.getAttribute("acc");
@@ -122,6 +124,7 @@ public class CheckoutControl extends HttpServlet {
         //Gửi thông báo
         Notification notification= new Notification(acc.getUserId(), orderId, "Order #"+Integer.toString(orderId)+" has been placed!");
         new NotificationDAO().addNotification(notification);
+        new ProductDAO().updateQuantity(carts, ProductID);
         session.removeAttribute("carts");
         response.sendRedirect("Finish.jsp");
     }
