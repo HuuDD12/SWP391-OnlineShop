@@ -20,8 +20,8 @@
                     class="app-menu__label" >Banner</span></a></li>
         <li><a class="app-menu__item" href="bannercontrol" style="text-decoration: none" ><i class='app-menu__icon bx bxs-message-add'></i><span
                     class="app-menu__label" >Banner sale</span></a></li>
-        <li><a class="app-menu__item" href="blogmanager" style="text-decoration: none" ><i class='app-menu__icon bx bxs-message-add'></i><span
-                    class="app-menu__label" >Blogs</span></a></li>
+        <li><a class="app-menu__item" href="blogmanager" style="text-decoration: none" ><i class='app-menu__icon bx bx-tachometer'></i><span
+                    class="app-menu__label" >Blog</span></a></li>
         
 
     </ul>
