@@ -172,8 +172,8 @@
         <script>
 
             const labelsBar = [
-            <c:forEach items="${listC}" var="c">
-                '${c.cate_name}',
+            <c:forEach items="${listBrand}" var="c">
+                '${c.p.url}',
             </c:forEach>
             ];
 
@@ -182,7 +182,11 @@
                 labels: labelsBar,
                 datasets: [{
                         label: 'Tổng danh mục đã được đặt hàng',
-                        data: [${categoryOrder1.totalCategoryOrder}, ${categoryOrder2.totalCategoryOrder}, ${categoryOrder3.totalCategoryOrder}, ${categoryOrder4.totalCategoryOrder}, ${categoryOrder5.totalCategoryOrder}],
+                        data: [
+                            <c:forEach items="${listBrand}" var="x">
+                '${x.p.salePrice}',
+            </c:forEach> 
+                        ],
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(255, 159, 64, 0.2)',
