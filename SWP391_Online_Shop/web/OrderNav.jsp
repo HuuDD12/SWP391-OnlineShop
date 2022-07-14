@@ -14,7 +14,7 @@
     </div>
     <hr>
     <ul class="app-menu">
-        <li><a class="app-menu__item" href="orderinfo" style="text-decoration: none" ><i class='app-menu__icon bx bx-tachometer'></i><span
+        <li><a class="app-menu__item" href="orderinfo?sid=${sessionScope.acc.getUserId()}" style="text-decoration: none" ><i class='app-menu__icon bx bx-tachometer'></i><span
                     class="app-menu__label" >Order Infomation</span></a></li>
         <li><a class="app-menu__item" href="waiting?sid=${sessionScope.acc.getUserId()}" style="text-decoration: none" ><i class='app-menu__icon bx bxs-user-account'></i><span
                     class="app-menu__label">Waiting for Confirmation</span></a></li>

@@ -38,7 +38,7 @@ public class OrderInformationControl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            int sid = Integer.valueOf(request.getParameter("sid"));
+            int sid = Integer.parseInt((request.getParameter("sid")));
             OrderDAO odao = new OrderDAO();
             HttpSession session = request.getSession();
             Account acc = (Account) session.getAttribute("acc");
