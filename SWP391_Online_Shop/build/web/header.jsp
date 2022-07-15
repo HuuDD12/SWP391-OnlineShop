@@ -155,7 +155,7 @@
                         <ul class="dropdown-menu">
 
                             <!-- Default -->
-                            <li><a href="${pageContext.request.contextPath}/orderinfo">Order History</a></li>
+                            <li><a href="${pageContext.request.contextPath}/orderinfo?sid=${sessionScope.acc.getUserId()}">Order History</a></li>
                             <li><a class="dropdown-item" href="${pageContext.request.contextPath}/ManagerAccountInfo?cid=${sessionScope.acc.getUserId()}">View profile</a></li>  
                             <!-- Admin -->
                             <c:if test="${sessionScope.acc.getRoleId() ==  1}">                               

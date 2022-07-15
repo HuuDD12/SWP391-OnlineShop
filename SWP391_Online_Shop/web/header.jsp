@@ -129,7 +129,7 @@
 
                 <li><a href="productlist"> Product</a></li>
                 <li><a href="bloglist">Blog</a></li>
-                <li><a href="MainRecruitment.jsp"> Recuments</a></li>
+                <li><a href="MainRecruitment.jsp"> Recruitment</a></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
                          About Shop
