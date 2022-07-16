@@ -116,7 +116,7 @@
 
                     <img style="width: 100%; margin: 45px;" src="./resources/img/Blog/5233122.jpg" >
                     <div class="spotlight">
-                    <c:if test="${o.userId == sessionScope.acc.userId}">
+                    <c:if test="${o.userId != 0}">
                         <button class="btn btn-success"><a href="addblog">Add Blogs</a></button>
                     </c:if>
 

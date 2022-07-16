@@ -124,8 +124,7 @@
                         <a href="#"><img src="assets\corporate\img\logos\Logo.png" style="width:350px;height:310px"/></a>
                         <div class="hero">
                             <hgroup style="color: #001b19">
-                                <h1>Welcome Online Shop !!</h1>        
-                                <h3> ai rảnh thì  </h3>
+                                <h1 style="padding-bottom: 50px">Welcome Online Shop !!</h1>        
                             </hgroup>
 
                         </div>

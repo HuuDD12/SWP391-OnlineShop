@@ -60,12 +60,12 @@
                         <form action="replyfeedback" method="post">
                             <div class="modal-header">						
                                 <h4 class="modal-title">Reply feedback</h4>
-                                <a type="button" class="close" href="ManageFeedbackBySeller" aria-hidden="true">&times;</a>
+                                <a type="button" class="close" href="feedbackmanager" aria-hidden="true">&times;</a>
                             </div>
                             <div class="modal-body">	
                                 <div class="form-group">
-                                    <label>ID</label>
-                                    <input type="text"  class="form-control" name="id" value="${requestScope.feedback.id}" readonly>
+                                    <label style="display: none">ID</label>
+                                    <input type="text"  class="form-control" name="id" value="${requestScope.feedback.id}" readonly style="display: none">
                             </div>
 
                             <div class="form-group">
@@ -91,7 +91,7 @@
                         </div>
                                 <h3 class="text-success">${mess}</h3>
                         <div class="modal-footer">
-                            <a type="button" class="btn btn-default" href="ManageFeedbackBySeller">Cancel</a>
+                            <a type="button" class="btn btn-default" href="feedbackmanager">Cancel</a>
                             <input type="reset" class="btn btn" value="Clear">
                             <button type="submit" class="btn btn-primary">Send</button>
                         </div>

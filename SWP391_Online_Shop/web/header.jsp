@@ -140,7 +140,6 @@
 
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="AboutShope.jsp">About Shop</a></li>
-                        <li><a href="Feedback.jsp">Write your feedback</a></li>
                     </ul>
 
                     <!-- END DROPDOWN MENU -->
