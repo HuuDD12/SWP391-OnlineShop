@@ -95,7 +95,7 @@ public class EditProductControl extends HttpServlet {
         String Product_name = request.getParameter("Product_name");
         String Description = request.getParameter("Description");
         Double Original_Price = Double.valueOf(request.getParameter("Original_Price"));
-        Double Sale_Price = Double.valueOf(request.getParameter("Sale_Price"));
+        //Double Sale_Price = Double.valueOf(request.getParameter("Sale_Price"));
         int amount = Integer.valueOf(request.getParameter("amount"));
         String Subcategory = request.getParameter("Subcategory");
         String Brand = request.getParameter("Brand");
@@ -106,12 +106,12 @@ public class EditProductControl extends HttpServlet {
         String link = "";
 
         if ("".equals(image)) {
-            Product pro = new Product(userid, Product_name, Description, Original_Price, Sale_Price, subCate, amount, brand);
+            Product pro = new Product(userid, Product_name, Description, Original_Price, subCate, amount, brand);
             Product product = new Product(userid, imageu);
             pdao.UpdateProductInfo(pro);
         } else {
             link = "resources\\img\\\\products\\" + image;
-            Product pro = new Product(userid, Product_name, Description, Original_Price, Sale_Price, subCate, amount, brand);
+            Product pro = new Product(userid, Product_name, Description, Original_Price, subCate, amount, brand);
             Product product = new Product(userid, link);
             String uploadPath = getServletContext().getRealPath("") + File.separator + link;
             //  String UploadPart = "C:/Users/ADM/OneDrive/Documents/NetBeansProjects/Online-Shop/web/resources/img/ImgUser/" + image ;
