@@ -36,7 +36,7 @@ public class BlogDAO extends DBcontext.DBContext {
         }
         return blogList;
     }
-
+    
     public Blog getBlogByID(int id) {
         query = "SELECT * FROM Blogs WHERE ID = ?";
         try {
@@ -106,6 +106,19 @@ public class BlogDAO extends DBcontext.DBContext {
         } catch (SQLException e) {
         }
 
+    }
+    
+    public int getCountBlog() {
+        String query = "select count(*) from Blogs";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+        }
+        return 0;
     }
 
     public static void main(String[] args) {

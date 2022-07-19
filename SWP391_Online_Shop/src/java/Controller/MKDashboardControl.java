@@ -6,6 +6,7 @@
 package Controller;
 
 import DAO.BannerDAO;
+import DAO.BlogDAO;
 import DAO.CBannerDAO;
 import DAO.CategoryDAO;
 import DAO.OrderDetailDAO;
@@ -45,8 +46,10 @@ public class MKDashboardControl extends HttpServlet {
         Account acc = (Account) session.getAttribute("acc");
         BannerDAO dao = new BannerDAO();
         CBannerDAO cdao = new CBannerDAO();
+        BlogDAO bdao = new BlogDAO();
         int countB = dao.getCountBanner();
         int countCB = cdao.getCountCBanner();
+        int countBL = bdao.getCountBlog();
         OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
 
         CategoryDAO cadao = new CategoryDAO();
@@ -69,6 +72,7 @@ public class MKDashboardControl extends HttpServlet {
         request.setAttribute("listC", listC);
         request.setAttribute("countB", countB);
         request.setAttribute("countCB", countCB);
+        request.setAttribute("countBL", countBL);
         request.getRequestDispatcher("MktDashboard.jsp").forward(request, response);
     }
 

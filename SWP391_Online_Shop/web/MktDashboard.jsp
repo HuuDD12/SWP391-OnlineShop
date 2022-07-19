@@ -51,25 +51,38 @@
                     <div class="col-md-12 col-lg-12">
                         <div class="row">
                             <!-- col-6 -->
-                            <div class="col-md-6">
-                                <div class="widget-small primary coloured-icon"><i class='icon bx bxs-data fa-3x'></i>
-                                    <div class="info">
-                                        <a href="bannercontrol" style="text-decoration: none" ><h4>Tổng Banner Sale</h4></a>                                       
-                                        <p><b>${countB} Banner Sale </b></p>
-                                    <p class="info-tong">Tổng số Banner Sale quản lý.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="widget-small primary coloured-icon"><i class='icon bx bxs-shopping-bags fa-3x'></i>
-                                <div class="info">
-                                    <a href="cbannercontrol" style="text-decoration: none" ><h4>Tổng Banner </h4></a>
-                                    <p><b>${countCB} Banner  </b></p>
-                                    <p class="info-tong">Tổng số Banner  quản lý.</p>
-                                </div>
-                            </div>
-                        </div>
 
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-4 ">
+                                        <div class="widget-small primary coloured-icon"><i class='icon bx bxs-data fa-3x'></i>
+                                            <div class="info">
+                                                <a href="bannercontrol" style="text-decoration: none" ><h4>Tổng Banner Sale</h4></a>                                       
+                                                <p><b>${countB} Banner Sale </b></p>
+                                            <p class="info-tong">Tổng số Banner Sale quản lý.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="widget-small primary coloured-icon"><i class='icon bx bxs-shopping-bags fa-3x'></i>
+                                        <div class="info">
+                                            <a href="cbannercontrol" style="text-decoration: none" ><h4>Tổng Banner </h4></a>
+                                            <p><b>${countCB} Banner  </b></p>
+                                            <p class="info-tong">Tổng số Banner  quản lý.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="widget-small primary coloured-icon"><i class='icon bx bxs-shopping-bags fa-3x'></i>
+                                        <div class="info">
+                                            <a href="blogmanager" style="text-decoration: none" ><h4>Tổng Blog </h4></a>
+                                            <p><b>${countBL} Blog  </b></p>
+                                            <p class="info-tong">Tổng số Banner  quản lý.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-lg-6">
                             <div class="card mb-4">
                                 <div class="card-header">
@@ -118,53 +131,52 @@
         <script>
             //Thời Gian
             function time() {
-                var today = new Date();
-                var weekday = new Array(7);
-                weekday[0] = "Chủ Nhật";
-                weekday[1] = "Thứ Hai";
-                weekday[2] = "Thứ Ba";
-                weekday[3] = "Thứ Tư";
-                weekday[4] = "Thứ Năm";
-                weekday[5] = "Thứ Sáu";
-                weekday[6] = "Thứ Bảy";
-                var day = weekday[today.getDay()];
-                var dd = today.getDate();
-                var mm = today.getMonth() + 1;
-                var yyyy = today.getFullYear();
-                var h = today.getHours();
-                var m = today.getMinutes();
-                var s = today.getSeconds();
-                m = checkTime(m);
-                s = checkTime(s);
-                nowTime = h + " giờ " + m + " phút " + s + " giây";
-                if (dd < 10) {
-                    dd = '0' + dd
-                }
-                if (mm < 10) {
-                    mm = '0' + mm
-                }
-                today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-                tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-                        '</span>';
-                document.getElementById("clock").innerHTML = tmp;
-                clocktime = setTimeout("time()", "1000", "Javascript");
-
-                function checkTime(i) {
-                    if (i < 10) {
-                        i = "0" + i;
-                    }
-                    return i;
-                }
+            var today = new Date();
+            var weekday = new Array(7);
+            weekday[0] = "Chủ Nhật";
+            weekday[1] = "Thứ Hai";
+            weekday[2] = "Thứ Ba";
+            weekday[3] = "Thứ Tư";
+            weekday[4] = "Thứ Năm";
+            weekday[5] = "Thứ Sáu";
+            weekday[6] = "Thứ Bảy";
+            var day = weekday[today.getDay()];
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1;
+            var yyyy = today.getFullYear();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            m = checkTime(m);
+            s = checkTime(s);
+            nowTime = h + " giờ " + m + " phút " + s + " giây";
+            if (dd < 10) {
+            dd = '0' + dd
+            }
+            if (mm < 10) {
+            mm = '0' + mm
+            }
+            today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+            tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+                    '</span>';
+            document.getElementById("clock").innerHTML = tmp;
+            clocktime = setTimeout("time()", "1000", "Javascript");
+            function checkTime(i) {
+            if (i < 10) {
+            i = "0" + i;
+            }
+            return i;
+            }
             }
             //In dữ liệu
             var myApp = new function () {
-                this.printTable = function () {
-                    var tab = document.getElementById('sampleTable');
-                    var win = window.open('', '', 'height=700,width=700');
-                    win.document.write(tab.outerHTML);
-                    win.document.close();
-                    win.print();
-                }
+            this.printTable = function () {
+            var tab = document.getElementById('sampleTable');
+            var win = window.open('', '', 'height=700,width=700');
+            win.document.write(tab.outerHTML);
+            win.document.close();
+            win.print();
+            }
             }
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -173,51 +185,49 @@
 
             const labelsBar = [
             <c:forEach items="${listBrand}" var="c">
-                '${c.p.url}',
+            '${c.p.url}',
             </c:forEach>
             ];
-
-
             const dataBar = {
-                labels: labelsBar,
-                datasets: [{
-                        label: 'Tổng danh mục đã được đặt hàng',
-                        data: [
-                            <c:forEach items="${listBrand}" var="x">
-                '${x.p.salePrice}',
-            </c:forEach> 
-                        ],
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 159, 64, 0.2)',
-                            'rgba(255, 205, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(201, 203, 207, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgb(255, 99, 132)',
-                            'rgb(255, 159, 64)',
-                            'rgb(255, 205, 86)',
-                            'rgb(75, 192, 192)',
-                            'rgb(54, 162, 235)',
-                            'rgb(153, 102, 255)',
-                            'rgb(201, 203, 207)'
-                        ],
-                        borderWidth: 1
+            labels: labelsBar,
+                    datasets: [{
+                    label: 'Tổng danh mục đã được đặt hàng',
+                            data: [
+            <c:forEach items="${listBrand}" var="x">
+                            '${x.p.salePrice}',
+            </c:forEach>
+                            ],
+                            backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(255, 159, 64, 0.2)',
+                                    'rgba(255, 205, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(153, 102, 255, 0.2)',
+                                    'rgba(201, 203, 207, 0.2)'
+                            ],
+                            borderColor: [
+                                    'rgb(255, 99, 132)',
+                                    'rgb(255, 159, 64)',
+                                    'rgb(255, 205, 86)',
+                                    'rgb(75, 192, 192)',
+                                    'rgb(54, 162, 235)',
+                                    'rgb(153, 102, 255)',
+                                    'rgb(201, 203, 207)'
+                            ],
+                            borderWidth: 1
                     }]
             };
             const configBar = {
-                type: 'bar',
-                data: dataBar,
-                options: {
+            type: 'bar',
+                    data: dataBar,
+                    options: {
                     scales: {
-                        y: {
-                            beginAtZero: true
-                        }
+                    y: {
+                    beginAtZero: true
                     }
-                },
+                    }
+                    },
             };
             const myBarChart = new Chart(
                     document.getElementById('myBarChart'),
@@ -227,30 +237,30 @@
         <!-- Pie   -->
         <script>
             const dataPie = {
-                labels: [
-                    <c:forEach items="${listSell}" var="x">
-                '${x.p.productName}',
+            labels: [
+            <c:forEach items="${listSell}" var="x">
+            '${x.p.productName}',
             </c:forEach>
 
-                ],
-                datasets: [{
-                        label: 'My First Dataset',
-                        data: [
-                            <c:forEach items="${listSell}" var="x">
-                '${x.p.salePrice}',
-            </c:forEach>                           
-                        ],
-                        backgroundColor: [
-                            'rgb(255, 99, 132)',
-                            'rgb(54, 162, 235)',
-                            'rgb(255, 205, 86)'
-                        ],
-                        hoverOffset: 4
+            ],
+                    datasets: [{
+                    label: 'My First Dataset',
+                            data: [
+            <c:forEach items="${listSell}" var="x">
+                            '${x.p.salePrice}',
+            </c:forEach>
+                            ],
+                            backgroundColor: [
+                                    'rgb(255, 99, 132)',
+                                    'rgb(54, 162, 235)',
+                                    'rgb(255, 205, 86)'
+                            ],
+                            hoverOffset: 4
                     }]
             };
             const configPie = {
-                type: 'pie',
-                data: dataPie,
+            type: 'pie',
+                    data: dataPie,
             };
             const myPieChart = new Chart(
                     document.getElementById('myPieChart'),
