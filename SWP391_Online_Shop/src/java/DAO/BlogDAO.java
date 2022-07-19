@@ -22,22 +22,6 @@ public class BlogDAO extends DBcontext.DBContext {
     ResultSet rs = null;
     String query = "";
 
-    public ArrayList<Blog> getHotBlogs() {
-        //Product with most amount
-        ArrayList<Blog> hotBlogList = new ArrayList<>();
-        query = "select top 3 * from Blog\n"
-                + "order by id desc";
-        try {
-            ps = connection.prepareStatement(query);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                hotBlogList.add(new Blog(rs.getInt("ID"), rs.getString("Author"), rs.getString("Title"), rs.getString("Content"), rs.getString("imageLink"), rs.getString("userId")));
-            }
-        } catch (SQLException e) {
-        }
-        return hotBlogList;
-    }
-
     public ArrayList<Blog> getAllBlogs() {
         ArrayList<Blog> blogList = new ArrayList<>();
         try {
